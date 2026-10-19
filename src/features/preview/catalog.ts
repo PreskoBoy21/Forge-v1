@@ -1,117 +1,52 @@
-import type { Href } from 'expo-router';
-
-export type PreviewLink = {
-  title: string;
-  hint: string;
-  href: Href;
-};
-
-export type PreviewGroup = {
-  title: string;
-  links: PreviewLink[];
-};
+export type PreviewLink = { title: string; hint: string; href: string };
+export type PreviewGroup = { title: string; links: PreviewLink[] };
 
 export const previewCatalog: PreviewGroup[] = [
   {
     title: 'Start',
-    links: [
-      { title: 'Welcome', hint: 'First impression', href: '/(auth)/welcome' },
-      {
-        title: 'Sign in',
-        hint: 'Email / Apple / Google',
-        href: '/(auth)/sign-in',
-      },
-    ],
+    links: [{ title: 'Hook', hint: 'Stop guessing', href: '/(auth)/welcome' }],
   },
   {
     title: 'Onboarding',
     links: [
-      { title: 'Age gate', hint: '18+ check', href: '/(onboarding)/age' },
+      { title: 'Goal', hint: 'One tap', href: '/(onboarding)/goal' },
+      { title: 'Body', hint: '18+ and sliders', href: '/(onboarding)/body' },
+      { title: 'Training', hint: 'Gym chain', href: '/(onboarding)/training' },
+      { title: 'Food', hint: 'What you hate', href: '/(onboarding)/food' },
+      { title: 'Coach', hint: 'Hear a line', href: '/(onboarding)/coach' },
+      { title: 'Forging…', hint: '3-sec build', href: '/(onboarding)/forging' },
+      { title: 'Plan reveal', hint: 'The aha', href: '/(onboarding)/plan' },
       {
-        title: 'Body',
-        hint: 'Sex, year, height, weight',
-        href: '/(onboarding)/body',
+        title: 'Notifications',
+        hint: 'Daily Call 07:30',
+        href: '/(onboarding)/notify',
       },
       {
-        title: 'Goal',
-        hint: 'Fat / muscle / recomp',
-        href: '/(onboarding)/goal',
-      },
-      {
-        title: 'Training',
-        hint: 'Days and equipment',
-        href: '/(onboarding)/training',
-      },
-      {
-        title: 'Diet',
-        hint: 'Prefs and allergies',
-        href: '/(onboarding)/diet',
-      },
-      {
-        title: 'Coach style',
-        hint: 'Buddy or strict',
-        href: '/(onboarding)/coach-style',
-      },
-      {
-        title: 'Your plan',
-        hint: 'Targets + split',
-        href: '/(onboarding)/your-plan',
+        title: 'Paywall',
+        hint: 'Continue free',
+        href: '/(onboarding)/paywall',
       },
     ],
   },
   {
-    title: 'Today',
-    links: [{ title: 'Home', hint: 'Daily plan card', href: '/(tabs)/today' }],
-  },
-  {
-    title: 'Food',
+    title: 'The loop',
     links: [
-      { title: 'Meals', hint: 'Macros and log', href: '/(tabs)/food' },
-      { title: 'Scan', hint: 'Camera', href: '/(tabs)/food/scan' },
-      { title: 'Review', hint: 'Edit AI items', href: '/(tabs)/food/review' },
+      { title: 'Daily Call', hint: 'Today', href: '/(tabs)/today' },
       {
-        title: 'Manual add',
-        hint: 'Search or type',
-        href: '/(tabs)/food/add-manual',
+        title: 'Forge the Day',
+        hint: 'Evening ritual',
+        href: '/(tabs)/today/forge-day',
       },
-    ],
-  },
-  {
-    title: 'Train',
-    links: [
-      { title: 'Workout', hint: "Today's session", href: '/(tabs)/train' },
+      { title: 'Gym Mode', hint: 'Sweaty hands', href: '/(tabs)/train/gym' },
+      { title: 'Snap', hint: 'Camera', href: '/(tabs)/snap' },
+      { title: 'Crew', hint: 'Who forged', href: '/(tabs)/crew' },
+      { title: 'You', hint: 'Progress + settings', href: '/(tabs)/you' },
+      { title: 'Weekly Verdict', hint: 'Sunday', href: '/(tabs)/you/verdict' },
       {
-        title: 'Log sets',
-        hint: 'Timer + swap',
-        href: '/(tabs)/train/session',
+        title: 'Forged Card',
+        hint: 'Shareable 9:16',
+        href: '/(tabs)/you/card',
       },
-      {
-        title: 'History',
-        hint: 'Past sessions',
-        href: '/(tabs)/train/history',
-      },
-    ],
-  },
-  {
-    title: 'Progress',
-    links: [
-      { title: 'Trend', hint: 'Weight + PRs', href: '/(tabs)/progress' },
-      {
-        title: 'Weekly check-in',
-        hint: 'Coach summary',
-        href: '/(tabs)/progress/checkin',
-      },
-    ],
-  },
-  {
-    title: 'Profile',
-    links: [
-      {
-        title: 'Settings',
-        hint: 'Goal, health, disclaimer',
-        href: '/(tabs)/profile',
-      },
-      { title: 'Paywall', hint: 'Forge Pro', href: '/(tabs)/profile/paywall' },
     ],
   },
 ];

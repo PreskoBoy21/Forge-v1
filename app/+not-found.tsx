@@ -8,14 +8,11 @@ export default function NotFoundScreen() {
     <>
       <Stack.Screen options={{ title: 'Missing', headerShown: true }} />
       <Screen>
-        <Text className="font-heading text-3xl uppercase text-ink">
+        <Text className="font-display text-[34px] uppercase tracking-wide text-bone">
           Lost the set
         </Text>
-        <Text className="mt-2 font-body text-base text-muted">
-          This screen does not exist.
-        </Text>
         <Link href="/(auth)/welcome" className="mt-6">
-          <Text className="font-bodySemi text-lime">Back to start</Text>
+          <Text className="font-uiSemi text-molten">Back to start</Text>
         </Link>
       </Screen>
     </>

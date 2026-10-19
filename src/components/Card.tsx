@@ -3,13 +3,13 @@ import { View } from 'react-native';
 
 type CardProps = {
   children: ReactNode;
-  accent?: 'lime' | 'none';
+  molten?: boolean;
 };
 
-export function Card({ children, accent = 'none' }: CardProps) {
+export function Card({ children, molten = false }: CardProps) {
   return (
     <View
-      className={`rounded-3xl bg-surface p-5 ${accent === 'lime' ? 'border border-lime/40' : ''}`}
+      className={`rounded-card bg-graphite-900 p-4 ${molten ? 'border border-molten' : ''}`}
     >
       {children}
     </View>

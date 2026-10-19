@@ -1,7 +1,6 @@
 # Forge — AI Fitness Coach (Mobile App) · Build Plan
 
 > Working name: **Forge**. This file is the source of truth for building the MVP.
-> Give it to Cursor as project context (e.g. save as `docs/PLAN.md` and reference it in `.cursor/rules`).
 
 ---
 
@@ -373,15 +372,3 @@ REVENUECAT_WEBHOOK_SECRET=
 
 Fridge mode · supermarket mode with AH/Lidl/Jumbo prices · shareable monthly progress story · AI coach chat · gym-specific equipment lists · barcode scanning · smart-scale direct Bluetooth · gym partnerships · more languages (NL, DE, FR).
 
----
-
-## 13. Rules for the AI coding assistant (Cursor)
-
-1. Build **phase by phase**; don't start the next phase until the current "Done when" passes.
-2. TypeScript strict mode. No `any`.
-3. **Never** put AI or secret keys in the app — all AI calls go through edge functions.
-4. Calorie/macro math lives in `src/lib/nutrition.ts` only, with tests. AI never calculates targets.
-5. Every table has RLS; every edge function verifies the user.
-6. Validate all AI output with zod before saving.
-7. Keep components small; feature logic in `src/features/*`, screens thin.
-8. Ask before adding a new dependency that isn't listed in section 2.

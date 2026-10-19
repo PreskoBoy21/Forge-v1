@@ -1,29 +1,24 @@
 import { create } from 'zustand';
 
-import type {
-  CoachStyle,
-  Equipment,
-  Experience,
-  Goal,
-  Sex,
-} from '@/types/database';
-
-export type DietPref =
-  'none' | 'vegetarian' | 'vegan' | 'halal' | 'no_pork' | 'allergies';
+export type Sex = 'male' | 'female';
+export type Goal = 'lose_fat' | 'build_muscle' | 'both';
+export type Experience = 'beginner' | 'intermediate';
+export type GymChain = 'basic_fit' | 'fit_for_free' | 'home' | 'other';
+export type CoachPersona = 'buddy' | 'sergeant' | 'scientist';
 
 export type OnboardingDraft = {
-  confirmed18Plus: boolean;
+  goal: Goal | null;
   sex: Sex | null;
   birthYear: number | null;
-  heightCm: number | null;
-  weightKg: number | null;
-  goal: Goal | null;
-  trainingDays: number | null;
+  confirmed18Plus: boolean;
+  heightCm: number;
+  weightKg: number;
+  trainingDays: number;
   experience: Experience | null;
-  equipment: Equipment | null;
-  dietPref: DietPref;
-  allergies: string;
-  coachStyle: CoachStyle;
+  gym: GymChain | null;
+  dietNotes: string;
+  hateEating: string;
+  coach: CoachPersona;
 };
 
 type OnboardingState = OnboardingDraft & {
@@ -32,18 +27,18 @@ type OnboardingState = OnboardingDraft & {
 };
 
 const initialDraft: OnboardingDraft = {
-  confirmed18Plus: false,
+  goal: null,
   sex: null,
   birthYear: null,
-  heightCm: null,
-  weightKg: null,
-  goal: null,
-  trainingDays: null,
+  confirmed18Plus: false,
+  heightCm: 178,
+  weightKg: 80,
+  trainingDays: 4,
   experience: null,
-  equipment: null,
-  dietPref: 'none',
-  allergies: '',
-  coachStyle: 'buddy',
+  gym: null,
+  dietNotes: '',
+  hateEating: '',
+  coach: 'buddy',
 };
 
 export const useOnboardingDraft = create<OnboardingState>((set) => ({

@@ -11,12 +11,12 @@ export function Screen({ children, scroll = false }: ScreenProps) {
   if (scroll) {
     return (
       <SafeAreaView
-        className="flex-1 bg-background"
+        className="flex-1 bg-graphite-950"
         edges={['top', 'left', 'right']}
       >
         <ScrollView
           className="flex-1"
-          contentContainerClassName="px-5 pb-8 pt-2"
+          contentContainerClassName="px-4 pb-8 pt-2"
           keyboardShouldPersistTaps="handled"
         >
           {children}
@@ -27,10 +27,10 @@ export function Screen({ children, scroll = false }: ScreenProps) {
 
   return (
     <SafeAreaView
-      className="flex-1 bg-background"
+      className="flex-1 bg-graphite-950"
       edges={['top', 'left', 'right']}
     >
-      <View className="flex-1 px-5 pt-2">{children}</View>
+      <View className="flex-1 px-4 pt-2">{children}</View>
     </SafeAreaView>
   );
 }

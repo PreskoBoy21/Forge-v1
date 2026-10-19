@@ -1,13 +1,12 @@
 import {
-  DMSans_400Regular,
-  DMSans_500Medium,
-  DMSans_600SemiBold,
-} from '@expo-google-fonts/dm-sans';
+  Archivo_700Bold,
+  Archivo_800ExtraBold,
+} from '@expo-google-fonts/archivo';
 import {
-  Oswald_400Regular,
-  Oswald_600SemiBold,
-  Oswald_700Bold,
-} from '@expo-google-fonts/oswald';
+  Inter_400Regular,
+  Inter_500Medium,
+  Inter_600SemiBold,
+} from '@expo-google-fonts/inter';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
@@ -19,7 +18,7 @@ import 'react-native-reanimated';
 
 import '../global.css';
 
-import { colors } from '@/theme/colors';
+import { colors } from '@/theme/tokens';
 
 export { ErrorBoundary } from 'expo-router';
 
@@ -32,12 +31,11 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const [queryClient] = useState(() => new QueryClient());
   const [loaded, error] = useFonts({
-    Oswald_400Regular,
-    Oswald_600SemiBold,
-    Oswald_700Bold,
-    DMSans_400Regular,
-    DMSans_500Medium,
-    DMSans_600SemiBold,
+    Archivo_700Bold,
+    Archivo_800ExtraBold,
+    Inter_400Regular,
+    Inter_500Medium,
+    Inter_600SemiBold,
   });
 
   useEffect(() => {
@@ -56,12 +54,12 @@ export default function RootLayout() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <View className="flex-1 bg-background">
+      <View className="flex-1 bg-graphite-950">
         <StatusBar style="light" />
         <Stack
           screenOptions={{
             headerShown: false,
-            contentStyle: { backgroundColor: colors.background },
+            contentStyle: { backgroundColor: colors.graphite[950] },
           }}
         >
           <Stack.Screen name="(auth)" />
