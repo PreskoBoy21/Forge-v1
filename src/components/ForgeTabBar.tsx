@@ -8,13 +8,13 @@ type ForgeTabBarProps = {
   navigation: { navigate: (name: string) => void };
 };
 
-const TABS = [
+const TABS: { name: string; label: string; locked?: boolean }[] = [
   { name: 'today', label: 'Today' },
   { name: 'train', label: 'Train' },
   { name: 'snap', label: 'Snap' },
-  { name: 'crew', label: 'Crew' },
+  { name: 'crew', label: 'Crew', locked: true },
   { name: 'you', label: 'You' },
-] as const;
+];
 
 function leafName(state: unknown): string {
   if (
@@ -71,9 +71,9 @@ export function ForgeTabBar({ state, navigation }: ForgeTabBarProps) {
                   className={`h-1.5 w-1.5 rounded-full ${focused ? 'bg-molten' : 'bg-graphite-700'}`}
                 />
                 <Text
-                  className={`mt-1 font-uiMedium text-[11px] ${focused ? 'text-bone' : 'text-steel'}`}
+                  className={`mt-1 font-uiMedium text-[11px] ${focused ? 'text-bone' : 'text-steel'} ${tab.locked ? 'opacity-50' : ''}`}
                 >
-                  {tab.label}
+                  {tab.locked ? `${tab.label} 🔒` : tab.label}
                 </Text>
               </>
             )}

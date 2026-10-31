@@ -30,13 +30,13 @@ export default function YouScreen() {
 
       <Pressable
         onPress={() => go('/(tabs)/you/card')}
-        className="mt-3 rounded-card bg-graphite-900 p-4"
+        className="mt-3 rounded-card bg-graphite-900 p-4 opacity-60"
       >
         <Text className="font-display text-[20px] uppercase text-bone">
           Forged Card
         </Text>
         <Text className="mt-1 font-ui text-[15px] text-steel">
-          5 days forged · ready to share
+          🔒 Coming soon
         </Text>
       </Pressable>
 
