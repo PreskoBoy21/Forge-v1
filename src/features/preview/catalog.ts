@@ -14,6 +14,11 @@ export const previewCatalog: PreviewGroup[] = [
       { title: 'Training', hint: 'Gym chain', href: '/(onboarding)/training' },
       { title: 'Food', hint: 'What you hate', href: '/(onboarding)/food' },
       { title: 'Coach', hint: 'Hear a line', href: '/(onboarding)/coach' },
+      {
+        title: 'Connect data',
+        hint: 'Scale + watch',
+        href: '/(onboarding)/connect',
+      },
       { title: 'Forging…', hint: '3-sec build', href: '/(onboarding)/forging' },
       { title: 'Plan reveal', hint: 'The aha', href: '/(onboarding)/plan' },
       {
@@ -39,7 +44,8 @@ export const previewCatalog: PreviewGroup[] = [
       },
       { title: 'Gym Mode', hint: 'Sweaty hands', href: '/(tabs)/train/gym' },
       { title: 'Snap', hint: 'Camera', href: '/(tabs)/snap' },
-      { title: 'Crew', hint: 'Who forged', href: '/(tabs)/crew' },
+      { title: 'Body', hint: 'Health data + AI read', href: '/(tabs)/body' },
+      { title: 'Crew (locked)', hint: 'Coming soon', href: '/(tabs)/you/crew' },
       { title: 'You', hint: 'Progress + settings', href: '/(tabs)/you' },
       { title: 'Weekly Verdict', hint: 'Sunday', href: '/(tabs)/you/verdict' },
       {

@@ -4,9 +4,45 @@ import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
 import { PreviewBanner } from '@/components/PreviewBanner';
 import { Screen } from '@/components/Screen';
+import { useOnboardingDraft } from '@/features/onboarding/draft-store';
+import {
+  calcTargets,
+  expectedWeeklyChangeKg,
+  pickSplit,
+  type PlanGoal,
+} from '@/features/plan/engine';
 import { go } from '@/lib/nav';
 
+const SPLIT_LABEL = {
+  full_body: 'Full body',
+  upper_lower: 'Upper / Lower',
+  ppl: 'Push / Pull / Legs',
+} as const;
+
+const GYM_LABEL = {
+  basic_fit: 'Basic-Fit equipment',
+  fit_for_free: 'Fit For Free equipment',
+  home: 'Home equipment',
+  other: 'Full gym',
+} as const;
+
 export default function PlanScreen() {
+  const draft = useOnboardingDraft();
+  const goal: PlanGoal =
+    draft.goal === 'both' || !draft.goal ? 'recomp' : draft.goal;
+  const age = draft.birthYear ? new Date().getFullYear() - draft.birthYear : 24;
+  const targets = calcTargets({
+    sex: draft.sex ?? 'male',
+    age: Math.max(18, age),
+    heightCm: draft.heightCm,
+    weightKg: draft.weightKg,
+    trainingDays: draft.trainingDays,
+    goal,
+  });
+  const [lo, hi] = expectedWeeklyChangeKg(goal, draft.weightKg);
+  const fmt = (n: number) =>
+    `${n > 0 ? '+' : n < 0 ? '−' : ''}${Math.abs(n).toFixed(1)}`;
+
   return (
     <Screen scroll>
       <PreviewBanner />
@@ -14,7 +50,8 @@ export default function PlanScreen() {
         Your plan
       </Text>
       <Text className="mt-2 font-ui text-[17px] text-steel">
-        Estimate only. Real math lands in code, not the model.
+        Built from your body, your goal and proven formulas. Your coach adjusts
+        it every week.
       </Text>
       <View className="mt-8 gap-4">
         <Card molten>
@@ -25,19 +62,20 @@ export default function PlanScreen() {
             className="mt-2 font-display text-[56px] text-bone"
             style={{ fontVariant: ['tabular-nums'] }}
           >
-            2140
+            {targets.kcal}
           </Text>
           <Text className="font-ui text-[15px] text-steel">kcal / day</Text>
           <Text className="mt-4 font-uiMedium text-[17px] text-bone">
-            Protein 160g · Carbs 220g · Fat 70g
+            Protein {targets.proteinG}g · Carbs {targets.carbsG}g · Fat{' '}
+            {targets.fatG}g
           </Text>
         </Card>
         <Card>
           <Text className="font-display text-[24px] uppercase text-bone">
-            Upper / Lower
+            {SPLIT_LABEL[pickSplit(draft.trainingDays)]}
           </Text>
           <Text className="mt-2 font-ui text-[15px] text-steel">
-            4 days · Basic-Fit equipment
+            {draft.trainingDays} days · {GYM_LABEL[draft.gym ?? 'other']}
           </Text>
         </Card>
         <Card>
@@ -45,8 +83,8 @@ export default function PlanScreen() {
             Estimated range
           </Text>
           <Text className="mt-2 font-ui text-[17px] text-bone">
-            About −0.4 to −0.7 kg / week if you follow the plan. Estimate, not a
-            promise.
+            About {fmt(lo)} to {fmt(hi)} kg / week if you follow the plan.
+            Estimate, not a promise.
           </Text>
         </Card>
       </View>

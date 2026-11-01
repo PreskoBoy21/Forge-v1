@@ -17,7 +17,7 @@ export default function TabLayout() {
       <Tabs.Screen name="today" />
       <Tabs.Screen name="train" />
       <Tabs.Screen name="snap" />
-      <Tabs.Screen name="crew" />
+      <Tabs.Screen name="body" />
       <Tabs.Screen name="you" />
     </Tabs>
   );
