@@ -4,18 +4,29 @@
  * and lean mass into Apple Health through their own apps; Apple Watch and the
  * iPhone add steps, sleep, resting heart rate and HRV. We only READ.
  */
-import {
-  isHealthDataAvailableAsync,
-  queryCategorySamples,
-  queryQuantitySamples,
-  queryStatisticsCollectionForQuantity,
-  requestAuthorization,
-} from '@kingstinct/react-native-healthkit';
-
+import { demoSnapshot } from './demo';
 import { addTo, emptyDays, setLatest } from './merge';
 import type { HealthPermissionResult, HealthSnapshot } from './types';
 
-export const providerLabel = 'Apple Health';
+type HK = typeof import('@kingstinct/react-native-healthkit');
+
+/**
+ * Loaded lazily: Expo Go has no HealthKit native module, so a static import
+ * would crash the app there. Without it we fall back to sample data.
+ */
+let hk: HK | null | undefined;
+function healthkit(): HK | null {
+  if (hk !== undefined) return hk;
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    hk = require('@kingstinct/react-native-healthkit') as HK;
+  } catch {
+    hk = null;
+  }
+  return hk;
+}
+
+export const providerLabel = healthkit() ? 'Apple Health' : 'Sample data';
 
 const READ = [
   'HKQuantityTypeIdentifierBodyMass',
@@ -30,7 +41,8 @@ const READ = [
 
 export async function isAvailable() {
   try {
-    return await isHealthDataAvailableAsync();
+    const h = healthkit();
+    return h ? await h.isHealthDataAvailableAsync() : false;
   } catch {
     return false;
   }
@@ -41,7 +53,7 @@ export async function requestPermissions(): Promise<HealthPermissionResult> {
   try {
     // HealthKit never tells apps whether READ access was denied (privacy);
     // a successful prompt means "asked". Missing data just shows as empty.
-    await requestAuthorization({ toRead: READ });
+    await healthkit()!.requestAuthorization({ toRead: READ });
     return 'granted';
   } catch {
     return 'denied';
@@ -49,6 +61,13 @@ export async function requestPermissions(): Promise<HealthPermissionResult> {
 }
 
 export async function fetchSnapshot(days = 42): Promise<HealthSnapshot> {
+  const h = healthkit();
+  if (!h) return demoSnapshot(days);
+  const {
+    queryCategorySamples,
+    queryQuantitySamples,
+    queryStatisticsCollectionForQuantity,
+  } = h;
   const now = new Date();
   const start = new Date(now);
   start.setDate(start.getDate() - days + 1);

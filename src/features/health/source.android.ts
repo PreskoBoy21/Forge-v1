@@ -3,20 +3,28 @@
  * Fitdays…) and Samsung Health / Google Fit / Fitbit write into Health
  * Connect; we only READ.
  */
-import {
-  getSdkStatus,
-  initialize,
-  readRecords,
-  requestPermission,
-  SdkAvailabilityStatus,
-  type Permission,
-  type RecordType,
-} from 'react-native-health-connect';
+import type { Permission, RecordType } from 'react-native-health-connect';
 
+import { demoSnapshot } from './demo';
 import { addTo, emptyDays, setLatest } from './merge';
 import type { HealthPermissionResult, HealthSnapshot } from './types';
 
-export const providerLabel = 'Health Connect';
+type HC = typeof import('react-native-health-connect');
+
+/** Lazy so Expo Go (no native module) falls back to sample data. */
+let hcMod: HC | null | undefined;
+function hc(): HC | null {
+  if (hcMod !== undefined) return hcMod;
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    hcMod = require('react-native-health-connect') as HC;
+  } catch {
+    hcMod = null;
+  }
+  return hcMod;
+}
+
+export const providerLabel = hc() ? 'Health Connect' : 'Sample data';
 
 const TYPES: RecordType[] = [
   'Weight',
@@ -32,9 +40,11 @@ const TYPES: RecordType[] = [
 let ready = false;
 async function ensureInit() {
   if (ready) return true;
-  const status = await getSdkStatus();
-  if (status !== SdkAvailabilityStatus.SDK_AVAILABLE) return false;
-  ready = await initialize();
+  const m = hc();
+  if (!m) return false;
+  const status = await m.getSdkStatus();
+  if (status !== m.SdkAvailabilityStatus.SDK_AVAILABLE) return false;
+  ready = await m.initialize();
   return ready;
 }
 
@@ -53,7 +63,7 @@ export async function requestPermissions(): Promise<HealthPermissionResult> {
       accessType: 'read',
       recordType,
     }));
-    const granted = await requestPermission(perms);
+    const granted = await hc()!.requestPermission(perms);
     return granted.length > 0 ? 'granted' : 'denied';
   } catch {
     return 'denied';
@@ -72,7 +82,8 @@ export async function fetchSnapshot(days = 42): Promise<HealthSnapshot> {
   };
   const map = emptyDays(days, now);
   const sources = new Set<string>();
-  await ensureInit();
+  if (!(await ensureInit())) return demoSnapshot(days);
+  const { readRecords } = hc()!;
 
   const read = async <T extends RecordType>(type: T) => {
     try {
