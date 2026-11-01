@@ -4,9 +4,9 @@ import type { Readiness } from '../insights';
 
 const COLOR = { high: '#C6F24E', normal: '#47D7E8', low: '#FFC542' } as const;
 const LABEL = {
-  push: 'Push day',
-  normal: 'Normal day',
-  easy: 'Easy day',
+  push: 'Go hard',
+  normal: 'Steady',
+  easy: 'Go easy',
 } as const;
 
 /** Segmented ring (40 ticks) — pure Views, no SVG dependency. */
