@@ -8,6 +8,7 @@ export default function YouLayout() {
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="verdict" options={{ headerShown: false }} />
       <Stack.Screen name="card" options={{ headerShown: false }} />
+      <Stack.Screen name="crew" options={{ headerShown: false }} />
       <Stack.Screen name="paywall" options={{ title: 'Forge Pro' }} />
     </Stack>
   );

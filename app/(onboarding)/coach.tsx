@@ -60,7 +60,7 @@ export default function CoachScreen() {
       <View className="mt-auto pb-6">
         <Button
           label="Forge my plan"
-          onPress={() => go('/(onboarding)/forging')}
+          onPress={() => go('/(onboarding)/connect')}
         />
       </View>
     </Screen>

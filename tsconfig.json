@@ -17,6 +17,7 @@
     "nativewind-env.d.ts"
   ],
   "exclude": [
-    "**/__tests__/**"
+    "**/__tests__/**",
+    "supabase/functions/**"
   ]
 }

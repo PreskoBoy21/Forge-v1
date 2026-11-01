@@ -12,7 +12,7 @@ const TABS: { name: string; label: string; locked?: boolean }[] = [
   { name: 'today', label: 'Today' },
   { name: 'train', label: 'Train' },
   { name: 'snap', label: 'Snap' },
-  { name: 'crew', label: 'Crew', locked: true },
+  { name: 'body', label: 'Body' },
   { name: 'you', label: 'You' },
 ];
 

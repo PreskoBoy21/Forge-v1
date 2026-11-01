@@ -4,16 +4,34 @@ import { Button } from '@/components/Button';
 import { CompactScore } from '@/components/CompactScore';
 import { MacroBar } from '@/components/MacroBar';
 import { Screen } from '@/components/Screen';
+import { InsightCard } from '@/features/health/ui/InsightCard';
+import { useAnalysis } from '@/features/health/ui/useAnalysis';
 import { mockCall } from '@/features/preview/mock-data';
 import { go } from '@/lib/nav';
 
+const CALL = {
+  push: 'Push day: go for a rep PR on your first lift.',
+  normal: 'Normal day: run the plan as written.',
+  easy: 'Easy day: same weights, one set less per move.',
+} as const;
+
 export default function TodayScreen() {
+  const { analysis } = useAnalysis();
+  const ready = analysis.readiness;
+  const top = analysis.insights.find((i) => !i.id.startsWith('readiness'));
+
   return (
     <Screen scroll>
       <View className="flex-row items-start justify-between">
         <View>
           <Text className="font-uiMedium text-[12px] uppercase tracking-widest text-steel">
-            {mockCall.weekday}
+            {new Date()
+              .toLocaleDateString('en-GB', {
+                weekday: 'short',
+                day: 'numeric',
+                month: 'short',
+              })
+              .toUpperCase()}
           </Text>
           <Text className="mt-1 font-display text-[24px] uppercase tracking-wide text-bone">
             {mockCall.greeting}
@@ -34,7 +52,39 @@ export default function TodayScreen() {
         />
       </View>
 
-      <View className="mt-6 rounded-card border border-molten/40 bg-graphite-900 p-4">
+      {ready ? (
+        <Pressable
+          onPress={() => go('/(tabs)/body')}
+          className="mt-6 flex-row items-center rounded-card bg-graphite-900 p-4"
+        >
+          <View
+            className={`h-12 w-12 items-center justify-center rounded-full ${
+              ready.level === 'high'
+                ? 'bg-molten'
+                : ready.level === 'low'
+                  ? 'bg-gold'
+                  : 'bg-ember'
+            }`}
+          >
+            <Text
+              className="font-display text-[20px] text-graphite-950"
+              style={{ fontVariant: ['tabular-nums'] }}
+            >
+              {ready.score}
+            </Text>
+          </View>
+          <View className="ml-3 flex-1">
+            <Text className="font-uiMedium text-[12px] uppercase tracking-widest text-steel">
+              Readiness · from your sleep + heart data
+            </Text>
+            <Text className="mt-1 font-uiSemi text-[15px] text-bone">
+              {CALL[ready.training]}
+            </Text>
+          </View>
+        </Pressable>
+      ) : null}
+
+      <View className="mt-4 rounded-card border border-molten/40 bg-graphite-900 p-4">
         <Text className="font-uiMedium text-[12px] uppercase tracking-widest text-molten">
           Today’s call
         </Text>
@@ -82,6 +132,12 @@ export default function TodayScreen() {
           color="fat"
         />
       </View>
+
+      {top ? (
+        <Pressable className="mt-5" onPress={() => go('/(tabs)/body')}>
+          <InsightCard insight={top} />
+        </Pressable>
+      ) : null}
 
       <View className="mt-5 rounded-card bg-graphite-900 p-4">
         <Text className="font-uiMedium text-[12px] uppercase tracking-widest text-steel">

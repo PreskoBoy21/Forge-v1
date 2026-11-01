@@ -40,6 +40,18 @@ export default function YouScreen() {
         </Text>
       </Pressable>
 
+      <Pressable
+        onPress={() => go('/(tabs)/you/crew')}
+        className="mt-3 rounded-card bg-graphite-900 p-4 opacity-60"
+      >
+        <Text className="font-display text-[20px] uppercase text-bone">
+          Crew
+        </Text>
+        <Text className="mt-1 font-ui text-[15px] text-steel">
+          🔒 Coming soon
+        </Text>
+      </Pressable>
+
       <View className="mt-3 rounded-card bg-graphite-900 p-4">
         <Text className="font-ui text-[13px] uppercase text-steel">PR</Text>
         <Text className="mt-1 font-display text-[24px] uppercase text-gold">
