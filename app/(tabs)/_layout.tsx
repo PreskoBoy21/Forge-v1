@@ -6,7 +6,9 @@ import { colors } from '@/theme/tokens';
 export default function TabLayout() {
   return (
     <Tabs
-      tabBar={(props) => <ForgeTabBar {...props} />}
+      tabBar={(props) => (
+        <ForgeTabBar state={props.state} navigateToTab={props.navigateToTab} />
+      )}
       screenOptions={{
         headerShown: false,
         sceneStyle: { backgroundColor: colors.graphite[950] },

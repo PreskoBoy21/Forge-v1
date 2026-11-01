@@ -4,8 +4,11 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { glow } from '@/theme/tokens';
 
 type ForgeTabBarProps = {
-  state: { index: number; routes: { name: string; state?: unknown }[] };
-  navigation: { navigate: (name: string) => void };
+  state: {
+    index: number;
+    routes: { key: string; name: string; state?: unknown }[];
+  };
+  navigateToTab: (routeKey: string) => void;
 };
 
 const TABS = [
@@ -35,7 +38,7 @@ function leafName(state: unknown): string {
   return route.name;
 }
 
-export function ForgeTabBar({ state, navigation }: ForgeTabBarProps) {
+export function ForgeTabBar({ state, navigateToTab }: ForgeTabBarProps) {
   const insets = useSafeAreaInsets();
   const leaf = leafName(state);
   if (leaf === 'forge-day' || leaf === 'verdict' || leaf === 'card') {
@@ -55,7 +58,10 @@ export function ForgeTabBar({ state, navigation }: ForgeTabBarProps) {
           <Pressable
             key={tab.name}
             accessibilityRole="button"
-            onPress={() => navigation.navigate(tab.name)}
+            onPress={() => {
+              const route = state.routes[index];
+              if (route) navigateToTab(route.key);
+            }}
             className="flex-1 items-center"
           >
             {isSnap ? (
