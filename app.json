@@ -65,6 +65,14 @@
             "minSdkVersion": 26
           }
         }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Forge uses your photos to estimate the food on your plate.",
+          "cameraPermission": "Forge uses the camera to snap your meals and estimate protein and calories.",
+          "microphonePermission": false
+        }
       ]
     ],
     "experiments": {

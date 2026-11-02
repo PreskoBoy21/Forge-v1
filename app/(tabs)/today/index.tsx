@@ -7,7 +7,7 @@ import { InsightCard } from '@/features/health/ui/InsightCard';
 import { ReadinessRing } from '@/features/health/ui/ReadinessRing';
 import { useAnalysis } from '@/features/health/ui/useAnalysis';
 import { useOnboardingDraft } from '@/features/onboarding/draft-store';
-import { mockCall } from '@/features/preview/mock-data';
+import { useToday } from '@/features/food/store';
 import { kgLabel } from '@/features/train/program';
 import { planToday, useTrain } from '@/features/train/store';
 import { go } from '@/lib/nav';
@@ -27,7 +27,8 @@ export default function TodayScreen() {
   const { analysis } = useAnalysis();
   const ready = analysis.readiness;
   const tip = analysis.insights.find((i) => !i.id.startsWith('readiness'));
-  const proteinLeft = mockCall.protein.target - mockCall.protein.current;
+  const food = useToday();
+  const proteinLeft = Math.max(0, food.targets.proteinG - food.eaten.protein);
   const easy = ready?.training === 'easy';
   const history = useTrain((st) => st.history);
   const active = useTrain((st) => st.active);
@@ -134,8 +135,8 @@ export default function TodayScreen() {
             {proteinLeft} g protein left
           </Text>
           <Text className="mt-0.5 font-ui text-[13px] text-steel">
-            Next: {mockCall.nextMeal.title.toLowerCase()} ·{' '}
-            {mockCall.nextMeal.protein} g
+            {food.eaten.kcal} / {food.targets.kcal} kcal · {food.meals.length}{' '}
+            {food.meals.length === 1 ? 'meal' : 'meals'} logged
           </Text>
         </View>
         <Text className="font-uiSemi text-[15px] text-molten">Snap →</Text>

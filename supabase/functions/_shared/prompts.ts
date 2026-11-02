@@ -25,3 +25,12 @@ Return JSON: {"headline": string (max 60 chars), "summary": string (max 3 short 
     user: `Today's computed data (JSON):\n${JSON.stringify(payload)}`,
   };
 }
+
+/** Meal photo → items with grams and per-100 g macros. */
+export function mealScanPrompt(note?: string) {
+  return {
+    system:
+      'You estimate food from photos for a fitness app. Respond only with JSON: {"items":[{"name":string,"grams":number,"kcal_per_100g":number,"protein_per_100g":number,"carbs_per_100g":number,"fat_per_100g":number,"confidence":0-1}]}. Use typical nutrition values for the cooked food as seen. Estimate grams from plate size and visible portions; be realistic, not optimistic. Max 8 items; combine sauces/oil into one "Sauce / oil" item when visible. If the photo is not food, respond {"items":[],"error":"not_food"}.',
+    user: `Estimate this meal.${note ? ` The user adds: "${note.slice(0, 200)}"` : ''}`,
+  };
+}
