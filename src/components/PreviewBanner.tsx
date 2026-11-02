@@ -2,6 +2,8 @@ import { Pressable, Text } from 'react-native';
 import { go } from '@/lib/nav';
 
 export function PreviewBanner() {
+  // Dev shortcut only: hidden in store/release builds.
+  if (!__DEV__) return null;
   return (
     <Pressable
       accessibilityRole="button"
