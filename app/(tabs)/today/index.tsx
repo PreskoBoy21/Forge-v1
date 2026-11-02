@@ -141,15 +141,6 @@ export default function TodayScreen() {
         </View>
         <Text className="font-uiSemi text-[15px] text-molten">Snap →</Text>
       </Pressable>
-
-      <Pressable
-        className="mt-6 py-3"
-        onPress={() => go('/(tabs)/today/forge-day')}
-      >
-        <Text className="text-center font-uiMedium text-[13px] text-steel">
-          Tonight · Forge the day and get your score
-        </Text>
-      </Pressable>
     </Screen>
   );
 }

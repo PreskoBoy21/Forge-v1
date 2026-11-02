@@ -65,10 +65,15 @@ Deno.serve(async (req) => {
         }),
       );
       if (!out.success) continue;
+      // Counter writes need the service role (users can't edit their own).
+      const admin = createClient(
+        Deno.env.get('SUPABASE_URL')!,
+        Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
+      );
       if (usage) {
-        await supabase.from('usage_counters').update({ meal_scans: used + 1 }).eq('id', usage.id);
+        await admin.from('usage_counters').update({ meal_scans: used + 1 }).eq('id', usage.id);
       } else {
-        await supabase.from('usage_counters').insert({ user_id: user.id, date: today, meal_scans: 1 });
+        await admin.from('usage_counters').insert({ user_id: user.id, date: today, meal_scans: 1 });
       }
       return json({ ...out.data, scansLeft: profile?.is_pro ? null : FREE_SCANS_PER_DAY - used - 1 });
     } catch (e) {

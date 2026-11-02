@@ -18,7 +18,9 @@ import 'react-native-reanimated';
 
 import '../global.css';
 
-import { useSessionListener } from '@/features/auth/session';
+import { useSession, useSessionListener } from '@/features/auth/session';
+import { initPurchases } from '@/features/paywall/purchases';
+import { syncPendingWorkouts } from '@/features/train/store';
 import { colors } from '@/theme/tokens';
 
 export { ErrorBoundary } from 'expo-router';
@@ -27,6 +29,11 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   useSessionListener();
+  const userId = useSession((s) => s.session?.user.id ?? null);
+  useEffect(() => {
+    void initPurchases(userId);
+    if (userId) void syncPendingWorkouts();
+  }, [userId]);
   const [queryClient] = useState(() => new QueryClient());
   const [loaded, error] = useFonts({
     Archivo_700Bold,

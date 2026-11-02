@@ -6,6 +6,7 @@ import { Button } from '@/components/Button';
 import { Screen } from '@/components/Screen';
 import { deleteAccount, signOut, useSession } from '@/features/auth/session';
 import { useTargets } from '@/features/food/store';
+import { usePro } from '@/features/paywall/purchases';
 import {
   useOnboardingDraft,
   type CoachPersona,
@@ -54,6 +55,7 @@ function Row({
 
 export default function YouScreen() {
   const session = useSession((s) => s.session);
+  const isPro = usePro((s) => s.isPro);
   const draft = useOnboardingDraft();
   const targets = useTargets();
   const history = useTrain((s) => s.history);
@@ -104,7 +106,7 @@ export default function YouScreen() {
   return (
     <Screen scroll>
       <Text className="font-uiMedium text-[12px] uppercase tracking-widest text-steel">
-        You · {COACH[draft.coach]} coach · Free
+        You · {COACH[draft.coach]} coach · {isPro ? 'Pro' : 'Free'}
       </Text>
       <Text
         className="mt-1 font-display text-[28px] uppercase tracking-wide text-bone"
