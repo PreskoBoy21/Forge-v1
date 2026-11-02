@@ -18,6 +18,7 @@ import 'react-native-reanimated';
 
 import '../global.css';
 
+import { useSessionListener } from '@/features/auth/session';
 import { colors } from '@/theme/tokens';
 
 export { ErrorBoundary } from 'expo-router';
@@ -29,6 +30,7 @@ export const unstable_settings = {
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  useSessionListener();
   const [queryClient] = useState(() => new QueryClient());
   const [loaded, error] = useFonts({
     Archivo_700Bold,
