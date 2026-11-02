@@ -47,3 +47,13 @@ export async function signIn(email: string, password: string) {
 export async function signOut() {
   await supabase?.auth.signOut();
 }
+
+/** App Store requirement: permanently delete the account and its data. */
+export async function deleteAccount() {
+  if (!supabase) throw new Error('Backend not configured');
+  const { error } = await supabase.functions.invoke('delete-account', {
+    method: 'POST',
+  });
+  if (error) throw new Error('Could not delete your account. Try again.');
+  await supabase.auth.signOut();
+}
