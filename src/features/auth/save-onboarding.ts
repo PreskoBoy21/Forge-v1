@@ -81,3 +81,43 @@ export async function saveOnboarding() {
     });
   }
 }
+
+/**
+ * Returning user (log in on a new phone): copy their saved profile into the
+ * on-device draft. Returns true when the account already finished onboarding.
+ */
+export async function restoreProfile(): Promise<boolean> {
+  if (!supabase) return false;
+  const { data: auth } = await supabase.auth.getUser();
+  if (!auth.user) return false;
+  const { data: p } = await supabase
+    .from('profiles')
+    .select('*')
+    .eq('id', auth.user.id)
+    .maybeSingle();
+  if (!p?.onboarded_at) return false;
+  const { data: w } = await supabase
+    .from('body_metrics')
+    .select('weight_kg')
+    .eq('user_id', auth.user.id)
+    .order('measured_at', { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  const prefs = (p.diet_prefs ?? {}) as { notes?: string; hates?: string };
+  const draft = useOnboardingDraft.getState();
+  draft.update({
+    goal: p.goal === 'recomp' ? 'both' : (p.goal as typeof draft.goal),
+    sex: p.sex as typeof draft.sex,
+    birthYear: p.birth_year,
+    confirmed18Plus: true,
+    heightCm: p.height_cm ?? draft.heightCm,
+    weightKg: w?.weight_kg ?? draft.weightKg,
+    trainingDays: p.training_days ?? draft.trainingDays,
+    experience: p.experience as typeof draft.experience,
+    gym: p.gym as typeof draft.gym,
+    coach: p.coach_style as typeof draft.coach,
+    dietNotes: prefs.notes ?? '',
+    hateEating: prefs.hates ?? '',
+  });
+  return true;
+}

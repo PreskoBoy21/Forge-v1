@@ -1,17 +1,27 @@
+import { useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 import { Pressable, Text, TextInput, View } from 'react-native';
 
 import { Button } from '@/components/Button';
 import { Screen } from '@/components/Screen';
-import { saveOnboarding } from '@/features/auth/save-onboarding';
+import {
+  restoreProfile,
+  saveOnboarding,
+} from '@/features/auth/save-onboarding';
 import { signIn, signUp } from '@/features/auth/session';
-import { go } from '@/lib/nav';
+import { useOnboardingDraft } from '@/features/onboarding/draft-store';
+import { syncPendingWorkouts, useTrain } from '@/features/train/store';
+import { pullWorkouts } from '@/features/train/sync';
+import { go, replaceTo } from '@/lib/nav';
 import { colors } from '@/theme/tokens';
 
 type Mode = 'signup' | 'signin';
 
 export default function SignInScreen() {
-  const [mode, setMode] = useState<Mode>('signup');
+  const params = useLocalSearchParams<{ mode?: string }>();
+  const [mode, setMode] = useState<Mode>(
+    params.mode === 'signin' ? 'signin' : 'signup',
+  );
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [busy, setBusy] = useState(false);
@@ -36,6 +46,20 @@ export default function SignInScreen() {
         }
       } else {
         await signIn(email.trim(), password);
+        if (await restoreProfile()) {
+          // Returning user: bring back their workouts and go straight in.
+          const remote = await pullWorkouts().catch(() => null);
+          if (remote?.length && useTrain.getState().history.length === 0)
+            useTrain.getState().setHistory(remote);
+          void syncPendingWorkouts();
+          replaceTo('/(tabs)/today');
+          return;
+        }
+      }
+      if (useOnboardingDraft.getState().goal === null) {
+        // Account first, plan second (came from "I already have an account").
+        replaceTo('/(onboarding)/goal');
+        return;
       }
       await saveOnboarding();
       go('/(onboarding)/notify');

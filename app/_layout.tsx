@@ -23,10 +23,6 @@ import { colors } from '@/theme/tokens';
 
 export { ErrorBoundary } from 'expo-router';
 
-export const unstable_settings = {
-  initialRouteName: '(auth)',
-};
-
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
@@ -64,6 +60,7 @@ export default function RootLayout() {
             contentStyle: { backgroundColor: colors.graphite[950] },
           }}
         >
+          <Stack.Screen name="index" />
           <Stack.Screen name="(auth)" />
           <Stack.Screen name="(onboarding)" />
           <Stack.Screen name="(tabs)" />
