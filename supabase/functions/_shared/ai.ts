@@ -11,6 +11,8 @@ export async function completeJson(input: {
   system: string;
   user: string;
   maxTokens?: number;
+  /** Optional JPEG, base64 (no data: prefix), sent before the text. */
+  imageBase64?: string;
 }): Promise<unknown> {
   const key = Deno.env.get('AI_API_KEY');
   if (!key) throw new Error('AI_API_KEY is not set');
@@ -25,7 +27,24 @@ export async function completeJson(input: {
       model: Deno.env.get('AI_MODEL') ?? DEFAULT_MODEL,
       max_tokens: input.maxTokens ?? 600,
       system: input.system,
-      messages: [{ role: 'user', content: input.user }],
+      messages: [
+        {
+          role: 'user',
+          content: input.imageBase64
+            ? [
+                {
+                  type: 'image',
+                  source: {
+                    type: 'base64',
+                    media_type: 'image/jpeg',
+                    data: input.imageBase64,
+                  },
+                },
+                { type: 'text', text: input.user },
+              ]
+            : input.user,
+        },
+      ],
     }),
   });
   if (!res.ok) throw new Error(`AI request failed: ${res.status}`);

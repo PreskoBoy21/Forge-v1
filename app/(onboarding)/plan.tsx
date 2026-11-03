@@ -4,6 +4,8 @@ import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
 import { PreviewBanner } from '@/components/PreviewBanner';
 import { Screen } from '@/components/Screen';
+import { saveOnboarding } from '@/features/auth/save-onboarding';
+import { useSession } from '@/features/auth/session';
 import { useOnboardingDraft } from '@/features/onboarding/draft-store';
 import {
   calcTargets,
@@ -89,7 +91,15 @@ export default function PlanScreen() {
         </Card>
       </View>
       <View className="mt-10">
-        <Button label="Save my plan" onPress={() => go('/(auth)/sign-in')} />
+        <Button
+          label="Save my plan"
+          onPress={() => {
+            if (!useSession.getState().session) return go('/(auth)/sign-in');
+            void saveOnboarding()
+              .catch(() => undefined)
+              .then(() => go('/(onboarding)/notify'));
+          }}
+        />
       </View>
     </Screen>
   );

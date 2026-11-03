@@ -2,6 +2,7 @@ import { create } from 'zustand';
 
 import { demoSnapshot } from './demo';
 import * as source from './source';
+import { syncHealthDays } from './sync';
 import type { HealthPermissionResult, HealthSnapshot } from './types';
 
 type HealthState = {
@@ -41,6 +42,7 @@ export const useHealth = create<HealthState>((set, get) => ({
           d.sleepHours !== undefined,
       );
       set({ snapshot: hasData ? snapshot : get().snapshot, loading: false });
+      if (hasData) void syncHealthDays(snapshot).catch(() => undefined);
     } catch (e) {
       set({
         loading: false,

@@ -12,7 +12,8 @@
       "bundleIdentifier": "app.forge.coach",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
-      }
+      },
+      "buildNumber": "1"
     },
     "android": {
       "adaptiveIcon": {
@@ -32,6 +33,10 @@
         "android.permission.health.READ_RESTING_HEART_RATE",
         "android.permission.health.READ_HEART_RATE_VARIABILITY",
         "android.permission.health.READ_ACTIVE_CALORIES_BURNED"
+      ],
+      "versionCode": 1,
+      "blockedPermissions": [
+        "android.permission.RECORD_AUDIO"
       ]
     },
     "web": {
@@ -64,6 +69,14 @@
           "android": {
             "minSdkVersion": 26
           }
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Forge uses your photos to estimate the food on your plate.",
+          "cameraPermission": "Forge uses the camera to snap your meals and estimate protein and calories.",
+          "microphonePermission": false
         }
       ]
     ],
