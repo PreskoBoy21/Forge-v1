@@ -82,6 +82,17 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "asyncRoutes": {
+          "web": true
+        }
+      },
+      "eas": {
+        "projectId": "905a815a-d66a-4339-b29a-1dfb84c85bd0"
+      }
+    },
+    "owner": "presko21"
   }
 }
