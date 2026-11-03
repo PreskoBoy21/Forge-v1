@@ -1,4 +1,7 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+
+import { deviceStorage } from '@/lib/storage';
 
 export type Sex = 'male' | 'female';
 export type Goal = 'lose_fat' | 'build_muscle' | 'both';
@@ -41,8 +44,14 @@ const initialDraft: OnboardingDraft = {
   coach: 'buddy',
 };
 
-export const useOnboardingDraft = create<OnboardingState>((set) => ({
-  ...initialDraft,
-  update: (patch) => set(patch),
-  reset: () => set(initialDraft),
-}));
+/** The user's answers; kept on the device so the plan survives restarts. */
+export const useOnboardingDraft = create<OnboardingState>()(
+  persist(
+    (set) => ({
+      ...initialDraft,
+      update: (patch) => set(patch),
+      reset: () => set(initialDraft),
+    }),
+    { name: 'forge-profile', storage: deviceStorage },
+  ),
+);

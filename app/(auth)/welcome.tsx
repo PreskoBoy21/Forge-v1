@@ -33,13 +33,13 @@ export default function WelcomeScreen() {
         </View>
         <View className="mt-8 gap-3">
           <Button
-            label="See the daily loop"
-            onPress={() => go('/(tabs)/today')}
+            label="Get my plan"
+            onPress={() => go('/(onboarding)/goal')}
           />
           <Button
-            label="Start onboarding"
-            variant="secondary"
-            onPress={() => go('/(onboarding)/goal')}
+            label="I already have an account"
+            variant="ghost"
+            onPress={() => go('/(auth)/sign-in?mode=signin')}
           />
         </View>
       </View>

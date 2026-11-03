@@ -1,3 +1,4 @@
+import { useMemo, useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 
 import { Button } from '@/components/Button';
@@ -5,7 +6,10 @@ import { Screen } from '@/components/Screen';
 import { InsightCard } from '@/features/health/ui/InsightCard';
 import { ReadinessRing } from '@/features/health/ui/ReadinessRing';
 import { useAnalysis } from '@/features/health/ui/useAnalysis';
-import { mockCall } from '@/features/preview/mock-data';
+import { useOnboardingDraft } from '@/features/onboarding/draft-store';
+import { useToday } from '@/features/food/store';
+import { kgLabel } from '@/features/train/program';
+import { planToday, useTrain } from '@/features/train/store';
 import { go } from '@/lib/nav';
 
 /**
@@ -23,8 +27,23 @@ export default function TodayScreen() {
   const { analysis } = useAnalysis();
   const ready = analysis.readiness;
   const tip = analysis.insights.find((i) => !i.id.startsWith('readiness'));
-  const proteinLeft = mockCall.protein.target - mockCall.protein.current;
+  const food = useToday();
+  const proteinLeft = Math.max(0, food.targets.proteinG - food.eaten.protein);
   const easy = ready?.training === 'easy';
+  const history = useTrain((st) => st.history);
+  const active = useTrain((st) => st.active);
+  const trainingDays = useOnboardingDraft((st) => st.trainingDays);
+  const plan = useMemo(() => planToday(history, easy), [history, easy]);
+  const first = plan.moves[0];
+  const [weekAgo] = useState(() =>
+    new Date(Date.now() - 6 * 864e5).toISOString().slice(0, 10),
+  );
+  const thisWeek = history.filter((w) => w.date >= weekAgo).length;
+  const hour = new Date().getHours();
+  const greeting = hour < 12 ? 'Morning' : hour < 18 ? 'Afternoon' : 'Evening';
+  const minutes = Math.round(
+    plan.moves.reduce((t, mv) => t + mv.sets * (mv.restSec + 45), 0) / 60,
+  );
 
   return (
     <Screen scroll>
@@ -40,12 +59,12 @@ export default function TodayScreen() {
               .toUpperCase()}
           </Text>
           <Text className="mt-1 font-display text-[24px] uppercase tracking-wide text-bone">
-            {mockCall.greeting}
+            {greeting}
           </Text>
         </View>
         <View className="rounded-full bg-graphite-800 px-3 py-2">
           <Text className="font-uiSemi text-[13px] text-ember">
-            🔥 {mockCall.streak}
+            🔥 {thisWeek}/{trainingDays} this week
           </Text>
         </View>
       </View>
@@ -73,25 +92,28 @@ export default function TodayScreen() {
         </Text>
         <View className="mt-3 flex-row items-end justify-between">
           <Text className="font-display text-[34px] uppercase leading-9 tracking-wide text-bone">
-            {mockCall.workout}
+            {active ? active.dayName : plan.name}
           </Text>
           <Text className="mb-1 font-ui text-[13px] text-steel">
-            {mockCall.minutes} min ·{' '}
-            {easy ? mockCall.moves - 1 : mockCall.moves} moves
+            ~{minutes} min · {plan.moves.length} moves
           </Text>
         </View>
         <View className="mt-4 flex-row items-center justify-between">
           <Text className="font-ui text-[15px] text-steel">
-            {easy ? 'Bench press 3×8' : mockCall.exercise}
+            {first ? `${first.name} ${first.sets}×${first.repMax}` : ''}
           </Text>
           <Text className="font-uiSemi text-[15px] text-mint">
-            {mockCall.weight} ↑ {mockCall.overload}
+            {first ? kgLabel(first.targetKg) : ''}
+            {first?.reason === 'increase' ? ' ↑' : ''}
           </Text>
         </View>
         <View className="mt-5">
           <Button
-            label="Start Gym Mode"
-            onPress={() => go('/(tabs)/train/gym')}
+            label={active ? 'Resume workout' : 'Start Gym Mode'}
+            onPress={() => {
+              if (!active) useTrain.getState().start(easy);
+              go('/(tabs)/train/gym');
+            }}
           />
         </View>
       </View>
@@ -113,20 +135,11 @@ export default function TodayScreen() {
             {proteinLeft} g protein left
           </Text>
           <Text className="mt-0.5 font-ui text-[13px] text-steel">
-            Next: {mockCall.nextMeal.title.toLowerCase()} ·{' '}
-            {mockCall.nextMeal.protein} g
+            {food.eaten.kcal} / {food.targets.kcal} kcal · {food.meals.length}{' '}
+            {food.meals.length === 1 ? 'meal' : 'meals'} logged
           </Text>
         </View>
         <Text className="font-uiSemi text-[15px] text-molten">Snap →</Text>
-      </Pressable>
-
-      <Pressable
-        className="mt-6 py-3"
-        onPress={() => go('/(tabs)/today/forge-day')}
-      >
-        <Text className="text-center font-uiMedium text-[13px] text-steel">
-          Tonight · Forge the day and get your score
-        </Text>
       </Pressable>
     </Screen>
   );

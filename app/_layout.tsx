@@ -18,17 +18,22 @@ import 'react-native-reanimated';
 
 import '../global.css';
 
+import { useSession, useSessionListener } from '@/features/auth/session';
+import { initPurchases } from '@/features/paywall/purchases';
+import { syncPendingWorkouts } from '@/features/train/store';
 import { colors } from '@/theme/tokens';
 
 export { ErrorBoundary } from 'expo-router';
 
-export const unstable_settings = {
-  initialRouteName: '(auth)',
-};
-
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  useSessionListener();
+  const userId = useSession((s) => s.session?.user.id ?? null);
+  useEffect(() => {
+    void initPurchases(userId);
+    if (userId) void syncPendingWorkouts();
+  }, [userId]);
   const [queryClient] = useState(() => new QueryClient());
   const [loaded, error] = useFonts({
     Archivo_700Bold,
@@ -62,6 +67,7 @@ export default function RootLayout() {
             contentStyle: { backgroundColor: colors.graphite[950] },
           }}
         >
+          <Stack.Screen name="index" />
           <Stack.Screen name="(auth)" />
           <Stack.Screen name="(onboarding)" />
           <Stack.Screen name="(tabs)" />

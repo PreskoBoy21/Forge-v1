@@ -1,3 +1,4 @@
+import { Redirect } from 'expo-router';
 import { Pressable, Text, View } from 'react-native';
 
 import { Screen } from '@/components/Screen';
@@ -5,6 +6,8 @@ import { previewCatalog } from '@/features/preview/catalog';
 import { go } from '@/lib/nav';
 
 export default function PreviewScreen() {
+  // Dev-only screen list; release builds go straight to the app.
+  if (!__DEV__) return <Redirect href="/" />;
   return (
     <Screen scroll>
       <Text className="font-display text-[34px] uppercase tracking-wide text-molten">

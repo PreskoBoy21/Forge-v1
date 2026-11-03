@@ -2,6 +2,7 @@ import { Pressable, Text, View } from 'react-native';
 
 import { Button } from '@/components/Button';
 import { Screen } from '@/components/Screen';
+import { CheckinCard } from '@/features/food/CheckinCard';
 import { InsightCard } from '@/features/health/ui/InsightCard';
 import { ReadinessRing } from '@/features/health/ui/ReadinessRing';
 import { TrendChart } from '@/features/health/ui/TrendChart';
@@ -121,6 +122,8 @@ export default function BodyScreen() {
           </View>
         </View>
       ) : null}
+
+      {!isDemo ? <CheckinCard days={snapshot.days} /> : null}
 
       <Text className="mt-7 font-uiMedium text-[12px] uppercase tracking-widest text-molten">
         Coach’s read
