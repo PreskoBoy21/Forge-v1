@@ -2,18 +2,27 @@ import { Text, View } from 'react-native';
 
 import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
+import { Footprints, Moon, Scale } from '@/components/icons';
+import { IconBadge } from '@/components/ui';
+import { useColors } from '@/theme/theme';
 import { PreviewBanner } from '@/components/PreviewBanner';
 import { Screen } from '@/components/Screen';
 import { healthProviderLabel, useHealth } from '@/features/health/store';
 import { go } from '@/lib/nav';
 
 const READS = [
-  ['⚖️', 'Weight, body fat, lean mass', 'from your smart scale'],
-  ['😴', 'Sleep, HRV, resting heart rate', 'from your watch or phone'],
-  ['👟', 'Steps and active calories', 'from your phone'],
+  [Scale, 'accent', 'Weight, body fat, lean mass', 'from your smart scale'],
+  [
+    Moon,
+    'violet',
+    'Sleep, HRV, resting heart rate',
+    'from your watch or phone',
+  ],
+  [Footprints, 'info', 'Steps and active calories', 'from your phone'],
 ] as const;
 
 export default function ConnectScreen() {
+  const c = useColors();
   const { connect, loading, permission } = useHealth();
   const native = healthProviderLabel !== 'Sample data';
   const label = native ? healthProviderLabel : 'Apple Health / Health Connect';
@@ -35,10 +44,10 @@ export default function ConnectScreen() {
       </Text>
 
       <View className="mt-8 gap-3">
-        {READS.map(([icon, title, sub]) => (
+        {READS.map(([Icon, tone, title, sub]) => (
           <Card key={title}>
             <View className="flex-row items-center">
-              <Text className="text-[24px]">{icon}</Text>
+              <IconBadge Icon={Icon} color={c[tone]} size={40} />
               <View className="ml-3 flex-1">
                 <Text className="font-uiSemi text-[17px] text-bone">
                   {title}

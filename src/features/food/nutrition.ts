@@ -123,3 +123,39 @@ export function weekStart(date: string): string {
   d.setUTCDate(d.getUTCDate() - dow);
   return d.toISOString().slice(0, 10);
 }
+
+/** Last 7 full days before `today`: logged days and average intake. */
+export function nutritionSummary(
+  meals: Meal[],
+  today: string,
+  targets: { kcal: number; proteinG: number },
+) {
+  const end = Date.parse(`${today}T00:00:00Z`);
+  const days = Array.from({ length: 7 }, (_, i) =>
+    new Date(end - (i + 1) * 86_400_000).toISOString().slice(0, 10),
+  );
+  const logged = days.map((d) => dayTotals(meals, d)).filter((t) => t.kcal > 0);
+  if (!logged.length) return undefined;
+  const avg = (k: 'kcal' | 'protein') =>
+    Math.round(logged.reduce((a, t) => a + t[k], 0) / logged.length);
+  return {
+    daysLogged7d: logged.length,
+    avgKcal: avg('kcal'),
+    kcalTarget: targets.kcal,
+    avgProteinG: avg('protein'),
+    proteinTargetG: targets.proteinG,
+    proteinHitDays: logged.filter((t) => t.protein >= targets.proteinG * 0.9)
+      .length,
+  };
+}
+
+/** Daily intake for the last `n` days including today, oldest → newest. */
+export function dailyIntake(meals: Meal[], today: string, n = 7) {
+  const end = Date.parse(`${today}T00:00:00Z`);
+  return Array.from({ length: n }, (_, i) => {
+    const d = new Date(end - (n - 1 - i) * 86_400_000)
+      .toISOString()
+      .slice(0, 10);
+    return { date: d, ...dayTotals(meals, d) };
+  });
+}

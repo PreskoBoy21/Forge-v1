@@ -1,7 +1,15 @@
 import { Pressable, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { glow } from '@/theme/tokens';
+import {
+  Activity,
+  Camera,
+  Dumbbell,
+  House,
+  User,
+  type LucideIcon,
+} from '@/components/icons';
+import { useColors } from '@/theme/theme';
 
 type ForgeTabBarProps = {
   state: {
@@ -11,12 +19,12 @@ type ForgeTabBarProps = {
   navigateToTab: (routeKey: string) => void;
 };
 
-const TABS: { name: string; label: string; locked?: boolean }[] = [
-  { name: 'today', label: 'Today' },
-  { name: 'train', label: 'Train' },
-  { name: 'snap', label: 'Snap' },
-  { name: 'body', label: 'Body' },
-  { name: 'you', label: 'You' },
+const TABS: { name: string; label: string; Icon: LucideIcon }[] = [
+  { name: 'today', label: 'Today', Icon: House },
+  { name: 'train', label: 'Train', Icon: Dumbbell },
+  { name: 'snap', label: 'Food', Icon: Camera },
+  { name: 'body', label: 'Body', Icon: Activity },
+  { name: 'you', label: 'You', Icon: User },
 ];
 
 function leafName(state: unknown): string {
@@ -40,24 +48,28 @@ function leafName(state: unknown): string {
 
 export function ForgeTabBar({ state, navigateToTab }: ForgeTabBarProps) {
   const insets = useSafeAreaInsets();
+  const c = useColors();
   const leaf = leafName(state);
-  if (leaf === 'forge-day' || leaf === 'verdict' || leaf === 'card') {
+  if (['forge-day', 'verdict', 'card', 'gym'].includes(leaf)) {
     return null;
   }
 
   return (
     <View
-      className="flex-row items-end border-t border-graphite-700 bg-graphite-950 px-3"
-      style={{ paddingBottom: Math.max(insets.bottom, 10), paddingTop: 10 }}
+      className="flex-row items-end border-t border-graphite-700 bg-graphite-900 px-2"
+      style={{ paddingBottom: Math.max(insets.bottom, 10), paddingTop: 8 }}
     >
       {TABS.map((tab, index) => {
         const focused = state.index === index;
         const isSnap = tab.name === 'snap';
+        const { Icon } = tab;
 
         return (
           <Pressable
             key={tab.name}
             accessibilityRole="button"
+            accessibilityLabel={tab.label}
+            accessibilityState={{ selected: focused }}
             onPress={() => {
               const route = state.routes[index];
               if (route) navigateToTab(route.key);
@@ -66,23 +78,29 @@ export function ForgeTabBar({ state, navigateToTab }: ForgeTabBarProps) {
           >
             {isSnap ? (
               <View
-                className="h-12 w-12 items-center justify-center rounded-full bg-molten"
-                style={glow}
+                className="-mt-6 h-14 w-14 items-center justify-center rounded-full bg-molten"
+                style={{
+                  shadowColor: c.accent,
+                  shadowOpacity: 0.35,
+                  shadowRadius: 14,
+                  shadowOffset: { width: 0, height: 4 },
+                  elevation: 6,
+                }}
               >
-                <View className="h-5 w-5 rounded-full border-2 border-graphite-950" />
+                <Icon size={26} color={c.bg} strokeWidth={2.2} />
               </View>
             ) : (
-              <>
-                <View
-                  className={`h-1.5 w-1.5 rounded-full ${focused ? 'bg-molten' : 'bg-graphite-700'}`}
-                />
-                <Text
-                  className={`mt-1 font-uiMedium text-[11px] ${focused ? 'text-bone' : 'text-steel'} ${tab.locked ? 'opacity-50' : ''}`}
-                >
-                  {tab.locked ? `${tab.label} 🔒` : tab.label}
-                </Text>
-              </>
+              <Icon
+                size={23}
+                color={focused ? c.accent : c.muted}
+                strokeWidth={focused ? 2.4 : 1.9}
+              />
             )}
+            <Text
+              className={`mt-1 font-uiMedium text-[11px] ${focused ? 'text-bone' : 'text-steel'}`}
+            >
+              {tab.label}
+            </Text>
           </Pressable>
         );
       })}

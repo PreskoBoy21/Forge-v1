@@ -1,4 +1,7 @@
-import { Pressable, Text } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
+
+import type { LucideIcon } from '@/components/icons';
+import { useColors } from '@/theme/theme';
 
 type ButtonProps = {
   label: string;
@@ -6,6 +9,7 @@ type ButtonProps = {
   variant?: 'primary' | 'secondary' | 'ghost';
   size?: 'default' | 'gym';
   disabled?: boolean;
+  icon?: LucideIcon;
 };
 
 export function Button({
@@ -14,7 +18,9 @@ export function Button({
   variant = 'primary',
   size = 'default',
   disabled = false,
+  icon: Icon,
 }: ButtonProps) {
+  const c = useColors();
   const background =
     variant === 'primary'
       ? 'bg-molten'
@@ -31,11 +37,21 @@ export function Button({
       onPress={onPress}
       className={`${height} items-center justify-center rounded-btn px-5 ${background} ${disabled ? 'opacity-40' : 'active:opacity-80'}`}
     >
-      <Text
-        className={`font-uiSemi text-[17px] ${variant === 'primary' ? 'uppercase' : ''} ${textColor}`}
-      >
-        {label}
-      </Text>
+      <View className="flex-row items-center">
+        {Icon ? (
+          <Icon
+            size={20}
+            color={variant === 'primary' ? c.bg : c.text}
+            strokeWidth={2.2}
+            style={{ marginRight: 8 }}
+          />
+        ) : null}
+        <Text
+          className={`font-uiSemi text-[17px] ${variant === 'primary' ? 'uppercase' : ''} ${textColor}`}
+        >
+          {label}
+        </Text>
+      </View>
     </Pressable>
   );
 }

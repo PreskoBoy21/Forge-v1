@@ -13,15 +13,16 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { AppState, View } from 'react-native';
 import 'react-native-reanimated';
 
 import '../global.css';
 
 import { useSession, useSessionListener } from '@/features/auth/session';
+import { useHealth } from '@/features/health/store';
 import { initPurchases } from '@/features/paywall/purchases';
 import { syncPendingWorkouts } from '@/features/train/store';
-import { colors } from '@/theme/tokens';
+import { PALETTE, THEME_VARS, useScheme } from '@/theme/theme';
 
 export { ErrorBoundary } from 'expo-router';
 
@@ -34,6 +35,24 @@ export default function RootLayout() {
     void initPurchases(userId);
     if (userId) void syncPendingWorkouts();
   }, [userId]);
+  const scheme = useScheme();
+  // Re-read Apple Health / Health Connect on launch and when the app returns.
+  useEffect(() => {
+    const refresh = () => void useHealth.getState().refresh();
+    if (useHealth.persist.hasHydrated()) refresh();
+    const unsub = useHealth.persist.onFinishHydration(refresh);
+    let last = Date.now();
+    const sub = AppState.addEventListener('change', (st) => {
+      if (st === 'active' && Date.now() - last > 10 * 60_000) {
+        last = Date.now();
+        refresh();
+      }
+    });
+    return () => {
+      unsub();
+      sub.remove();
+    };
+  }, []);
   const [queryClient] = useState(() => new QueryClient());
   const [loaded, error] = useFonts({
     Archivo_700Bold,
@@ -59,12 +78,12 @@ export default function RootLayout() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <View className="flex-1 bg-graphite-950">
-        <StatusBar style="light" />
+      <View className="flex-1 bg-graphite-950" style={THEME_VARS[scheme]}>
+        <StatusBar style={scheme === 'dark' ? 'light' : 'dark'} />
         <Stack
           screenOptions={{
             headerShown: false,
-            contentStyle: { backgroundColor: colors.graphite[950] },
+            contentStyle: { backgroundColor: PALETTE[scheme].bg },
           }}
         >
           <Stack.Screen name="index" />

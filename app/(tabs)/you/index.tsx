@@ -3,6 +3,22 @@ import { useMemo, useState } from 'react';
 import { Linking, Pressable, Text, View } from 'react-native';
 
 import { Button } from '@/components/Button';
+import { Card } from '@/components/Card';
+import {
+  FileText,
+  HeartPulse,
+  LogOut,
+  Mail,
+  Monitor,
+  Moon,
+  RotateCcw,
+  Shield,
+  Sparkles,
+  Sun,
+  Trash2,
+  User,
+} from '@/components/icons';
+import { ListRow, SectionHeader } from '@/components/ui';
 import { Screen } from '@/components/Screen';
 import { deleteAccount, signOut, useSession } from '@/features/auth/session';
 import { useTargets } from '@/features/food/store';
@@ -18,6 +34,12 @@ import { LINKS } from '@/lib/links';
 import { go, replaceTo } from '@/lib/nav';
 import { clearLocalData } from '@/lib/reset';
 import { supabase } from '@/lib/supabase';
+import {
+  healthProviderLabel,
+  healthSupported,
+  useHealth,
+} from '@/features/health/store';
+import { useColors, useTheme, type ThemeMode } from '@/theme/theme';
 
 const COACH: Record<CoachPersona, string> = {
   buddy: 'Buddy',
@@ -25,36 +47,42 @@ const COACH: Record<CoachPersona, string> = {
   scientist: 'Scientist',
 };
 
-function Row({
-  label,
-  value,
-  onPress,
-  danger,
-}: {
-  label: string;
-  value?: string;
-  onPress?: () => void;
-  danger?: boolean;
-}) {
+const MODES: { mode: ThemeMode; label: string; Icon: typeof Sun }[] = [
+  { mode: 'light', label: 'Light', Icon: Sun },
+  { mode: 'dark', label: 'Dark', Icon: Moon },
+  { mode: 'system', label: 'System', Icon: Monitor },
+];
+
+function AppearancePicker() {
+  const c = useColors();
+  const { mode, setMode } = useTheme();
   return (
-    <Pressable
-      onPress={onPress}
-      disabled={!onPress}
-      className="flex-row items-center justify-between border-b border-graphite-800 py-4"
-    >
-      <Text
-        className={`font-uiMedium text-[16px] ${danger ? 'text-rose' : 'text-bone'}`}
-      >
-        {label}
-      </Text>
-      {value ? (
-        <Text className="font-ui text-[15px] text-steel">{value}</Text>
-      ) : null}
-    </Pressable>
+    <View className="flex-row gap-2">
+      {MODES.map((m) => {
+        const on = m.mode === mode;
+        return (
+          <Pressable
+            key={m.mode}
+            onPress={() => setMode(m.mode)}
+            accessibilityRole="button"
+            accessibilityState={{ selected: on }}
+            className={`flex-1 items-center rounded-2xl border py-3 ${on ? 'border-molten bg-graphite-800' : 'border-graphite-700/60'}`}
+          >
+            <m.Icon size={20} color={on ? c.accent : c.muted} />
+            <Text
+              className={`mt-1 font-uiSemi text-[13px] ${on ? 'text-bone' : 'text-steel'}`}
+            >
+              {m.label}
+            </Text>
+          </Pressable>
+        );
+      })}
+    </View>
   );
 }
 
 export default function YouScreen() {
+  const health = useHealth();
   const session = useSession((s) => s.session);
   const isPro = usePro((s) => s.isPro);
   const draft = useOnboardingDraft();
@@ -107,7 +135,7 @@ export default function YouScreen() {
   return (
     <Screen scroll>
       <Text className="font-uiMedium text-[12px] uppercase tracking-widest text-steel">
-        You · {COACH[draft.coach]} coach
+        {COACH[draft.coach]} coach
         {FLAGS.SUBSCRIPTIONS ? (isPro ? ' · Pro' : ' · Free') : ''}
       </Text>
       <Text
@@ -117,9 +145,9 @@ export default function YouScreen() {
         {session?.user.email?.split('@')[0] ?? 'Not signed in'}
       </Text>
 
-      <View className="mt-6 flex-row gap-3">
-        <View className="flex-1 rounded-card bg-graphite-900 p-4">
-          <Text className="font-uiMedium text-[11px] uppercase tracking-widest text-steel">
+      <View className="mt-5 flex-row gap-3">
+        <Card className="flex-1">
+          <Text className="font-uiMedium text-[12px] text-steel">
             Daily target
           </Text>
           <Text className="mt-1 font-display text-[24px] text-bone">
@@ -128,23 +156,21 @@ export default function YouScreen() {
           <Text className="font-ui text-[12px] text-steel">
             kcal · {targets.proteinG} g protein
           </Text>
-        </View>
-        <View className="flex-1 rounded-card bg-graphite-900 p-4">
-          <Text className="font-uiMedium text-[11px] uppercase tracking-widest text-steel">
-            Workouts
-          </Text>
+        </Card>
+        <Card className="flex-1">
+          <Text className="font-uiMedium text-[12px] text-steel">Workouts</Text>
           <Text className="mt-1 font-display text-[24px] text-bone">
             {history.length}
           </Text>
           <Text className="font-ui text-[12px] text-steel">
             {draft.trainingDays} days / week plan
           </Text>
-        </View>
+        </Card>
       </View>
 
       {prs.length ? (
-        <View className="mt-3 rounded-card bg-graphite-900 p-4">
-          <Text className="font-uiMedium text-[11px] uppercase tracking-widest text-steel">
+        <Card className="mt-3">
+          <Text className="font-uiMedium text-[12px] text-steel">
             Best lifts
           </Text>
           {prs.map(([name, kg]) => (
@@ -155,7 +181,7 @@ export default function YouScreen() {
               </Text>
             </View>
           ))}
-        </View>
+        </Card>
       ) : null}
 
       {FLAGS.SUBSCRIPTIONS ? (
@@ -170,49 +196,81 @@ export default function YouScreen() {
         </Pressable>
       ) : null}
 
-      <View className="mt-6">
-        <Row
+      <SectionHeader title="Appearance" />
+      <AppearancePicker />
+
+      <SectionHeader title="Coach & data" />
+      <Card className="py-1">
+        <ListRow
+          Icon={Sparkles}
           label="Coach style"
-          value={`${COACH[draft.coach]} ›`}
+          value={COACH[draft.coach]}
           onPress={cycleCoach}
         />
-        <Row
-          label="Redo my plan"
-          value="›"
-          onPress={() => go('/(onboarding)/goal')}
+        <ListRow
+          Icon={HeartPulse}
+          label={healthSupported ? healthProviderLabel : 'Health data'}
+          value={
+            health.connected
+              ? health.loading
+                ? 'Syncing…'
+                : 'Connected'
+              : 'Connect'
+          }
+          onPress={() =>
+            void (health.connected ? health.refresh() : health.connect())
+          }
         />
-        <Row
+        <ListRow
+          Icon={RotateCcw}
+          label="Redo my plan"
+          onPress={() => go('/(onboarding)/goal')}
+          last
+        />
+      </Card>
+
+      <SectionHeader title="Account" />
+      <Card className="py-1">
+        <ListRow
+          Icon={Shield}
           label="Privacy policy"
-          value="›"
           onPress={() => void WebBrowser.openBrowserAsync(LINKS.privacy)}
         />
-        <Row
+        <ListRow
+          Icon={FileText}
           label="Terms"
-          value="›"
           onPress={() => void WebBrowser.openBrowserAsync(LINKS.terms)}
         />
-        <Row
+        <ListRow
+          Icon={Mail}
           label="Contact support"
-          value="›"
           onPress={() => void Linking.openURL(LINKS.support)}
+          last={!session}
         />
         {session ? (
           <>
-            <Row label="Sign out" onPress={() => void onSignOut()} />
-            <Row
+            <ListRow
+              Icon={LogOut}
+              label="Sign out"
+              onPress={() => void onSignOut()}
+            />
+            <ListRow
+              Icon={Trash2}
               label="Delete account"
               danger
               onPress={() => setConfirmDelete(true)}
+              last
             />
           </>
         ) : (
-          <Row
-            label="Sign in"
-            value="›"
+          <ListRow
+            Icon={User}
+            label="Log in"
             onPress={() => go('/(auth)/sign-in?mode=signin')}
+            last
           />
         )}
-      </View>
+      </Card>
 
       {confirmDelete ? (
         <View className="mt-4 rounded-card border border-rose/50 bg-graphite-900 p-4">

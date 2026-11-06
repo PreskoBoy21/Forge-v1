@@ -1,9 +1,10 @@
 import { Tabs } from 'expo-router';
 
 import { ForgeTabBar } from '@/components/ForgeTabBar';
-import { colors } from '@/theme/tokens';
+import { useColors } from '@/theme/theme';
 
 export default function TabLayout() {
+  const c = useColors();
   return (
     <Tabs
       tabBar={(props) => (
@@ -11,7 +12,7 @@ export default function TabLayout() {
       )}
       screenOptions={{
         headerShown: false,
-        sceneStyle: { backgroundColor: colors.graphite[950] },
+        sceneStyle: { backgroundColor: c.bg },
       }}
     >
       <Tabs.Screen name="today" />

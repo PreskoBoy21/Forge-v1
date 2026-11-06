@@ -2,6 +2,20 @@ import { useState } from 'react';
 import { Image, Pressable, Text, TextInput, View } from 'react-native';
 
 import { Button } from '@/components/Button';
+import { Card } from '@/components/Card';
+import { Progress, Ring } from '@/components/charts';
+import {
+  Camera,
+  Coffee,
+  Cookie,
+  ImageIcon,
+  Moon,
+  Plus,
+  Sun,
+  Utensils,
+  type LucideIcon,
+} from '@/components/icons';
+import { IconBadge, SectionHeader } from '@/components/ui';
 import { Screen } from '@/components/Screen';
 import { FOODS, searchFoods, type Food } from '@/features/food/foods';
 import {
@@ -11,7 +25,7 @@ import {
 } from '@/features/food/nutrition';
 import { scanMeal, type ScanOutcome } from '@/features/food/scan';
 import { useFood, useToday } from '@/features/food/store';
-import { colors } from '@/theme/tokens';
+import { useColors } from '@/theme/theme';
 
 const SCAN_ERROR: Record<Exclude<ScanOutcome, { ok: true }>['reason'], string> =
   {
@@ -34,7 +48,15 @@ const fromFood = (f: Food): MealItem => ({
   fat: f.fat,
 });
 
+const MEAL_ICON: Record<string, LucideIcon> = {
+  breakfast: Coffee,
+  lunch: Sun,
+  dinner: Moon,
+  snack: Cookie,
+};
+
 export default function SnapScreen() {
+  const c = useColors();
   const { eaten, targets, meals } = useToday();
   const [items, setItems] = useState<MealItem[]>([]);
   const [source, setSource] = useState<'scan' | 'manual'>('manual');
@@ -99,31 +121,76 @@ export default function SnapScreen() {
 
   return (
     <Screen scroll>
-      <Text className="font-display text-[34px] uppercase tracking-wide text-bone">
+      <Text className="font-display text-[28px] uppercase tracking-wide text-bone">
         Food
       </Text>
 
       {/* today at a glance */}
-      <View className="mt-4 flex-row gap-3">
-        <Stat
-          label="Protein left"
-          value={`${proteinLeft} g`}
-          sub={`${eaten.protein} / ${targets.proteinG} g`}
-          tone="mint"
-        />
-        <Stat
-          label={kcalLeft >= 0 ? 'Calories left' : 'Over by'}
-          value={`${Math.abs(kcalLeft)}`}
-          sub={`${eaten.kcal} / ${targets.kcal} kcal`}
-          tone={kcalLeft >= 0 ? 'bone' : 'gold'}
-        />
-      </View>
+      <Card className="mt-4">
+        <View className="flex-row items-center">
+          <Ring
+            value={(eaten.protein / Math.max(1, targets.proteinG)) * 100}
+            size={104}
+            stroke={10}
+            color={c.accent}
+          >
+            <Text className="font-display text-[22px] text-bone">
+              {proteinLeft}
+            </Text>
+            <Text className="font-uiMedium text-[11px] text-steel">
+              g protein left
+            </Text>
+          </Ring>
+          <View className="ml-4 flex-1 gap-3">
+            <View>
+              <View className="mb-1 flex-row justify-between">
+                <Text className="font-uiMedium text-[13px] text-steel">
+                  {kcalLeft >= 0 ? 'Calories left' : 'Over by'}
+                </Text>
+                <Text
+                  className={`font-uiSemi text-[13px] ${kcalLeft >= 0 ? 'text-bone' : 'text-gold'}`}
+                >
+                  {Math.abs(kcalLeft)} kcal
+                </Text>
+              </View>
+              <Progress value={eaten.kcal} max={targets.kcal} color={c.aqua} />
+            </View>
+            <View>
+              <View className="mb-1 flex-row justify-between">
+                <Text className="font-uiMedium text-[13px] text-steel">
+                  Carbs
+                </Text>
+                <Text className="font-uiSemi text-[13px] text-bone">
+                  {eaten.carbs} / {targets.carbsG} g
+                </Text>
+              </View>
+              <Progress
+                value={eaten.carbs}
+                max={targets.carbsG}
+                color={c.info}
+              />
+            </View>
+            <View>
+              <View className="mb-1 flex-row justify-between">
+                <Text className="font-uiMedium text-[13px] text-steel">
+                  Fat
+                </Text>
+                <Text className="font-uiSemi text-[13px] text-bone">
+                  {eaten.fat} / {targets.fatG} g
+                </Text>
+              </View>
+              <Progress value={eaten.fat} max={targets.fatG} color={c.warn} />
+            </View>
+          </View>
+        </View>
+      </Card>
 
       {/* capture */}
       {items.length === 0 ? (
         <View className="mt-6 gap-3">
           <Button
-            label={busy ? 'Reading your plate…' : '📸 Snap a meal'}
+            label={busy ? 'Reading your plate…' : 'Snap a meal'}
+            icon={Camera}
             size="gym"
             disabled={busy}
             onPress={() => void scan('camera')}
@@ -132,6 +199,7 @@ export default function SnapScreen() {
             <View className="flex-1">
               <Button
                 label="From photos"
+                icon={ImageIcon}
                 variant="secondary"
                 disabled={busy}
                 onPress={() => void scan('library')}
@@ -140,6 +208,7 @@ export default function SnapScreen() {
             <View className="flex-1">
               <Button
                 label="Add by hand"
+                icon={Plus}
                 variant="secondary"
                 onPress={() => setAdding(true)}
               />
@@ -213,7 +282,7 @@ export default function SnapScreen() {
           <TextInput
             className="min-h-[48px] rounded-btn bg-graphite-900 px-4 font-ui text-[16px] text-bone"
             placeholder="Search food (chicken, rice, oats…)"
-            placeholderTextColor={colors.steel[400]}
+            placeholderTextColor={c.muted}
             value={query}
             onChangeText={setQuery}
           />
@@ -253,61 +322,54 @@ export default function SnapScreen() {
 
       {/* today's meals */}
       {meals.length > 0 ? (
-        <View className="mt-8 gap-2 pb-6">
-          <Text className="font-uiMedium text-[12px] uppercase tracking-widest text-steel">
-            Today
-          </Text>
-          {meals.map((m) => {
-            const t = sumMacros(m.items);
-            return (
-              <Pressable
-                key={m.id}
-                onLongPress={() => useFood.getState().removeMeal(m.id)}
-                className="rounded-card bg-graphite-900 px-4 py-3"
-              >
-                <View className="flex-row justify-between">
-                  <Text className="font-uiSemi text-[15px] capitalize text-bone">
-                    {m.type}
-                  </Text>
-                  <Text className="font-uiSemi text-[15px] text-mint">
-                    {t.protein} g protein
-                  </Text>
-                </View>
-                <Text
-                  className="mt-0.5 font-ui text-[13px] text-steel"
-                  numberOfLines={1}
+        <>
+          <SectionHeader title="Today’s meals" />
+          <Card className="py-1">
+            {meals.map((m, i) => {
+              const t = sumMacros(m.items);
+              const Icon = MEAL_ICON[m.type] ?? Utensils;
+              return (
+                <Pressable
+                  key={m.id}
+                  onLongPress={() => useFood.getState().removeMeal(m.id)}
+                  className={`flex-row items-center py-3 ${i ? 'border-t border-graphite-700/60' : ''}`}
                 >
-                  {t.kcal} kcal · {m.items.map((i) => i.name).join(', ')}
-                </Text>
-              </Pressable>
-            );
-          })}
-        </View>
-      ) : null}
+                  <IconBadge Icon={Icon} color={c.warn} />
+                  <View className="ml-3 flex-1">
+                    <View className="flex-row justify-between">
+                      <Text className="font-uiSemi text-[15px] capitalize text-bone">
+                        {m.type}
+                      </Text>
+                      <Text className="font-uiSemi text-[15px] text-mint">
+                        {t.protein} g protein
+                      </Text>
+                    </View>
+                    <Text
+                      className="mt-0.5 font-ui text-[13px] text-steel"
+                      numberOfLines={1}
+                    >
+                      {t.kcal} kcal · {m.items.map((it) => it.name).join(', ')}
+                    </Text>
+                  </View>
+                </Pressable>
+              );
+            })}
+          </Card>
+          <Text className="mb-6 mt-2 font-ui text-[12px] text-steel">
+            Hold a meal to delete it.
+          </Text>
+        </>
+      ) : (
+        <Card className="mb-6 mt-6">
+          <View className="flex-row items-center">
+            <IconBadge Icon={Utensils} color={c.warn} />
+            <Text className="ml-3 flex-1 font-ui text-[14px] leading-[20px] text-steel">
+              No meals yet today. Snap your plate and Forge estimates calories
+              and protein in seconds.
+            </Text>
+          </View>
+        </Card>
+      )}
     </Screen>
-  );
-}
-
-function Stat({
-  label,
-  value,
-  sub,
-  tone,
-}: {
-  label: string;
-  value: string;
-  sub: string;
-  tone: 'mint' | 'bone' | 'gold';
-}) {
-  const color =
-    tone === 'mint' ? 'text-mint' : tone === 'gold' ? 'text-gold' : 'text-bone';
-  return (
-    <View className="flex-1 rounded-card bg-graphite-900 p-4">
-      <Text className="font-uiMedium text-[11px] uppercase tracking-widest text-steel">
-        {label}
-      </Text>
-      <Text className={`mt-1 font-display text-[28px] ${color}`}>{value}</Text>
-      <Text className="font-ui text-[12px] text-steel">{sub}</Text>
-    </View>
   );
 }
