@@ -1,105 +1,55 @@
-import { Platform } from 'react-native';
-import type {
-  CustomerInfo,
-  PurchasesOffering,
-  PurchasesPackage,
-} from 'react-native-purchases';
 import { create } from 'zustand';
 
 /**
- * RevenueCat subscriptions. Public SDK keys come from the RevenueCat
- * dashboard (safe to ship in the app). Entitlement id: "pro".
+ * Subscriptions are OFF for v1 (see src/lib/flags.ts), so the RevenueCat SDK
+ * (react-native-purchases) is not installed: its iOS pod (PurchasesHybridCommon
+ * 20.1.0) could not be resolved on EAS. The full RevenueCat version of this
+ * file is in git history at 5c5a2de:src/features/paywall/purchases.ts.
+ * To bring Pro back: install a react-native-purchases version whose iOS pod
+ * resolves, restore that file, and set FLAGS.SUBSCRIPTIONS = true.
  */
-const KEY = Platform.select({
-  ios: process.env.EXPO_PUBLIC_RC_IOS_KEY,
-  android: process.env.EXPO_PUBLIC_RC_ANDROID_KEY,
-});
 export const ENTITLEMENT = 'pro';
 
-type RC = typeof import('react-native-purchases').default;
-
-function sdk(): RC | null {
-  if (Platform.OS === 'web' || !KEY) return null;
-  try {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    return require('react-native-purchases').default as RC;
-  } catch {
-    return null;
-  }
-}
+/** Minimal shape the paywall UI needs (matches RevenueCat's package). */
+export type PurchasesPackage = {
+  identifier: string;
+  packageType: string;
+  product: {
+    title: string;
+    priceString: string;
+    introPrice?: {
+      price: number;
+      priceString: string;
+      periodNumberOfUnits: number;
+      periodUnit: string;
+    } | null;
+  };
+};
 
 type ProState = {
   ready: boolean;
   available: boolean;
   isPro: boolean;
-  offering: PurchasesOffering | null;
+  offering: { availablePackages: PurchasesPackage[] } | null;
 };
 
 export const usePro = create<ProState>(() => ({
-  ready: false,
+  ready: true,
   available: false,
   isPro: false,
   offering: null,
 }));
 
-const apply = (info: CustomerInfo) =>
-  usePro.setState({ isPro: Boolean(info.entitlements.active[ENTITLEMENT]) });
-
-let configured = false;
-
-/** Call once with the Supabase user id (or null when signed out). */
-export async function initPurchases(userId: string | null) {
-  const rc = sdk();
-  if (!rc) {
-    usePro.setState({ ready: true, available: false });
-    return;
-  }
-  try {
-    if (!configured) {
-      rc.configure({ apiKey: KEY!, appUserID: userId ?? undefined });
-      rc.addCustomerInfoUpdateListener(apply);
-      configured = true;
-    } else if (userId) {
-      await rc.logIn(userId);
-    } else {
-      await rc.logOut().catch(() => undefined);
-    }
-    apply(await rc.getCustomerInfo());
-    const offerings = await rc.getOfferings();
-    usePro.setState({
-      ready: true,
-      available: Boolean(offerings.current),
-      offering: offerings.current,
-    });
-  } catch {
-    usePro.setState({ ready: true, available: false });
-  }
+export async function initPurchases(_userId: string | null) {
+  usePro.setState({ ready: true, available: false });
 }
 
 export async function buy(
-  pkg: PurchasesPackage,
+  _pkg: PurchasesPackage,
 ): Promise<'done' | 'cancelled' | 'error'> {
-  const rc = sdk();
-  if (!rc) return 'error';
-  try {
-    const { customerInfo } = await rc.purchasePackage(pkg);
-    apply(customerInfo);
-    return 'done';
-  } catch (e) {
-    return (e as { userCancelled?: boolean }).userCancelled
-      ? 'cancelled'
-      : 'error';
-  }
+  return 'error';
 }
 
 export async function restore(): Promise<boolean> {
-  const rc = sdk();
-  if (!rc) return false;
-  try {
-    const info = await rc.restorePurchases();
-    apply(info);
-    return Boolean(info.entitlements.active[ENTITLEMENT]);
-  } catch {
-    return false;
-  }
+  return false;
 }

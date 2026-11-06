@@ -1,7 +1,7 @@
 import * as WebBrowser from 'expo-web-browser';
 import { useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
-import type { PurchasesPackage } from 'react-native-purchases';
+import type { PurchasesPackage } from './purchases';
 
 import { Button } from '@/components/Button';
 import { LINKS } from '@/lib/links';
