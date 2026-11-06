@@ -21,7 +21,7 @@ const SCAN_ERROR: Record<Exclude<ScanOutcome, { ok: true }>['reason'], string> =
     signed_out: 'Log in to use photo scan. You can still add foods below.',
     not_food: 'That doesn’t look like food. Try again or add foods below.',
     limit_reached:
-      '3 free scans used today. Go Pro for unlimited, or add foods below.',
+      'You’ve used today’s 3 photo scans. More tomorrow. Add foods below for now.',
     unavailable: 'Photo scan isn’t available right now. Add foods below.',
   };
 
@@ -59,7 +59,7 @@ export default function SnapScreen() {
         setSource('scan');
         setMessage(
           r.scansLeft !== null
-            ? `Estimate · check the grams · ${r.scansLeft} free scans left today`
+            ? `Estimate · check the grams · ${r.scansLeft} scans left today`
             : 'Estimate · check the grams',
         );
       } else {
