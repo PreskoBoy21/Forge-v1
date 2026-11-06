@@ -8,6 +8,10 @@ export default function SnapLayout() {
     <Stack screenOptions={header}>
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="fix" options={{ title: 'Fix' }} />
+      <Stack.Screen
+        name="barcode"
+        options={{ headerShown: false, presentation: 'fullScreenModal' }}
+      />
     </Stack>
   );
 }

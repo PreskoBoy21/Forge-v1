@@ -1,6 +1,6 @@
 // POST /functions/v1/scan-meal
 // Body: { imageBase64: string (JPEG, <= ~1.5 MB), note?: string }
-// Free users: 3 scans per day (usage_counters). Pro: unlimited.
+// Free users: 10 scans per day (usage_counters). Pro: unlimited.
 import { createClient } from 'npm:@supabase/supabase-js@2';
 import { z } from 'zod';
 
@@ -8,7 +8,7 @@ import { completeJson } from '../_shared/ai.ts';
 import { mealScanPrompt } from '../_shared/prompts.ts';
 import { mealScanResultSchema } from '../_shared/schemas.ts';
 
-const FREE_SCANS_PER_DAY = 3;
+const FREE_SCANS_PER_DAY = 10;
 
 const bodySchema = z.object({
   imageBase64: z.string().min(100).max(2_000_000),

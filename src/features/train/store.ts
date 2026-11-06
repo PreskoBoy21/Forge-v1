@@ -6,12 +6,14 @@ import { nextWeight, pickSplit } from '@/features/plan/engine';
 import { deviceStorage } from '@/lib/storage';
 
 import {
+  applyOverrides,
   easier,
   lastSessionFor,
   startingWeight,
   todaysDay,
   type EquipmentAccess,
   type LoggedSet,
+  type PlanOverrides,
   type PlannedMove,
   type WorkoutLog,
 } from './program';
@@ -33,6 +35,8 @@ export type ActiveWorkout = {
 
 type TrainState = {
   history: WorkoutLog[];
+  overrides: PlanOverrides;
+  setOverride: (day: string, index: number, name: string | null) => void;
   active: ActiveWorkout | null;
   start: (easy?: boolean) => void;
   logSet: (weightKg: number, reps: number) => void;
@@ -78,7 +82,10 @@ export function planToday(
   easy = false,
 ): { name: string; moves: ActiveMove[] } {
   const ctx = userContext();
-  const base = todaysDay(ctx.split, history.length, ctx.access);
+  const base = applyOverrides(
+    todaysDay(ctx.split, history.length, ctx.access),
+    useTrain.getState().overrides,
+  );
   const day = easy ? easier(base) : base;
   return {
     ...day,
@@ -90,6 +97,13 @@ export const useTrain = create<TrainState>()(
   persist(
     (set, get) => ({
       history: [],
+      overrides: {},
+      setOverride: (day, index, name) => {
+        const cur = { ...(get().overrides[day] ?? {}) };
+        if (name) cur[index] = name;
+        else delete cur[index];
+        set({ overrides: { ...get().overrides, [day]: cur } });
+      },
       active: null,
       start: (easy = false) => {
         if (get().active) return;
@@ -193,7 +207,11 @@ export const useTrain = create<TrainState>()(
     {
       name: 'forge-training',
       storage: deviceStorage,
-      partialize: (s) => ({ history: s.history, active: s.active }),
+      partialize: (s) => ({
+        history: s.history,
+        active: s.active,
+        overrides: s.overrides,
+      }),
     },
   ),
 );

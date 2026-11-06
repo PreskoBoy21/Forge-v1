@@ -50,7 +50,9 @@ export function ForgeTabBar({ state, navigateToTab }: ForgeTabBarProps) {
   const insets = useSafeAreaInsets();
   const c = useColors();
   const leaf = leafName(state);
-  if (['forge-day', 'verdict', 'card', 'gym'].includes(leaf)) {
+  if (
+    ['forge-day', 'verdict', 'card', 'gym', 'barcode', 'howto'].includes(leaf)
+  ) {
     return null;
   }
 

@@ -43,7 +43,12 @@ export default function TodayScreen() {
   const history = useTrain((st) => st.history);
   const active = useTrain((st) => st.active);
   const trainingDays = useOnboardingDraft((st) => st.trainingDays);
-  const plan = useMemo(() => planToday(history, easy), [history, easy]);
+  const overrides = useTrain((st) => st.overrides);
+  const plan = useMemo(
+    () => planToday(history, easy),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [history, easy, overrides],
+  );
   const [today] = useState(() => new Date().toISOString().slice(0, 10));
   const [weekAgo] = useState(() =>
     new Date(Date.now() - 6 * 864e5).toISOString().slice(0, 10),

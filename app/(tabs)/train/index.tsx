@@ -37,7 +37,12 @@ export default function TrainScreen() {
   const trainingDays = useOnboardingDraft((s) => s.trainingDays);
   const { analysis } = useAnalysis();
   const easy = analysis.readiness?.training === 'easy';
-  const plan = useMemo(() => planToday(history, easy), [history, easy]);
+  const overrides = useTrain((st) => st.overrides);
+  const plan = useMemo(
+    () => planToday(history, easy),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [history, easy, overrides],
+  );
   const [today] = useState(() => new Date().toISOString().slice(0, 10));
   const [view, setView] = useState<View_>('strength');
 
@@ -75,15 +80,28 @@ export default function TrainScreen() {
 
       {/* today's plan */}
       <Card molten className="mt-5">
-        <Text className="font-uiMedium text-[12px] uppercase tracking-widest text-molten">
-          {easy ? 'Today · easy day' : 'Today'}
-        </Text>
+        <View className="flex-row items-center justify-between">
+          <Text className="font-uiMedium text-[12px] uppercase tracking-widest text-molten">
+            {easy ? 'Today · easy day' : 'Today'}
+          </Text>
+          <Pressable onPress={() => go('/(tabs)/train/edit')} hitSlop={10}>
+            <Text className="font-uiSemi text-[13px] text-steel">
+              Edit plan
+            </Text>
+          </Pressable>
+        </View>
         <Text className="mt-1 font-display text-[26px] uppercase text-bone">
           {active ? active.dayName : plan.name}
         </Text>
         <View className="mt-2">
           {plan.moves.map((mv) => (
-            <View key={mv.name} className="flex-row items-center py-2">
+            <Pressable
+              key={mv.name}
+              onPress={() =>
+                go(`/(tabs)/train/howto?name=${encodeURIComponent(mv.name)}`)
+              }
+              className="flex-row items-center py-2"
+            >
               <Text className="flex-1 font-ui text-[15px] text-bone">
                 {mv.name}
               </Text>
@@ -96,7 +114,7 @@ export default function TrainScreen() {
                 {kgLabel(mv.targetKg)}
                 {ARROW[mv.reason]}
               </Text>
-            </View>
+            </Pressable>
           ))}
         </View>
         <View className="mt-4">
@@ -110,7 +128,7 @@ export default function TrainScreen() {
           />
         </View>
         <Text className="mt-3 text-center font-ui text-[12px] text-steel">
-          ↑ = weight goes up because you hit the top of the reps last time
+          Tap an exercise to see how to do it
         </Text>
       </Card>
 
