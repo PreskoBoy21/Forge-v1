@@ -59,7 +59,7 @@
         "@kingstinct/react-native-healthkit",
         {
           "NSHealthShareUsageDescription": "Forge reads your weight, body fat, sleep, heart rate and steps to build and adjust your daily training and nutrition plan.",
-          "NSHealthUpdateUsageDescription": false,
+          "NSHealthUpdateUsageDescription": "Forge does not write anything to Apple Health. It only reads the data you allow (weight, body fat, sleep, heart rate, steps) to adjust your training and nutrition plan.",
           "background": false
         }
       ],
