@@ -7,7 +7,9 @@ import { useAnalysis } from '@/features/health/ui/useAnalysis';
 import { useOnboardingDraft } from '@/features/onboarding/draft-store';
 import { kgLabel, swapsFor } from '@/features/train/program';
 import { useTrain } from '@/features/train/store';
-import { replaceTo } from '@/lib/nav';
+import { BookOpen } from '@/components/icons';
+import { go, replaceTo } from '@/lib/nav';
+import { useColors } from '@/theme/theme';
 
 function formatRest(total: number) {
   const minutes = Math.floor(total / 60);
@@ -16,6 +18,7 @@ function formatRest(total: number) {
 }
 
 export default function GymModeScreen() {
+  const c = useColors();
   const active = useTrain((s) => s.active);
   const { analysis } = useAnalysis();
   const easy = analysis.readiness?.training === 'easy';
@@ -93,6 +96,18 @@ export default function GymModeScreen() {
       <Text className="mt-6 font-display text-[34px] uppercase leading-9 tracking-wide text-bone">
         {move.name}
       </Text>
+      <Pressable
+        onPress={() =>
+          go(`/(tabs)/train/howto?name=${encodeURIComponent(move.name)}`)
+        }
+        hitSlop={8}
+        className="mt-2 flex-row items-center self-start rounded-full bg-graphite-800 px-3 py-1.5"
+      >
+        <BookOpen size={15} color={c.accent} />
+        <Text className="ml-1.5 font-uiSemi text-[13px] text-bone">
+          How to do it
+        </Text>
+      </Pressable>
       <Text className="mt-2 font-ui text-[15px] text-steel">
         Target {move.sets} × {move.repMin}–{move.repMax} ·{' '}
         {kgLabel(move.targetKg)}

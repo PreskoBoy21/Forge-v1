@@ -3,41 +3,31 @@ import { Pressable, Text, View } from 'react-native';
 
 import { Card } from '@/components/Card';
 import { BarChart, LineChart } from '@/components/charts';
-import {
-  Activity,
-  Brain,
-  Footprints,
-  Moon,
-  RefreshCw,
-  Scale,
-  Sparkles,
-  Utensils,
-} from '@/components/icons';
+import { Brain, RefreshCw, Sparkles } from '@/components/icons';
 import { Screen } from '@/components/Screen';
-import {
-  Eyebrow,
-  Explain,
-  IconBadge,
-  Pill,
-  SectionHeader,
-} from '@/components/ui';
+import { Eyebrow, Explain, Segmented } from '@/components/ui';
 import { CheckinCard } from '@/features/food/CheckinCard';
 import { dailyIntake } from '@/features/food/nutrition';
 import { useFood, useTargets } from '@/features/food/store';
+import { weightTrend } from '@/features/health/insights';
 import {
   hasHealthData,
   healthProviderLabel,
   healthSupported,
   useHealth,
 } from '@/features/health/store';
-import { weightTrend } from '@/features/health/insights';
 import { ConnectHealthCard } from '@/features/health/ui/ConnectHealthCard';
-import { InsightCard } from '@/features/health/ui/InsightCard';
-import { ReadinessRing } from '@/features/health/ui/ReadinessRing';
 import { useAnalysis } from '@/features/health/ui/useAnalysis';
 import { useCoachRead } from '@/features/health/ui/useCoachRead';
 import { lastDays, shortDate } from '@/features/health/vitals';
 import { useColors } from '@/theme/theme';
+
+/**
+ * Body = the AI's read on top, then ONE area at a time:
+ * Recovery · Weight · Activity · Food. Each area is one number, one graph
+ * and one plain-language explanation.
+ */
+type Area = 'recovery' | 'weight' | 'activity' | 'food';
 
 const fmt = (n: number | undefined, unit = '', d = 1) =>
   n === undefined ? '—' : `${n.toFixed(d)}${unit}`;
@@ -47,45 +37,48 @@ const avg = (xs: (number | undefined)[]) => {
   const v = xs.filter((x): x is number => x !== undefined);
   return v.length ? v.reduce((a, b) => a + b, 0) / v.length : undefined;
 };
-
-const barLabel = (d: string) =>
+const weekday = (d: string) =>
   new Date(`${d}T12:00:00Z`)
     .toLocaleDateString('en-GB', { weekday: 'short' })
     .slice(0, 2);
 
-const RANGES = [
-  { label: '7D', days: 7 },
-  { label: '30D', days: 30 },
-  { label: '6W', days: 42 },
-] as const;
-
-function Metric({
-  label,
+function Big({
   value,
-  sub,
+  label,
+  note,
   tone,
 }: {
-  label: string;
   value: string;
-  sub?: string;
+  label: string;
+  note?: string;
   tone?: 'good' | 'warn';
 }) {
   return (
-    <View className="flex-1">
-      <Text className="font-uiMedium text-[12px] text-steel">{label}</Text>
+    <View>
       <Text
-        className="mt-0.5 font-display text-[22px] text-bone"
+        className="font-display text-[32px] text-bone"
         style={{ fontVariant: ['tabular-nums'] }}
       >
         {value}
       </Text>
-      {sub ? (
-        <Text
-          className={`font-uiMedium text-[12px] ${tone === 'good' ? 'text-mint' : tone === 'warn' ? 'text-gold' : 'text-steel'}`}
-        >
-          {sub}
-        </Text>
-      ) : null}
+      <Text className="font-ui text-[13px] text-steel">
+        {label}
+        {note ? (
+          <Text className={tone === 'warn' ? 'text-gold' : 'text-mint'}>
+            {'  '}
+            {note}
+          </Text>
+        ) : null}
+      </Text>
+    </View>
+  );
+}
+
+function Small({ label, value }: { label: string; value: string }) {
+  return (
+    <View className="flex-1 rounded-2xl bg-graphite-800 px-3 py-2.5">
+      <Text className="font-ui text-[12px] text-steel">{label}</Text>
+      <Text className="font-uiSemi text-[16px] text-bone">{value}</Text>
     </View>
   );
 }
@@ -99,34 +92,54 @@ export default function BodyScreen() {
   const hasData = hasHealthData(snapshot);
   const { data: coach, isFetching } = useCoachRead(analysis, goal);
   const ex = coach?.explain ?? {};
-  const [range, setRange] = useState<number>(30);
-  const days = useMemo(
-    () => lastDays(snapshot.days, range),
-    [snapshot.days, range],
-  );
-  const labels: [string, string] | undefined = days.length
-    ? [shortDate(days[0]!.date), shortDate(days.at(-1)!.date)]
-    : undefined;
+  // Without AI, the top card already shows insights[0]; don't repeat it below.
+  const headlineId = coach ? null : insights[0]?.id;
+  const insightFor = (ids: string[]) =>
+    insights.find((i) => ids.includes(i.id) && i.id !== headlineId)?.body;
+
+  const all = snapshot.days;
+  const d14 = useMemo(() => lastDays(all, 14), [all]);
+  const d42 = useMemo(() => lastDays(all, 42), [all]);
   const trend = useMemo(() => {
-    const full = weightTrend(snapshot.days);
-    const byDate = new Map(full.map((t) => [t.date, t.trend]));
-    return days.map((d) => byDate.get(d.date));
-  }, [snapshot.days, days]);
+    const byDate = new Map(weightTrend(all).map((t) => [t.date, t.trend]));
+    return d42.map((d) => byDate.get(d.date));
+  }, [all, d42]);
   const meals = useFood((s) => s.meals);
   const targets = useTargets();
   const [today] = useState(() => new Date().toISOString().slice(0, 10));
   const intake = useMemo(() => dailyIntake(meals, today, 7), [meals, today]);
-  const loggedDays = intake.filter((d) => d.kcal > 0);
-  const insightFor = (ids: string[]) =>
-    insights.find((i) => ids.includes(i.id))?.body;
+  const logged = intake.filter((d) => d.kcal > 0);
 
-  const has = (k: keyof (typeof days)[number]) =>
-    days.some((d) => d[k] !== undefined);
-  const sleepAvg = avg(days.map((d) => d.sleepHours));
-  const rhrAvg = avg(days.map((d) => d.restingHr));
-  const hrvAvg = avg(days.map((d) => d.hrvMs));
-  const stepsAvg = avg(days.map((d) => d.steps));
-  const fatSeries = days.map((d) => d.bodyFatPct);
+  const has = (k: 'sleepHours' | 'restingHr' | 'weightKg' | 'steps') =>
+    all.some((d) => d[k] !== undefined);
+  const areas = (
+    [
+      {
+        value: 'recovery',
+        label: 'Recovery',
+        on: has('sleepHours') || has('restingHr'),
+      },
+      { value: 'weight', label: 'Weight', on: has('weightKg') },
+      { value: 'activity', label: 'Activity', on: has('steps') },
+      { value: 'food', label: 'Food', on: logged.length > 0 },
+    ] as const
+  ).filter((a) => a.on);
+  const [picked, setPicked] = useState<Area | null>(null);
+  const area: Area | undefined =
+    picked && areas.some((a) => a.value === picked) ? picked : areas[0]?.value;
+  const r14 = (k: 'sleepHours' | 'restingHr' | 'hrvMs' | 'steps') =>
+    avg(d14.map((d) => d[k]));
+  const label14: [string, string] | undefined = d14.length
+    ? [shortDate(d14[0]!.date), shortDate(d14.at(-1)!.date)]
+    : undefined;
+  const label42: [string, string] | undefined = d42.length
+    ? [shortDate(d42[0]!.date), shortDate(d42.at(-1)!.date)]
+    : undefined;
+  const goodWeight =
+    weight &&
+    (goal === 'build_muscle'
+      ? weight.weeklyChangeKg >= 0
+      : weight.weeklyChangeKg <= 0);
 
   return (
     <Screen scroll>
@@ -136,7 +149,7 @@ export default function BodyScreen() {
             {isDemo
               ? 'Sample data'
               : connected
-                ? `Synced from ${healthProviderLabel}`
+                ? `From ${healthProviderLabel}`
                 : 'Not connected'}
           </Eyebrow>
           <Text className="mt-1 font-display text-[28px] uppercase tracking-wide text-bone">
@@ -146,13 +159,11 @@ export default function BodyScreen() {
         {connected ? (
           <Pressable
             onPress={() => void refresh()}
-            hitSlop={10}
-            className="mt-1 flex-row items-center rounded-full bg-graphite-900 px-3 py-2"
+            hitSlop={12}
+            accessibilityLabel="Sync health data"
+            className="mt-1 h-10 w-10 items-center justify-center rounded-full bg-graphite-900"
           >
-            <RefreshCw size={15} color={c.muted} />
-            <Text className="ml-1.5 font-uiMedium text-[13px] text-steel">
-              {loading ? 'Syncing…' : 'Sync'}
-            </Text>
+            <RefreshCw size={17} color={loading ? c.accent : c.muted} />
           </Pressable>
         ) : null}
       </View>
@@ -163,386 +174,220 @@ export default function BodyScreen() {
         </View>
       ) : null}
 
-      {/* AI analysis */}
-      {hasData || loggedDays.length ? (
-        <Card molten className="mt-5">
+      {/* the AI's read of everything */}
+      {areas.length ? (
+        <Card className="mt-5">
           <View className="flex-row items-center">
-            <Sparkles size={18} color={c.accent} />
+            <Sparkles size={16} color={c.accent} />
             <Text className="ml-2 font-uiSemi text-[12px] uppercase tracking-widest text-molten">
               Coach’s analysis
             </Text>
           </View>
-          {coach ? (
-            <>
-              <Text className="mt-2 font-uiSemi text-[18px] text-bone">
-                {coach.headline}
-              </Text>
-              <Text className="mt-1 font-ui text-[15px] leading-[22px] text-steel">
-                {coach.summary}
-              </Text>
-              <Text className="mt-3 font-uiSemi text-[14px] text-molten">
-                → {coach.today}
-              </Text>
-            </>
-          ) : (
-            <Text className="mt-2 font-ui text-[15px] leading-[22px] text-steel">
-              {isFetching
-                ? 'Your coach is reading your data…'
-                : insights[0]
-                  ? `${insights[0].title}. ${insights[0].body}`
-                  : 'Keep logging. The more days of data, the sharper the analysis.'}
-            </Text>
-          )}
+          <Text className="mt-2 font-uiSemi text-[18px] leading-6 text-bone">
+            {coach?.headline ??
+              (isFetching
+                ? 'Reading your data…'
+                : (insights[0]?.title ?? 'Keep logging'))}
+          </Text>
+          <Text className="mt-1 font-ui text-[15px] leading-[22px] text-steel">
+            {coach?.summary ??
+              (isFetching
+                ? ''
+                : (insights[0]?.body ??
+                  'The more days of data, the sharper the analysis.'))}
+          </Text>
         </Card>
       ) : null}
 
-      {hasData ? (
-        <View className="mt-5 flex-row gap-2">
-          {RANGES.map((r) => (
-            <Pill
-              key={r.label}
-              label={r.label}
-              active={range === r.days}
-              onPress={() => setRange(r.days)}
-            />
-          ))}
-        </View>
-      ) : null}
-
-      {/* recovery */}
-      {readiness || has('sleepHours') || has('restingHr') ? (
+      {/* one area at a time */}
+      {area ? (
         <>
-          <SectionHeader title="Recovery" />
-          <Card>
-            {readiness ? (
-              <View className="mb-4 flex-row items-center">
-                <ReadinessRing r={readiness} size={92} />
-                <View className="ml-4 flex-1 gap-1">
-                  <Text className="font-ui text-[14px] text-bone">
-                    Sleep last night{' '}
-                    <Text className="font-uiSemi">
-                      {fmt(readiness.sleepHours, ' h')}
-                    </Text>
-                  </Text>
-                  <Text className="font-ui text-[14px] text-bone">
-                    HRV{' '}
-                    <Text className="font-uiSemi">
-                      {readiness.hrvVsBaselinePct === undefined
-                        ? '—'
-                        : `${readiness.hrvVsBaselinePct > 0 ? '+' : ''}${readiness.hrvVsBaselinePct}% vs usual`}
-                    </Text>
-                  </Text>
-                  <Text className="font-ui text-[14px] text-bone">
-                    Resting HR{' '}
-                    <Text className="font-uiSemi">
-                      {readiness.rhrVsBaselineBpm === undefined
-                        ? '—'
-                        : signed(readiness.rhrVsBaselineBpm, ' bpm')}
-                    </Text>
-                  </Text>
-                </View>
-              </View>
-            ) : null}
-            {has('sleepHours') ? (
+          <View className="mt-6">
+            <Segmented
+              value={area}
+              onChange={setPicked}
+              options={areas.map((a) => ({ value: a.value, label: a.label }))}
+            />
+          </View>
+
+          <Card className="mt-3">
+            {area === 'recovery' ? (
               <>
-                <View className="flex-row items-center">
-                  <IconBadge Icon={Moon} color={c.violet} size={28} />
-                  <Text className="ml-2 flex-1 font-uiSemi text-[15px] text-bone">
-                    Sleep
-                  </Text>
-                  <Text className="font-ui text-[13px] text-steel">
-                    avg {fmt(sleepAvg, ' h')} · goal 7 h+
-                  </Text>
-                </View>
-                <View className="mt-3">
+                <Big
+                  value={fmt(r14('sleepHours'), ' h')}
+                  label="Average sleep · 14 days"
+                  note={
+                    (r14('sleepHours') ?? 8) < 7
+                      ? 'below the 7 h goal'
+                      : undefined
+                  }
+                  tone="warn"
+                />
+                <View className="mt-4">
                   <BarChart
-                    data={days.map((d) => ({
-                      label: barLabel(d.date),
+                    data={d14.map((d) => ({
+                      label: weekday(d.date),
                       value: d.sleepHours,
                     }))}
                     color={c.violet}
-                    edges={labels}
                     target={7}
-                    height={100}
+                    edges={label14}
+                    height={110}
                     format={(v) => `${v.toFixed(1)} h`}
                   />
                 </View>
+                <View className="mt-4 flex-row gap-2">
+                  <Small
+                    label="Readiness"
+                    value={readiness ? String(readiness.score) : '—'}
+                  />
+                  <Small
+                    label="Resting HR"
+                    value={fmt(r14('restingHr'), ' bpm', 0)}
+                  />
+                  <Small label="HRV" value={fmt(r14('hrvMs'), ' ms', 0)} />
+                </View>
+                <Explain
+                  Icon={Brain}
+                  text={
+                    ex.recovery ??
+                    insightFor([
+                      'readiness_low',
+                      'readiness_high',
+                      'short_sleep',
+                    ])
+                  }
+                />
               </>
             ) : null}
-            {has('restingHr') || has('hrvMs') ? (
+
+            {area === 'weight' ? (
               <>
-                <View className="mt-5 flex-row items-center">
-                  <IconBadge Icon={Activity} color={c.aqua} size={28} />
-                  <Text className="ml-2 flex-1 font-uiSemi text-[15px] text-bone">
-                    Heart
-                  </Text>
-                  <Text className="font-ui text-[13px] text-steel">
-                    RHR {fmt(rhrAvg, '', 0)} · HRV {fmt(hrvAvg, ' ms', 0)}
-                  </Text>
+                <Big
+                  value={fmt(weight?.currentTrendKg, ' kg')}
+                  label="Trend weight"
+                  note={
+                    weight
+                      ? `${signed(weight.weeklyChangeKg, ' kg', 2)} / week`
+                      : undefined
+                  }
+                  tone={goodWeight ? 'good' : 'warn'}
+                />
+                <View className="mt-4">
+                  <LineChart
+                    series={[
+                      {
+                        values: d42.map((d) => d.weightKg),
+                        color: c.muted,
+                        dots: true,
+                      },
+                      { values: trend, color: c.accent, area: true },
+                    ]}
+                    labels={label42}
+                    unit=" kg"
+                  />
                 </View>
-                <View className="mt-3 flex-row gap-4">
-                  <View className="flex-1">
-                    <Text className="mb-1 font-ui text-[12px] text-steel">
-                      Resting HR (lower = better)
-                    </Text>
-                    <LineChart
-                      series={[
-                        {
-                          values: days.map((d) => d.restingHr),
-                          color: c.bad,
-                        },
-                      ]}
-                      height={80}
-                      decimals={0}
+                {composition ? (
+                  <View className="mt-4 flex-row gap-2">
+                    <Small
+                      label="Body fat"
+                      value={`${fmt(composition.bodyFatPct, '%')} (${signed(composition.fatChangeKg, ' kg')})`}
+                    />
+                    <Small
+                      label="Lean mass"
+                      value={`${fmt(composition.leanMassKg, ' kg')} (${signed(composition.leanChangeKg, ' kg')})`}
                     />
                   </View>
-                  <View className="flex-1">
-                    <Text className="mb-1 font-ui text-[12px] text-steel">
-                      HRV (higher = better)
-                    </Text>
-                    <LineChart
-                      series={[
-                        { values: days.map((d) => d.hrvMs), color: c.aqua },
-                      ]}
-                      height={80}
-                      decimals={0}
-                    />
-                  </View>
-                </View>
+                ) : null}
+                <Explain
+                  Icon={Brain}
+                  text={
+                    ex.weight ??
+                    insightFor([
+                      'loss_too_fast',
+                      'loss_stalled',
+                      'loss_on_track',
+                      'gain_too_fast',
+                    ])
+                  }
+                />
+                {composition ? (
+                  <Explain
+                    Icon={Brain}
+                    text={ex.body ?? insightFor(['lean_loss', 'recomp_win'])}
+                  />
+                ) : null}
               </>
             ) : null}
-            <Explain
-              Icon={Brain}
-              text={
-                ex.recovery ??
-                insightFor(['readiness_low', 'readiness_high', 'short_sleep'])
-              }
-            />
+
+            {area === 'activity' ? (
+              <>
+                <Big
+                  value={
+                    r14('steps') === undefined
+                      ? '—'
+                      : Math.round(r14('steps')!).toLocaleString('en-GB')
+                  }
+                  label="Steps per day · 14 days"
+                />
+                <View className="mt-4">
+                  <BarChart
+                    data={d14.map((d) => ({
+                      label: weekday(d.date),
+                      value: d.steps,
+                    }))}
+                    color={c.info}
+                    target={8000}
+                    edges={label14}
+                    height={110}
+                    format={(v) => Math.round(v).toLocaleString('en-GB')}
+                  />
+                </View>
+                <Explain
+                  Icon={Brain}
+                  text={ex.activity ?? insightFor(['steps_drop'])}
+                />
+              </>
+            ) : null}
+
+            {area === 'food' ? (
+              <>
+                <Big
+                  value={`${Math.round(avg(logged.map((d) => d.protein)) ?? 0)} g`}
+                  label={`Average protein · goal ${targets.proteinG} g`}
+                />
+                <View className="mt-4">
+                  <BarChart
+                    data={intake.map((d) => ({
+                      label: weekday(d.date),
+                      value: d.protein || undefined,
+                    }))}
+                    color={c.accent}
+                    target={targets.proteinG}
+                    height={110}
+                  />
+                </View>
+                <View className="mt-4 flex-row gap-2">
+                  <Small
+                    label="Avg calories"
+                    value={`${Math.round(avg(logged.map((d) => d.kcal)) ?? 0)} / ${targets.kcal}`}
+                  />
+                  <Small label="Days logged" value={`${logged.length} of 7`} />
+                </View>
+                <Explain Icon={Brain} text={ex.nutrition} />
+              </>
+            ) : null}
           </Card>
+
+          {area === 'weight' && !isDemo ? <CheckinCard days={all} /> : null}
         </>
       ) : null}
 
-      {/* weight */}
-      {has('weightKg') ? (
-        <>
-          <SectionHeader title="Weight" />
-          <Card>
-            <View className="flex-row items-center">
-              <IconBadge Icon={Scale} color={c.accent} size={28} />
-              <Text className="ml-2 flex-1 font-uiSemi text-[15px] text-bone">
-                Trend weight
-              </Text>
-            </View>
-            <View className="mt-3 flex-row">
-              <Metric
-                label="Trend"
-                value={fmt(weight?.currentTrendKg, ' kg')}
-              />
-              <Metric
-                label="Per week"
-                value={weight ? signed(weight.weeklyChangeKg, ' kg', 2) : '—'}
-                sub={weight ? `${weight.weeklyChangePct}% of body weight` : ''}
-                tone={
-                  !weight
-                    ? undefined
-                    : (
-                          goal === 'build_muscle'
-                            ? weight.weeklyChangeKg >= 0
-                            : weight.weeklyChangeKg <= 0
-                        )
-                      ? 'good'
-                      : 'warn'
-                }
-              />
-              <Metric
-                label="Last weigh-in"
-                value={fmt(weight?.latestScaleKg, ' kg')}
-              />
-            </View>
-            <View className="mt-4">
-              <LineChart
-                series={[
-                  {
-                    values: days.map((d) => d.weightKg),
-                    color: c.muted,
-                    dots: true,
-                  },
-                  { values: trend, color: c.accent, area: true },
-                ]}
-                labels={labels}
-                unit=" kg"
-              />
-            </View>
-            <Text className="mt-2 font-ui text-[12px] text-steel">
-              Line = trend (ignores daily water swings). Dots = weigh-ins.
-            </Text>
-            <Explain
-              Icon={Brain}
-              text={
-                ex.weight ??
-                insightFor([
-                  'loss_too_fast',
-                  'loss_stalled',
-                  'loss_on_track',
-                  'gain_too_fast',
-                ])
-              }
-            />
-          </Card>
-          {!isDemo ? <CheckinCard days={snapshot.days} /> : null}
-        </>
-      ) : null}
-
-      {/* composition */}
-      {composition ? (
-        <>
-          <SectionHeader title="Body composition" />
-          <Card>
-            <View className="flex-row">
-              <Metric
-                label="Body fat"
-                value={fmt(composition.bodyFatPct, '%')}
-                sub={signed(composition.fatChangeKg, ' kg fat')}
-                tone={composition.fatChangeKg <= 0 ? 'good' : 'warn'}
-              />
-              <Metric
-                label="Lean mass"
-                value={fmt(composition.leanMassKg, ' kg')}
-                sub={signed(composition.leanChangeKg, ' kg lean')}
-                tone={composition.leanChangeKg >= -0.2 ? 'good' : 'warn'}
-              />
-            </View>
-            <Text className="mt-1 font-ui text-[12px] text-steel">
-              Change over the last {composition.windowDays} days
-            </Text>
-            <View className="mt-4">
-              <LineChart
-                series={[{ values: fatSeries, color: c.warn, area: true }]}
-                labels={labels}
-                unit="%"
-              />
-            </View>
-            <Explain
-              Icon={Brain}
-              text={ex.body ?? insightFor(['lean_loss', 'recomp_win'])}
-            />
-          </Card>
-        </>
-      ) : null}
-
-      {/* activity */}
-      {has('steps') ? (
-        <>
-          <SectionHeader title="Activity" />
-          <Card>
-            <View className="flex-row items-center">
-              <IconBadge Icon={Footprints} color={c.info} size={28} />
-              <Text className="ml-2 flex-1 font-uiSemi text-[15px] text-bone">
-                Steps
-              </Text>
-              <Text className="font-ui text-[13px] text-steel">
-                avg{' '}
-                {stepsAvg === undefined
-                  ? '—'
-                  : Math.round(stepsAvg).toLocaleString('en-GB')}{' '}
-                / day
-              </Text>
-            </View>
-            <View className="mt-3">
-              <BarChart
-                data={days.map((d) => ({
-                  label: barLabel(d.date),
-                  value: d.steps,
-                }))}
-                color={c.info}
-                edges={labels}
-                target={8000}
-                height={100}
-                format={(v) => Math.round(v).toLocaleString('en-GB')}
-              />
-            </View>
-            <Explain
-              Icon={Brain}
-              text={ex.activity ?? insightFor(['steps_drop'])}
-            />
-          </Card>
-        </>
-      ) : null}
-
-      {/* nutrition from the food log */}
-      {loggedDays.length ? (
-        <>
-          <SectionHeader title="Nutrition · 7 days" />
-          <Card>
-            <View className="flex-row items-center">
-              <IconBadge Icon={Utensils} color={c.warn} size={28} />
-              <Text className="ml-2 flex-1 font-uiSemi text-[15px] text-bone">
-                Protein per day
-              </Text>
-              <Text className="font-ui text-[13px] text-steel">
-                goal {targets.proteinG} g
-              </Text>
-            </View>
-            <View className="mt-3">
-              <BarChart
-                data={intake.map((d) => ({
-                  label: new Date(`${d.date}T12:00:00Z`)
-                    .toLocaleDateString('en-GB', { weekday: 'short' })
-                    .slice(0, 2),
-                  value: d.protein || undefined,
-                }))}
-                color={c.accent}
-                target={targets.proteinG}
-                height={100}
-              />
-            </View>
-            <View className="mt-4 flex-row">
-              <Metric
-                label="Avg protein"
-                value={`${Math.round(avg(loggedDays.map((d) => d.protein)) ?? 0)} g`}
-              />
-              <Metric
-                label="Avg calories"
-                value={`${Math.round(avg(loggedDays.map((d) => d.kcal)) ?? 0)}`}
-                sub={`target ${targets.kcal}`}
-              />
-              <Metric label="Days logged" value={`${loggedDays.length}/7`} />
-            </View>
-            <Explain Icon={Brain} text={ex.nutrition} />
-          </Card>
-        </>
-      ) : null}
-
-      {/* other insights */}
-      {insights.length > 1 ? (
-        <>
-          <SectionHeader title="Coach notes" />
-          <View className="gap-3">
-            {insights.slice(0, 4).map((i) => (
-              <InsightCard key={i.id} insight={i} />
-            ))}
-          </View>
-        </>
-      ) : null}
-
-      <View className="mt-7 rounded-card border border-graphite-700/60 p-4">
-        <Text className="font-uiSemi text-[15px] text-bone">
-          Where this comes from
-        </Text>
-        <Text className="mt-1 font-ui text-[13px] leading-[19px] text-steel">
-          {snapshot.sources.length
-            ? snapshot.sources.join(' · ')
-            : 'No sources yet'}
-        </Text>
-        <Text className="mt-3 font-ui text-[13px] leading-[19px] text-steel">
-          Works with any watch or smart scale that syncs to Apple Health or
-          Health Connect: Apple Watch, Garmin, Withings, RENPHO, Eufy and more.
-          Scale body fat is an estimate, so Forge watches the trend.
-        </Text>
-      </View>
-
-      <Text className="mb-6 mt-6 font-ui text-[12px] text-steel">
-        Not medical advice. Talk to a doctor about health conditions.
+      <Text className="mb-6 mt-6 font-ui text-[12px] leading-[18px] text-steel">
+        {snapshot.sources.length && !isDemo
+          ? `Data from ${snapshot.sources.join(', ')}. `
+          : ''}
+        Not medical advice.
       </Text>
     </Screen>
   );

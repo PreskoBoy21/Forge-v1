@@ -1,3 +1,4 @@
+import * as Apple from 'expo-apple-authentication';
 import type { Session } from '@supabase/supabase-js';
 import { useEffect } from 'react';
 import { create } from 'zustand';
@@ -62,4 +63,29 @@ export async function deleteAccount() {
   });
   if (error) throw new Error('Could not delete your account. Try again.');
   await supabase.auth.signOut();
+}
+
+/** Sign in with Apple (iOS). Supabase must have the Apple provider enabled. */
+export async function signInWithApple(): Promise<'ok' | 'cancelled'> {
+  if (!supabase) throw new Error('Backend not configured');
+
+  try {
+    const cred = await Apple.signInAsync({
+      requestedScopes: [
+        Apple.AppleAuthenticationScope.FULL_NAME,
+        Apple.AppleAuthenticationScope.EMAIL,
+      ],
+    });
+    if (!cred.identityToken) throw new Error('No identity token from Apple');
+    const { error } = await supabase.auth.signInWithIdToken({
+      provider: 'apple',
+      token: cred.identityToken,
+    });
+    if (error) throw error;
+    return 'ok';
+  } catch (e) {
+    if ((e as { code?: string }).code === 'ERR_REQUEST_CANCELED')
+      return 'cancelled';
+    throw e;
+  }
 }

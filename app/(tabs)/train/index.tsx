@@ -3,32 +3,17 @@ import { Pressable, ScrollView, Text, View } from 'react-native';
 
 import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
-import { BarChart, LineChart, Progress } from '@/components/charts';
-import {
-  CalendarDays,
-  ChevronRight,
-  Dumbbell,
-  History,
-  Sparkles,
-  Trophy,
-} from '@/components/icons';
+import { BarChart, LineChart } from '@/components/charts';
+import { ChevronRight, History, Trophy } from '@/components/icons';
 import { Screen } from '@/components/Screen';
-import {
-  Eyebrow,
-  IconBadge,
-  Explain,
-  Pill,
-  SectionHeader,
-} from '@/components/ui';
+import { Eyebrow, IconBadge, Pill, Segmented } from '@/components/ui';
 import { useAnalysis } from '@/features/health/ui/useAnalysis';
-import { useCoachRead } from '@/features/health/ui/useCoachRead';
 import { shortDate } from '@/features/health/vitals';
 import { useOnboardingDraft } from '@/features/onboarding/draft-store';
 import { kgLabel } from '@/features/train/program';
 import {
   consistency,
   liftProgress,
-  musclesThisWeek,
   recentPRs,
   topLifts,
   trainingSummary,
@@ -38,167 +23,103 @@ import { planToday, useTrain } from '@/features/train/store';
 import { go } from '@/lib/nav';
 import { useColors } from '@/theme/theme';
 
-const ARROW = { increase: '↑', deload: '↓', keep: '', first: '' } as const;
+/** Train = today's plan first; progress is one card with one graph at a time. */
+const ARROW = { increase: ' ↑', deload: ' ↓', keep: '', first: '' } as const;
 const kg = (n: number) =>
   n >= 10_000 ? `${(n / 1000).toFixed(1)} t` : `${Math.round(n)} kg`;
-const MUSCLE: Record<string, string> = {
-  chest: 'Chest',
-  back: 'Back',
-  shoulders: 'Shoulders',
-  arms: 'Arms',
-  legs: 'Legs',
-  core: 'Core',
-};
 
-function Stat({
-  label,
-  value,
-  sub,
-  tone,
-}: {
-  label: string;
-  value: string;
-  sub?: string;
-  tone?: 'good' | 'warn';
-}) {
-  return (
-    <View className="flex-1 rounded-card border border-graphite-700/60 bg-graphite-900 p-3.5">
-      <Text className="font-uiMedium text-[12px] text-steel">{label}</Text>
-      <Text
-        className="mt-1 font-display text-[22px] text-bone"
-        style={{ fontVariant: ['tabular-nums'] }}
-        numberOfLines={1}
-      >
-        {value}
-      </Text>
-      {sub ? (
-        <Text
-          numberOfLines={1}
-          className={`mt-0.5 font-uiMedium text-[12px] ${tone === 'good' ? 'text-mint' : tone === 'warn' ? 'text-gold' : 'text-steel'}`}
-        >
-          {sub}
-        </Text>
-      ) : null}
-    </View>
-  );
-}
+type View_ = 'strength' | 'volume' | 'calendar';
 
 export default function TrainScreen() {
   const c = useColors();
   const history = useTrain((s) => s.history);
   const active = useTrain((s) => s.active);
   const trainingDays = useOnboardingDraft((s) => s.trainingDays);
-  const { analysis, goal } = useAnalysis();
-  const { data: coach } = useCoachRead(analysis, goal);
+  const { analysis } = useAnalysis();
   const easy = analysis.readiness?.training === 'easy';
-  const plan = useMemo(() => planToday(history, easy), [history, easy]);
+  const overrides = useTrain((st) => st.overrides);
+  const plan = useMemo(
+    () => planToday(history, easy),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [history, easy, overrides],
+  );
   const [today] = useState(() => new Date().toISOString().slice(0, 10));
+  const [view, setView] = useState<View_>('strength');
 
-  const stats = useMemo(() => {
-    const lifts = topLifts(history);
-    return {
+  const stats = useMemo(
+    () => ({
       summary: trainingSummary(history, today, trainingDays),
       volume: weeklyVolume(history, today, 8),
-      lifts,
-      prs: recentPRs(history, 4),
-      muscles: musclesThisWeek(history, today),
+      lifts: topLifts(history),
+      pr: recentPRs(history, 1)[0],
       days: consistency(history, today, 28),
-    };
-  }, [history, today, trainingDays]);
+    }),
+    [history, today, trainingDays],
+  );
   const [lift, setLift] = useState<string | null>(null);
   const shownLift = lift ?? stats.lifts[0] ?? null;
   const progress = useMemo(
     () => (shownLift ? liftProgress(history, shownLift) : []),
     [history, shownLift],
   );
-  const s = stats.summary;
   const gain =
     progress.length > 1
       ? Math.round((progress.at(-1)!.e1rm - progress[0]!.e1rm) * 10) / 10
       : 0;
+  const s = stats.summary;
+  const trained28 = stats.days.filter((d) => d.trained).length;
 
   return (
     <Screen scroll>
       <Eyebrow>
-        Session {history.length + 1}
-        {easy ? ' · easy day' : ''}
+        {s.workouts7d} of {trainingDays} workouts this week
       </Eyebrow>
       <Text className="mt-1 font-display text-[28px] uppercase tracking-wide text-bone">
         Train
       </Text>
 
-      {/* stats */}
-      <View className="mt-4 flex-row gap-3">
-        <Stat
-          label="This week"
-          value={`${s.workouts7d}/${trainingDays}`}
-          sub={
-            s.workouts7d >= trainingDays
-              ? 'Goal hit'
-              : `${trainingDays - s.workouts7d} to go`
-          }
-          tone={s.workouts7d >= trainingDays ? 'good' : undefined}
-        />
-        <Stat
-          label="Volume 7d"
-          value={kg(s.volume7dKg)}
-          sub={
-            s.volumeChangePct === undefined
-              ? 'Sets × reps × kg'
-              : `${s.volumeChangePct > 0 ? '+' : ''}${s.volumeChangePct}% vs last wk`
-          }
-          tone={
-            s.volumeChangePct === undefined
-              ? undefined
-              : s.volumeChangePct >= 0
-                ? 'good'
-                : 'warn'
-          }
-        />
-        <Stat
-          label="PRs 30d"
-          value={String(s.prs30d)}
-          sub={s.weekStreak > 0 ? `${s.weekStreak} wk streak` : 'Lift heavy'}
-        />
-      </View>
-
-      {coach?.explain?.training ? (
-        <Explain Icon={Sparkles} text={coach.explain.training} />
-      ) : null}
-
       {/* today's plan */}
-      <SectionHeader title={active ? active.dayName : plan.name} />
-      <Card molten>
-        <Text className="font-ui text-[14px] text-steel">
-          {easy
-            ? 'Under-recovered: same weights, one set less per move.'
-            : 'Weights go up when you hit the top of the rep range.'}
+      <Card molten className="mt-5">
+        <View className="flex-row items-center justify-between">
+          <Text className="font-uiMedium text-[12px] uppercase tracking-widest text-molten">
+            {easy ? 'Today · easy day' : 'Today'}
+          </Text>
+          <Pressable onPress={() => go('/(tabs)/train/edit')} hitSlop={10}>
+            <Text className="font-uiSemi text-[13px] text-steel">
+              Edit plan
+            </Text>
+          </Pressable>
+        </View>
+        <Text className="mt-1 font-display text-[26px] uppercase text-bone">
+          {active ? active.dayName : plan.name}
         </Text>
-        <View className="mt-3">
-          {plan.moves.map((mv, i) => (
-            <View
+        <View className="mt-2">
+          {plan.moves.map((mv) => (
+            <Pressable
               key={mv.name}
-              className={`flex-row items-center py-2.5 ${i ? 'border-t border-graphite-700/60' : ''}`}
+              onPress={() =>
+                go(`/(tabs)/train/howto?name=${encodeURIComponent(mv.name)}`)
+              }
+              className="flex-row items-center py-2"
             >
-              <View className="flex-1 pr-3">
-                <Text className="font-uiSemi text-[16px] text-bone">
-                  {mv.name}
-                </Text>
-                <Text className="font-ui text-[13px] text-steel">
-                  {mv.sets} × {mv.repMin}–{mv.repMax}
-                </Text>
-              </View>
-              <Text
-                className={`font-uiSemi text-[15px] ${mv.reason === 'increase' ? 'text-mint' : mv.reason === 'deload' ? 'text-gold' : 'text-bone'}`}
-              >
-                {kgLabel(mv.targetKg)} {ARROW[mv.reason]}
+              <Text className="flex-1 font-ui text-[15px] text-bone">
+                {mv.name}
               </Text>
-            </View>
+              <Text className="mr-3 font-ui text-[13px] text-steel">
+                {mv.sets}×{mv.repMin}–{mv.repMax}
+              </Text>
+              <Text
+                className={`min-w-[72px] text-right font-uiSemi text-[15px] ${mv.reason === 'increase' ? 'text-mint' : mv.reason === 'deload' ? 'text-gold' : 'text-bone'}`}
+              >
+                {kgLabel(mv.targetKg)}
+                {ARROW[mv.reason]}
+              </Text>
+            </Pressable>
           ))}
         </View>
-        <View className="mt-3">
+        <View className="mt-4">
           <Button
-            label={active ? 'Resume workout' : 'Start Gym Mode'}
+            label={active ? 'Resume workout' : 'Start workout'}
             size="gym"
             onPress={() => {
               if (!active) useTrain.getState().start(easy);
@@ -206,25 +127,36 @@ export default function TrainScreen() {
             }}
           />
         </View>
+        <Text className="mt-3 text-center font-ui text-[12px] text-steel">
+          Tap an exercise to see how to do it
+        </Text>
       </Card>
 
+      {/* progress: one graph at a time */}
+      <Text className="mb-3 mt-8 font-display text-[19px] uppercase tracking-wide text-bone">
+        Progress
+      </Text>
       {history.length === 0 ? (
-        <Card className="mt-6">
-          <View className="flex-row items-center">
-            <IconBadge Icon={Dumbbell} color={c.accent} />
-            <Text className="ml-3 flex-1 font-ui text-[15px] leading-[21px] text-steel">
-              Finish your first workout and your strength graphs, volume and PRs
-              show up here.
-            </Text>
-          </View>
+        <Card>
+          <Text className="font-ui text-[15px] leading-[21px] text-steel">
+            Finish your first workout and your progress graphs show up here.
+          </Text>
         </Card>
       ) : (
-        <>
-          {/* strength */}
-          {shownLift ? (
-            <>
-              <SectionHeader title="Strength" />
-              <Card>
+        <Card>
+          <Segmented
+            value={view}
+            onChange={setView}
+            options={[
+              { value: 'strength', label: 'Strength' },
+              { value: 'volume', label: 'Volume' },
+              { value: 'calendar', label: 'Calendar' },
+            ]}
+          />
+
+          {view === 'strength' ? (
+            shownLift ? (
+              <View className="mt-4">
                 <ScrollView
                   horizontal
                   showsHorizontalScrollIndicator={false}
@@ -239,25 +171,18 @@ export default function TrainScreen() {
                     />
                   ))}
                 </ScrollView>
-                <View className="mt-4 flex-row items-end justify-between">
-                  <View>
-                    <Text className="font-uiMedium text-[12px] text-steel">
-                      Est. 1-rep max
-                    </Text>
-                    <Text className="font-display text-[30px] text-bone">
-                      {progress.at(-1)?.e1rm ?? '—'} kg
-                    </Text>
-                  </View>
-                  {gain !== 0 ? (
-                    <Text
-                      className={`mb-1 font-uiSemi text-[14px] ${gain > 0 ? 'text-mint' : 'text-gold'}`}
-                    >
-                      {gain > 0 ? '+' : ''}
-                      {gain} kg since {shortDate(progress[0]!.date)}
+                <Text className="mt-4 font-display text-[32px] text-bone">
+                  {progress.at(-1)?.e1rm ?? '—'} kg
+                </Text>
+                <Text className="font-ui text-[13px] text-steel">
+                  Estimated 1-rep max
+                  {gain > 0 ? (
+                    <Text className="text-mint">
+                      {'  '}+{gain} kg since {shortDate(progress[0]!.date)}
                     </Text>
                   ) : null}
-                </View>
-                <View className="mt-3">
+                </Text>
+                <View className="mt-4">
                   <LineChart
                     series={[
                       {
@@ -278,125 +203,101 @@ export default function TrainScreen() {
                     decimals={0}
                   />
                 </View>
-              </Card>
-            </>
-          ) : null}
-
-          {/* volume */}
-          <SectionHeader title="Weekly volume" />
-          <Card>
-            <Text className="font-ui text-[13px] text-steel">
-              Total kg lifted per week (sets × reps × weight). Going up over
-              time = progressive overload.
-            </Text>
-            <View className="mt-4">
-              <BarChart
-                data={stats.volume.map((w) => ({
-                  label: w.label,
-                  value: w.volume,
-                }))}
-                color={c.accent}
-                format={kg}
-              />
-            </View>
-          </Card>
-
-          {/* consistency */}
-          <SectionHeader title="Last 4 weeks" />
-          <Card>
-            <View className="flex-row items-center">
-              <CalendarDays size={18} color={c.muted} />
-              <Text className="ml-2 font-ui text-[14px] text-steel">
-                {stats.days.filter((d) => d.trained).length} workouts ·{' '}
-                {trainingDays * 4} planned
+              </View>
+            ) : (
+              <Text className="mt-4 font-ui text-[14px] text-steel">
+                Do the same lift twice and its strength line appears here.
               </Text>
-            </View>
-            <View className="mt-3 flex-row flex-wrap" style={{ gap: 6 }}>
-              {stats.days.map((d) => (
-                <View
-                  key={d.date}
-                  style={{ width: '12.4%', aspectRatio: 1 }}
-                  className={`rounded-md ${d.trained ? 'bg-molten' : 'bg-graphite-800'} ${d.date === today ? 'border-2 border-bone' : ''}`}
-                />
-              ))}
-            </View>
-          </Card>
-
-          {/* muscles */}
-          {stats.muscles.length ? (
-            <>
-              <SectionHeader title="Sets per muscle · 7 days" />
-              <Card>
-                <View className="gap-3">
-                  {stats.muscles.slice(0, 8).map((m) => (
-                    <View key={m.muscle}>
-                      <View className="mb-1 flex-row justify-between">
-                        <Text className="font-uiMedium text-[14px] text-bone">
-                          {MUSCLE[m.muscle] ?? m.muscle}
-                        </Text>
-                        <Text className="font-ui text-[13px] text-steel">
-                          {m.sets} / 10 sets
-                        </Text>
-                      </View>
-                      <Progress
-                        value={m.sets}
-                        max={10}
-                        color={m.sets >= 10 ? c.good : c.aqua}
-                      />
-                    </View>
-                  ))}
-                </View>
-                <Text className="mt-3 font-ui text-[12px] text-steel">
-                  About 10 hard sets per muscle per week is a solid target for
-                  growth.
-                </Text>
-              </Card>
-            </>
+            )
           ) : null}
 
-          {/* PRs */}
-          {stats.prs.length ? (
-            <>
-              <SectionHeader title="Recent PRs" />
-              <Card>
-                {stats.prs.map((p, i) => (
-                  <View
-                    key={`${p.date}-${p.exercise}`}
-                    className={`flex-row items-center py-2.5 ${i ? 'border-t border-graphite-700/60' : ''}`}
+          {view === 'volume' ? (
+            <View className="mt-4">
+              <Text className="font-display text-[32px] text-bone">
+                {kg(s.volume7dKg)}
+              </Text>
+              <Text className="font-ui text-[13px] text-steel">
+                Lifted in the last 7 days
+                {s.volumeChangePct !== undefined ? (
+                  <Text
+                    className={
+                      s.volumeChangePct >= 0 ? 'text-mint' : 'text-gold'
+                    }
                   >
-                    <IconBadge Icon={Trophy} color={c.warn} size={30} />
-                    <View className="ml-3 flex-1">
-                      <Text className="font-uiSemi text-[15px] text-bone">
-                        {p.exercise}
-                      </Text>
-                      <Text className="font-ui text-[12px] text-steel">
-                        {shortDate(p.date)} · was {p.prevKg} kg
-                      </Text>
-                    </View>
-                    <Text className="font-display text-[18px] text-mint">
-                      {p.kg} kg
-                    </Text>
-                  </View>
-                ))}
-              </Card>
-            </>
+                    {'  '}
+                    {s.volumeChangePct > 0 ? '+' : ''}
+                    {s.volumeChangePct}% vs last week
+                  </Text>
+                ) : null}
+              </Text>
+              <View className="mt-4">
+                <BarChart
+                  data={stats.volume.map((w) => ({
+                    label: w.label,
+                    value: w.volume,
+                  }))}
+                  color={c.accent}
+                  format={kg}
+                />
+              </View>
+            </View>
           ) : null}
-        </>
+
+          {view === 'calendar' ? (
+            <View className="mt-4">
+              <Text className="font-display text-[32px] text-bone">
+                {trained28} / {trainingDays * 4}
+              </Text>
+              <Text className="font-ui text-[13px] text-steel">
+                Workouts in the last 4 weeks
+                {s.weekStreak > 1 ? ` · ${s.weekStreak}-week streak` : ''}
+              </Text>
+              <View className="mt-4 flex-row flex-wrap" style={{ gap: 6 }}>
+                {stats.days.map((d) => (
+                  <View
+                    key={d.date}
+                    style={{ width: '12.4%', aspectRatio: 1 }}
+                    className={`rounded-md ${d.trained ? 'bg-molten' : 'bg-graphite-800'} ${d.date === today ? 'border-2 border-bone' : ''}`}
+                  />
+                ))}
+              </View>
+            </View>
+          ) : null}
+        </Card>
       )}
 
-      <Pressable
-        className="mb-6 mt-6 flex-row items-center rounded-card border border-graphite-700/60 bg-graphite-900 p-4"
-        onPress={() => go('/(tabs)/train/history')}
-      >
-        <History size={20} color={c.muted} />
-        <Text className="ml-3 flex-1 font-uiMedium text-[16px] text-bone">
-          Workout history
-        </Text>
-        <Text className="mr-1 font-ui text-[14px] text-steel">
-          {history.length}
-        </Text>
-        <ChevronRight size={18} color={c.muted} />
-      </Pressable>
+      {/* latest PR + history, as two quiet rows */}
+      <View className="mb-6 mt-4 rounded-card border border-graphite-700/60 bg-graphite-900 px-4">
+        {stats.pr ? (
+          <Pressable
+            onPress={() => go('/(tabs)/train/history')}
+            className="flex-row items-center border-b border-graphite-700/60 py-3.5"
+          >
+            <IconBadge Icon={Trophy} color={c.warn} size={30} />
+            <View className="ml-3 flex-1">
+              <Text className="font-uiSemi text-[15px] text-bone">
+                Latest PR: {stats.pr.exercise}
+              </Text>
+              <Text className="font-ui text-[12px] text-steel">
+                {stats.pr.kg} kg · {shortDate(stats.pr.date)}
+              </Text>
+            </View>
+          </Pressable>
+        ) : null}
+        <Pressable
+          onPress={() => go('/(tabs)/train/history')}
+          className="flex-row items-center py-3.5"
+        >
+          <History size={20} color={c.muted} />
+          <Text className="ml-3 flex-1 font-uiMedium text-[15px] text-bone">
+            Workout history
+          </Text>
+          <Text className="mr-1 font-ui text-[14px] text-steel">
+            {history.length}
+          </Text>
+          <ChevronRight size={18} color={c.muted} />
+        </Pressable>
+      </View>
     </Screen>
   );
 }

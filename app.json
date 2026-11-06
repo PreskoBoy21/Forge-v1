@@ -13,7 +13,8 @@
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       },
-      "buildNumber": "1"
+      "buildNumber": "1",
+      "usesAppleSignIn": true
     },
     "android": {
       "adaptiveIcon": {
@@ -76,10 +77,26 @@
         "expo-image-picker",
         {
           "photosPermission": "Forge uses your photos to estimate the food on your plate.",
-          "cameraPermission": "Forge uses the camera to snap your meals and estimate protein and calories.",
+          "cameraPermission": "Forge uses the camera to scan food barcodes and snap your meals.",
           "microphonePermission": false
         }
-      ]
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Forge uses the camera to scan food barcodes and snap your meals.",
+          "microphonePermission": false,
+          "recordAudioAndroid": false,
+          "barcodeScannerEnabled": true
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "color": "#4C8A0C"
+        }
+      ],
+      "expo-apple-authentication"
     ],
     "experiments": {
       "typedRoutes": true

@@ -12,6 +12,11 @@ export default function TrainLayout() {
         options={{ title: 'Gym Mode', headerShown: false }}
       />
       <Stack.Screen name="history" options={{ title: '' }} />
+      <Stack.Screen
+        name="howto"
+        options={{ headerShown: false, presentation: 'modal' }}
+      />
+      <Stack.Screen name="edit" options={{ title: '' }} />
     </Stack>
   );
 }

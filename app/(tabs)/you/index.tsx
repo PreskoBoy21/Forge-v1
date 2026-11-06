@@ -5,12 +5,14 @@ import { Linking, Pressable, Text, View } from 'react-native';
 import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
 import {
+  Bell,
   FileText,
   HeartPulse,
   LogOut,
   Mail,
   Monitor,
   Moon,
+  Pencil,
   RotateCcw,
   Shield,
   Sparkles,
@@ -34,6 +36,13 @@ import { LINKS } from '@/lib/links';
 import { go, replaceTo } from '@/lib/nav';
 import { clearLocalData } from '@/lib/reset';
 import { supabase } from '@/lib/supabase';
+import {
+  disableReminder,
+  enableReminder,
+  REMINDER_TIMES,
+  timeLabel,
+  useReminder,
+} from '@/features/notify/reminders';
 import {
   healthProviderLabel,
   healthSupported,
@@ -83,6 +92,19 @@ function AppearancePicker() {
 
 export default function YouScreen() {
   const health = useHealth();
+  const reminder = useReminder();
+  // Off → 07:30 → 12:00 → 17:30 → 20:00 → Off
+  const cycleReminder = () => {
+    if (!reminder.enabled) {
+      const t = REMINDER_TIMES[0];
+      return void enableReminder(t.hour, t.minute);
+    }
+    const i = REMINDER_TIMES.findIndex(
+      (t) => t.hour === reminder.hour && t.minute === reminder.minute,
+    );
+    const t = REMINDER_TIMES[i + 1];
+    return void (t ? enableReminder(t.hour, t.minute) : disableReminder());
+  };
   const session = useSession((s) => s.session);
   const isPro = usePro((s) => s.isPro);
   const draft = useOnboardingDraft();
@@ -220,6 +242,19 @@ export default function YouScreen() {
           onPress={() =>
             void (health.connected ? health.refresh() : health.connect())
           }
+        />
+        <ListRow
+          Icon={Bell}
+          label="Daily reminder"
+          value={
+            reminder.enabled ? timeLabel(reminder.hour, reminder.minute) : 'Off'
+          }
+          onPress={cycleReminder}
+        />
+        <ListRow
+          Icon={Pencil}
+          label="Edit my plan"
+          onPress={() => go('/(tabs)/train/edit')}
         />
         <ListRow
           Icon={RotateCcw}

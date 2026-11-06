@@ -276,3 +276,18 @@ export function bestWeights(history: WorkoutLog[]): Record<string, number> {
 export function kgLabel(kg: number) {
   return kg === 0 ? 'Bodyweight' : `${kg} kg`;
 }
+
+/** Per-day exercise swaps the user chose in "Edit plan": day name → move index → exercise. */
+export type PlanOverrides = Record<string, Record<number, string>>;
+
+export function applyOverrides(
+  day: DayTemplate,
+  overrides: PlanOverrides | undefined,
+): DayTemplate {
+  const o = overrides?.[day.name];
+  if (!o) return day;
+  return {
+    ...day,
+    moves: day.moves.map((mv, i) => (o[i] ? { ...mv, name: o[i]! } : mv)),
+  };
+}
