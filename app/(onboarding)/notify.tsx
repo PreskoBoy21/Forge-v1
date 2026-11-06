@@ -3,7 +3,13 @@ import { Text, View } from 'react-native';
 import { Button } from '@/components/Button';
 import { PreviewBanner } from '@/components/PreviewBanner';
 import { Screen } from '@/components/Screen';
-import { go } from '@/lib/nav';
+import { FLAGS } from '@/lib/flags';
+import { go, replaceTo } from '@/lib/nav';
+
+const next = () =>
+  FLAGS.SUBSCRIPTIONS
+    ? go('/(onboarding)/paywall')
+    : replaceTo('/(tabs)/today');
 
 export default function NotifyScreen() {
   return (
@@ -16,15 +22,8 @@ export default function NotifyScreen() {
         Morning: what to do. Night: forge the day. That’s the habit.
       </Text>
       <View className="mt-auto gap-3 pb-6">
-        <Button
-          label="Yes, ping me"
-          onPress={() => go('/(onboarding)/paywall')}
-        />
-        <Button
-          label="Not now"
-          variant="secondary"
-          onPress={() => go('/(onboarding)/paywall')}
-        />
+        <Button label="Yes, ping me" onPress={next} />
+        <Button label="Not now" variant="secondary" onPress={next} />
       </View>
     </Screen>
   );

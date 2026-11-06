@@ -33,7 +33,13 @@ export function useSessionListener() {
 
 export async function signUp(email: string, password: string) {
   if (!supabase) throw new Error('Backend not configured');
-  const { data, error } = await supabase.auth.signUp({ email, password });
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      emailRedirectTo: 'https://preskoboy21.github.io/Forge-v1/confirmed.html',
+    },
+  });
   if (error) throw error;
   return { needsConfirmation: !data.session };
 }

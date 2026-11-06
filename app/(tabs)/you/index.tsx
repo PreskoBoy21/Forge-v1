@@ -7,6 +7,7 @@ import { Screen } from '@/components/Screen';
 import { deleteAccount, signOut, useSession } from '@/features/auth/session';
 import { useTargets } from '@/features/food/store';
 import { usePro } from '@/features/paywall/purchases';
+import { FLAGS } from '@/lib/flags';
 import {
   useOnboardingDraft,
   type CoachPersona,
@@ -106,7 +107,8 @@ export default function YouScreen() {
   return (
     <Screen scroll>
       <Text className="font-uiMedium text-[12px] uppercase tracking-widest text-steel">
-        You · {COACH[draft.coach]} coach · {isPro ? 'Pro' : 'Free'}
+        You · {COACH[draft.coach]} coach
+        {FLAGS.SUBSCRIPTIONS ? (isPro ? ' · Pro' : ' · Free') : ''}
       </Text>
       <Text
         className="mt-1 font-display text-[28px] uppercase tracking-wide text-bone"
@@ -156,15 +158,17 @@ export default function YouScreen() {
         </View>
       ) : null}
 
-      <Pressable
-        onPress={() => go('/(tabs)/you/paywall')}
-        className="mt-3 rounded-card border border-molten/40 bg-graphite-900 p-4"
-      >
-        <Text className="font-uiSemi text-[15px] text-molten">Forge Pro</Text>
-        <Text className="mt-1 font-ui text-[13px] text-steel">
-          Unlimited meal scans · AI coach read every day
-        </Text>
-      </Pressable>
+      {FLAGS.SUBSCRIPTIONS ? (
+        <Pressable
+          onPress={() => go('/(tabs)/you/paywall')}
+          className="mt-3 rounded-card border border-molten/40 bg-graphite-900 p-4"
+        >
+          <Text className="font-uiSemi text-[15px] text-molten">Forge Pro</Text>
+          <Text className="mt-1 font-ui text-[13px] text-steel">
+            Unlimited meal scans · AI coach read every day
+          </Text>
+        </Pressable>
+      ) : null}
 
       <View className="mt-6">
         <Row
