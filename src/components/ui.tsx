@@ -147,3 +147,48 @@ export function Explain({ text, Icon }: { text?: string; Icon: LucideIcon }) {
     </View>
   );
 }
+
+/** iOS-style segmented control: one view at a time. */
+export function Segmented<T extends string>({
+  options,
+  value,
+  onChange,
+}: {
+  options: { value: T; label: string }[];
+  value: T;
+  onChange: (v: T) => void;
+}) {
+  return (
+    <View className="flex-row rounded-2xl bg-graphite-800 p-1">
+      {options.map((o) => {
+        const on = o.value === value;
+        return (
+          <Pressable
+            key={o.value}
+            onPress={() => onChange(o.value)}
+            accessibilityRole="button"
+            accessibilityState={{ selected: on }}
+            className={`flex-1 items-center rounded-xl py-2 ${on ? 'bg-graphite-900' : ''}`}
+            style={
+              on
+                ? {
+                    shadowColor: '#000',
+                    shadowOpacity: 0.08,
+                    shadowRadius: 4,
+                    shadowOffset: { width: 0, height: 1 },
+                    elevation: 1,
+                  }
+                : undefined
+            }
+          >
+            <Text
+              className={`font-uiSemi text-[13px] ${on ? 'text-bone' : 'text-steel'}`}
+            >
+              {o.label}
+            </Text>
+          </Pressable>
+        );
+      })}
+    </View>
+  );
+}
