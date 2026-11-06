@@ -4,10 +4,11 @@ import { Button } from '@/components/Button';
 import { PreviewBanner } from '@/components/PreviewBanner';
 import { Screen } from '@/components/Screen';
 import { useOnboardingDraft } from '@/features/onboarding/draft-store';
-import { colors } from '@/theme/tokens';
+import { useColors } from '@/theme/theme';
 import { go } from '@/lib/nav';
 
 export default function FoodScreen() {
+  const c = useColors();
   const draft = useOnboardingDraft();
 
   return (
@@ -26,7 +27,7 @@ export default function FoodScreen() {
         value={draft.dietNotes}
         onChangeText={(dietNotes) => draft.update({ dietNotes })}
         placeholder="None / vegetarian / no pork / allergies…"
-        placeholderTextColor={colors.steel[400]}
+        placeholderTextColor={c.muted}
         className="min-h-[56px] rounded-card bg-graphite-800 px-4 font-ui text-[17px] text-bone"
       />
       <Text className="mb-2 mt-8 font-uiMedium text-[13px] uppercase tracking-wide text-steel">
@@ -36,7 +37,7 @@ export default function FoodScreen() {
         value={draft.hateEating}
         onChangeText={(hateEating) => draft.update({ hateEating })}
         placeholder="Cottage cheese, tuna, dry chicken…"
-        placeholderTextColor={colors.steel[400]}
+        placeholderTextColor={c.muted}
         className="min-h-[56px] rounded-card bg-graphite-800 px-4 font-ui text-[17px] text-bone"
       />
       <View className="mt-10">

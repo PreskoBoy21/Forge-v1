@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Light theme defaults (src/theme/theme.ts sets the live values) */
+:root {
+  --c-bg: 243 245 248;
+  --c-card: 255 255 255;
+  --c-raised: 233 237 242;
+  --c-line: 220 226 234;
+  --c-text: 17 20 26;
+  --c-muted: 95 107 124;
+  --c-accent: 76 138 12;
+  --c-aqua: 11 142 160;
+  --c-violet: 107 88 221;
+  --c-good: 15 154 98;
+  --c-warn: 183 121 31;
+  --c-bad: 214 52 69;
+  --c-info: 47 111 219;
+}

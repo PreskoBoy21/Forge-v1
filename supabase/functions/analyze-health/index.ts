@@ -26,7 +26,7 @@ Deno.serve(async (req) => {
   const { system, user } = healthCoachPrompt(parsed.data.payload, parsed.data.coachStyle);
   for (let attempt = 0; attempt < 2; attempt++) {
     try {
-      const out = healthCoachResultSchema.safeParse(await completeJson({ system, user }));
+      const out = healthCoachResultSchema.safeParse(await completeJson({ system, user, maxTokens: 900 }));
       if (out.success) return json(out.data);
     } catch (e) {
       console.error('analyze-health attempt failed', attempt, e);

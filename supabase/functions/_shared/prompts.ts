@@ -21,7 +21,15 @@ Rules:
 - If data is missing, say what to connect or log instead of guessing.
 - No diagnosis, no medical claims, no supplements, no fasting, no calorie numbers below targets.
 - Tone: ${COACH_STYLE[coachStyle] ?? COACH_STYLE.buddy}
-Return JSON: {"headline": string (max 60 chars), "summary": string (max 3 short sentences), "today": string (one concrete action for today, max 90 chars)}`,
+Return JSON:
+{"headline": string (max 60 chars),
+ "summary": string (max 3 short sentences, the big picture across all data),
+ "today": string (one concrete action for today, max 90 chars),
+ "explain": {
+   "recovery"?: string, "weight"?: string, "body"?: string,
+   "activity"?: string, "training"?: string, "nutrition"?: string
+ }}
+"explain": for each area that has data in the input, 1–2 plain sentences (max 220 chars) saying what the numbers mean for THIS user's goal and what to do. Omit areas with no data. Areas: recovery = readiness/sleep/HRV/resting HR; weight = weight trend; body = body fat & lean mass; activity = steps; training = workouts/volume/PRs; nutrition = protein & calories.`,
     user: `Today's computed data (JSON):\n${JSON.stringify(payload)}`,
   };
 }

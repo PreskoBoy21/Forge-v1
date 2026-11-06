@@ -1,10 +1,11 @@
 import { Stack } from 'expo-router';
 
-import { stackHeader } from '@/theme/navigation';
+import { useStackHeader } from '@/theme/navigation';
 
 export default function TodayLayout() {
+  const header = useStackHeader();
   return (
-    <Stack screenOptions={stackHeader}>
+    <Stack screenOptions={header}>
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="forge-day" options={{ headerShown: false }} />
     </Stack>

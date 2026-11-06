@@ -1,8 +1,15 @@
-import { colors, fonts } from '@/theme/tokens';
+import { fonts } from '@/theme/tokens';
 
-export const stackHeader = {
-  headerStyle: { backgroundColor: colors.graphite[950] },
-  headerTintColor: colors.bone[50],
-  headerTitleStyle: { fontFamily: fonts.display },
-  contentStyle: { backgroundColor: colors.graphite[950] },
-};
+import { useColors } from './theme';
+
+/** Stack header + background colours for the current theme. */
+export function useStackHeader() {
+  const c = useColors();
+  return {
+    headerStyle: { backgroundColor: c.bg },
+    headerTintColor: c.text,
+    headerShadowVisible: false,
+    headerTitleStyle: { fontFamily: fonts.display, color: c.text },
+    contentStyle: { backgroundColor: c.bg },
+  };
+}

@@ -1,16 +1,17 @@
 import { Stack } from 'expo-router';
 
-import { stackHeader } from '@/theme/navigation';
+import { useStackHeader } from '@/theme/navigation';
 
 export default function TrainLayout() {
+  const header = useStackHeader();
   return (
-    <Stack screenOptions={stackHeader}>
+    <Stack screenOptions={header}>
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen
         name="gym"
         options={{ title: 'Gym Mode', headerShown: false }}
       />
-      <Stack.Screen name="history" options={{ title: 'History' }} />
+      <Stack.Screen name="history" options={{ title: '' }} />
     </Stack>
   );
 }

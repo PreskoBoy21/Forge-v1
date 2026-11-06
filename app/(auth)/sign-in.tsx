@@ -13,11 +13,12 @@ import { useOnboardingDraft } from '@/features/onboarding/draft-store';
 import { syncPendingWorkouts, useTrain } from '@/features/train/store';
 import { pullWorkouts } from '@/features/train/sync';
 import { go, replaceTo } from '@/lib/nav';
-import { colors } from '@/theme/tokens';
+import { useColors } from '@/theme/theme';
 
 type Mode = 'signup' | 'signin';
 
 export default function SignInScreen() {
+  const c = useColors();
   const params = useLocalSearchParams<{ mode?: string }>();
   const [mode, setMode] = useState<Mode>(
     params.mode === 'signin' ? 'signin' : 'signup',
@@ -90,7 +91,7 @@ export default function SignInScreen() {
         <TextInput
           className={input}
           placeholder="Email"
-          placeholderTextColor={colors.steel[400]}
+          placeholderTextColor={c.muted}
           autoCapitalize="none"
           autoComplete="email"
           keyboardType="email-address"
@@ -100,7 +101,7 @@ export default function SignInScreen() {
         <TextInput
           className={input}
           placeholder="Password (8+ characters)"
-          placeholderTextColor={colors.steel[400]}
+          placeholderTextColor={c.muted}
           secureTextEntry
           autoComplete={mode === 'signup' ? 'new-password' : 'current-password'}
           value={password}
