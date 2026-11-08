@@ -7,6 +7,9 @@
 - Presko's rules: TikTok `isAigc: false`, IG `isAiGenerated: false`; captions have EXACTLY 3 hashtags, one always #gym.
 
 ## What works (data, newest first)
+- 2026-11-08 Named body part in a quiz hook wins again: "2 arm myths that keep your arms small" = 2.0k IG / 660 TT (2 comments) in ~11 h, best of the day. Prefer "2 [body-part] myths" over generic "2 gym myths".
+- 2026-11-08 Captions that give away both answers + study details ("used as an excuse" quiz) did weakest today: 1.2k IG / 373 TT. Keep captions answer-free, tease only.
+- 2026-11-08 TikTok back carousel (JPEG) climbed late to 1,080 views (2nd best TT in 14 d); IG carousels still weak → carousels are a TikTok play, Reels remain the IG play.
 - 2026-11 IG is the stronger channel (quizzes 2.6k–3.7k views, 99% non-followers). TikTok 250–1,700.
 - Best format on both: "2 gym myths: true or false?" — 2 myths, 3-2-1 guess gap, FALSE stamp, one-line why, CTA "which one did you believe? comment 1 or 2".
 - Personal hooks win: "myths you probably did today", "your gym bro still swears by", "that keep your arms small". Say "2 gym myths" (or "2 arm myths") in the first second; never give the answer in the hook.

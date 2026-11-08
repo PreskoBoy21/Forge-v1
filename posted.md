@@ -18,3 +18,5 @@
 - 2026-11-08 | 11:00 | arm-myths-quiz | 2 arm myths that keep your arms small | curls only; hammer curls = forearms | 420570001
 - 2026-11-08 | 14:00 | ohp-deadlift-myths-quiz | 2 myths that scare you off big lifts | OHP ruins shoulders; deadlifts bad for back | 420570023
 - 2026-11-08 | 17:00 | beginner-myths-quiz | 2 beginner myths wasting your year | body-part split; 2-hour workouts | 420570038
+- 2026-11-08 | 12:00 | pushups-deadlift-excuse-myths-quiz | 2 gym myths you've probably used as an excuse | push-ups vs bench; deadlift & back pain (logged late by evening run) | 420571735
+- 2026-11-08 | 17:00 | press-vs-raise-shoulders (CAROUSEL) | Press vs raise: only one builds width | A-vs-B side delts (logged late by evening run) | 420571748
