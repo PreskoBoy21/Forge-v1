@@ -1,0 +1,20 @@
+# Posted (newest last) — date | slot | slug | hook | myths/topic | Metricool id
+- 2026-10-24 | 17:00 | rest-day-myths-quiz | 2 rest day myths: true or false? | more gym days = more muscle; rest day = couch | 404865365
+- 2026-10-28 | 17:00 | light-weights-myths-quiz | 2 gym myths: true or false? | light weights; new workout every week | 408786294
+- 2026-10-29 | 17:00 | squats-muscle-fat-myths-quiz | You've believed at least one of these gym myths | squats bad for knees; muscle turns into fat | 409964276
+- 2026-10-29 | 20:00 | first-month-strength-no-size | Four weeks in the gym... bench up but arms look the same | neural strength | 409964320
+- 2026-11-02 | 17:00 | failure-machines-myths-quiz | Every set to failure? Machines are fake gains? | failure; machines | 413910312
+- 2026-11-02 | 20:00 | spotlight-effect-gym | You skip the squat rack because you think everyone's watching | spotlight effect | 413914703
+- 2026-11-03 | 12:00 | rest-mindmuscle-myths-quiz | Sixty seconds on the clock... | short rest; mind-muscle | 414948820
+- 2026-11-03 | 17:00 | overhead-vs-pushdown | Pushdowns every arm day? One change grew triceps ~40% more | A-vs-B (Maeo 2023) | 414951266
+- 2026-11-04 | 12:00 | stretch-slowreps-myths-quiz | 2 gym myths you probably did today | stretching prevents injury; slow reps | 416287533
+- 2026-11-04 | 17:00 | half-squat-glutes | You've been squatting... but skipping your glutes | Kubo 2019 | 416288554
+- 2026-11-05 | 12:00 | soreness-flexibility-myths-quiz | 2 gym myths your gym bro still swears by | soreness = lactic acid; lifting = stiff | 417347344
+- 2026-11-05 | 17:00 | incline-vs-flat-chest | Your bench is going up... but your upper chest isn't | A-vs-B (Chaves 2020) | 417348676
+- 2026-11-06 | 12:00 | growth-squeeze-myths-quiz | 2 gym myths you've probably repeated yourself | stunts growth; squeeze at top | 418632564
+- 2026-11-06 | 17:00 | back-gains-mistakes (CAROUSEL) | You row every week. Your back's still flat. | 5 back mistakes | 418632721
+- 2026-11-07 | 17:00 IG | pushups-knees-myths-quiz | 2 gym myths you heard this week | push-ups can't build chest; knees past toes | 419872061
+- 2026-11-07 | 20:00 IG | over40-shakes-myths-quiz | 2 gym myths that keep you small | no muscle after 40; need protein shakes | 419872095
+- 2026-11-08 | 11:00 | arm-myths-quiz | 2 arm myths that keep your arms small | curls only; hammer curls = forearms | 420570001
+- 2026-11-08 | 14:00 | ohp-deadlift-myths-quiz | 2 myths that scare you off big lifts | OHP ruins shoulders; deadlifts bad for back | 420570023
+- 2026-11-08 | 17:00 | beginner-myths-quiz | 2 beginner myths wasting your year | body-part split; 2-hour workouts | 420570038

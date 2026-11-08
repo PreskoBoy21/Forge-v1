@@ -1,0 +1,229 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+:root{--g2:#12161D;--g3:#2C3442;--o:#C6F24E;--o2:#47D7E8;--t:#F3EFEA;--m:#8E8984;--b:#4DA8FF;--fat:#F2B13C;--r:#FF4D5E}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#0A0C10;font-family:'Inter Display','Inter',sans-serif;color:var(--t)}
+#stage{position:absolute;inset:0;overflow:hidden}
+#bg{position:absolute;inset:0;background:linear-gradient(#1A1A1C,#0D0D0E)}
+#glow{position:absolute;left:50%;top:50%;width:1400px;height:1400px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(198,242,78,.22),rgba(198,242,78,.05) 55%,transparent)}
+#grid{position:absolute;inset:-100px;background-image:linear-gradient(rgba(255,255,255,.028) 2px,transparent 2px),linear-gradient(90deg,rgba(255,255,255,.028) 2px,transparent 2px);background-size:90px 90px}
+#flash{position:absolute;inset:0;background:#C6F24E;opacity:0;mix-blend-mode:screen}
+#vig{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,transparent 55%,rgba(0,0,0,.55))}
+#prog{position:absolute;left:0;top:0;height:10px;background:linear-gradient(90deg,var(--o),var(--o2));box-shadow:0 0 24px var(--o)}
+#wm{position:absolute;left:60px;top:200px;font-weight:900;font-size:30px;letter-spacing:.3em;color:rgba(243,239,234,.35)}
+#wm b{color:var(--o)}
+#world{position:absolute;inset:0;transform-origin:50% 55%}
+#world>*{position:absolute}
+svg.full{left:0;top:0}
+.a{position:absolute;transform:translate(-50%,-50%);opacity:0;white-space:nowrap;text-align:center}
+.label{font-weight:700;font-size:40px;letter-spacing:.2em;color:var(--o2)}
+.h1{font-weight:900;font-size:128px;line-height:1;letter-spacing:-.02em}
+.h2{font-weight:900;font-size:76px;line-height:1.06;letter-spacing:-.01em}
+.sub{font-weight:600;font-size:40px;color:var(--m)}
+.o{color:var(--o)}
+.badge{display:flex;align-items:center;gap:22px;font-weight:900;font-size:40px;letter-spacing:.14em;background:var(--g2);border:3px solid var(--g3);padding:12px 30px;border-radius:999px}
+.badge i{display:inline-block;width:18px;height:18px;border-radius:50%;background:var(--g3);margin-left:6px}
+.badge i.on{background:var(--o);box-shadow:0 0 12px var(--o)}
+.claim{white-space:normal;width:900px;background:var(--t);color:#0A0C10;font-weight:900;font-size:54px;line-height:1.08;padding:30px 40px;border-radius:30px;box-shadow:0 12px 0 #0006;position:relative}
+.claim .q{position:absolute;left:28px;top:-26px;background:var(--o);color:#0A0C10;font-size:30px;letter-spacing:.14em;padding:6px 18px;border-radius:999px}
+.claim .x{position:absolute;left:30px;right:30px;top:50%;height:12px;background:var(--r);border-radius:6px;transform:scaleX(0) rotate(-3deg);transform-origin:left}
+.btn{font-weight:900;font-size:52px;letter-spacing:.06em;padding:20px 44px;border-radius:999px;border:5px solid var(--g3);background:var(--g2);color:var(--t)}
+.ring{width:150px;height:150px;position:relative}
+.ring svg{position:absolute;inset:0}
+.ring b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:80px}
+.stamp{font-weight:900;font-size:200px;color:#0A0C10;background:var(--o);padding:4px 60px 20px;border-radius:26px;box-shadow:0 0 90px rgba(198,242,78,.7);border:8px solid #0A0C10;outline:6px solid var(--o)}
+.panel{background:#12161D;border:4px solid var(--g3);border-radius:30px;padding:20px 40px;text-align:center}
+.panel .n{font-weight:900;font-size:110px;font-variant-numeric:tabular-nums;line-height:1}
+.panel .u{font-weight:700;font-size:30px;letter-spacing:.2em;color:var(--m)}
+.chip{font-weight:800;font-size:38px;padding:12px 30px;border-radius:999px;border:4px solid var(--o);color:var(--o);background:rgba(198,242,78,.1)}
+#cap{position:absolute;left:540px;top:1555px;transform:translate(-50%,-50%);width:940px;text-align:center;font-weight:900;font-size:64px;line-height:1.1;color:#fff;text-shadow:0 0 6px #000,0 0 14px rgba(0,0,0,.9),0 6px 0 #000}
+#cap span{display:inline-block;margin:0 12px}
+#cap span.on{color:var(--o)}
+.bar{position:absolute;bottom:0;width:96px;border-radius:16px 16px 0 0;background:linear-gradient(var(--o2),var(--o))}
+.blk{position:absolute;left:0;width:300px;height:78px;border-radius:16px;border:3px solid var(--g3);background:var(--g2);display:flex;align-items:center;justify-content:space-between;padding:0 22px;font-weight:800;font-size:28px}
+.blk b{font-weight:900;color:var(--o);font-size:30px}
+</style></head>
+<body><div id="stage">
+<div id="bg"></div><div id="glow"></div><div id="grid"></div>
+<div id="world">
+<svg class="full" width="1080" height="1920" viewBox="0 0 1080 1920">
+<defs>
+ <linearGradient id="shirt" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#A9D63A"/><stop offset=".25" stop-color="#C6F24E"/><stop offset=".75" stop-color="#D2F566"/><stop offset="1" stop-color="#9CC72F"/></linearGradient>
+ <linearGradient id="shirtF" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#232327"/><stop offset=".3" stop-color="#34343A"/><stop offset=".7" stop-color="#3A3A41"/><stop offset="1" stop-color="#222226"/></linearGradient>
+ <radialGradient id="sore"><stop offset="0" stop-color="#FF3B2F" stop-opacity=".95"/><stop offset="1" stop-color="#FF3B2F" stop-opacity="0"/></radialGradient>
+ <filter id="gl" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
+</defs>
+<g id="char">
+ <ellipse cx="0" cy="410" rx="170" ry="22" fill="#000" opacity=".45"/>
+ <g id="tread" opacity="0"><rect x="-205" y="-60" width="22" height="470" rx="10" fill="#3A3A40"/><rect x="183" y="-60" width="22" height="470" rx="10" fill="#3A3A40"/>
+  <rect x="-240" y="-78" width="480" height="34" rx="17" fill="#4A4A52"/><rect x="-70" y="-110" width="140" height="56" rx="12" fill="#1C1C1F" stroke="#C6F24E" stroke-width="4"/><text x="0" y="-72" text-anchor="middle" font-family="Inter Display" font-weight="900" font-size="30" fill="#C6F24E" id="tspd">12.0</text>
+  <rect x="-200" y="374" width="400" height="44" rx="16" fill="#26262A"/><rect x="-200" y="404" width="400" height="16" rx="8" fill="#5A5A62"/></g>
+ <g id="body">
+ <path id="hairBack" d="M-80,-420 C-96,-330 -90,-290 -60,-270 L60,-270 C90,-290 96,-330 80,-420 Z" fill="#2A1A14" opacity="0"/>
+ <line id="Lth" stroke="#E3A57A" stroke-width="60" stroke-linecap="round"/>
+ <line id="Rth" stroke="#E3A57A" stroke-width="60" stroke-linecap="round"/>
+ <path id="Lshoe" fill="#F3EFEA"/><path id="Rshoe" fill="#F3EFEA"/>
+ <path d="M-100,-12 L100,-12 L112,150 L12,158 L0,70 L-12,158 L-112,150 Z" fill="#2A2A2F"/>
+ <path d="M-100,-12 L100,-12 L101,6 L-101,6 Z" fill="#1C1C20"/>
+ <path d="M-112,150 L-12,158 M12,158 L112,150" stroke="#C6F24E" stroke-width="6"/>
+ <g id="soreG" opacity="0"><circle cx="-56" cy="235" r="62" fill="url(#sore)"/><circle cx="56" cy="235" r="62" fill="url(#sore)"/><circle cx="-80" cy="-110" r="55" fill="url(#sore)"/></g>
+ <rect x="-27" y="-350" width="54" height="70" rx="14" fill="#C98A60"/>
+ <path id="torso" fill="url(#shirt)"/>
+ <ellipse id="belly" cx="0" cy="-70" fill="#B5E03F"/>
+ <path id="chestMark" d="M-14,-250 L0,-274 L14,-250 Z" fill="#0A0C10" opacity=".8"/>
+ <g id="armL"><line id="Lu" stroke="#E3A57A" stroke-width="50" stroke-linecap="round"/><ellipse id="Lb" fill="#E3A57A"/><ellipse id="LbG" fill="#C6F24E" filter="url(#gl)"/>
+  <line id="Lf" stroke="#E3A57A" stroke-width="42" stroke-linecap="round"/><line id="Lp" stroke="#E3A57A" stroke-width="15" stroke-linecap="round"/><circle id="Lh" r="26" fill="#D99A6E"/></g>
+ <g id="armR"><line id="Ru" stroke="#E3A57A" stroke-width="50" stroke-linecap="round"/><ellipse id="Rb" fill="#E3A57A"/><ellipse id="RbG" fill="#C6F24E" filter="url(#gl)"/>
+  <line id="Rf" stroke="#E3A57A" stroke-width="42" stroke-linecap="round"/><line id="Rp" stroke="#E3A57A" stroke-width="15" stroke-linecap="round"/><circle id="Rh" r="26" fill="#D99A6E"/></g>
+ <g id="shaker" opacity="0"><rect x="-30" y="-110" width="60" height="130" rx="14" fill="#F3EFEA"/><rect x="-34" y="-128" width="68" height="26" rx="8" fill="#C6F24E"/><rect x="-30" y="-70" width="60" height="44" fill="#C6F24E"/><text x="0" y="-40" text-anchor="middle" font-family="Inter Display" font-weight="900" font-size="15" fill="#0A0C10">PROTEIN</text></g>
+ <g id="barbell" opacity="0"><line id="bbar" stroke="#B9B5B0" stroke-width="12" stroke-linecap="round"/><g id="pL"><rect x="-18" y="-62" width="36" height="124" rx="10" fill="#26262A" stroke="#C6F24E" stroke-width="5"/><rect x="-36" y="-44" width="22" height="88" rx="8" fill="#3A3A40"/></g><g id="pR"><rect x="-18" y="-62" width="36" height="124" rx="10" fill="#26262A" stroke="#C6F24E" stroke-width="5"/><rect x="14" y="-44" width="22" height="88" rx="8" fill="#3A3A40"/></g></g>
+ <g id="head">
+  <circle cx="-68" cy="-392" r="15" fill="#D99A6E"/><circle cx="68" cy="-392" r="15" fill="#D99A6E"/>
+  <ellipse cx="0" cy="-395" rx="68" ry="78" fill="#E3A57A"/>
+  <path id="hairM" d="M-70,-405 C-78,-500 78,-500 70,-405 C62,-440 30,-452 0,-448 C-30,-452 -62,-440 -70,-405 Z" fill="#1C1C1F"/>
+  <g id="hairF" opacity="0"><path d="M-74,-395 C-84,-505 84,-505 74,-395 C66,-430 40,-458 -4,-452 C-20,-430 -50,-425 -74,-395 Z" fill="#2A1A14"/><path id="pony" d="M60,-470 C120,-470 130,-400 112,-350 C104,-330 92,-340 96,-360 C106,-400 98,-440 60,-450 Z" fill="#2A1A14"/><circle cx="66" cy="-462" r="10" fill="#C6F24E"/></g>
+  <ellipse cx="-38" cy="-372" rx="13" ry="8" fill="#F28B6E" opacity=".35"/><ellipse cx="38" cy="-372" rx="13" ry="8" fill="#F28B6E" opacity=".35"/>
+  <ellipse id="eL" cx="-24" cy="-398" rx="8" ry="11" fill="#1C1C1F"/><ellipse id="eR" cx="24" cy="-398" rx="8" ry="11" fill="#1C1C1F"/>
+  <g id="lash" opacity="0" stroke="#1C1C1F" stroke-width="4" stroke-linecap="round"><path d="M-34,-404 L-40,-410 M34,-404 L40,-410"/></g>
+  <line id="bL" stroke="#1C1C1F" stroke-width="7" stroke-linecap="round"/><line id="bR" stroke="#1C1C1F" stroke-width="7" stroke-linecap="round"/>
+  <path d="M-4,-385 Q0,-375 6,-382" stroke="#B87A52" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <g id="mouth"></g><g id="sweat"></g>
+ </g>
+ </g>
+</g>
+</svg>
+@@PROPS@@
+</div>
+<div id="flash"></div>
+<div id="vig"></div>
+<div id="wm"><b>▲</b> FORGE</div>
+
+@@TEXT@@
+<div id="cap"></div>
+<div id="prog"></div>
+</div>
+<script>
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const eo=p=>1-Math.pow(1-p,3);
+const eio=p=>p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;
+const eob=p=>{const c=1.7,c3=c+1;return 1+c3*Math.pow(p-1,3)+c*Math.pow(p-1,2)};
+const $=id=>document.getElementById(id);
+const NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent&&parent.appendChild(e);return e};
+@@TIMING@@
+// ---- rig
+const SH={L:[-118,-282],R:[118,-282]}, UA=128, FA=118, L2=118+10+26+26;
+const dirv=(side,deg)=>{const r=deg*Math.PI/180;return side==='L'?[-Math.sin(r),Math.cos(r)]:[Math.sin(r),Math.cos(r)]};
+function ik(side,x,y){const S=SH.L;if(side==='R')x=-x;const dx=x-S[0],dy=y-S[1];let d=Math.hypot(dx,dy);d=clamp(d,40,UA+L2-2);
+  const th=Math.atan2(-dx,dy),al=Math.acos(clamp((UA*UA+d*d-L2*L2)/(2*UA*d),-1,1)),be=Math.acos(clamp((UA*UA+L2*L2-d*d)/(2*UA*L2),-1,1));
+  const o={};o[side+'UA']=(th+al)*180/Math.PI;o[side+'FA']=-(Math.PI-be)*180/Math.PI;return o}
+const P0={cx:540,hy:1080,s:.85,LUA:8,LFA:-8,RUA:8,RFA:-8,flexL:0,flexR:0,ptL:0,ptR:0,brow:0,tilt:0,tread:0,sore:0,shaker:0,bb:0,mouth:'smile',fem:'m'};
+const relax={LUA:8,LFA:-8,RUA:8,RFA:-8,ptL:0,ptR:0,flexL:0,flexR:0};
+const hips={...ik('L',-96,-18),...ik('R',96,-18),ptL:0,ptR:0};
+const rack={LUA:60,LFA:115,RUA:60,RFA:115};
+@@KEYS@@
+function pose(t){const out={...P0};
+  for(const p in P0){
+    if(typeof P0[p]==='string'){for(const [kt,kv] of K){if(kt<=t&&kv[p]!==undefined)out[p]=kv[p]}continue}
+    let from=P0[p],to=P0[p],ts=-1,tr=.35;
+    for(const [kt,kv] of K){if(kt>t)break;if(kv[p]===undefined)continue;
+      const cur=ts<0?to:from+(to-from)*eio(clamp((kt-ts)/tr));from=cur;to=kv[p];ts=kt;tr=kv.tr||.35}
+    out[p]=ts<0?to:from+(to-from)*eio(clamp((t-ts)/tr));}
+  return out}
+const SW=[];for(let i=0;i<5;i++)SW.push(mk('path',{d:'M0,-10 C6,0 8,6 0,10 C-8,6 -6,0 0,-10Z',fill:'#7CC0FF'},$('sweat')));
+const set=(id,o)=>{const e=typeof id==='string'?$(id):id;for(const k in o)e.setAttribute(k,o[k])};
+const win=(t,list,f=.3)=>{let v=0;for(const [a,b] of list)v=Math.max(v,clamp((t-a)/f)*clamp((b-t)/f));return v};
+const MOUTH={
+ smile:'<path d="M-22,-360 Q0,-342 22,-360" stroke="#5A2A1A" stroke-width="6" fill="none" stroke-linecap="round"/>',
+ grin:'<path d="M-28,-364 Q0,-330 28,-364 Z" fill="#3A1610"/><path d="M-22,-362 L22,-362 L20,-356 L-20,-356Z" fill="#fff"/>',
+ o:'<ellipse cx="0" cy="-356" rx="9" ry="11" fill="#3A1610"/>',
+ O:'<ellipse cx="0" cy="-354" rx="15" ry="20" fill="#3A1610"/>',
+ flat:'<line x1="-16" y1="-357" x2="16" y2="-357" stroke="#5A2A1A" stroke-width="6" stroke-linecap="round"/>'};
+let lastMouth='',lastFem='';
+function arm(side,P,flex,pt){
+  const S=SH[side],d1=dirv(side,P[side+'UA']),d2=dirv(side,P[side+'UA']+P[side+'FA']);
+  const E=[S[0]+UA*d1[0],S[1]+UA*d1[1]],H=[E[0]+(FA+10)*d2[0],E[1]+(FA+10)*d2[1]],F=[H[0]+44*d2[0],H[1]+44*d2[1]];
+  set(side+'u',{x1:S[0],y1:S[1],x2:E[0],y2:E[1]});set(side+'f',{x1:E[0],y1:E[1],x2:H[0]-8*d2[0],y2:H[1]-8*d2[1]});
+  set(side+'h',{cx:H[0],cy:H[1]});set(side+'p',{x1:H[0],y1:H[1],x2:F[0],y2:F[1],opacity:pt>.5?1:0});
+  const perp=side==='L'?[-d1[1],d1[0]]:[d1[1],-d1[0]];
+  const M=[S[0]+UA*.5*d1[0]+perp[0]*(8+16*flex),S[1]+UA*.5*d1[1]+perp[1]*(8+16*flex)];
+  const ang=Math.atan2(d1[1],d1[0])*180/Math.PI;
+  set(side+'b',{cx:M[0],cy:M[1],rx:34+6*flex,ry:20+18*flex,transform:`rotate(${ang} ${M[0]} ${M[1]})`});
+  set(side+'bG',{cx:M[0],cy:M[1],rx:34+6*flex,ry:20+18*flex,transform:`rotate(${ang} ${M[0]} ${M[1]})`,opacity:.75*flex});
+  return {S,E,H,M,d2};
+}
+// captions
+const CH=[];
+SEG.forEach(([a,b,txt])=>{const w=txt.split(' ');const wt=w.map(x=>x.replace(/[^A-Za-z0-9']/g,'').length+2);const tot=wt.reduce((p,c)=>p+c,0);
+  let acc=0;const times=w.map((x,i)=>{const s=a+(b-a)*acc/tot;acc+=wt[i];return s});
+  const n=Math.ceil(w.length/4),per=Math.ceil(w.length/n);
+  for(let i=0;i<w.length;i+=per){const ws=w.slice(i,i+per),ts=times.slice(i,i+per);CH.push({s:ts[0],words:ws,ts,end:i+per>=w.length?b:times[i+per]})}});
+let lastCh=-1;
+function caption(t){let k=-1;for(let i=0;i<CH.length;i++)if(CH[i].s<=t)k=i;const cap=$('cap');
+  if(k<0||t>CH[k].end+0.6){cap.style.opacity=0;return}
+  const c=CH[k];if(k!==lastCh){cap.innerHTML=c.words.map(w=>`<span>${w.replace(/\.\.\.$/,'…').toUpperCase()}</span>`).join('');lastCh=k}
+  const sp=cap.children;let a=0;for(let i=0;i<c.ts.length;i++)if(c.ts[i]<=t)a=i;
+  for(let i=0;i<sp.length;i++){sp[i].className=i===a?'on':'';sp[i].style.transform='none'}
+  const p=clamp((t-c.s)/.12);cap.style.opacity=1;cap.style.transform=`translate(-50%,-50%) scale(${.92+.08*eo(p)})`}
+let EL=null;
+function render(t){
+  EL=EL||[...document.querySelectorAll('[data-in]')];
+  for(const el of EL){const tin=+el.dataset.in,tout=+el.dataset.out,fx=el.dataset.fx||'up';
+    let o=0,dy=0,s=1,r=+(el.dataset.rot||0);
+    if(t>=tin){const d=fx==='slam'?.24:fx==='pop'?.5:.42,p=clamp((t-tin)/d);
+      if(fx==='up'){o=eo(p);dy=(1-eo(p))*70}else if(fx==='pop'){o=clamp(p*3);s=.3+.7*eob(p)}
+      else if(fx==='slam'){o=clamp(p*4);s=2.6-1.6*eo(p)}else o=eo(p);
+      const q=clamp((t-tout)/.22);if(q>0){o*=1-q;s*=1-.08*q;dy-=q*30}}
+    el.style.opacity=o;el.style.visibility=o<.002?'hidden':'visible';
+    el.style.transform=`translate(-50%,-50%) translateY(${dy}px) scale(${s}) rotate(${r}deg)`}
+  $('prog').style.width=(t/DUR*1080)+'px';
+  // ---- camera: whips + punch-ins + slow push
+  let wx=0,blur=0,sc=1+.02*Math.sin(t*.6),shx=0,shy=0,fl=0;
+  for(const W of WH){const po=clamp((t-(W-.16))/.16);if(t>=W-.16&&t<W){wx=-eio(po)*520;blur=po*16}
+    const pi=clamp((t-W)/.34);if(t>=W&&pi<1){wx=(1-eo(pi))*900;blur=(1-pi)*16}}
+  for(const M of MY){const d=t-M.f;if(d>=0&&d<.9){sc+=.09*Math.exp(-d*5);const k=Math.exp(-d*9);shx+=Math.sin(d*95)*20*k;shy+=Math.cos(d*80)*14*k;fl=Math.max(fl,.35*Math.exp(-d*10))}}
+  if(t<.5){const d=t;sc+=.06*Math.exp(-d*6)}
+  $('world').style.transform=`translate(${wx+shx}px,${shy}px) scale(${sc})`;$('world').style.filter=blur>.3?`blur(${blur}px)`:'none';
+  $('grid').style.transform=`translate(${(wx*.3)%90}px,${(t*12)%90}px)`;$('flash').style.opacity=fl;
+  // ---- myth widgets
+  MY.forEach((M,i)=>{const p=clamp((t-M.g)/(M.f-M.g));set('rg'+i,{'stroke-dashoffset':402*p});
+    $('rn'+i).textContent=t<M.g+.6?'3':t<M.g+1.2?'2':'1';
+    const rv=t>=M.f;const bf=$('bf'+i),bt=$('bt'+i);
+    bf.style.background=rv?'#C6F24E':'';bf.style.color=rv?'#0A0C10':'';bf.style.borderColor=rv?'#C6F24E':'';bf.style.boxShadow=rv?'0 0 40px rgba(198,242,78,.7)':'';
+    bt.style.opacity=rv?.3:1;
+    $('x'+i).style.transform=`scaleX(${eo(clamp((t-M.f-.05)/.25))}) rotate(-3deg)`});
+@@PROPDATA@@
+  // ---- character
+  const P=pose(t);
+@@ANIM@@
+  const hy=P.hy+Math.sin(t*2.3)*3-bob-34*P.tread;
+  set('char',{transform:`translate(${P.cx},${hy}) scale(${P.s}) rotate(${rot} 0 380)`});
+  set('tread',{opacity:P.tread,transform:`translate(0,${34*P.tread})`});
+  set('soreG',{opacity:P.sore*(.6+.4*Math.sin(t*8))});
+  [['L',-48,liftL],['R',48,liftR]].forEach(([sd,x,lift])=>{const fx=x*1.12,fy=340-lift;set(sd+'th',{x1:x,y1:60,x2:fx,y2:fy});
+    const dir=sd==='L'?-1:1;set(sd+'shoe',{d:`M${fx-30*(dir<0?1.4:1)},${fy+5} Q${fx},${fy-22} ${fx+30*(dir>0?1.4:1)},${fy+5} L${fx+36*(dir>0?1.5:1)},${fy+32} Q${fx},${fy+44} ${fx-36*(dir<0?1.5:1)},${fy+32} Z`})});
+  const fem=P.fem==='f',ww=fem?88:112;
+  $('torso').setAttribute('d',`M-88,-302 Q0,-266 88,-302 L114,-292 C128,-250 106,-215 104,-190 C104,-150 ${ww},-128 ${ww},-82 C${ww},-36 98,-22 98,2 L-98,2 C-98,-22 -${ww},-36 -${ww},-82 C-${ww},-128 -104,-150 -104,-190 C-106,-215 -128,-250 -114,-292 Z`);
+  if(P.fem!==lastFem){lastFem=P.fem;$('torso').setAttribute('fill',fem?'url(#shirtF)':'url(#shirt)');set("belly",{rx:80,ry:60,opacity:fem?0:.35});
+    set('hairM',{opacity:fem?0:1});set('hairF',{opacity:fem?1:0});set('lash',{opacity:fem?1:0});set('hairBack',{opacity:fem?1:0});set('chestMark',{fill:fem?'#C6F24E':'#0A0C10'})}
+  set('pony',{transform:`rotate(${Math.sin(t*6)*6} 70 -460)`});
+  const A=arm('L',P,P.flexL,P.ptL),B=arm('R',P,P.flexR,P.ptR);
+  set('shaker',{opacity:P.shaker,transform:`translate(${B.H[0]},${B.H[1]})`});
+  // barbell between hands
+  const dx=B.H[0]-A.H[0],dy=B.H[1]-A.H[1],dl=Math.hypot(dx,dy)||1,ux=dx/dl,uy=dy/dl,ext=70;
+  const p1=[A.H[0]-ux*ext,A.H[1]-uy*ext],p2=[B.H[0]+ux*ext,B.H[1]+uy*ext],an=Math.atan2(uy,ux)*180/Math.PI;
+  set('bbar',{x1:p1[0]-ux*30,y1:p1[1]-uy*30,x2:p2[0]+ux*30,y2:p2[1]+uy*30});
+  set('pL',{transform:`translate(${p1[0]},${p1[1]}) rotate(${an})`});set('pR',{transform:`translate(${p2[0]},${p2[1]}) rotate(${an})`});
+  set('barbell',{opacity:P.bb});
+  $('head').setAttribute('transform',`rotate(${P.tilt} 0 -320)`);
+  const blink=((t+.4)%3.4)<.12?.12:1;set('eL',{ry:11*blink});set('eR',{ry:11*blink});
+  const by=-428-P.brow*9,ang=-P.brow*6;
+  set('bL',{x1:-38,y1:by+ang*.6,x2:-12,y2:by-ang*.6+(P.brow<0?6*-P.brow:0)});set('bR',{x1:38,y1:by+ang*.6,x2:12,y2:by-ang*.6+(P.brow<0?6*-P.brow:0)});
+  if(P.mouth!==lastMouth){$('mouth').innerHTML=MOUTH[P.mouth];lastMouth=P.mouth}
+  const swo=win(t,SWO);
+  SW.forEach((d,i)=>{const u=((t*1.1+i/5)%1),x=(i%2?-1:1)*(62+i*6);set(d,{transform:`translate(${x},${-450+u*80}) scale(${1.15-i*.08})`,opacity:swo*Math.sin(u*Math.PI)})});
+  caption(t);
+}
+window.render=render;render(0);
+</script></body></html>
