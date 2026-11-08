@@ -18,15 +18,27 @@
 - "Scale went up → it's not fat" format is BURNT OUT. Diet-only topics do badly. Gym training topics first.
 - Engagement CTAs that work: side-picking ("comment 1 or 2", "flat or incline?"). "Answer in one word" / "comment day one" got 0 comments.
 
+## Formats (engine/build.py `format`)
+myth · mistake · versus · swap · worth — max one myth reel per day; rotate the rest. Myth quiz = proven baseline; track the other formats in "What works" and shift the mix toward what wins.
+
 ## Hook rules
 1. Never give the answer in the hook — promise it. 2. Open with tension the viewer feels, not a tip list.
 3. Specific > vague (body part, lift, number). 4. No "stop scrolling / you need to see this". 5. No "Did you know…?" + known fact.
 6. Two posts in one week never share the same hook template opening words.
 
-## Myths already used (never repeat)
+## Used topics (never repeat) — myths so far:
 more gym days = more muscle; rest day = couch; sweating = fat burn; no soreness = no growth; 30-min protein window; women get bulky; 30 g protein per meal limit; cardio kills gains; fasted cardio; fat-burning zone; fat-burning foods; creatine myths; light weights can't build muscle; need a new workout every week; squats are bad for your knees; muscle turns into fat; every set must go to failure; machines don't build real muscle; shorter rest builds more muscle; mind-muscle connection is bro science; stretching before lifting prevents injuries; slow reps build more muscle; next-day soreness is lactic acid; lifting makes you stiff; lifting stunts your growth; the squeeze at the top builds the most muscle; push-ups can't build a big chest; never let knees go past toes; can't build muscle after 40; you need protein shakes to grow; curls are all you need for big arms; hammer curls are just forearms; overhead press ruins your shoulders; deadlifts are bad for your back; beginners need a body-part split; you need 2-hour workouts.
 
-## Myth bank (ideas not used yet — check accuracy before use)
+## Idea bank (not used yet — check accuracy before use)
+### mistake
+- Bench: bouncing the bar off the chest; flaring elbows to 90° — Squat: cutting depth on heavy days; knees caving — Rows: using the lower back to swing — Curls: swinging the weight up — Lat pulldown: pulling behind the neck — Skipping warm-up sets before heavy work — Never tracking weights/reps — Same weight for months (no progressive overload)
+### versus
+- Dumbbell vs barbell bench — Pull-ups vs lat pulldown — Squat vs leg press for quads — Hip thrust vs squat for glutes — Free weights vs machines for size (both work) — High reps vs low reps for size (both build muscle when hard)
+### swap
+- Crunches → cable crunches / hanging leg raises (loadable) — Half reps → full range — Ego lifting → controlled reps — Random workouts → a set plan you progress — 5 min treadmill warm-up only → ramp-up sets
+### worth
+- Lifting belts — Lifting straps — Training to failure every set — Ab training if you have high body fat — Deload weeks — Mind-muscle connection cues
+### myth
 - "You need to bench to build a big chest" (dips/press variations work) — "Abs are made in the kitchen only" (both matter) — "High reps for definition, low reps for size" (both build muscle when hard; Schoenfeld 2017) — "You can't train the same muscle 2 days in a row" — "Lifting belts make your core weak" — "Bigger forearms need forearm-only training" — "Pull-ups are only for back" (biceps too) — "Warm-up sets are a waste" — "Calves are pure genetics" (they grow with hard, full-range training) — "Wide grip = wider back" (grip width matters less than full stretch) — "You must lift fast to build power for size" — "Training to failure every set is required" (used) — "One set per exercise is useless" (1 hard set still builds muscle; more is better) — "Leg day once a week is enough for big legs" (2x/week usually better).
 
 ## TREND LOG (keep ~20, newest last)

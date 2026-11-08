@@ -1,7 +1,7 @@
 # RUN.md — the daily run (follow exactly, top to bottom)
 
 Output every day (Europe/Berlin):
-- **11:00 Instagram Story** — "Myth of the day: true or false?" teasing Reel 1 (TikTok Stories can't be scheduled via Metricool).
+- **11:00 Instagram Story** — a question teasing Reel 1 (TikTok Stories can't be scheduled via Metricool).
 - **12:00 Reel 1** — TikTok + Instagram.
 - **17:00 Reel 2** — TikTok + Instagram.
 
@@ -31,37 +31,46 @@ Log each step as an activity line `{t: ISO time, agent, text}` and set the worki
 - Append 1–2 lines to PLAYBOOK TREND LOG (keep ~20, drop the oldest). Dashboard `board/today.trends`.
 
 ## 3. Content Strategist [strategist]
-- Two reel briefs + one story brief. Rules:
-  - Both reels use the proven quiz format "2 [body-part/gym] myths: true or false?" unless the Analyst has strong evidence another format wins.
-  - Myths must **not** be in PLAYBOOK "Myths already used". Prefer the Myth bank; verify each fact (web search, a real study or a consensus source). Avoid medical claims.
-  - Different topic areas for the two reels (e.g. one body-part, one training-method). Hook opening words must differ from each other and from the last 7 days in posted.md.
-- Dashboard: two campaigns `{title, format:"Reel quiz", slot:"12:00"/"17:00", stage:"strategist", step:1, status:"in_progress"}`.
+Forge is a **gym brand, not a myth channel**. Content covers all of gym training: technique, mistakes, exercise choices, programming, progress, beginner life, recovery basics, gym motivation/culture.
+- Pick a **format** for each reel from the engine's formats (all are 2-item, ~25 s, animated):
+  | format | what it is | example hook | line 3 / 8 | line 5 / 10 (verdict) |
+  |---|---|---|---|---|
+  | `myth` | 2 gym myths, true or false | "2 arm myths that keep your arms small" | "Myth one..." | "False." |
+  | `mistake` | 2 technique/training mistakes + the fix | "2 bench mistakes stealing your chest gains" | "Mistake one..." | "Big mistake." |
+  | `versus` | 2 rounds of A vs B, which builds more | "Incline or flat... which builds more chest?" | "Round one..." | "<winner> wins." (or "It's a tie.") |
+  | `swap` | 2 habits to swap for a better one | "2 swaps that grow your back faster" | "Swap one..." | "Swap it." |
+  | `worth` | 2 "is it worth it?" gym questions | "2 things lifters waste time on... or do they?" | "Question one..." | "Worth it." / "Waste." |
+- **Mix rule:** max ONE `myth` reel per day; the other reel uses a different format. Never the same format 3 days running for the same slot. Rotate body parts and topics (chest, back, arms, shoulders, legs, glutes, abs, beginner, programming, technique).
+- Facts must be checkable (web search, real studies or consensus). No medical claims, no diet-only topics.
+- Never repeat a topic/myth from PLAYBOOK "Used topics", nor a hook opening used in the last 7 days.
+- Dashboard: two campaigns `{title, format:"Reel · <format>", slot:"12:00"/"17:00", stage:"strategist", step:1, status:"in_progress"}`.
 
 ## 4. Scriptwriter [writer]
 Each reel = **exactly 14 lines** (the engine depends on it):
-1. Hook sentence (personal, promise, no answer) — e.g. "Two arm myths that keep your arms small..."
-2. Hook follow-up — e.g. "and number one is in every gym."
-3. `Myth one...`
-4. myth 1 statement, lower-case, ending with "."
-5. `False.`
-6. why, part 1 (short, concrete, a number if true)
-7. why, part 2
-8. `Myth two...`
-9. myth 2 statement
-10. `False.`
-11. why, part 1
-12. why, part 2
-13. `Be honest...`
-14. `which one did you believe?`
+1. Hook sentence (personal, specific, promise — never the answer)
+2. Hook follow-up (tension / tease)
+3. format label line 1 (table above, e.g. "Mistake one...")
+4. item 1 (lower-case statement, e.g. "bouncing the bar off your chest.")
+5. verdict 1 (short, table above)
+6. why / fix, part 1 (short, concrete, a number if true)
+7. why / fix, part 2
+8. format label line 2 (e.g. "Mistake two...")
+9. item 2
+10. verdict 2
+11. why / fix, part 1
+12. why / fix, part 2
+13. CTA part 1 — "Be honest..."
+14. CTA part 2 — matching the format: myth "which one did you believe?", mistake "which one do you do?", versus "which one do you train?", swap "which one will you swap?", worth "did that surprise you?"
 Write 3 hook candidates, pick the best by the Hook rules. Total spoken ≈ 22–26 s (≈ 55–70 words).
 
 ## 5. Creative Director QA [director-qa] — script gate
-Check: facts true and conservative; myth not reused; hook rules; no answer in the hook; lines 3,5,8,10,13,14 exact. Fix once if needed, otherwise drop that myth and pick another from the bank.
+Check: facts true and conservative; topic not reused; hook rules; no answer in the hook; lines 3,5,8,10,13,14 follow the format table; the day has max one myth reel. Fix once if needed, otherwise drop that myth and pick another from the bank.
 
 ## 6. Video Editor [editor] — for each reel r1, r2
 Write `WORK/r1/cfg.json` (copy the shape from `days/2026-11-08/c/cfg.json`, without `segs`):
-- `lines` (14), `hook` (on-screen, ≤ 2 short lines, `<span class="o">` for the volt word, `<br>` between lines), `hookSize` 96–110, `chipTop` 560, `hookChip` (short tease, caps),
-- `myths` [2] (Title-case statements), `h2` [4] (on-screen captions for lines 6,7,11,12, caps, one `<span class="o">` each),
+- `format` (myth | mistake | versus | swap | worth), `lines` (14), `hook` (on-screen, ≤ 2 short lines, `<span class="o">` for the volt word, `<br>` between lines), `hookSize` 96–110, `chipTop` 560, `hookChip` (short tease, caps),
+- `myths` [2] = the two on-screen items (Title-case; for versus write "Incline vs flat bench for upper chest"),
+- optional `items` [2] to override button/stamp text per item: `{"a":"FLAT","b":"INCLINE","stamp":"INCLINE WINS"}` — the right button (b) is the one that lights up, so put the correct answer/winner there (required for versus and worth),, `h2` [4] (on-screen captions for lines 6,7,11,12, caps, one `<span class="o">` each),
 - `charts` [2]: either `{labels:[A,B], values:[a,b], unit, verdict}` (only for a real comparison) or `{verdict}` alone.
 
 Voiceover:
@@ -74,13 +83,13 @@ Voiceover:
 7. Render: `python3 ../../../engine/render.py index.html vo.mp3 out.mp4` (≈ 25 s, 1080×1920). `ffprobe` duration must be 20–30 s.
 
 ## 7. Story Designer [designer]
-`WORK/story.json` = `{"kicker":"MYTH OF THE DAY","claim":"<Reel 1 myth 1>","time":"12:00","sub":"Answer in today's reel 👀","size":96}` → `python3 engine/story.py WORK/story.json WORK/story.png`. Look at it; shrink `size` if the claim wraps to > 4 lines.
+`WORK/story.json` = `{"kicker":"<MYTH OF THE DAY | GYM MISTAKE OF THE DAY | WHICH BUILDS MORE? | GYM QUESTION OF THE DAY>","claim":"<Reel 1 item 1>","time":"12:00","sub":"Answer in today's reel 👀","size":96}` → `python3 engine/story.py WORK/story.json WORK/story.png`. Look at it; shrink `size` if the claim wraps to > 4 lines.
 
 ## 8. Creative Director QA — visual gate
 Every still + story PNG checked. Nothing half-broken ships. If a reel can't be fixed, ship only what passed and mark that campaign `failed` + tell Presko.
 
 ## 9. Copywriter [copy]
-Caption per reel: hook sentence + "true or false? 🤔" + one-line tease + "Which one did you believe? Comment 1 or 2 👇" + **EXACTLY 3 hashtags, one is #gym** (e.g. `#gym #gymmyths #armday`). TikTok title = first ~80 chars of the caption without hashtags.
+Caption per reel: hook sentence + one-line tease (myth reels add "true or false? 🤔") + the CTA from line 14 + "Comment 1 or 2 👇" + **EXACTLY 3 hashtags, one is #gym** (e.g. `#gym #gymmyths #armday`). TikTok title = first ~80 chars of the caption without hashtags.
 
 ## 10. Publisher [publisher]
 1. Copy files into `media/` as `DATE-r1.mp4`, `DATE-r2.mp4`, `DATE-story.png`; delete media files older than 3 days; `git add -A && git commit -m "media DATE" && git push`.
@@ -91,7 +100,7 @@ Caption per reel: hook sentence + "true or false? 🤔" + one-line tease + "Whic
      `tiktokData:{title, isAigc:false, privacyOption:"PUBLIC_TO_EVERYONE", autoAddMusic:false}`,
      `instagramData:{type:"REEL", showReelOnFeed:true, isAiGenerated:false}`.
 4. Only count a post as scheduled if Metricool returned an id.
-5. Append to posted.md (`- DATE | slot | slug | hook | myths | id`); add the myths to PLAYBOOK "Myths already used" and remove them from the Myth bank; top up the Myth bank to ≥ 10 ideas.
+5. Append to posted.md (`- DATE | slot | slug | hook | myths | id`); add both items to PLAYBOOK "Used topics" and remove them from the Idea bank; top up the Idea bank to ≥ 15 ideas across formats.
 6. Save cfgs into `days/DATE/`, commit + push the `agency` branch (no mp3/mp4/png in this branch).
 
 ## 11. Director wrap-up [director]

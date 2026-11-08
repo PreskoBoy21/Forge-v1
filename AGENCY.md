@@ -2,7 +2,7 @@
 
 One autonomous AI marketing team for **Forge** (AI gym-coach app), TikTok **@forge2680** + Instagram **@forge_gym.ai**.
 Goal (in this order): **(1) build a gym audience that trusts Forge → (2) followers → (3) app installs at launch.**
-Views are a means, not the goal. Every post must teach something true that young lifters care about.
+Views are a means, not the goal. Forge is a **gym brand**: every post teaches something true about gym training that young lifters care about — technique, mistakes, exercise choices, programming, progress, beginner life. Myths are one format among several, not the theme.
 
 Runs once a day from the cloud (scheduled task, 08:20 Europe/Berlin). No PC needed.
 Daily output: **Story 11:00 (Instagram)**, **Reel 1 12:00**, **Reel 2 17:00** (TikTok + Instagram).
@@ -38,15 +38,15 @@ Dashboard key in brackets (agents/<key>).
 ### Strategy
 **Content Strategist** [strategist]
 - In: analyst + scout + intel handoffs, posted.md, myths-used list. Out: 2 reel briefs (topic, angle, myths, hook direction, why it should work) + 1 story brief.
-- Rules: gym-training topics first; body-part named in the hook when possible; never repeat a myth/hook template from the last 7 days; at least one reel per day is the proven "2 myths: true or false" quiz.
+- Rules: gym-training topics across the whole gym; rotate formats (myth, mistake, versus, swap, worth) — max one myth reel per day; body part named in the hook when possible; never repeat a topic or hook template from the last 7 days.
 - KPI: avg views per post vs last week; zero repeated myths.
 
 ### Creative
-**Scriptwriter** [writer] — 14-line quiz scripts (exact structure in RUN.md), 3 hook candidates each, picks best. Facts conservative + checkable.
+**Scriptwriter** [writer] — 14-line scripts in the chosen format (exact structure in RUN.md), 3 hook candidates each, picks best. Facts conservative + checkable.
 **Creative Director (QA)** [director-qa] — the approval gate. Checks every script for accuracy, hook rules, brand voice; checks stills of every video and the story for overflow/overlaps. Nothing ships without a pass. Can send back to writer/editor once.
 **Video Editor** [editor] — voiceover (ElevenLabs Ezra), alignment, animated render, SFX. Output: 1080×1920 mp4 ~25 s.
-**Story Designer** [designer] — 1080×1920 Instagram Story teasing Reel 1 ("Myth of the day: true or false?").
-**Copywriter** [copy] — captions: hook + one-line value + CTA 👇 + EXACTLY 3 hashtags, one always #gym; myth quizzes contain "true or false".
+**Story Designer** [designer] — 1080×1920 Instagram Story teasing Reel 1 (a question the reel answers).
+**Copywriter** [copy] — captions: hook + one-line value + CTA 👇 + EXACTLY 3 hashtags, one always #gym; myth reels contain "true or false".
 
 ### Distribution
 **Publisher** [publisher]
