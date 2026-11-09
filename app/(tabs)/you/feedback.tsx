@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Text, TextInput, View } from 'react-native';
+import { Platform, Text, TextInput, View, type TextStyle } from 'react-native';
 
 import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
@@ -7,6 +7,10 @@ import { Screen } from '@/components/Screen';
 import { Pill } from '@/components/ui';
 import { flush, track } from '@/lib/telemetry';
 import { useColors } from '@/theme/theme';
+
+const WEB_NO_OUTLINE = (
+  Platform.OS === 'web' ? { outlineStyle: 'none' } : {}
+) as TextStyle;
 
 const TOPICS = ['Bug', 'Idea', 'Confusing', 'Love it'] as const;
 
@@ -71,7 +75,8 @@ export default function FeedbackScreen() {
           multiline
           maxLength={280}
           className="min-h-[120px] font-ui text-[16px] text-bone"
-          style={{ textAlignVertical: 'top' }}
+          // no browser focus ring inside the rounded card (web preview)
+          style={[{ textAlignVertical: 'top' }, WEB_NO_OUTLINE]}
         />
       </Card>
       <Text className="mt-2 font-ui text-[12px] text-steel">

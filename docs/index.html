@@ -27,9 +27,9 @@ form{display:flex;gap:10px;flex-wrap:wrap;max-width:460px}
 input[type=email]{flex:1 1 220px;min-height:52px;padding:0 16px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--text);font-size:16px}
 button{min-height:52px;padding:0 22px;border:0;border-radius:14px;background:var(--accent);color:var(--accent-ink);font-weight:800;font-size:15px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
 button:disabled{opacity:.6;cursor:default}
-.note{font-size:14px;color:var(--muted);margin-top:10px;min-height:1.4em}
+.note{font-size:14px;color:var(--muted);margin-top:10px;min-height:1.4em}.note.err{color:#D63445;font-weight:600}
 .phones{display:flex;gap:14px;justify-content:center}
-.phones img{width:46%;max-width:240px;border-radius:28px;border:6px solid var(--text);box-shadow:0 20px 50px rgba(0,0,0,.18)}
+.phones img{width:46%;max-width:240px;padding:12px 4px 0;background:#F3F5F8;border-radius:28px;border:6px solid var(--text);box-shadow:0 20px 50px rgba(0,0,0,.18)}
 .phones img:nth-child(2){margin-top:48px}
 section{padding:48px 0;border-top:1px solid var(--line)}
 h2{font-size:30px;text-transform:uppercase;letter-spacing:.01em;margin:0 0 24px;font-weight:900}
@@ -40,8 +40,8 @@ h2{font-size:30px;text-transform:uppercase;letter-spacing:.01em;margin:0 0 24px;
 .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:s}
 .steps .card::before{counter-increment:s;content:counter(s);display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--soft);color:var(--accent);font-weight:800;margin-bottom:10px}
-.shots{display:flex;gap:16px;overflow-x:auto;padding-bottom:6px}
-.shots img{height:440px;border-radius:24px;border:1px solid var(--line)}
+.shots{display:flex;gap:16px;overflow-x:auto;padding-bottom:6px;justify-content:center}
+.shots img{height:440px;padding:14px 6px 0;background:#F3F5F8;border-radius:24px;border:1px solid var(--line)}
 footer{padding:32px 0 60px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
 footer a{color:var(--muted)}
 @media (max-width:760px){.hero{grid-template-columns:1fr;padding-top:16px}.grid,.steps{grid-template-columns:1fr}.phones img{max-width:180px}nav a:not(:last-child){display:none}.shots img{height:360px}}
@@ -93,7 +93,7 @@ footer a{color:var(--muted)}
   <div class="shots">
     <img src="img/today.jpg" alt="Today" loading="lazy">
     <img src="img/train.jpg" alt="Train" loading="lazy">
-    <img src="img/body.jpg" alt="Body analysis" loading="lazy">
+    <img src="img/food.jpg" alt="Food: protein left and quick add" loading="lazy">
   </div>
 </section>
 
@@ -112,7 +112,8 @@ footer a{color:var(--muted)}
   form.addEventListener('submit',function(e){
     e.preventDefault();
     var email=form.email.value.trim().toLowerCase();
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){note.textContent='That email doesn’t look right.';return;}
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){note.className='note err';note.textContent='That email doesn’t look right.';form.email.focus();return;}
+    note.className='note';
     var btn=form.querySelector('button'); btn.disabled=true; note.textContent='Adding you…';
     fetch(URL,{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json',Prefer:'return=minimal'},
       body:JSON.stringify({email:email,source:(new URLSearchParams(location.search).get('ref')||'site').slice(0,40)})})

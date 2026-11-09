@@ -6,6 +6,7 @@ import { Card } from '@/components/Card';
 import {
   CalendarDays,
   ChevronRight,
+  Flame,
   Footprints,
   Moon,
   Sparkles,
@@ -72,6 +73,8 @@ export default function TodayScreen() {
   );
   const proteinLeft = Math.max(0, food.targets.proteinG - food.eaten.protein);
   const { verdict, habit } = useWeekly();
+  // Evening ritual: Forge the Day after a workout or from 18:00.
+  const forgeTime = doneToday || hour >= 18;
   // Weekly Verdict shows on Today on Sunday and Monday.
   const verdictDay = [0, 1].includes(new Date().getDay());
 
@@ -190,6 +193,24 @@ export default function TodayScreen() {
             {habit.text}
           </Text>
         </View>
+      ) : null}
+
+      {forgeTime ? (
+        <Pressable
+          onPress={() => go('/(tabs)/today/forge-day')}
+          className="mb-4 flex-row items-center rounded-card border border-graphite-700/60 bg-graphite-900 p-4"
+        >
+          <IconBadge Icon={Flame} color={c.accent} />
+          <View className="ml-3 flex-1">
+            <Text className="font-uiSemi text-[16px] text-bone">
+              Forge the day
+            </Text>
+            <Text className="font-ui text-[13px] text-steel">
+              See today’s Forge Score
+            </Text>
+          </View>
+          <ChevronRight size={20} color={c.muted} />
+        </Pressable>
       ) : null}
 
       {verdictDay ? (

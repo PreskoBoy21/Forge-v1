@@ -272,6 +272,19 @@ export default function SnapScreen() {
             Review and turn on AI coaching ›
           </Text>
         </Pressable>
+      ) : message === SCAN_ERROR.signed_out ? (
+        <Pressable
+          onPress={() => go('/(auth)/sign-in?mode=signin')}
+          accessibilityRole="button"
+          className="mt-3 rounded-card bg-graphite-900 p-4"
+        >
+          <Text className="font-ui text-[14px] leading-[20px] text-steel">
+            Photo scan needs an account. You can still add foods below.
+          </Text>
+          <Text className="mt-1 font-uiSemi text-[15px] text-molten">
+            Log in ›
+          </Text>
+        </Pressable>
       ) : message ? (
         <Text className="mt-3 font-ui text-[13px] text-steel">{message}</Text>
       ) : null}

@@ -1,34 +1,85 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Text, View } from 'react-native';
 
 import { Button } from '@/components/Button';
 import { ForgedStamp } from '@/components/ForgedStamp';
 import { Screen } from '@/components/Screen';
-import { mockForgeDay } from '@/features/preview/mock-data';
-import { go, replaceTo } from '@/lib/nav';
+import { dayTotals } from '@/features/food/nutrition';
+import { useFood, useTargets } from '@/features/food/store';
+import { useOnboardingDraft } from '@/features/onboarding/draft-store';
+import {
+  activeStreak,
+  FORGED_AT,
+  forgeScore,
+} from '@/features/progress/forgeScore';
+import { mondayOf } from '@/features/train/stats';
+import { planToday, useTrain } from '@/features/train/store';
+import { goBack } from '@/lib/nav';
+import { useTodayIso } from '@/lib/useTodayIso';
 import { colors } from '@/theme/tokens';
 
+/** Forge the Day: tonight's score from what you actually did today. */
 export default function ForgeDayScreen() {
-  const [score, setScore] = useState(0);
+  const today = useTodayIso();
+  const history = useTrain((s) => s.history);
+  const meals = useFood((s) => s.meals);
+  const targets = useTargets();
+  const planned = useOnboardingDraft((s) => s.trainingDays);
 
+  const { score, rows, streak, next } = useMemo(() => {
+    const eaten = dayTotals(meals, today);
+    const weekWorkouts = new Set(
+      history.filter((w) => w.date >= mondayOf(today)).map((w) => w.date),
+    ).size;
+    const result = forgeScore({
+      trained: history.some((w) => w.date === today),
+      weekDone: weekWorkouts >= planned,
+      proteinG: eaten.protein,
+      proteinTargetG: targets.proteinG,
+      kcal: eaten.kcal,
+      kcalTarget: targets.kcal,
+      mealsLogged: meals.filter((m) => m.date === today).length,
+    });
+    const end = Date.parse(`${today}T00:00:00Z`);
+    const active = Array.from({ length: 60 }, (_, i) => {
+      const d = new Date(end - (59 - i) * 864e5).toISOString().slice(0, 10);
+      return (
+        history.some((w) => w.date === d) || meals.some((m) => m.date === d)
+      );
+    });
+    return {
+      ...result,
+      streak: activeStreak(active),
+      next: planToday(history, false).name,
+    };
+  }, [history, meals, targets, planned, today]);
+
+  const [shown, setShown] = useState(0);
   useEffect(() => {
     const ticks = setInterval(() => {
-      setScore((value) => {
-        if (value >= mockForgeDay.score) {
+      setShown((v) => {
+        if (v + 3 >= score) {
           clearInterval(ticks);
-          return mockForgeDay.score;
+          return score;
         }
-        return value + 3;
+        return v + 3;
       });
     }, 30);
     return () => clearInterval(ticks);
-  }, []);
+  }, [score]);
+
+  const forged = score >= FORGED_AT;
+  const when = new Date().toLocaleDateString('en-GB', {
+    weekday: 'short',
+    day: 'numeric',
+    month: 'short',
+  });
 
   return (
     <Screen>
       <Text className="text-center font-uiMedium text-[12px] uppercase tracking-widest text-steel">
-        {mockForgeDay.when}
+        {when} · Forge the day
       </Text>
 
       <View className="mt-8 items-center">
@@ -49,7 +100,7 @@ export default function ForgeDayScreen() {
               className="font-display text-[56px] text-bone"
               style={{ fontVariant: ['tabular-nums'] }}
             >
-              {score}
+              {shown}
             </Text>
             <Text className="font-uiMedium text-[12px] uppercase tracking-widest text-steel">
               Forge score
@@ -58,41 +109,42 @@ export default function ForgeDayScreen() {
         </LinearGradient>
       </View>
 
-      <View className="mt-8">
-        <ForgedStamp />
-      </View>
-      <Text className="mt-4 text-center font-uiSemi text-[15px] text-ember">
-        🔥 {mockForgeDay.streak}-day streak
-      </Text>
+      {forged ? (
+        <View className="mt-8">
+          <ForgedStamp />
+        </View>
+      ) : (
+        <Text className="mt-8 text-center font-uiSemi text-[17px] text-bone">
+          {FORGED_AT - score} points to forge today
+        </Text>
+      )}
+      {streak > 0 ? (
+        <Text className="mt-4 text-center font-uiSemi text-[15px] text-ember">
+          🔥 {streak}-day streak · trained or logged food
+        </Text>
+      ) : null}
 
       <View className="mt-8 gap-3">
-        {mockForgeDay.rows.map((row) => (
+        {rows.map((row) => (
           <View key={row.label} className="flex-row justify-between">
-            <Text className="font-ui text-[15px] text-steel">{row.label}</Text>
+            <Text className="flex-1 font-ui text-[15px] text-steel">
+              {row.label}
+            </Text>
             <Text
-              className="font-uiSemi text-[15px] text-mint"
+              className={`font-uiSemi text-[15px] ${row.points === row.max ? 'text-mint' : 'text-bone'}`}
               style={{ fontVariant: ['tabular-nums'] }}
             >
-              {row.value}
+              {row.points}/{row.max}
             </Text>
           </View>
         ))}
       </View>
       <Text className="mt-6 font-ui text-[13px] text-steel">
-        {mockForgeDay.footer}
+        Next workout: {next}
       </Text>
 
-      <View className="mt-auto flex-row gap-3 pb-4">
-        <View className="flex-1">
-          <Button
-            label="Share card"
-            variant="secondary"
-            onPress={() => go('/(tabs)/you/card')}
-          />
-        </View>
-        <View className="flex-1">
-          <Button label="Done" onPress={() => replaceTo('/(tabs)/today')} />
-        </View>
+      <View className="mt-auto pb-4 pt-6">
+        <Button label="Done" onPress={() => goBack()} />
       </View>
     </Screen>
   );

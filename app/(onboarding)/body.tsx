@@ -87,6 +87,12 @@ export default function BodyScreen() {
       </View>
 
       <View className="mt-10">
+        {!draft.sex ? (
+          <Text className="mb-3 text-center font-ui text-[13px] text-steel">
+            Pick male or female above to continue (used for your calorie
+            target).
+          </Text>
+        ) : null}
         <Button
           label="Continue"
           disabled={!draft.sex || under18}
