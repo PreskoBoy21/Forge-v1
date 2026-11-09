@@ -1,0 +1,11 @@
+{
+  "name": "Forge",
+  "repo": "PreskoBoy21/Forge-v1",
+  "stack": "Expo SDK 58 / React Native / NativeWind / zustand / Supabase",
+  "supabase_project": "dxirfwtrrbjuflyiobjq",
+  "bundle_id": "app.forge.coach",
+  "app_store_app_id": "6831514024",
+  "stage": "v1.1 on TestFlight",
+  "dashboard": "TBD",
+  "marketing": "Forge Agency (branch agency) — receives a What's-new brief per release"
+}

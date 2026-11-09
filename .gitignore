@@ -44,3 +44,7 @@ yarn-error.*
 # editor / agent tooling
 .cursor/
 .claude/
+
+# QA screenshots
+e2e-shots/
+expo-web.log
