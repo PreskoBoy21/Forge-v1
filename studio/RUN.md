@@ -11,7 +11,11 @@ npm ci
 export EXPO_OFFLINE=1 CI=1 BROWSER=none
 ```
 Read `studio/STUDIO.md`, `studio/PRODUCT.md`, `studio/LESSONS.md` (if `studio/` is missing on `main`, check out the open `studio-foundations` branch to read them).
-Dashboard: set every `agents/<key>` to `{status:"idle"}` (`ops`, `release` → `{status:"off", task:"Phase 4/5"}` until enabled); `board/today` = `{date, tasks:[], activity:[], prs:[], qa:{}}`.
+Dashboard (ArtifactData on the `dashboard` URL; read each doc first, pass `if_version`):
+- `agents/<key>` = `{status: idle|working|done|blocked|off, task: "<= 40 chars", handoff: "<next key>"}` — keys: director, pm, designer, architect, engineer, reviewer, qa, security, librarian (release, ops stay `off` until phases 4/5).
+- `board/today` = `{date, campaigns:[{title, step 1-6, stage:"<agent key>", stageText, status: in_progress|scheduled|failed, slot:"PR #n", hook:"<one-line summary>", url:"<PR link>"}], activity:[{t ISO, agent, text}], qa:["PR #n — Review PASS · QA PASS"]}`. Steps: 1 spec, 2 design, 3 plan, 4 build, 5 review, 6 QA passed. Use status `scheduled` for ready-to-merge.
+- `board/stats` = `{posts7d:"<tests passed, e.g. 41/41>", views7d:<open bugs>, avgViews7d:<open PRs>, postsThisWeek:<open PRs>, best:{title:"<one-line summary of this run>"}, backlog:["Ready: n","Idea: n","Waiting for Presko: n"], waiting:["PR #n <title> — merge after phone test"], lessons:[max 6 short], nextRun:"20:33"}`.
+At the start: all active agents `idle`, `board/today` reset with today's date.
 
 ## 1. Pick tonight's work — Director
 Read open issues and PRs (`gh api repos/PreskoBoy21/Forge-v1/issues?state=open&per_page=100`, `.../pulls?state=open`).
