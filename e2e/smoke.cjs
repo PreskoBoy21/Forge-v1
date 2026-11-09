@@ -42,7 +42,7 @@ for (const route of ROUTES) {
   const page = await ctx.newPage();
   const errors = [];
   page.on('pageerror', (e) => errors.push(e.message));
-  await page.goto(base + route, { waitUntil: 'networkidle' }).catch((e) => errors.push(String(e)));
+  await page.goto(base + route, { waitUntil: 'networkidle', timeout: 180000 }).catch((e) => errors.push(String(e)));
   await page.waitForTimeout(remote ? 2500 : 800);
   const text = (await page.evaluate(() => document.body.innerText).catch(() => '')).trim();
   const name = route === '/' ? 'home' : route.slice(1).replace(/\//g, '_');

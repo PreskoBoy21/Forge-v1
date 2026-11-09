@@ -2,6 +2,8 @@
 module.exports = {
   content: ['./app/**/*.{js,jsx,ts,tsx}', './src/**/*.{js,jsx,ts,tsx}'],
   presets: [require('nativewind/preset')],
+  // 'class' lets the app pick light/dark itself (web crashes with 'media').
+  darkMode: 'class',
   theme: {
     extend: {
       // Theme-aware: values come from CSS variables set in src/theme/theme.ts
