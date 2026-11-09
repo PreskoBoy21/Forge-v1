@@ -6,10 +6,13 @@ import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
 import {
   Bell,
+  Brain,
+  CalendarDays,
   FileText,
   HeartPulse,
   LogOut,
   Mail,
+  MessageCircle,
   Monitor,
   Moon,
   Pencil,
@@ -23,6 +26,7 @@ import {
 import { ListRow, SectionHeader } from '@/components/ui';
 import { Screen } from '@/components/Screen';
 import { deleteAccount, signOut, useSession } from '@/features/auth/session';
+import { useConsent } from '@/features/consent/store';
 import { useTargets } from '@/features/food/store';
 import { usePro } from '@/features/paywall/purchases';
 import { FLAGS } from '@/lib/flags';
@@ -93,6 +97,7 @@ function AppearancePicker() {
 export default function YouScreen() {
   const health = useHealth();
   const reminder = useReminder();
+  const aiConsent = useConsent((s) => s.ai);
   // Off → 07:30 → 12:00 → 17:30 → 20:00 → Off
   const cycleReminder = () => {
     if (!reminder.enabled) {
@@ -230,6 +235,17 @@ export default function YouScreen() {
           onPress={cycleCoach}
         />
         <ListRow
+          Icon={CalendarDays}
+          label="Weekly verdict"
+          onPress={() => go('/(tabs)/you/verdict')}
+        />
+        <ListRow
+          Icon={Brain}
+          label="AI coaching"
+          value={aiConsent === 'granted' ? 'On' : 'Off'}
+          onPress={() => go('/(tabs)/you/ai')}
+        />
+        <ListRow
           Icon={HeartPulse}
           label={healthSupported ? healthProviderLabel : 'Health data'}
           value={
@@ -275,6 +291,11 @@ export default function YouScreen() {
           Icon={FileText}
           label="Terms"
           onPress={() => void WebBrowser.openBrowserAsync(LINKS.terms)}
+        />
+        <ListRow
+          Icon={MessageCircle}
+          label="Send feedback"
+          onPress={() => go('/(tabs)/you/feedback')}
         />
         <ListRow
           Icon={Mail}

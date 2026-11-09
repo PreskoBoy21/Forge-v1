@@ -34,6 +34,7 @@ import {
 import { scanMeal, type ScanOutcome } from '@/features/food/scan';
 import { useFood, useToday } from '@/features/food/store';
 import { go } from '@/lib/nav';
+import { track } from '@/lib/telemetry';
 import { useColors } from '@/theme/theme';
 
 const SCAN_ERROR: Record<Exclude<ScanOutcome, { ok: true }>['reason'], string> =
@@ -45,6 +46,10 @@ const SCAN_ERROR: Record<Exclude<ScanOutcome, { ok: true }>['reason'], string> =
     not_food: 'That doesn’t look like food. Try again or add foods below.',
     limit_reached:
       'You’ve used today’s 10 photo scans. More tomorrow. Add foods below for now.',
+    needs_consent:
+      'Photo scan uses AI coaching. Turn it on in You → AI coaching, or add foods below.',
+    ai_off:
+      'Photo scan is switched off for a moment. Use Barcode or Search below.',
     unavailable: 'Photo scan isn’t available right now. Add foods below.',
   };
 
@@ -109,6 +114,7 @@ export default function SnapScreen() {
     setMessage('');
     try {
       const r = await scanMeal(from);
+      track('meal_scan', { result: r.ok ? 'ok' : r.reason });
       if (r.photoUri) setPhoto(r.photoUri);
       if (r.ok) {
         setItems(r.items);
@@ -253,7 +259,33 @@ export default function SnapScreen() {
         </View>
       ) : null}
 
-      {message ? (
+      {message === SCAN_ERROR.needs_consent ? (
+        <Pressable
+          onPress={() => go('/(tabs)/you/ai')}
+          accessibilityRole="button"
+          className="mt-3 rounded-card bg-graphite-900 p-4"
+        >
+          <Text className="font-ui text-[14px] leading-[20px] text-steel">
+            Photo scan uses AI coaching, which is off.
+          </Text>
+          <Text className="mt-1 font-uiSemi text-[15px] text-molten">
+            Review and turn on AI coaching ›
+          </Text>
+        </Pressable>
+      ) : message === SCAN_ERROR.signed_out ? (
+        <Pressable
+          onPress={() => go('/(auth)/sign-in?mode=signin')}
+          accessibilityRole="button"
+          className="mt-3 rounded-card bg-graphite-900 p-4"
+        >
+          <Text className="font-ui text-[14px] leading-[20px] text-steel">
+            Photo scan needs an account. You can still add foods below.
+          </Text>
+          <Text className="mt-1 font-uiSemi text-[15px] text-molten">
+            Log in ›
+          </Text>
+        </Pressable>
+      ) : message ? (
         <Text className="mt-3 font-ui text-[13px] text-steel">{message}</Text>
       ) : null}
 

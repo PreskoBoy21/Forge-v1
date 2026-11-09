@@ -1,9 +1,16 @@
-import { ScrollViewStyleReset } from 'expo-router/html';
+import {
+  ScrollViewStyleReset,
+  useServerDocumentContext,
+} from 'expo-router/html';
 import type { ReactNode } from 'react';
 
+// Web-only HTML shell. Since Expo SDK 58 the root must render the injected
+// head/body nodes (JS bundles, CSS, fonts) or the page never loads its scripts.
 export default function Root({ children }: { children: ReactNode }) {
+  const { htmlAttributes, bodyAttributes, headNodes, bodyNodes } =
+    useServerDocumentContext();
   return (
-    <html lang="en">
+    <html lang="en" {...htmlAttributes}>
       <head>
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
@@ -13,13 +20,22 @@ export default function Root({ children }: { children: ReactNode }) {
         />
         <ScrollViewStyleReset />
         <style dangerouslySetInnerHTML={{ __html: responsiveBackground }} />
+        {headNodes}
       </head>
-      <body>{children}</body>
+      <body {...bodyAttributes}>
+        {children}
+        {bodyNodes}
+      </body>
     </html>
   );
 }
 
 const responsiveBackground = `
 body {
-  background-color: #0A0C10;
+  background-color: #F3F5F8;
+}
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #0A0C10;
+  }
 }`;

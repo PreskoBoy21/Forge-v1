@@ -7,6 +7,7 @@ import { useOnboardingDraft } from '@/features/onboarding/draft-store';
 import { trainingSummary } from '@/features/train/stats';
 import { useTrain } from '@/features/train/store';
 import { useSession } from '@/features/auth/session';
+import { useConsent } from '@/features/consent/store';
 import { supabase } from '@/lib/supabase';
 
 import { aiPayload, type Analysis, type Goal } from '../insights';
@@ -24,7 +25,8 @@ export type CoachRead = {
 /**
  * AI-written daily read from the `analyze-health` Edge Function, built from
  * health data + training + nutrition summaries (numbers only, no names).
- * Only runs when signed in; screens fall back to rule-based insights.
+ * Only runs when signed in AND the user allowed AI coaching; screens fall
+ * back to rule-based insights otherwise.
  */
 export function useCoachRead(analysis: Analysis, goal: Goal) {
   const coachStyle = useOnboardingDraft((s) => s.coach);
@@ -33,6 +35,8 @@ export function useCoachRead(analysis: Analysis, goal: Goal) {
   const meals = useFood((s) => s.meals);
   const targets = useTargets();
   const signedIn = useSession((s) => Boolean(s.session));
+  // Nothing goes to the AI provider without permission (guideline 5.1.2(i)).
+  const aiOn = useConsent((s) => s.ai === 'granted');
   const today = new Date().toISOString().slice(0, 10);
 
   const payload = useMemo(() => {
@@ -51,9 +55,9 @@ export function useCoachRead(analysis: Analysis, goal: Goal) {
     payload.nutrition,
   );
 
-  return useQuery({
+  const query = useQuery({
     queryKey: ['coach-read', payload, coachStyle],
-    enabled: Boolean(supabase) && signedIn && hasAnything,
+    enabled: Boolean(supabase) && signedIn && aiOn && hasAnything,
     staleTime: 1000 * 60 * 60 * 6,
     gcTime: 1000 * 60 * 60 * 24,
     retry: false,
@@ -67,4 +71,6 @@ export function useCoachRead(analysis: Analysis, goal: Goal) {
       return data;
     },
   });
+  // Turning AI off hides any AI text still cached from earlier.
+  return aiOn ? query : { ...query, data: undefined };
 }

@@ -1,8 +1,129 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Forge – AI gym coach</title><link rel="stylesheet" href="_style.css"></head>
-<body><main>
-<h1>Forge</h1>
-<p>Your AI gym coach. Reads your scale, sleep and recovery data and tells you exactly what to do today: the workout, the weights, and how much protein is left.</p>
-<p><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a> · <a href="delete-account.html">Delete account</a> · <a href="mailto:forge.gym.you@gmail.com">Support</a></p>
-</main></body></html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Forge – AI gym coach</title>
+<meta name="description" content="Forge reads your sleep, recovery and weight, then tells you exactly what to do today: the workout, the weights and how much protein is left. Free at launch.">
+<meta property="og:title" content="Forge – your AI gym coach">
+<meta property="og:description" content="Know what to do today. Workouts, weights and food that adapt to how you slept and recovered.">
+<meta property="og:image" content="https://preskoboy21.github.io/Forge-v1/img/today.jpg">
+<link rel="icon" href="img/today.jpg">
+<style>
+:root{--bg:#F3F5F8;--card:#FFFFFF;--line:#DCE2EA;--text:#11141A;--muted:#5F6B7C;--accent:#4C8A0C;--accent-ink:#FFFFFF;--soft:#E9F3DD}
+@media (prefers-color-scheme:dark){:root{--bg:#0A0C10;--card:#12151B;--line:#282D38;--text:#EEF1F5;--muted:#8C95A6;--accent:#C6F24E;--accent-ink:#0A0C10;--soft:#1B2410}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header{display:flex;align-items:center;justify-content:space-between;padding:20px 0}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.04em;text-transform:uppercase}
+.logo b{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--accent);color:var(--accent-ink);font-size:18px}
+nav a{color:var(--muted);text-decoration:none;margin-left:18px;font-size:15px}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:40px 0 56px}
+h1{font-size:clamp(40px,7vw,68px);line-height:.98;letter-spacing:-.01em;text-transform:uppercase;margin:0 0 18px;font-weight:900}
+h1 em{font-style:normal;color:var(--accent)}
+.lead{font-size:19px;color:var(--muted);max-width:30em;margin:0 0 26px}
+form{display:flex;gap:10px;flex-wrap:wrap;max-width:460px}
+input[type=email]{flex:1 1 220px;min-height:52px;padding:0 16px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--text);font-size:16px}
+button{min-height:52px;padding:0 22px;border:0;border-radius:14px;background:var(--accent);color:var(--accent-ink);font-weight:800;font-size:15px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+button:disabled{opacity:.6;cursor:default}
+.note{font-size:14px;color:var(--muted);margin-top:10px;min-height:1.4em}.note.err{color:#D63445;font-weight:600}
+.phones{display:flex;gap:14px;justify-content:center}
+.phones img{width:46%;max-width:240px;padding:12px 4px 0;background:#F3F5F8;border-radius:28px;border:6px solid var(--text);box-shadow:0 20px 50px rgba(0,0,0,.18)}
+.phones img:nth-child(2){margin-top:48px}
+section{padding:48px 0;border-top:1px solid var(--line)}
+h2{font-size:30px;text-transform:uppercase;letter-spacing:.01em;margin:0 0 24px;font-weight:900}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px}
+.card h3{margin:0 0 6px;font-size:18px}
+.card p{margin:0;color:var(--muted);font-size:15px}
+.tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:s}
+.steps .card::before{counter-increment:s;content:counter(s);display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--soft);color:var(--accent);font-weight:800;margin-bottom:10px}
+.shots{display:flex;gap:16px;overflow-x:auto;padding-bottom:6px;justify-content:center}
+.shots img{height:440px;padding:14px 6px 0;background:#F3F5F8;border-radius:24px;border:1px solid var(--line)}
+footer{padding:32px 0 60px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+footer a{color:var(--muted)}
+@media (max-width:760px){.hero{grid-template-columns:1fr;padding-top:16px}.grid,.steps{grid-template-columns:1fr}.phones img{max-width:180px}nav a:not(:last-child){display:none}.shots img{height:360px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="logo"><b>F</b> Forge</div>
+  <nav><a href="#how">How it works</a><a href="https://www.instagram.com/forge_gym.ai/">Instagram</a><a href="https://www.tiktok.com/@forge2680">TikTok</a></nav>
+</header>
+
+<div class="hero">
+  <div>
+    <h1>Know what to do <em>today.</em></h1>
+    <p class="lead">Forge is an AI gym coach that reads your sleep, recovery and weight, then gives you one clear plan: the workout, the exact weights, and how much protein is left.</p>
+    <form id="wl" novalidate>
+      <input type="email" name="email" placeholder="you@email.com" autocomplete="email" required aria-label="Email address">
+      <button type="submit">Get early access</button>
+    </form>
+    <div class="note" id="wl-note">Coming to the App Store soon. Free at launch. One email when it’s live, nothing else.</div>
+  </div>
+  <div class="phones">
+    <img src="img/today.jpg" alt="Forge Today screen: readiness 77, today's workout Upper A and protein left">
+    <img src="img/train.jpg" alt="Forge Train screen with exact weights for each exercise">
+  </div>
+</div>
+
+<section>
+  <h2>One app instead of three</h2>
+  <div class="grid">
+    <div class="card"><span class="tag">Recovery</span><h3>Reads your body</h3><p>Sleep, HRV, resting heart rate, steps and your smart scale, via Apple Health. One readiness score each morning.</p></div>
+    <div class="card"><span class="tag">Training</span><h3>Plans every session</h3><p>Exact weights for every set. They go up when you’re ready, and ease off on bad-sleep days.</p></div>
+    <div class="card"><span class="tag">Food</span><h3>Protein, not guesswork</h3><p>Scan a barcode, search, or snap a photo. Forge shows what’s left for today in one line.</p></div>
+  </div>
+</section>
+
+<section id="how">
+  <h2>How it works</h2>
+  <div class="steps">
+    <div class="card"><h3>Connect</h3><p>Answer a few quick questions and link Apple Health. About two minutes.</p></div>
+    <div class="card"><h3>Follow today’s call</h3><p>Open Forge in the morning: how hard to train, what to lift, what to eat.</p></div>
+    <div class="card"><h3>It adapts</h3><p>Every Sunday you get a Weekly Verdict: one change for next week, and why.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Inside the app</h2>
+  <div class="shots">
+    <img src="img/today.jpg" alt="Today" loading="lazy">
+    <img src="img/train.jpg" alt="Train" loading="lazy">
+    <img src="img/food.jpg" alt="Food: protein left and quick add" loading="lazy">
+  </div>
+</section>
+
+<footer>
+  <p>Forge – AI gym coach · Made in the Netherlands · Not medical advice.</p>
+  <p><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a> · <a href="delete-account.html">Delete account</a> · <a href="mailto:forge.gym.you@gmail.com">Support</a></p>
+</footer>
+</div>
+
+<script>
+// Waitlist → Supabase table `waitlist` (insert-only; the key below is the public publishable key).
+(function(){
+  var URL='https://dxirfwtrrbjuflyiobjq.supabase.co/rest/v1/waitlist';
+  var KEY='sb_publishable_zu5bhrjh681kKzfBFHizQw_bf0dRljF';
+  var form=document.getElementById('wl'), note=document.getElementById('wl-note');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var email=form.email.value.trim().toLowerCase();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){note.className='note err';note.textContent='That email doesn’t look right.';form.email.focus();return;}
+    note.className='note';
+    var btn=form.querySelector('button'); btn.disabled=true; note.textContent='Adding you…';
+    fetch(URL,{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json',Prefer:'return=minimal'},
+      body:JSON.stringify({email:email,source:(new URLSearchParams(location.search).get('ref')||'site').slice(0,40)})})
+    .then(function(r){
+      if(r.ok||r.status===409){note.textContent='You’re on the list. We’ll email you once, on launch day.';form.reset();}
+      else{note.textContent='Couldn’t save that right now. Try again in a minute.';}
+    }).catch(function(){note.textContent='No connection. Try again in a minute.';})
+    .finally(function(){btn.disabled=false;});
+  });
+})();
+</script>
+</body>
+</html>

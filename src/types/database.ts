@@ -22,6 +22,42 @@ export type Database = {
   __InternalSupabase: { PostgrestVersion: '14.18' };
   public: {
     Tables: {
+      app_events: {
+        Row: {
+          app_version: string | null;
+          created_at: string;
+          id: number;
+          install_id: string;
+          name: string;
+          os_version: string | null;
+          platform: string | null;
+          props: Json;
+          user_id: string | null;
+        };
+        Insert: {
+          app_version?: string | null;
+          created_at?: string;
+          id?: never;
+          install_id: string;
+          name: string;
+          os_version?: string | null;
+          platform?: string | null;
+          props?: Json;
+          user_id?: string | null;
+        };
+        Update: {
+          app_version?: string | null;
+          created_at?: string;
+          id?: never;
+          install_id?: string;
+          name?: string;
+          os_version?: string | null;
+          platform?: string | null;
+          props?: Json;
+          user_id?: string | null;
+        };
+        Relationships: [];
+      };
       body_metrics: {
         Row: {
           body_fat_pct: number | null;

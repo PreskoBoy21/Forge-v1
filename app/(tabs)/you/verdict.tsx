@@ -1,63 +1,86 @@
+import { useEffect } from 'react';
 import { Text, View } from 'react-native';
 
 import { Button } from '@/components/Button';
+import { Card } from '@/components/Card';
 import { Screen } from '@/components/Screen';
-import { mockVerdict } from '@/features/preview/mock-data';
-import { go, replaceTo } from '@/lib/nav';
+import { Eyebrow } from '@/components/ui';
+import { useWeekly } from '@/features/progress/useWeekly';
+import { goBack } from '@/lib/nav';
+import { track } from '@/lib/telemetry';
+import { useColors } from '@/theme/theme';
 
+const DAY = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+
+/** Weekly Verdict: one decision for next week, from the real last 7 days. */
 export default function VerdictScreen() {
-  const max = Math.max(...mockVerdict.bars);
+  const c = useColors();
+  const { verdict, week, stats } = useWeekly();
+  useEffect(() => track('verdict_viewed', { key: verdict.key }), [verdict.key]);
+  const tone =
+    verdict.tone === 'good'
+      ? c.good
+      : verdict.tone === 'warn'
+        ? c.warn
+        : c.info;
 
   return (
-    <Screen>
-      <View className="flex-row items-start justify-between">
-        <Text className="font-uiMedium text-[12px] uppercase tracking-widest text-steel">
-          {mockVerdict.header}
-        </Text>
-        <Text className="font-uiSemi text-[13px] text-ember">
-          {mockVerdict.coach}
-        </Text>
-      </View>
-
-      <Text className="mt-6 font-uiMedium text-[12px] uppercase tracking-widest text-molten">
+    <Screen scroll>
+      <Eyebrow>Weekly verdict · last 7 days</Eyebrow>
+      <Text className="mt-6 font-uiMedium text-[12px] uppercase tracking-widest text-steel">
         The call
       </Text>
-      <Text className="mt-2 font-display text-[56px] uppercase leading-[56px] tracking-wide text-molten">
-        {mockVerdict.call}
+      <Text
+        className="mt-2 font-display text-[48px] uppercase leading-[50px] tracking-wide"
+        style={{ color: tone }}
+      >
+        {verdict.call}
       </Text>
       <Text className="mt-4 font-ui text-[17px] leading-6 text-bone">
-        {mockVerdict.reason}
+        {verdict.reason}
       </Text>
 
-      <Text className="mt-8 font-uiMedium text-[12px] uppercase tracking-widest text-steel">
-        Forge score this week
-      </Text>
-      <View className="mt-4 h-28 flex-row items-end gap-2">
-        {mockVerdict.bars.map((value, index) => (
-          <View
-            key={index}
-            className={`flex-1 rounded-t-md ${index === 6 ? 'bg-molten' : 'bg-graphite-700'}`}
-            style={{ height: 24 + (value / max) * 88 }}
-          />
-        ))}
-      </View>
+      <Card className="mt-8">
+        <Text className="font-uiMedium text-[12px] uppercase tracking-widest text-steel">
+          Training days
+        </Text>
+        <View className="mt-3 flex-row gap-2">
+          {week.map((d) => {
+            const wd = (new Date(`${d.date}T00:00:00Z`).getUTCDay() + 6) % 7;
+            return (
+              <View key={d.date} className="flex-1 items-center">
+                <View
+                  className={`h-10 w-full rounded-md ${d.trained ? 'bg-molten' : 'bg-graphite-700'}`}
+                />
+                <Text className="mt-1 font-ui text-[11px] text-steel">
+                  {DAY[wd]}
+                </Text>
+              </View>
+            );
+          })}
+        </View>
+      </Card>
 
-      <View className="mt-6 flex-row">
-        <Stat value={mockVerdict.days} label="Days forged" />
-        <Stat value={mockVerdict.avg} label="Avg score" />
-        <Stat value={mockVerdict.strength} label="Est. strength" />
+      <View className="mt-4 flex-row flex-wrap">
+        <Stat value={`${stats.workouts}/${stats.planned}`} label="Workouts" />
+        <Stat value={String(stats.prs)} label="New PRs" />
+        <Stat
+          value={stats.protein !== undefined ? `${stats.protein} g` : '–'}
+          label={`Protein / ${stats.proteinTarget} g`}
+        />
+        <Stat
+          value={stats.sleep !== undefined ? `${stats.sleep} h` : '–'}
+          label="Avg sleep"
+        />
       </View>
+      {stats.prNames.length ? (
+        <Text className="mt-2 font-ui text-[13px] text-steel">
+          PRs: {stats.prNames.join(' · ')}
+        </Text>
+      ) : null}
 
-      <View className="mt-auto gap-3 pb-4">
-        <Button
-          label="Got it, coach"
-          onPress={() => replaceTo('/(tabs)/today')}
-        />
-        <Button
-          label="Share your week"
-          variant="ghost"
-          onPress={() => go('/(tabs)/you/card')}
-        />
+      <View className="mt-8 pb-4">
+        <Button label="Got it, coach" onPress={() => goBack()} />
       </View>
     </Screen>
   );
@@ -65,7 +88,7 @@ export default function VerdictScreen() {
 
 function Stat({ value, label }: { value: string; label: string }) {
   return (
-    <View className="flex-1">
+    <View className="mb-3 w-1/2">
       <Text
         className="font-display text-[24px] text-bone"
         style={{ fontVariant: ['tabular-nums'] }}

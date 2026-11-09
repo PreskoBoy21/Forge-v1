@@ -11,6 +11,8 @@ export default function YouLayout() {
       <Stack.Screen name="card" options={{ headerShown: false }} />
       <Stack.Screen name="crew" options={{ headerShown: false }} />
       <Stack.Screen name="paywall" options={{ title: 'Forge Pro' }} />
+      <Stack.Screen name="ai" options={{ title: 'AI coaching' }} />
+      <Stack.Screen name="feedback" options={{ title: 'Feedback' }} />
     </Stack>
   );
 }

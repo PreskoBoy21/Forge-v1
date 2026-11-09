@@ -27,6 +27,7 @@ export {
   Minus,
   LogOut,
   Mail,
+  MessageCircle,
   Monitor,
   Moon,
   RefreshCw,
