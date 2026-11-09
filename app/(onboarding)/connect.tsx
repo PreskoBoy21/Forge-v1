@@ -29,7 +29,7 @@ export default function ConnectScreen() {
 
   const onConnect = async () => {
     await connect();
-    go('/(onboarding)/forging');
+    go('/(onboarding)/ai');
   };
 
   return (
@@ -85,7 +85,7 @@ export default function ConnectScreen() {
         <Button
           label="Skip for now"
           variant="ghost"
-          onPress={() => go('/(onboarding)/forging')}
+          onPress={() => go('/(onboarding)/ai')}
         />
       </View>
     </Screen>

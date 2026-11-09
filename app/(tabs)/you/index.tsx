@@ -6,6 +6,7 @@ import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
 import {
   Bell,
+  Brain,
   FileText,
   HeartPulse,
   LogOut,
@@ -23,6 +24,7 @@ import {
 import { ListRow, SectionHeader } from '@/components/ui';
 import { Screen } from '@/components/Screen';
 import { deleteAccount, signOut, useSession } from '@/features/auth/session';
+import { useConsent } from '@/features/consent/store';
 import { useTargets } from '@/features/food/store';
 import { usePro } from '@/features/paywall/purchases';
 import { FLAGS } from '@/lib/flags';
@@ -93,6 +95,7 @@ function AppearancePicker() {
 export default function YouScreen() {
   const health = useHealth();
   const reminder = useReminder();
+  const aiConsent = useConsent((s) => s.ai);
   // Off → 07:30 → 12:00 → 17:30 → 20:00 → Off
   const cycleReminder = () => {
     if (!reminder.enabled) {
@@ -228,6 +231,12 @@ export default function YouScreen() {
           label="Coach style"
           value={COACH[draft.coach]}
           onPress={cycleCoach}
+        />
+        <ListRow
+          Icon={Brain}
+          label="AI coaching"
+          value={aiConsent === 'granted' ? 'On' : 'Off'}
+          onPress={() => go('/(tabs)/you/ai')}
         />
         <ListRow
           Icon={HeartPulse}

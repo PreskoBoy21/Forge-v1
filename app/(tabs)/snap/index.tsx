@@ -45,6 +45,10 @@ const SCAN_ERROR: Record<Exclude<ScanOutcome, { ok: true }>['reason'], string> =
     not_food: 'That doesn’t look like food. Try again or add foods below.',
     limit_reached:
       'You’ve used today’s 10 photo scans. More tomorrow. Add foods below for now.',
+    needs_consent:
+      'Photo scan uses AI coaching. Turn it on in You → AI coaching, or add foods below.',
+    ai_off:
+      'Photo scan is switched off for a moment. Use Barcode or Search below.',
     unavailable: 'Photo scan isn’t available right now. Add foods below.',
   };
 
@@ -253,7 +257,20 @@ export default function SnapScreen() {
         </View>
       ) : null}
 
-      {message ? (
+      {message === SCAN_ERROR.needs_consent ? (
+        <Pressable
+          onPress={() => go('/(tabs)/you/ai')}
+          accessibilityRole="button"
+          className="mt-3 rounded-card bg-graphite-900 p-4"
+        >
+          <Text className="font-ui text-[14px] leading-[20px] text-steel">
+            Photo scan uses AI coaching, which is off.
+          </Text>
+          <Text className="mt-1 font-uiSemi text-[15px] text-molten">
+            Review and turn on AI coaching ›
+          </Text>
+        </Pressable>
+      ) : message ? (
         <Text className="mt-3 font-ui text-[13px] text-steel">{message}</Text>
       ) : null}
 

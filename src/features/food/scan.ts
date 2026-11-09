@@ -1,6 +1,7 @@
 import { manipulateAsync, SaveFormat } from 'expo-image-manipulator';
 import * as ImagePicker from 'expo-image-picker';
 
+import { aiAllowed } from '@/features/consent/store';
 import { supabase } from '@/lib/supabase';
 
 import type { MealItem } from './nutrition';
@@ -15,6 +16,8 @@ export type ScanOutcome =
         | 'signed_out'
         | 'not_food'
         | 'limit_reached'
+        | 'needs_consent'
+        | 'ai_off'
         | 'unavailable';
     };
 
@@ -26,6 +29,8 @@ export async function scanMeal(
   if (!supabase) return { ok: false, reason: 'unavailable' };
   const { data: s } = await supabase.auth.getSession();
   if (!s.session) return { ok: false, reason: 'signed_out' };
+  // Ask before the photo goes to the AI provider (guideline 5.1.2(i)).
+  if (!aiAllowed()) return { ok: false, reason: 'needs_consent' };
 
   if (from === 'camera') {
     const perm = await ImagePicker.requestCameraPermissionsAsync();
@@ -60,7 +65,12 @@ export async function scanMeal(
     const status = (error as { context?: { status?: number } }).context?.status;
     return {
       ok: false,
-      reason: status === 429 ? 'limit_reached' : 'unavailable',
+      reason:
+        status === 429
+          ? 'limit_reached'
+          : status === 503
+            ? 'ai_off'
+            : 'unavailable',
       photoUri: asset.uri,
     };
   }
