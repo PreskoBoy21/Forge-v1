@@ -11,6 +11,7 @@ import {
   HeartPulse,
   LogOut,
   Mail,
+  MessageCircle,
   Monitor,
   Moon,
   Pencil,
@@ -284,6 +285,11 @@ export default function YouScreen() {
           Icon={FileText}
           label="Terms"
           onPress={() => void WebBrowser.openBrowserAsync(LINKS.terms)}
+        />
+        <ListRow
+          Icon={MessageCircle}
+          label="Send feedback"
+          onPress={() => go('/(tabs)/you/feedback')}
         />
         <ListRow
           Icon={Mail}

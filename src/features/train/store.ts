@@ -3,6 +3,7 @@ import { persist } from 'zustand/middleware';
 
 import { useOnboardingDraft } from '@/features/onboarding/draft-store';
 import { nextWeight, pickSplit } from '@/features/plan/engine';
+import { track } from '@/lib/telemetry';
 import { deviceStorage } from '@/lib/storage';
 
 import {
@@ -108,6 +109,7 @@ export const useTrain = create<TrainState>()(
       start: (easy = false) => {
         if (get().active) return;
         const plan = planToday(get().history, easy);
+        track('workout_started', { day: plan.name, easy });
         set({
           active: {
             dayName: plan.name,
@@ -190,6 +192,11 @@ export const useTrain = create<TrainState>()(
           synced: false,
         };
         set({ history: [log, ...get().history], active: null });
+        track('workout_finished', {
+          day: a.dayName,
+          sets: a.sets.length,
+          minutes: Math.round((Date.now() - a.startedAt) / 60000),
+        });
         void pushWorkout(log)
           .then((ok) => ok && get().markSynced(log.id))
           .catch(() => undefined);

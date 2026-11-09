@@ -34,6 +34,7 @@ import {
 import { scanMeal, type ScanOutcome } from '@/features/food/scan';
 import { useFood, useToday } from '@/features/food/store';
 import { go } from '@/lib/nav';
+import { track } from '@/lib/telemetry';
 import { useColors } from '@/theme/theme';
 
 const SCAN_ERROR: Record<Exclude<ScanOutcome, { ok: true }>['reason'], string> =
@@ -113,6 +114,7 @@ export default function SnapScreen() {
     setMessage('');
     try {
       const r = await scanMeal(from);
+      track('meal_scan', { result: r.ok ? 'ok' : r.reason });
       if (r.photoUri) setPhoto(r.photoUri);
       if (r.ok) {
         setItems(r.items);

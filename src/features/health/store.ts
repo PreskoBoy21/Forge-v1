@@ -1,4 +1,6 @@
 import { Platform } from 'react-native';
+
+import { track } from '@/lib/telemetry';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -63,6 +65,7 @@ export const useHealth = create<HealthState>()(
           connected: permission === 'granted',
           loading: false,
         });
+        track('health_connected', { result: permission });
         if (permission === 'granted') await get().refresh();
         return permission;
       },

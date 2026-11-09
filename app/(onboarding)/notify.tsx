@@ -9,12 +9,14 @@ import { IconBadge } from '@/components/ui';
 import { enableReminder } from '@/features/notify/reminders';
 import { FLAGS } from '@/lib/flags';
 import { go, replaceTo } from '@/lib/nav';
+import { track } from '@/lib/telemetry';
 import { useColors } from '@/theme/theme';
 
-const next = () =>
-  FLAGS.SUBSCRIPTIONS
-    ? go('/(onboarding)/paywall')
-    : replaceTo('/(tabs)/today');
+const next = () => {
+  track('onboarding_done');
+  if (FLAGS.SUBSCRIPTIONS) go('/(onboarding)/paywall');
+  else replaceTo('/(tabs)/today');
+};
 
 export default function NotifyScreen() {
   const c = useColors();

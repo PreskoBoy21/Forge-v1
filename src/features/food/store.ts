@@ -23,6 +23,7 @@ import {
   type Meal,
 } from './nutrition';
 import { pushCheckin, pushMeal } from './sync';
+import { track } from '@/lib/telemetry';
 
 export type CheckinRecord = CheckinResult & {
   weekStart: string;
@@ -48,6 +49,7 @@ export const useFood = create<FoodState>()(
       checkins: [],
       addMeal: (m) => {
         const meal: Meal = { ...m, id: `${Date.now()}`, synced: false };
+        track('meal_saved', { source: m.source, items: m.items.length });
         // keep ~60 days on the device
         const cutoff = new Date(Date.now() - 60 * 864e5)
           .toISOString()

@@ -9,7 +9,7 @@ import {
 } from '@expo-google-fonts/inter';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
+import { Stack, usePathname } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
@@ -22,14 +22,18 @@ import { useSession, useSessionListener } from '@/features/auth/session';
 import { useHealth } from '@/features/health/store';
 import { initPurchases } from '@/features/paywall/purchases';
 import { syncPendingWorkouts } from '@/features/train/store';
+import { setScreen, startTelemetry } from '@/lib/telemetry';
 import { PALETTE, THEME_VARS, useScheme } from '@/theme/theme';
 
-export { ErrorBoundary } from 'expo-router';
+export { ErrorBoundary } from '@/components/ErrorBoundary';
 
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   useSessionListener();
+  const pathname = usePathname();
+  useEffect(() => startTelemetry(), []);
+  useEffect(() => setScreen(pathname), [pathname]);
   const userId = useSession((s) => s.session?.user.id ?? null);
   useEffect(() => {
     void initPurchases(userId);

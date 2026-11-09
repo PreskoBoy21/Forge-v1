@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 import { deviceStorage } from '@/lib/storage';
+import { track } from '@/lib/telemetry';
 
 /**
  * Permission to send data to the AI provider (Anthropic) — App Store
@@ -22,7 +23,10 @@ export const useConsent = create<ConsentState>()(
     (set) => ({
       ai: 'unknown',
       decidedAt: null,
-      setAi: (ai) => set({ ai, decidedAt: new Date().toISOString() }),
+      setAi: (ai) => {
+        set({ ai, decidedAt: new Date().toISOString() });
+        track('ai_consent', { choice: ai });
+      },
     }),
     {
       name: 'forge-consent',
