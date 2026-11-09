@@ -21,5 +21,5 @@
 - 2026-11-08 | 12:00 | pushups-deadlift-excuse-myths-quiz | 2 gym myths you've probably used as an excuse | push-ups vs bench; deadlift & back pain (logged late by evening run) | 420571735
 - 2026-11-08 | 17:00 | press-vs-raise-shoulders (CAROUSEL) | Press vs raise: only one builds width | A-vs-B side delts (logged late by evening run) | 420571748
 - 2026-11-09 | 11:00 IG story | bench-mistake-story | Gym mistake of the day: bouncing the bar off your chest | teases reel 1 | 421452495
-- 2026-11-09 | 12:00 | bench-mistakes | 2 bench mistakes stealing chest gains | mistake: bouncing bar off chest; flaring elbows 90° | 421452523 (FAILED: Metricool account limit, not published)
+- 2026-11-09 | 14:00 (moved from 12:00) | bench-mistakes | 2 bench mistakes stealing chest gains | mistake: bouncing bar off chest; flaring elbows 90° | 421719162 (12:00 failed on Metricool limit; plan upgraded, rescheduled 14:00)
 - 2026-11-09 | 17:00 | hipthrust-vs-squat | Hip thrust or squat for bigger glutes? | versus: glutes tie; squat wins for quads/adductors (Plotkin 2023) | 421452539
