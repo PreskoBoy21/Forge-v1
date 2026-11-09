@@ -55,7 +55,7 @@ export function useCoachRead(analysis: Analysis, goal: Goal) {
     payload.nutrition,
   );
 
-  return useQuery({
+  const query = useQuery({
     queryKey: ['coach-read', payload, coachStyle],
     enabled: Boolean(supabase) && signedIn && aiOn && hasAnything,
     staleTime: 1000 * 60 * 60 * 6,
@@ -71,4 +71,6 @@ export function useCoachRead(analysis: Analysis, goal: Goal) {
       return data;
     },
   });
+  // Turning AI off hides any AI text still cached from earlier.
+  return aiOn ? query : { ...query, data: undefined };
 }

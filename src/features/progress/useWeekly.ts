@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
 import { nutritionSummary } from '@/features/food/nutrition';
 import { useFood, useTargets } from '@/features/food/store';
@@ -10,6 +10,7 @@ import {
   trainingSummary,
 } from '@/features/train/stats';
 import { useTrain } from '@/features/train/store';
+import { useTodayIso } from '@/lib/useTodayIso';
 
 import { dailyHabit, verdictGoal, weeklyVerdict } from './verdict';
 
@@ -23,7 +24,7 @@ export function useWeekly() {
   const goal = useOnboardingDraft((s) => s.goal);
   const planned = useOnboardingDraft((s) => s.trainingDays);
   const { analysis } = useAnalysis();
-  const [today] = useState(() => iso(Date.now()));
+  const today = useTodayIso();
 
   return useMemo(() => {
     const training = trainingSummary(history, today, planned);

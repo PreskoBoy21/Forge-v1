@@ -19,6 +19,13 @@ Deno.serve(async (req) => {
   if (!data.user) return json({ error: 'unauthorized' }, 401);
 
   const admin = createClient(url, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!);
+
+  // Also remove analytics sent from this phone before the user signed in
+  // (rows with user_id are removed by the FK cascade below).
+  const body = (await req.json().catch(() => ({}))) as { installId?: unknown };
+  if (typeof body.installId === 'string' && body.installId.length >= 8 && body.installId.length <= 64) {
+    await admin.from('app_events').delete().eq('install_id', body.installId).is('user_id', null);
+  }
   const { error } = await admin.auth.admin.deleteUser(data.user.id);
   if (error) {
     console.error('delete-account failed', error);

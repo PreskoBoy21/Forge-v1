@@ -11,11 +11,14 @@ export { cleanProps };
 
 /**
  * First-party analytics, crash reports and feedback, stored in our own
- * Supabase table `app_events` (insert-only, deleted with the account).
- * No third-party SDK, no advertising IDs, no names or emails in props.
+ * Supabase table `app_events` (insert-only). No third-party SDK, no
+ * advertising IDs, no names or emails in props.
  *
- * Events are buffered and sent in small batches; failures are dropped
- * silently (telemetry must never break the app).
+ * - Normal events are buffered in memory and sent in small batches; if a send
+ *   fails they are dropped (telemetry must never break the app).
+ * - Crashes and feedback are also saved on the device until the server has
+ *   them, so a fatal crash is reported on the next launch and feedback is
+ *   never lost.
  */
 
 export type EventName =
@@ -35,16 +38,20 @@ export type EventName =
 type Row = { name: EventName; props: Props; created_at: string };
 
 const MAX_BUFFER = 200;
+const MAX_PENDING = 30;
 const FLUSH_EVERY_MS = 20_000;
 const INSTALL_KEY = 'forge-install-id';
+const PENDING_KEY = 'forge-pending-events';
 
 let buffer: Row[] = [];
+let pending: Row[] = []; // crashes + feedback, mirrored to AsyncStorage
 let installId: string | null = null;
 let timer: ReturnType<typeof setInterval> | null = null;
-let flushing = false;
+let inFlight: Promise<boolean> | null = null;
 
 const isServer = typeof window === 'undefined' && Platform.OS === 'web';
 const appVersion = Constants.expoConfig?.version ?? null;
+const important = (n: EventName) => n === 'crash' || n === 'feedback';
 
 function randomId() {
   return `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 10)}`;
@@ -64,23 +71,49 @@ async function getInstallId() {
   return installId;
 }
 
+/** Install id, so account deletion can also remove pre-sign-in events. */
+export const telemetryInstallId = () => getInstallId();
+
+function savePending() {
+  AsyncStorage.setItem(PENDING_KEY, JSON.stringify(pending)).catch(
+    () => undefined,
+  );
+}
+
+async function loadPending() {
+  try {
+    const raw = await AsyncStorage.getItem(PENDING_KEY);
+    const saved = raw ? (JSON.parse(raw) as Row[]) : [];
+    if (Array.isArray(saved))
+      pending = [...saved, ...pending].slice(-MAX_PENDING);
+  } catch {
+    // ignore corrupt storage
+  }
+}
+
 /** Record one event. Cheap and safe to call anywhere. */
 export function track(name: EventName, props?: Props) {
   if (isServer) return;
-  buffer.push({
+  const row = {
     name,
     props: cleanProps(props),
     created_at: new Date().toISOString(),
-  });
+  };
+  if (important(name)) {
+    pending = [...pending, row].slice(-MAX_PENDING);
+    savePending();
+    void flush();
+    return;
+  }
+  buffer.push(row);
   if (buffer.length > MAX_BUFFER) buffer = buffer.slice(-MAX_BUFFER);
-  if (name === 'crash' || name === 'feedback') void flush();
 }
 
-/** Send buffered events now. */
-export async function flush() {
-  if (!supabase || flushing || buffer.length === 0) return;
-  flushing = true;
+async function send(): Promise<boolean> {
+  if (!supabase) return false;
   const batch = buffer.splice(0, 50);
+  const urgent = pending.slice();
+  if (!batch.length && !urgent.length) return true;
   try {
     const [{ data }, id] = await Promise.all([
       supabase.auth.getSession(),
@@ -88,7 +121,7 @@ export async function flush() {
     ]);
     const userId = data.session?.user.id ?? null;
     const { error } = await supabase.from('app_events').insert(
-      batch.map((r) => ({
+      [...urgent, ...batch].map((r) => ({
         name: r.name,
         props: r.props as Json,
         created_at: r.created_at,
@@ -99,15 +132,26 @@ export async function flush() {
         os_version: String(Platform.Version ?? ''),
       })),
     );
-    // Table missing or offline: keep feedback/crashes for one retry, drop the rest.
-    if (error)
-      buffer.unshift(
-        ...batch.filter((r) => r.name === 'crash' || r.name === 'feedback'),
-      );
+    if (error) return false; // normal events dropped, crashes/feedback stay pending
+    pending = pending.filter((r) => !urgent.includes(r));
+    savePending();
+    return true;
   } catch {
-    // never throw from telemetry
+    return false;
+  }
+}
+
+/**
+ * Send what's waiting. Resolves true when crashes/feedback are safely on the
+ * server (or there was nothing to send). Never throws.
+ */
+export async function flush(): Promise<boolean> {
+  if (inFlight) await inFlight;
+  inFlight = send();
+  try {
+    return await inFlight;
   } finally {
-    flushing = false;
+    inFlight = null;
   }
 }
 
@@ -128,10 +172,11 @@ export function setScreen(path: string) {
   track('screen', { path });
 }
 
-/** Call once at app start: periodic flush, flush on background, global error hook. */
+/** Call once at app start: send leftovers, periodic flush, error hooks. */
 export function startTelemetry() {
   if (isServer || timer) return;
   track('app_open');
+  void loadPending().then(() => flush());
   timer = setInterval(() => void flush(), FLUSH_EVERY_MS);
   AppState.addEventListener('change', (s) => {
     if (s !== 'active') void flush();
@@ -146,12 +191,16 @@ export function startTelemetry() {
   if (g.ErrorUtils) {
     const prev = g.ErrorUtils.getGlobalHandler();
     g.ErrorUtils.setGlobalHandler((e, fatal) => {
+      // Saved to the device first, so a fatal crash is sent on next launch.
       reportError(e, { fatal: Boolean(fatal), screen: currentScreen });
       prev(e, fatal);
     });
   } else if (typeof window !== 'undefined' && window.addEventListener) {
     window.addEventListener('error', (ev) =>
       reportError(ev.error ?? ev.message, { screen: currentScreen }),
+    );
+    window.addEventListener('unhandledrejection', (ev) =>
+      reportError(ev.reason, { screen: currentScreen, promise: true }),
     );
   }
 }

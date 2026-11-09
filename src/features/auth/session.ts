@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { create } from 'zustand';
 
 import { supabase } from '@/lib/supabase';
+import { telemetryInstallId } from '@/lib/telemetry';
 
 type SessionState = {
   session: Session | null;
@@ -58,8 +59,10 @@ export async function signOut() {
 /** App Store requirement: permanently delete the account and its data. */
 export async function deleteAccount() {
   if (!supabase) throw new Error('Backend not configured');
+  const installId = await telemetryInstallId();
   const { error } = await supabase.functions.invoke('delete-account', {
     method: 'POST',
+    body: { installId },
   });
   if (error) throw new Error('Could not delete your account. Try again.');
   await supabase.auth.signOut();

@@ -12,6 +12,7 @@ create unique index if not exists waitlist_email_key on public.waitlist (lower(e
 
 alter table public.waitlist enable row level security;
 
+drop policy if exists "waitlist insert" on public.waitlist;
 create policy "waitlist insert"
   on public.waitlist for insert
   to anon, authenticated

@@ -16,10 +16,12 @@ export default function FeedbackScreen() {
   const [topic, setTopic] = useState<(typeof TOPICS)[number]>('Idea');
   const [text, setText] = useState('');
   const [sent, setSent] = useState(false);
+  const [queued, setQueued] = useState(false);
 
   const send = async () => {
     track('feedback', { topic, text: text.trim() });
-    await flush();
+    const ok = await flush();
+    setQueued(!ok);
     setSent(true);
     setText('');
   };
@@ -31,7 +33,9 @@ export default function FeedbackScreen() {
           Thanks!
         </Text>
         <Text className="mt-2 font-ui text-[17px] leading-[24px] text-steel">
-          Got it. Every message is read, and it shapes what we fix next.
+          {queued
+            ? 'Saved on your phone. It will be sent automatically when you’re back online.'
+            : 'Got it. We read every message.'}
         </Text>
         <View className="mt-8">
           <Button
