@@ -32,7 +32,7 @@ drop policy if exists "app_events insert own" on public.app_events;
 create policy "app_events insert own"
   on public.app_events for insert
   to anon, authenticated
-  with check (user_id is null or user_id = auth.uid());
+  with check (user_id is null or user_id = (select auth.uid()));
 
 -- No select/update/delete policies: nobody reads events from the app.
 
