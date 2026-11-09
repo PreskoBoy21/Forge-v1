@@ -1,4 +1,7 @@
-import { ScrollViewStyleReset, useServerDocumentContext } from 'expo-router/html';
+import {
+  ScrollViewStyleReset,
+  useServerDocumentContext,
+} from 'expo-router/html';
 import type { ReactNode } from 'react';
 
 // Web-only HTML shell. Since Expo SDK 58 the root must render the injected
