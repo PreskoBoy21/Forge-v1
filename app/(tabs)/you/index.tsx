@@ -7,6 +7,7 @@ import { Card } from '@/components/Card';
 import {
   Bell,
   Brain,
+  CalendarDays,
   FileText,
   HeartPulse,
   LogOut,
@@ -232,6 +233,11 @@ export default function YouScreen() {
           label="Coach style"
           value={COACH[draft.coach]}
           onPress={cycleCoach}
+        />
+        <ListRow
+          Icon={CalendarDays}
+          label="Weekly verdict"
+          onPress={() => go('/(tabs)/you/verdict')}
         />
         <ListRow
           Icon={Brain}

@@ -3,7 +3,14 @@ import { Pressable, Text, View } from 'react-native';
 
 import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
-import { ChevronRight, Sparkles, Utensils } from '@/components/icons';
+import {
+  CalendarDays,
+  ChevronRight,
+  Footprints,
+  Moon,
+  Sparkles,
+  Utensils,
+} from '@/components/icons';
 import { Screen } from '@/components/Screen';
 import { Eyebrow, IconBadge } from '@/components/ui';
 import { useToday } from '@/features/food/store';
@@ -12,13 +19,15 @@ import { ReadinessRing } from '@/features/health/ui/ReadinessRing';
 import { useAnalysis } from '@/features/health/ui/useAnalysis';
 import { useCoachRead } from '@/features/health/ui/useCoachRead';
 import { useOnboardingDraft } from '@/features/onboarding/draft-store';
+import { useWeekly } from '@/features/progress/useWeekly';
 import { planToday, useTrain } from '@/features/train/store';
 import { go } from '@/lib/nav';
 import { useColors } from '@/theme/theme';
 
 /**
- * Today = three things, nothing else:
+ * Today = the day in four lines:
  * 1. How ready you are + the coach's call   2. The workout   3. Protein left
+ * 4. One daily-life habit (sleep / steps)   (+ the Weekly Verdict on Sun/Mon)
  * Everything else lives one tap away (Body, Train, Food).
  */
 const CALL = {
@@ -62,6 +71,9 @@ export default function TodayScreen() {
     plan.moves.reduce((t, mv) => t + mv.sets * (mv.restSec + 45), 0) / 60,
   );
   const proteinLeft = Math.max(0, food.targets.proteinG - food.eaten.protein);
+  const { verdict, habit } = useWeekly();
+  // Weekly Verdict shows on Today on Sunday and Monday.
+  const verdictDay = [0, 1].includes(new Date().getDay());
 
   return (
     <Screen scroll>
@@ -151,7 +163,7 @@ export default function TodayScreen() {
       {/* 3 — food in one line */}
       <Pressable
         onPress={() => go('/(tabs)/snap')}
-        className="mb-6 mt-4 flex-row items-center rounded-card border border-graphite-700/60 bg-graphite-900 p-4"
+        className="mb-4 mt-4 flex-row items-center rounded-card border border-graphite-700/60 bg-graphite-900 p-4"
       >
         <IconBadge Icon={Utensils} color={c.warn} />
         <View className="ml-3 flex-1">
@@ -166,6 +178,37 @@ export default function TodayScreen() {
         </View>
         <ChevronRight size={20} color={c.muted} />
       </Pressable>
+
+      {/* 4 — one daily-life habit from your own data */}
+      {habit ? (
+        <View className="mb-4 flex-row items-center rounded-card border border-graphite-700/60 bg-graphite-900 p-4">
+          <IconBadge
+            Icon={habit.kind === 'steps' ? Footprints : Moon}
+            color={habit.kind === 'steps' ? c.info : c.violet}
+          />
+          <Text className="ml-3 flex-1 font-uiMedium text-[15px] leading-[21px] text-bone">
+            {habit.text}
+          </Text>
+        </View>
+      ) : null}
+
+      {verdictDay ? (
+        <Pressable
+          onPress={() => go('/(tabs)/you/verdict')}
+          className="mb-6 flex-row items-center rounded-card border border-graphite-700/60 bg-graphite-900 p-4"
+        >
+          <IconBadge Icon={CalendarDays} color={c.accent} />
+          <View className="ml-3 flex-1">
+            <Text className="font-uiSemi text-[16px] text-bone">
+              Your weekly verdict: {verdict.call}
+            </Text>
+            <Text className="font-ui text-[13px] text-steel">
+              Tap to see why
+            </Text>
+          </View>
+          <ChevronRight size={20} color={c.muted} />
+        </Pressable>
+      ) : null}
     </Screen>
   );
 }
