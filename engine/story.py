@@ -23,7 +23,7 @@ body{{width:1080px;height:1920px;overflow:hidden;background:#0A0C10;color:#F3F5E
 <div class="mark"><b>▲</b> FORGE</div>
 <div class="kick"><span>{S.get('kicker','MYTH OF THE DAY')}</span></div>
 <div class="claim">“{S['claim']}”</div>
-<div class="btns"><div class="btn t">TRUE</div><div class="btn f">FALSE</div></div>
+<div class="btns"><div class="btn t">{S.get('a','TRUE')}</div><div class="btn f">{S.get('b','FALSE')}</div></div>
 <div class="sub">{S.get('sub',"Answer in today's reel")} 👀</div>
 <div class="time">{S['time']}</div>
 </div></body></html>"""
