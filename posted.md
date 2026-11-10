@@ -23,3 +23,6 @@
 - 2026-11-09 | 11:00 IG story | bench-mistake-story | Gym mistake of the day: bouncing the bar off your chest | teases reel 1 | 421452495
 - 2026-11-09 | 14:00 (moved from 12:00) | bench-mistakes | 2 bench mistakes stealing chest gains | mistake: bouncing bar off chest; flaring elbows 90° | 421719162 (12:00 failed on Metricool limit; plan upgraded, rescheduled 14:00)
 - 2026-11-09 | 17:00 | hipthrust-vs-squat | Hip thrust or squat for bigger glutes? | versus: glutes tie; squat wins for quads/adductors (Plotkin 2023) | 421452539
+- 2026-11-10 | 11:00 IG story | ab-myth-story | Myth of the day: crunches burn belly fat | teases reel 1 | 422815421
+- 2026-11-10 | 12:00 | ab-myths-quiz | 2 ab myths hiding your six-pack | myth: crunches burn belly fat; abs only need high reps | 422815451
+- 2026-11-10 | 17:00 | calves-standing-vs-seated | Standing or seated calf raises: one grew ~2x more | versus: standing wins (Kinoshita 2023); stretched bottom half beats full reps (Kassiano 2023) | 422815468
