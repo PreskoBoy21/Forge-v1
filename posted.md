@@ -26,3 +26,6 @@
 - 2026-11-10 | 11:00 IG story | ab-myth-story | Myth of the day: crunches burn belly fat | teases reel 1 | 422815421
 - 2026-11-10 | 12:00 | ab-myths-quiz | 2 ab myths hiding your six-pack | myth: crunches burn belly fat; abs only need high reps | 422815451
 - 2026-11-10 | 17:00 | calves-standing-vs-seated | Standing or seated calf raises: one grew ~2x more | versus: standing wins (Kinoshita 2023); stretched bottom half beats full reps (Kassiano 2023) | 422815468
+- 2026-11-11 | 11:00 IG story | pulldown-mistake-story | Gym mistake of the day: pulling the lat pulldown behind your neck | teases reel 1 | 424098231
+- 2026-11-11 | 12:00 | lat-pulldown-mistakes | Your lat pulldown might be skipping your lats | mistake: behind-the-neck pulldown; swinging way back | 424098249
+- 2026-11-11 | 17:00 | chest-myths-quiz | 2 chest myths wasting your chest days | myth: squeeze presses build inner chest; dips only triceps | 424098260

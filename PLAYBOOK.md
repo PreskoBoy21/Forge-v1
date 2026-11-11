@@ -7,6 +7,8 @@
 - Presko's rules: TikTok `isAigc: false`, IG `isAiGenerated: false`; captions have EXACTLY 3 hashtags, one always #gym.
 
 ## What works (data, newest first)
+- 2026-11-11 Legs are bottom on IG for the 3rd time (calves versus 422 views, 50% skip rate) → no leg reels on IG until a strong upper-body streak; if legs, TikTok-only test.
+- 2026-11-11 TikTok is flat at ~710–730 for 6 posts in a row (myth, mistake, versus all the same) → the first frame, not the format, is the limit; test bolder frame-0 claims. Ab myths dropped to 1.2k IG (myth quizzes were 2.0k+) → chest/back/arms myths only.
 - 2026-11-10 Mistake format holds up: 2 bench mistakes = 2.0k IG / 729 TT in ~19 h (on par with myth quizzes). Keep it in rotation.
 - 2026-11-10 Glute topics are bottom-2 on IG twice (hip thrust vs squat 443 views / 9 s avg watch; half-squat 645). IG crowd trains upper body → favour chest/back/arms/shoulders/abs; legs only with a strong hook.
 - 2026-11-10 TikTok sits at 700–800 for every format; only versus reels with a named muscle + study broke 1k (incline 1.3k, press vs raise 1.2k). Shipped first ab myth quiz + calves versus today — measure tomorrow.
@@ -32,15 +34,15 @@ myth · mistake · versus · swap · worth — max one myth reel per day; rotate
 6. Two posts in one week never share the same hook template opening words.
 
 ## Used topics (never repeat) — myths so far:
-more gym days = more muscle; rest day = couch; sweating = fat burn; no soreness = no growth; 30-min protein window; women get bulky; 30 g protein per meal limit; cardio kills gains; fasted cardio; fat-burning zone; fat-burning foods; creatine myths; light weights can't build muscle; need a new workout every week; squats are bad for your knees; muscle turns into fat; every set must go to failure; machines don't build real muscle; shorter rest builds more muscle; mind-muscle connection is bro science; stretching before lifting prevents injuries; slow reps build more muscle; next-day soreness is lactic acid; lifting makes you stiff; lifting stunts your growth; the squeeze at the top builds the most muscle; push-ups can't build a big chest; never let knees go past toes; can't build muscle after 40; you need protein shakes to grow; curls are all you need for big arms; hammer curls are just forearms; overhead press ruins your shoulders; deadlifts are bad for your back; beginners need a body-part split; you need 2-hour workouts; bench: bouncing the bar off the chest (mistake); bench: flaring elbows to 90° (mistake); hip thrust vs squat for glutes (tie, Plotkin 2023); hip thrust vs squat for quads/adductors (squat wins); crunches burn belly fat (myth, Vispute 2011); abs only need high reps, no weight (myth); standing vs seated calf raise (standing wins, Kinoshita 2023); full vs stretched bottom-half calf reps (stretch wins, Kassiano 2023).
+more gym days = more muscle; rest day = couch; sweating = fat burn; no soreness = no growth; 30-min protein window; women get bulky; 30 g protein per meal limit; cardio kills gains; fasted cardio; fat-burning zone; fat-burning foods; creatine myths; light weights can't build muscle; need a new workout every week; squats are bad for your knees; muscle turns into fat; every set must go to failure; machines don't build real muscle; shorter rest builds more muscle; mind-muscle connection is bro science; stretching before lifting prevents injuries; slow reps build more muscle; next-day soreness is lactic acid; lifting makes you stiff; lifting stunts your growth; the squeeze at the top builds the most muscle; push-ups can't build a big chest; never let knees go past toes; can't build muscle after 40; you need protein shakes to grow; curls are all you need for big arms; hammer curls are just forearms; overhead press ruins your shoulders; deadlifts are bad for your back; beginners need a body-part split; you need 2-hour workouts; bench: bouncing the bar off the chest (mistake); bench: flaring elbows to 90° (mistake); hip thrust vs squat for glutes (tie, Plotkin 2023); hip thrust vs squat for quads/adductors (squat wins); crunches burn belly fat (myth, Vispute 2011); abs only need high reps, no weight (myth); standing vs seated calf raise (standing wins, Kinoshita 2023); full vs stretched bottom-half calf reps (stretch wins, Kassiano 2023); lat pulldown behind the neck (mistake); lat pulldown leaning/swinging way back (mistake); squeeze presses build inner chest (myth); dips are only a triceps exercise (myth, McKenzie 2022).
 
 ## Idea bank (not used yet — check accuracy before use)
 ### mistake
-Squat: cutting depth on heavy days; knees caving — Rows: using the lower back to swing — Curls: swinging the weight up — Lat pulldown: pulling behind the neck — Skipping warm-up sets before heavy work — Never tracking weights/reps — Same weight for months (no progressive overload) — Lat pulldown: leaning way back so it turns into a row — Bench: lifting the butt off the bench — Calf raises: bouncing out of the bottom
+Squat: cutting depth on heavy days; knees caving — Rows: using the lower back to swing — Curls: swinging the weight up — Skipping warm-up sets before heavy work — Never tracking weights/reps — Same weight for months (no progressive overload) — Bench: lifting the butt off the bench — Calf raises: bouncing out of the bottom — Pull-ups: half reps without dead hang — Shoulder press: arching the lower back hard
 ### versus
 - Dumbbell vs barbell bench — Pull-ups vs lat pulldown — Squat vs leg press for quads — Romanian deadlift vs lying leg curl for hamstrings (both work; do both) — Free weights vs machines for size (both work) — High reps vs low reps for size (both build muscle when hard)
 ### swap
-- Half reps → full range — Ego lifting → controlled reps — Random workouts → a set plan you progress — 5 min treadmill warm-up only → ramp-up sets
+- Half reps → full range — Rear delts only from rows → add reverse flyes — Ego lifting → controlled reps — Random workouts → a set plan you progress — 5 min treadmill warm-up only → ramp-up sets
 ### worth
 - Lifting belts — Lifting straps — Training to failure every set — Ab training if you have high body fat — Deload weeks — Mind-muscle connection cues — Hip abduction machine for glutes
 ### myth
@@ -58,6 +60,8 @@ Squat: cutting depth on heavy days; knees caving — Rows: using the lower back 
 - 2026-11-09: Warm-up hooks ('This is not a good warm up') spiking → warm-up mistakes reel candidate.
 - 2026-11-10: Same top formats as yesterday on tryvolume (bad-rep-then-fix 20x, before/after flash 16x, belief-wrong-in-line-1 15x); 'this one exercise for X for life' authority hooks spiking.
 - 2026-11-10: Audience pains used: 'my calves won't grow', 'crunches every day, still no abs'.
+- 2026-11-11: tryvolume: 'wrong form then right form, marked on screen' 23x and 'act out the bad form first' 29x lead → keep mistake reels with the FINE/MISTAKE stamp.
+- 2026-11-11: Audience pains used: 'pulldowns but no back growth', 'how do I grow my inner chest?'.
 
 ## STYLE (cloud quiz engine)
 - engine/skel.html = quiz template in brand look: ink #0A0C10, volt #C6F24E, aqua #47D7E8, red #FF4D5E; mascot in volt tank; word-pop captions; FALSE stamp; countdown ring; 2-bar chart or verdict chip per myth.
@@ -65,4 +69,5 @@ Squat: cutting depth on heavy days; knees caving — Rows: using the lower back 
 - STYLE LOG (newest last):
   - 2026-11-08: robust audio alignment (prep.py dynamic programming over pauses); Instagram Story generator (story.py).
   - 2026-11-09: story.py takes optional "a"/"b" button labels (e.g. FINE / MISTAKE for mistake stories); sub text already gets 👀 appended — don't add it to "sub".
+  - 2026-11-11: verdict chips > ~18 chars (SIT TALL, ELBOWS DOWN / TRAIN THE WHOLE CHEST) touch the right edge → keep chip text ≤ 14 chars. Don't invent chart numbers; verdict-only if no study value.
   - 2026-11-10: items button labels > ~9 chars (e.g. BOTTOM HALF) overflow the right edge → keep a/b labels short (FULL / STRETCH). Hook 92 px with a long 2nd line touches the edges → 84 px.
