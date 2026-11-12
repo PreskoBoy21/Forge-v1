@@ -29,3 +29,6 @@
 - 2026-11-11 | 11:00 IG story | pulldown-mistake-story | Gym mistake of the day: pulling the lat pulldown behind your neck | teases reel 1 | 424098231
 - 2026-11-11 | 12:00 | lat-pulldown-mistakes | Your lat pulldown might be skipping your lats | mistake: behind-the-neck pulldown; swinging way back | 424098249
 - 2026-11-11 | 17:00 | chest-myths-quiz | 2 chest myths wasting your chest days | myth: squeeze presses build inner chest; dips only triceps | 424098260
+- 2026-11-12 | 11:00 IG story | chest-frequency-story | Which builds more? Training chest once a week, or twice? | teases reel 1 | 425352028
+- 2026-11-12 | 12:00 | chest-frequency-sets-versus | Most lifters hit chest once a week... enough? | versus: twice a week wins (Schoenfeld 2016); 3 sets beat 1 (~40%, Krieger 2010) | 425352037
+- 2026-11-12 | 17:00 | shoulder-width-swaps | Shoulders not getting any wider? | swap: heavy swinging lateral raises → strict; only pressing → add rear delt flyes | 425352050
