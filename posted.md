@@ -32,3 +32,6 @@
 - 2026-11-12 | 11:00 IG story | chest-frequency-story | Which builds more? Training chest once a week, or twice? | teases reel 1 | 425352028
 - 2026-11-12 | 12:00 | chest-frequency-sets-versus | Most lifters hit chest once a week... enough? | versus: twice a week wins (Schoenfeld 2016); 3 sets beat 1 (~40%, Krieger 2010) | 425352037
 - 2026-11-12 | 17:00 | shoulder-width-swaps | Shoulders not getting any wider? | swap: heavy swinging lateral raises → strict; only pressing → add rear delt flyes | 425352050
+- 2026-11-13 | 11:00 IG story | curl-mistake-story | Gym mistake of the day: swinging your curls up | teases reel 1 | 426624774
+- 2026-11-13 | 12:00 | curl-mistakes | These 2 curl mistakes keep your biceps small | mistake: swinging the weight up; never lowering all the way down | 426624800
+- 2026-11-13 | 17:00 | back-myths-quiz | Back day myths you still believe | myth: pull-ups only work your back; you need deadlifts for a big back | 426624828
