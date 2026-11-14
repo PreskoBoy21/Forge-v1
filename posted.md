@@ -35,3 +35,6 @@
 - 2026-11-13 | 11:00 IG story | curl-mistake-story | Gym mistake of the day: swinging your curls up | teases reel 1 | 426624774
 - 2026-11-13 | 12:00 | curl-mistakes | These 2 curl mistakes keep your biceps small | mistake: swinging the weight up; never lowering all the way down | 426624800
 - 2026-11-13 | 17:00 | back-myths-quiz | Back day myths you still believe | myth: pull-ups only work your back; you need deadlifts for a big back | 426624828
+- 2026-11-14 | 11:00 IG story | incline-mistake-story | Gym mistake of the day: setting your incline bench too steep | teases reel 1 | 427803297
+- 2026-11-14 | 12:00 | chest-bench-mistakes | Your upper chest stays flat from 2 bench mistakes | mistake: incline too steep (>45°); lifting butt off the bench | 427803305
+- 2026-11-14 | 17:00 | straps-belts-worth | Half the gym calls straps and belts cheating | worth: lifting straps (worth it); lifting belt (worth it) | 427803315

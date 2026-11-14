@@ -40,7 +40,7 @@ text=f'''<div class="a h1" style="left:540px;top:400px;font-size:{CF.get('hookSi
 <div class="a h2" style="left:540px;top:400px" data-in="{C}" data-out="99">{LB['which']}</div>
 <div class="a" style="left:330px;top:620px" data-in="{st[13]+.1}" data-out="99" data-fx="pop"><div class="btn" id="c1">{LB['c']} 1</div></div>
 <div class="a" style="left:750px;top:620px" data-in="{st[13]+.25}" data-out="99" data-fx="pop"><div class="btn" id="c2">{LB['c']} 2</div></div>
-<div class="a sub" style="left:540px;top:740px;color:var(--t)" data-in="{st[13]+.5}" data-out="99" data-fx="pop">COMMENT 1 OR 2 👇</div>
+<div class="a sub" style="left:540px;top:535px;color:var(--t)" data-in="{st[13]+.5}" data-out="99" data-fx="pop">COMMENT 1 OR 2 👇</div>
 '''
 timing=f'''const DUR={DUR};
 const MY=[
