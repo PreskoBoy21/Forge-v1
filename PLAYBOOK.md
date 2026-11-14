@@ -69,7 +69,37 @@ Squat: cutting depth on heavy days; knees caving — Rows: using the lower back 
 - 2026-11-13: tryvolume: before/after flash 17x, bad-rep-then-fix 20x, muscle overlay 6x, 'age named against body goal' 17x. Pains used: 'curls every week, arms still small', 'is a big back just deadlifts?'.
 - 2026-11-14: tryvolume: bad-rep-then-fix 21x, before/after flash 17x, age-vs-goal 17x, muscle overlay 6x; 'This is not a good WARM UP' 130x outlier → warm-up mistakes reel next. Pains used: 'incline bench hits my shoulders', 'are straps/belts cheating?'.
 
-## STYLE (cloud quiz engine)
+## STYLE v3 — MOTION EXPLAINER (current, approved by Presko 2026-11-14)
+- Presko: "Now this is something, this is actually good." Old quiz/mascot style looked AI-made; real stock footage (Descript) was rejected ("slideshow of bad footage").
+- Look: off-black #0B0B0C + film grain, Anton headlines, Inter Tight captions, JetBrains Mono labels, ONE accent lime #C8F04A, red #FF4B4B only for "bad". No mascot, emojis, glow, grid.
+- Motion: mask/word/char reveals with expo easing, lime panel wipe, self-drawing lines/charts/rings, counters, camera punch only on hits, chapter counter "01 / 09".
+- Retention: claim on screen at frame 0, payoff slams on its word, a new scene every 2–4 s, 24–28 s total, CTA "Save this…".
+- Engine: engine/explainer_prep.py → engine/motion.py → sfx.py → music.py → render.py. Example: days/2026-11-14/example/cfg.json.
+
+## Topic bank (motion explainers — famous gym topics; check facts before use)
+- Why cutting carbs isn't why you lose fat (low-carb week 1 = water/glycogen)
+- How much protein you actually need (≈1.6 g/kg/day plateau in Morton 2018 meta-analysis)
+- What actually raises testosterone naturally (sleep: 1 week of 5 h ≈ −10–15% in Leproult 2011; body fat; lifting)
+- "T-boosters" don't work (most have no evidence)
+- Peptides hype vs evidence (BPC-157: mostly animal data, unapproved) — RISKS ONLY
+- What steroids actually do to your heart/fertility — RISKS ONLY
+- Bulking vs cutting vs recomp: which one fits you
+- Skinny fat: why it happens and the fix
+- Creatine: what it really does (and the water myth)
+- Why you're sore (DOMS isn't lactic acid; soreness ≠ growth)
+- Progressive overload explained in 25 s
+- Beginner gains: why year 1 is magic
+- Why your weight jumps 2 kg overnight (water, glycogen, salt)
+- Sleep is your best pre-workout (recovery numbers)
+- Cardio doesn't kill gains (concurrent training data)
+- Fasted cardio vs fed cardio (same fat loss over time)
+- Plateau? The 3 reasons you stopped growing
+- How muscle actually grows (tension, volume, recovery)
+- Alcohol and gains: what one night does
+
+Used motion topics: calorie deficit / crash dieting (example, 2026-11-14)
+
+## STYLE (old cloud quiz engine — RETIRED 2026-11-14, kept for reference)
 - engine/skel.html = quiz template in brand look: ink #0A0C10, volt #C6F24E, aqua #47D7E8, red #FF4D5E; mascot in volt tank; word-pop captions; FALSE stamp; countdown ring; 2-bar chart or verdict chip per myth.
 - Hook on screen ≤ 2 short lines at ~96–110 px (3 lines max) — check frame 0.3 s for overflow.
 - STYLE LOG (newest last):
