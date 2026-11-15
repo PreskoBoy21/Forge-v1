@@ -1,0 +1,128 @@
+{
+"lines": [
+"Short sleep is draining your testosterone.",
+"Here's why.",
+"Most of your daily testosterone is released while you sleep.",
+"Cut the night short... and you cut that release.",
+"In a Chicago study, ten young men slept five hours.",
+"After just one week...",
+"their testosterone dropped ten to fifteen percent.",
+"That's like aging ten to fifteen years.",
+"Seven to nine hours.",
+"Same bedtime.",
+"Train hard.",
+"Save this for your next late night."
+],
+"tempo": 1.06,
+"tail": 1.4,
+"scenes": [
+{
+"l": 0,
+"cap": false,
+"html": "<div class='e mono' style='left:540px;top:330px' data-l='0' data-fx='none'>NATURAL TESTOSTERONE</div><div class='e an' style='left:540px;top:600px;font-size:250px' data-l='0' data-fx='none'>SHORT<br>SLEEP</div><div class='e an' style='left:540px;top:930px;font-size:96px' data-l='0' data-fx='none'>IS DRAINING YOUR</div><div class='e an' style='left:540px;top:1120px;font-size:170px' data-l='0' data-dl='1.2' data-fx='slam'><span class='rd'>TESTOSTERONE</span></div><div class='e' style='left:540px;top:1240px' data-l='0' data-dl='1.4' data-fx='none'><svg width=\"820\" height=\"20\" viewBox=\"0 0 820 20\" style=\"overflow:visible\"><path class=\"draw\" data-l=\"0\" data-dl=\"1.4\" data-d=\".35\" d=\"M0 10 L820 10\" stroke=\"#FF4B4B\" stroke-width=\"14\" stroke-linecap=\"round\" /></svg></div>"
+},
+{
+"l": 1,
+"cap": false,
+"html": "<div class='e panel' data-l='1' data-dl='-.12'></div><div class='e an' style='left:540px;top:800px;font-size:250px;color:#0B0B0C' data-l='1' data-dl='0' data-fx='chars'>HERE'S<br>WHY</div>"
+},
+{
+"l": 2,
+"html": "<div class='e mono' style='left:540px;top:330px' data-l='2'>YOUR TESTOSTERONE \u00b7 24 H</div><div class='e an' style='left:540px;top:480px;font-size:130px' data-l='2' data-fx='words'>RELEASED IN</div><div class='e an' style='left:540px;top:640px;font-size:200px' data-l='2' data-dl='.25' data-fx='mask'>YOUR <span class='ac'>SLEEP</span></div><div class='e' style='left:540px;top:980px' data-l='2' data-fx='none'><svg width=\"860\" height=\"300\" viewBox=\"0 0 860 300\" style=\"overflow:visible\"><path class=\"draw\" data-l=\"2\" data-dl=\".4\" data-d=\".5\" d=\"M10 290 L850 290\" fill=\"none\" stroke=\"#3A3A3E\" stroke-width=\"4\" /><path class=\"draw\" data-l=\"2\" data-dl=\".7\" data-d=\"1.6\" d=\"M10 250 C 120 240, 220 120, 360 40 C 480 60, 620 170, 850 220\" fill=\"none\" stroke=\"#C8F04A\" stroke-width=\"12\" stroke-linecap=\"round\" /></svg></div><div class='e mono' style='left:250px;top:1180px;color:#C8F04A' data-l='2' data-dl='1.0' data-fx='fade'>SLEEP</div><div class='e mono' style='left:760px;top:1180px' data-l='2' data-dl='1.6' data-fx='fade'>DAY</div>"
+},
+{
+"l": 3,
+"tint": "red",
+"html": "<div class='e an' style='left:540px;top:470px;font-size:160px' data-l='3' data-fx='words'>CUT IT <span class='rd'>SHORT?</span></div><div class='e' style='left:540px;top:820px;width:880px;text-align:left' data-l='3' data-dl='.3' data-fx='fade'><div class='mono' style='margin-bottom:14px;color:#F2F0EB'>NIGHTLY RELEASE</div><div class='track' style='height:120px'><div class='grow' data-w='55' data-from='100' data-d='1.0' data-l='3' data-dl='1.1' style='background:#FF4B4B'></div></div></div><div class='e an rd' style='left:540px;top:1110px;font-size:170px' data-l='3' data-dl='1.2' data-fx='slam'>LESS RELEASE</div>"
+},
+{
+"l": 4,
+"html": "<div class='e mono' style='left:540px;top:330px' data-l='4'>STUDY \u00b7 UNIV. OF CHICAGO \u00b7 2011</div><div class='e an' style='left:540px;top:470px;font-size:130px' data-l='4' data-fx='words'>10 YOUNG MEN</div><div class='e' style='left:540px;top:900px' data-l='4' data-fx='none'><svg width=\"640\" height=\"640\" viewBox=\"0 0 640 640\" style=\"overflow:visible\"><circle class=\"draw\" data-l=\"4\" data-dl=\".05\" data-d=\".8\" cx=\"320\" cy=\"320\" r=\"300\" fill=\"none\" stroke=\"#2A2A2D\" stroke-width=\"4\" /><circle class=\"draw\" data-l=\"4\" data-dl=\"0.9\" data-d=\"1.0\" cx=\"320\" cy=\"320\" r=\"300\" fill=\"none\" stroke=\"#FF4B4B\" stroke-width=\"10\" stroke-linecap=\"round\" transform=\"rotate(-90 320 320)\" /></svg></div><div class='e an' style='left:540px;top:890px;font-size:260px' data-l='4' data-dl='.9' data-fx='pop'><span class='count rd' data-to='5'>0</span></div><div class='e mono' style='left:540px;top:1060px;font-size:40px;color:#F2F0EB' data-l='4' data-dl='1.2' data-fx='fade'>HOURS A NIGHT</div>"
+},
+{
+"l": 5,
+"html": "<div class='e an' style='left:540px;top:430px;font-size:170px' data-l='5' data-fx='words'>ONE <span class='ac'>WEEK</span></div><div class='e' style='left:540px;top:660px;display:flex;gap:22px' data-l='5' data-dl='.05' data-fx='fade'><div style='text-align:center'><div class='box'><div class='fill' data-l='5' data-dl='0.10'></div></div><div class='mono' style='font-size:22px;margin-top:12px'>MO</div></div><div style='text-align:center'><div class='box'><div class='fill' data-l='5' data-dl='0.23'></div></div><div class='mono' style='font-size:22px;margin-top:12px'>TU</div></div><div style='text-align:center'><div class='box'><div class='fill' data-l='5' data-dl='0.36'></div></div><div class='mono' style='font-size:22px;margin-top:12px'>WE</div></div><div style='text-align:center'><div class='box'><div class='fill' data-l='5' data-dl='0.49'></div></div><div class='mono' style='font-size:22px;margin-top:12px'>TH</div></div><div style='text-align:center'><div class='box'><div class='fill' data-l='5' data-dl='0.62'></div></div><div class='mono' style='font-size:22px;margin-top:12px'>FR</div></div><div style='text-align:center'><div class='box'><div class='fill' data-l='5' data-dl='0.75'></div></div><div class='mono' style='font-size:22px;margin-top:12px'>SA</div></div><div style='text-align:center'><div class='box'><div class='fill' data-l='5' data-dl='0.88'></div></div><div class='mono' style='font-size:22px;margin-top:12px'>SU</div></div></div><div class='e' style='left:540px;top:920px;width:880px;text-align:left' data-l='6' data-fx='fade'><div class='mono' style='margin:30px 0 14px;color:#F2F0EB'>TESTOSTERONE <span class='mu' style='float:right'>DAYTIME</span></div><div class='track' style='height:96px'><div class='grow' data-w='87' data-from='100' data-d='1.0' data-l='6' data-dl='0.9' style='background:#FF4B4B'></div></div></div><div class='e an rd' style='left:540px;top:1160px;font-size:200px' data-l='6' data-dl='1.3' data-fx='slam'>\u221210\u201315%</div>"
+},
+{
+"l": 7,
+"html": "<div class='e mono' style='left:540px;top:330px' data-l='7'>SAME DROP AS</div><div class='e an' style='left:540px;top:500px;font-size:180px' data-l='7' data-fx='words'>AGING</div><div class='e an ac' style='left:540px;top:780px;font-size:280px' data-l='7' data-dl='.5' data-fx='slam'>10\u201315</div><div class='e an' style='left:540px;top:1010px;font-size:130px' data-l='7' data-dl='.8' data-fx='words'>YEARS</div>"
+},
+{
+"l": 8,
+"cap": false,
+"html": "<div class='e mono' style='left:540px;top:380px' data-l='8'>DO THIS INSTEAD</div><div class='e an' style='left:540px;top:620px;font-size:150px' data-l='8' data-fx='words' data-dim='9'><span class='ac'>7\u20139</span> HOURS.</div><div class='e an' style='left:540px;top:840px;font-size:150px' data-l='9' data-fx='words' data-dim='10'>SAME <span class='ac'>BEDTIME.</span></div><div class='e an' style='left:540px;top:1060px;font-size:150px' data-l='10' data-fx='words'>TRAIN <span class='ac'>HARD.</span></div>"
+},
+{
+"l": 11,
+"cap": false,
+"html": "<div class='e' style='left:540px;top:470px' data-l='11' data-fx='none'><svg width=\"150\" height=\"190\" viewBox=\"0 0 150 190\" style=\"overflow:visible\"><path class=\"draw\" data-l=\"11\" data-d=\".6\" d=\"M10 10 L140 10 L140 180 L75 130 L10 180 Z\" fill=\"none\" stroke=\"#C8F04A\" stroke-width=\"10\" stroke-linejoin=\"round\" /></svg></div><div class='e an ac' style='left:540px;top:760px;font-size:250px' data-l='11' data-fx='chars'>SAVE THIS</div><div class='e an' style='left:540px;top:950px;font-size:86px' data-l='11' data-dl='.35' data-fx='words'>FOR YOUR NEXT LATE NIGHT</div><div class='e mono' style='left:540px;top:1240px;font-size:30px;color:#F2F0EB;border:2px solid #3A3A3E;padding:20px 34px;border-radius:999px' data-l='11' data-dl='.8' data-fx='fade'>FORGE \u2014 YOUR AI GYM COACH \u00b7 LINK IN BIO</div>"
+}
+],
+"hits": [
+[
+0,
+1.2
+],
+[
+1,
+0
+],
+[
+3,
+1.2
+],
+[
+6,
+1.3
+],
+[
+7,
+0.5
+],
+[
+8,
+0
+],
+[
+9,
+0
+],
+[
+10,
+0
+]
+],
+"ticks": [
+[
+5,
+0.1
+],
+[
+5,
+0.23
+],
+[
+5,
+0.36
+],
+[
+5,
+0.49
+],
+[
+5,
+0.62
+],
+[
+5,
+0.75
+],
+[
+5,
+0.88
+]
+],
+"dings": [
+4
+]
+}

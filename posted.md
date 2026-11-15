@@ -38,3 +38,6 @@
 - 2026-11-14 | 11:00 IG story | incline-mistake-story | Gym mistake of the day: setting your incline bench too steep | teases reel 1 | 427803297
 - 2026-11-14 | 12:00 | chest-bench-mistakes | Your upper chest stays flat from 2 bench mistakes | mistake: incline too steep (>45°); lifting butt off the bench | 427803305
 - 2026-11-14 | 17:00 | straps-belts-worth | Half the gym calls straps and belts cheating | worth: lifting straps (worth it); lifting belt (worth it) | 427803315
+- 2026-11-15 | 11:00 IG story | creatine-bloat-story | Will creatine make you look bloated? (YES / NO) | teases reel 1 | 428664053
+- 2026-11-15 | 12:00 | creatine-water-explainer | Creatine doesn't bloat you. It fills your muscles. | motion v3: creatine water myth, 3 g/day ~4 wk (Hultman 1996), ~1 kg extra lean mass (Delpino 2022, 35 RCTs) | 428664068
+- 2026-11-15 | 17:00 | sleep-testosterone-explainer | Short sleep is draining your testosterone. | motion v3: 1 week of 5 h sleep = −10–15% daytime T (Leproult & Van Cauter 2011, JAMA) | 428664089

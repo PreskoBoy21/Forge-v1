@@ -7,6 +7,8 @@
 - Presko's rules: TikTok `isAigc: false`, IG `isAiGenerated: false`; captions have EXACTLY 3 hashtags, one always #gym.
 
 ## What works (data, newest first)
+- 2026-11-15 17:00 is NOT dead: straps & belts 'cheating' reel = 2.1k IG (beat 12:00's 1.8k) + 910 TT (best TikTok reel since 11-08), lowest IG skip (25.9%), 13.7 s avg watch. The 2-day 17:00 slump was topic (shoulder swap, back myths), not slot → keep 17:00; debate/'is it cheating' claims work on both apps.
+- 2026-11-15 First style-v3 motion explainers shipped: creatine water myth (12:00, 26.5 s) + sleep & testosterone (17:00, 25.4 s) → measure tomorrow vs quiz baseline (IG ~1.5–2.1k, TT ~700). Note: grain makes the mp4 ~50 MB — fine for GitHub raw/Metricool so far.
 - 2026-11-14 17:00 IG reel collapsed 2 days running (shoulder swap 192, back myths 302) while 12:00 held ~1.5k (curl mistakes 1.6k, chest versus 1.5k). Back myths had a normal 38% skip → it's reach, not the hook. Put the strongest reel at 12:00; if 17:00 stays <500 on IG for a 3rd day, ask Presko about moving Reel 2's slot.
 - 2026-11-14 Shipped chest mistakes (incline too steep + butt off bench) at 12:00 and the first WORTH reel (straps + belt, 'cheating?' opener) at 17:00 → measure tomorrow.
 - 2026-11-13 SWAP + question opener flopped: 'Shoulders not getting any wider?' = 162 IG views / 58% skip, 526 TT (worst in 14 d). Chest versus held 1.5k IG. → pause swap; open on a bold body-part claim, not a question. Myth + mistake still hold IG ~2.1k.
@@ -53,7 +55,6 @@ Squat: cutting depth on heavy days; knees caving — Rows: using the lower back 
 - "You need to bench to build a big chest" (dips/press variations work) — "Abs are made in the kitchen only" (both matter) — "High reps for definition, low reps for size" (both build muscle when hard; Schoenfeld 2017) — "You can't train the same muscle 2 days in a row" — "Bigger forearms need forearm-only training" — "Warm-up sets are a waste" — "Calves are pure genetics" (they grow with hard, full-range training) — "Wide grip = wider back" (CHECKED 2026-11-10: EMG evidence mixed, wide grip slightly higher lat activity in Andersen 2014 → do NOT use as a myth) — "You must lift fast to build power for size" — "Training to failure every set is required" (used) — "Leg day once a week is enough for big legs" (2x/week usually better).
 
 ## TREND LOG (keep ~20, newest last)
-- 2026-11-03: "[A] vs [B]" hooks invite side-picking in comments.
 - 2026-11-04: Specific numbers + timeframes are the #1 fitness-hook win; open mid-action.
 - 2026-11-05: "Take-first" hot-take hooks: state a debatable claim at frame 0.
 - 2026-11-05: Withheld reveal: show both options first, crown the winner after sec 3.
@@ -68,6 +69,7 @@ Squat: cutting depth on heavy days; knees caving — Rows: using the lower back 
 - 2026-11-12: tryvolume: before/after flash 16x, bad-rep-then-fix 20x, muscle-diagram overlay 7x (gap: we never show the muscle hit). Pains used: 'how often should I train chest?', 'shoulders won't get wider'.
 - 2026-11-13: tryvolume: before/after flash 17x, bad-rep-then-fix 20x, muscle overlay 6x, 'age named against body goal' 17x. Pains used: 'curls every week, arms still small', 'is a big back just deadlifts?'.
 - 2026-11-14: tryvolume: bad-rep-then-fix 21x, before/after flash 17x, age-vs-goal 17x, muscle overlay 6x; 'This is not a good WARM UP' 130x outlier → warm-up mistakes reel next. Pains used: 'incline bench hits my shoulders', 'are straps/belts cheating?'.
+- 2026-11-15: Own data: 'is it cheating?' debate opener beat every other reel on TT + IG; creatine 'water weight' fear and 'natural T' via sleep are top young-lifter questions. Pains used: 'will creatine make me look bloated?', 'how do I raise testosterone naturally?'.
 
 ## STYLE v3 — MOTION EXPLAINER (current, approved by Presko 2026-11-14)
 - Presko: "Now this is something, this is actually good." Old quiz/mascot style looked AI-made; real stock footage (Descript) was rejected ("slideshow of bad footage").
@@ -79,13 +81,11 @@ Squat: cutting depth on heavy days; knees caving — Rows: using the lower back 
 ## Topic bank (motion explainers — famous gym topics; check facts before use)
 - Why cutting carbs isn't why you lose fat (low-carb week 1 = water/glycogen)
 - How much protein you actually need (≈1.6 g/kg/day plateau in Morton 2018 meta-analysis)
-- What actually raises testosterone naturally (sleep: 1 week of 5 h ≈ −10–15% in Leproult 2011; body fat; lifting)
 - "T-boosters" don't work (most have no evidence)
 - Peptides hype vs evidence (BPC-157: mostly animal data, unapproved) — RISKS ONLY
 - What steroids actually do to your heart/fertility — RISKS ONLY
 - Bulking vs cutting vs recomp: which one fits you
 - Skinny fat: why it happens and the fix
-- Creatine: what it really does (and the water myth)
 - Why you're sore (DOMS isn't lactic acid; soreness ≠ growth)
 - Progressive overload explained in 25 s
 - Beginner gains: why year 1 is magic
@@ -96,8 +96,10 @@ Squat: cutting depth on heavy days; knees caving — Rows: using the lower back 
 - Plateau? The 3 reasons you stopped growing
 - How muscle actually grows (tension, volume, recovery)
 - Alcohol and gains: what one night does
+- Body fat and testosterone: what losing fat does (no sleep angle — sleep used 2026-11-15)
+- Protein timing vs daily total (total matters most)
 
-Used motion topics: calorie deficit / crash dieting (example, 2026-11-14)
+Used motion topics: calorie deficit / crash dieting (example, 2026-11-14); creatine water myth + 3 g/day saturation + ~1 kg extra lean mass (Hultman 1996, Delpino 2022) (2026-11-15); sleep & testosterone, 1 week of 5 h = −10–15% (Leproult 2011) (2026-11-15)
 
 ## STYLE (old cloud quiz engine — RETIRED 2026-11-14, kept for reference)
 - engine/skel.html = quiz template in brand look: ink #0A0C10, volt #C6F24E, aqua #47D7E8, red #FF4D5E; mascot in volt tank; word-pop captions; FALSE stamp; countdown ring; 2-bar chart or verdict chip per myth.

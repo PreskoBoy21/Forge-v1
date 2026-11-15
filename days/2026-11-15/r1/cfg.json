@@ -1,0 +1,174 @@
+{
+"lines": [
+"Creatine doesn't bloat you. It fills your muscles.",
+"Here's why.",
+"Muscles store creatine for hard, fast efforts.",
+"Three grams a day tops them up in a month.",
+"It pulls water into the muscle... not under your skin.",
+"That's the early jump on the scale.",
+"Across thirty-five trials...",
+"creatine plus lifting built about a kilo more lean mass than lifting alone.",
+"Three to five grams.",
+"Every day.",
+"Keep lifting.",
+"Save this before your next supplement order."
+],
+"tempo": 1.06,
+"tail": 1.4,
+"scenes": [
+{
+"l": 0,
+"cap": false,
+"html": "<div class='e mono' style='left:540px;top:330px' data-l='0' data-fx='none'>THE TRUTH ABOUT CREATINE</div><div class='e an' style='left:540px;top:560px;font-size:250px' data-l='0' data-fx='none'>CREATINE</div><div class='e an' style='left:540px;top:780px;font-size:120px' data-l='0' data-fx='none'>DOESN'T <span class='rd'>BLOAT</span> YOU</div><div class='e an' style='left:540px;top:960px;font-size:96px' data-l='0' data-dl='1.7' data-fx='words'>IT FILLS YOUR</div><div class='e an' style='left:540px;top:1150px;font-size:230px' data-l='0' data-dl='2.25' data-fx='slam'><span class='ac'>MUSCLES</span></div><div class='e' style='left:540px;top:1290px' data-l='0' data-dl='2.45' data-fx='none'><svg width=\"640\" height=\"20\" viewBox=\"0 0 640 20\" style=\"overflow:visible\"><path class=\"draw\" data-l=\"0\" data-dl=\"2.45\" data-d=\".35\" d=\"M0 10 L640 10\" stroke=\"#C8F04A\" stroke-width=\"14\" stroke-linecap=\"round\" /></svg></div>"
+},
+{
+"l": 1,
+"cap": false,
+"html": "<div class='e panel' data-l='1' data-dl='-.12'></div><div class='e an' style='left:540px;top:800px;font-size:250px;color:#0B0B0C' data-l='1' data-dl='0' data-fx='chars'>HERE'S<br>WHY</div>"
+},
+{
+"l": 2,
+"html": "<div class='e mono' style='left:540px;top:330px' data-l='2'>WHERE CREATINE GOES</div><div class='e an' style='left:540px;top:480px;font-size:150px' data-l='2' data-fx='words'>STORED IN</div><div class='e an ac' style='left:540px;top:660px;font-size:220px' data-l='2' data-dl='.3' data-fx='mask'>MUSCLE</div><div class='e' style='left:540px;top:930px;width:880px;text-align:left' data-l='2' data-dl='.6' data-fx='fade'><div class='mono' style='margin:30px 0 14px;color:#F2F0EB'>FAST ENERGY STORE <span class='mu' style='float:right'>PARTLY FULL</span></div><div class='track'><div class='grow' data-w='55' data-l='2' data-dl='0.8' style='background:#F2F0EB'></div></div></div><div class='e mono' style='left:540px;top:1170px;color:#F2F0EB;border:2px solid #3A3A3E;padding:16px 28px;border-radius:999px' data-l='2' data-dl='1.7' data-fx='pop'>HEAVY SETS \u00b7 SPRINTS \u00b7 JUMPS</div>"
+},
+{
+"l": 3,
+"html": "<div class='e an' style='left:540px;top:460px;font-size:180px' data-l='3' data-fx='words'><span class='ac'>3 G</span> A DAY</div><div class='e' style='left:540px;top:720px;display:flex;gap:40px' data-l='3' data-dl='.25' data-fx='fade'><div style='text-align:center'><div class='box'><div class='fill' data-l='3' data-dl='0.35'></div></div><div class='mono' style='font-size:22px;margin-top:12px'>WK 1</div></div><div style='text-align:center'><div class='box'><div class='fill' data-l='3' data-dl='0.57'></div></div><div class='mono' style='font-size:22px;margin-top:12px'>WK 2</div></div><div style='text-align:center'><div class='box'><div class='fill' data-l='3' data-dl='0.79'></div></div><div class='mono' style='font-size:22px;margin-top:12px'>WK 3</div></div><div style='text-align:center'><div class='box'><div class='fill' data-l='3' data-dl='1.01'></div></div><div class='mono' style='font-size:22px;margin-top:12px'>WK 4</div></div></div><div class='e an' style='left:540px;top:1010px;font-size:200px' data-l='3' data-dl='1.35' data-fx='slam'>= <span class='ac'>FULL</span></div><div class='e mono' style='left:540px;top:1170px' data-l='3' data-dl='1.6' data-fx='fade'>MUSCLE STORES \u00b7 ~28 DAYS</div>"
+},
+{
+"l": 4,
+"html": "<div class='e mono' style='left:540px;top:330px' data-l='4'>WHERE THE WATER GOES</div><div class='e an' style='left:540px;top:500px;font-size:180px' data-l='4' data-fx='words'>INTO <span class='ac'>MUSCLE</span></div><div class='e' style='left:540px;top:850px;width:880px;text-align:left' data-l='4' data-dl='.3' data-fx='fade'><div class='mono' style='margin:30px 0 14px;color:#F2F0EB'>INSIDE THE MUSCLE <span class='mu' style='float:right'>\u2191</span></div><div class='track'><div class='grow' data-w='100' data-l='4' data-dl='0.5' style='background:#C8F04A'></div></div><div class='mono' style='margin:30px 0 14px;color:#F2F0EB'>UNDER YOUR SKIN <span class='mu' style='float:right'>\u2014</span></div><div class='track'><div class='grow' data-w='3' data-l='4' data-dl='2.0' style='background:#4A4A4F'></div></div></div><div class='e an' style='left:540px;top:1180px;font-size:150px' data-l='4' data-dl='2.2' data-fx='slam'><span class='mu'>NOT</span> BLOAT</div>"
+},
+{
+"l": 5,
+"html": "<div class='e mono' style='left:540px;top:330px' data-l='5'>THE SCALE \u00b7 WEEK ONE</div><div class='e' style='left:540px;top:620px' data-l='5' data-fx='none'><svg width=\"200\" height=\"300\" viewBox=\"0 0 200 300\" style=\"overflow:visible\"><path class=\"draw\" data-l=\"5\" data-dl=\".05\" data-d=\".5\" d=\"M100 290 L100 20 M30 90 L100 20 L170 90\" fill=\"none\" stroke=\"#F2F0EB\" stroke-width=\"16\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /></svg></div><div class='e an' style='left:540px;top:900px;font-size:150px' data-l='5' data-dl='.2' data-fx='words'>EARLY JUMP</div><div class='e an' style='left:540px;top:1110px;font-size:200px' data-l='5' data-dl='.8' data-fx='slam'>= <span class='ac'>WATER</span></div>"
+},
+{
+"l": 6,
+"cap": false,
+"html": "<div class='e mono' style='left:540px;top:330px' data-l='6'>META-ANALYSIS \u00b7 2022</div><div class='e' style='left:540px;top:800px' data-l='6' data-fx='none'><svg width=\"640\" height=\"640\" viewBox=\"0 0 640 640\" style=\"overflow:visible\"><circle class=\"draw\" data-l=\"6\" data-dl=\".05\" data-d=\".8\" cx=\"320\" cy=\"320\" r=\"300\" fill=\"none\" stroke=\"#2A2A2D\" stroke-width=\"4\" /><circle class=\"draw\" data-l=\"6\" data-dl=\"0.3\" data-d=\"1.0\" cx=\"320\" cy=\"320\" r=\"300\" fill=\"none\" stroke=\"#C8F04A\" stroke-width=\"10\" stroke-linecap=\"round\" transform=\"rotate(-90 320 320)\" /></svg></div><div class='e an' style='left:540px;top:790px;font-size:260px' data-l='6' data-dl='.25' data-fx='pop'><span class='count ac' data-to='35'>0</span></div><div class='e mono' style='left:540px;top:960px;font-size:40px;color:#F2F0EB' data-l='6' data-dl='.5' data-fx='fade'>TRIALS</div>"
+},
+{
+"l": 7,
+"html": "<div class='e mono' style='left:540px;top:330px' data-l='7'>LEAN MASS \u00b7 LIFTING + CREATINE</div><div class='e an' style='left:540px;top:450px;font-size:130px' data-l='7' data-fx='words'>WITH <span class='mu'>VS</span> WITHOUT</div><div class='e' style='left:540px;top:880px' data-l='7' data-fx='none'><svg width=\"860\" height=\"520\" viewBox=\"0 0 860 520\" style=\"overflow:visible\"><path class=\"draw\" data-l=\"7\" data-dl=\".2\" data-d=\".5\" d=\"M10 10 L10 510 L850 510\" fill=\"none\" stroke=\"#3A3A3E\" stroke-width=\"4\" /><path class=\"draw\" data-l=\"7\" data-dl=\".5\" data-d=\"1.2\" d=\"M10 440 C 250 400, 500 230, 800 90\" fill=\"none\" stroke=\"#C8F04A\" stroke-width=\"12\" stroke-linecap=\"round\" /><path class=\"draw\" data-l=\"7\" data-dl=\"2.4\" data-d=\".9\" d=\"M10 440 C 250 420, 500 320, 800 250\" fill=\"none\" stroke=\"#6A6A70\" stroke-width=\"12\" stroke-linecap=\"round\" /></svg></div><div class='e an ac' style='left:770px;top:640px;font-size:72px' data-l='7' data-dl='1.6' data-fx='pop'>\u2248 +1 KG</div><div class='e mono' style='left:290px;top:1200px;color:#C8F04A' data-l='7' data-dl='.6' data-fx='fade'>\u2014 WITH CREATINE</div><div class='e mono' style='left:790px;top:1200px' data-l='7' data-dl='2.5' data-fx='fade'>\u2014 LIFTING ONLY</div>"
+},
+{
+"l": 8,
+"cap": false,
+"html": "<div class='e mono' style='left:540px;top:380px' data-l='8'>DO THIS INSTEAD</div><div class='e an' style='left:540px;top:620px;font-size:180px' data-l='8' data-fx='words' data-dim='9'><span class='ac'>3\u20135 G.</span></div><div class='e an' style='left:540px;top:840px;font-size:180px' data-l='9' data-fx='words' data-dim='10'>EVERY <span class='ac'>DAY.</span></div><div class='e an' style='left:540px;top:1060px;font-size:180px' data-l='10' data-fx='words'>KEEP <span class='ac'>LIFTING.</span></div>"
+},
+{
+"l": 11,
+"cap": false,
+"html": "<div class='e' style='left:540px;top:470px' data-l='11' data-fx='none'><svg width=\"150\" height=\"190\" viewBox=\"0 0 150 190\" style=\"overflow:visible\"><path class=\"draw\" data-l=\"11\" data-d=\".6\" d=\"M10 10 L140 10 L140 180 L75 130 L10 180 Z\" fill=\"none\" stroke=\"#C8F04A\" stroke-width=\"10\" stroke-linejoin=\"round\" /></svg></div><div class='e an ac' style='left:540px;top:760px;font-size:250px' data-l='11' data-fx='chars'>SAVE THIS</div><div class='e an' style='left:540px;top:950px;font-size:86px' data-l='11' data-dl='.35' data-fx='words'>BEFORE YOUR NEXT ORDER</div><div class='e mono' style='left:540px;top:1240px;font-size:30px;color:#F2F0EB;border:2px solid #3A3A3E;padding:20px 34px;border-radius:999px' data-l='11' data-dl='.8' data-fx='fade'>FORGE \u2014 YOUR AI GYM COACH \u00b7 LINK IN BIO</div>"
+}
+],
+"segs": [
+[
+0,
+2.98
+],
+[
+3.31,
+3.78
+],
+[
+4.25,
+7.06
+],
+[
+7.51,
+9.49
+],
+[
+9.85,
+12.96
+],
+[
+13.37,
+14.8
+],
+[
+15.25,
+16.75
+],
+[
+16.97,
+20.82
+],
+[
+21.37,
+22.3
+],
+[
+22.63,
+23.18
+],
+[
+23.63,
+24.22
+],
+[
+24.6,
+26.46
+]
+],
+"hits": [
+[
+0,
+2.25
+],
+[
+1,
+0
+],
+[
+3,
+1.35
+],
+[
+4,
+2.2
+],
+[
+5,
+0.8
+],
+[
+7,
+1.6
+],
+[
+8,
+0
+],
+[
+9,
+0
+],
+[
+10,
+0
+]
+],
+"ticks": [
+[
+3,
+0.35
+],
+[
+3,
+0.57
+],
+[
+3,
+0.79
+],
+[
+3,
+1.01
+]
+],
+"dings": [
+6
+]
+}
