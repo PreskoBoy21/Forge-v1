@@ -41,3 +41,6 @@
 - 2026-11-15 | 11:00 IG story | creatine-bloat-story | Will creatine make you look bloated? (YES / NO) | teases reel 1 | 428664053
 - 2026-11-15 | 12:00 | creatine-water-explainer | Creatine doesn't bloat you. It fills your muscles. | motion v3: creatine water myth, 3 g/day ~4 wk (Hultman 1996), ~1 kg extra lean mass (Delpino 2022, 35 RCTs) | 428664068
 - 2026-11-15 | 17:00 | sleep-testosterone-explainer | Short sleep is draining your testosterone. | motion v3: 1 week of 5 h sleep = −10–15% daytime T (Leproult & Van Cauter 2011, JAMA) | 428664089
+- 2026-11-16 | 11:00 IG story | overload-reps-story | Do you have to add weight to the bar to grow? (YES / NO) | teases reel 1 | 429691447
+- 2026-11-16 | 12:00 | reps-vs-weight-explainer | Adding reps builds muscle like adding weight. | motion v3: progressive overload, rep vs load progression similar growth, 38 trained lifters 8 wk (Plotkin 2022, PeerJ) | 429691505
+- 2026-11-16 | 17:00 | protein-ceiling-explainer | Most lifters don't need 200 grams of protein. | motion v3: ~1.6 g/kg/day breakpoint, upper CI 2.2 (Morton 2018, 49 RCTs, 1,863 people) | 429691551

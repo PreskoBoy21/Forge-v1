@@ -1,0 +1,110 @@
+{
+ "lines": [
+  "Adding reps builds muscle like adding weight.",
+  "Here's why.",
+  "Muscle grows when you make it work harder.",
+  "Adding weight is one way.",
+  "Adding reps is another.",
+  "Same weight... eight reps, then ten, then twelve.",
+  "Thirty-eight trained lifters tested both for eight weeks.",
+  "One group added weight.",
+  "One group added reps.",
+  "Their legs grew about the same.",
+  "Track every set.",
+  "Beat last week.",
+  "Weight or reps.",
+  "Save this for your next gym day."
+ ],
+ "tempo": 1.06,
+ "tail": 1.4,
+ "scenes": [
+  {
+   "l": 0,
+   "cap": false,
+   "html": "<div class='e mono' style='left:540px;top:330px' data-l='0' data-fx='none'>PROGRESSIVE OVERLOAD</div><div class='e an' style='left:540px;top:590px;font-size:280px' data-l='0' data-fx='none'><span class='ac'>+ REPS</span></div><div class='e an' style='left:540px;top:820px;font-size:130px' data-l='0' data-fx='none'>BUILD MUSCLE</div><div class='e an' style='left:540px;top:975px;font-size:96px' data-l='0' data-dl='1.2' data-fx='words'>LIKE</div><div class='e an' style='left:540px;top:1150px;font-size:230px' data-l='0' data-dl='1.55' data-fx='slam'>+ WEIGHT</div><div class='e' style='left:540px;top:1290px' data-l='0' data-dl='1.8' data-fx='none'><svg width=\"640\" height=\"20\" viewBox=\"0 0 640 20\" style=\"overflow:visible\"><path class=\"draw\" data-l=\"0\" data-dl=\"1.8\" data-d=\".35\" d=\"M0 10 L640 10\" stroke=\"#C8F04A\" stroke-width=\"14\" stroke-linecap=\"round\" /></svg></div>"
+  },
+  {
+   "l": 1,
+   "cap": false,
+   "html": "<div class='e panel' data-l='1' data-dl='-.12'></div><div class='e an' style='left:540px;top:800px;font-size:250px;color:#0B0B0C' data-l='1' data-dl='0' data-fx='chars'>HERE'S<br>WHY</div>"
+  },
+  {
+   "l": 2,
+   "html": "<div class='e mono' style='left:540px;top:330px' data-l='2'>HOW MUSCLE GROWS</div><div class='e an' style='left:540px;top:490px;font-size:170px' data-l='2' data-fx='words'>MORE <span class='ac'>WORK</span></div><div class='e' style='left:540px;top:900px' data-l='2' data-fx='none'><svg width=\"760\" height=\"420\" viewBox=\"0 0 760 420\" style=\"overflow:visible\"><path class=\"draw\" data-l=\"2\" data-dl=\".3\" data-d=\"1.3\" d=\"M10 410 L10 330 L190 330 L190 250 L370 250 L370 170 L550 170 L550 90 L750 90\" fill=\"none\" stroke=\"#C8F04A\" stroke-width=\"12\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /></svg></div><div class='e mono' style='left:540px;top:1180px;color:#F2F0EB' data-l='2' data-dl='1.3' data-fx='fade'>A LITTLE MORE EVERY WEEK</div>"
+  },
+  {
+   "l": 3,
+   "html": "<div class='e mono' style='left:540px;top:330px' data-l='3'>TWO WAYS TO DO IT</div><div class='e mono' style='left:540px;top:520px' data-l='3' data-fx='fade'>WAY 01</div><div class='e an' style='left:540px;top:650px;font-size:170px' data-l='3' data-dl='.1' data-fx='mask'>ADD WEIGHT</div><div class='e mono' style='left:540px;top:860px' data-l='4' data-fx='fade'>WAY 02</div><div class='e an ac' style='left:540px;top:990px;font-size:170px' data-l='4' data-dl='.25' data-fx='slam'>ADD REPS</div>"
+  },
+  {
+   "l": 5,
+   "html": "<div class='e an' style='left:540px;top:470px;font-size:150px' data-l='5' data-fx='words'>SAME <span class='ac'>WEIGHT</span></div><div class='e' style='left:540px;top:900px;width:880px;text-align:left' data-l='5' data-dl='.3' data-fx='fade'><div class='mono' style='margin:0px 0 14px;color:#F2F0EB'>WEEK 1 <span class='mu' style='float:right'>8 REPS</span></div><div class='track'><div class='grow' data-w='66' data-l='5' data-dl='0.95' style='background:#4A4A4F'></div></div><div class='mono' style='margin:40px 0 14px;color:#F2F0EB'>WEEK 2 <span class='mu' style='float:right'>10 REPS</span></div><div class='track'><div class='grow' data-w='83' data-l='5' data-dl='1.9' style='background:#8A8A90'></div></div><div class='mono' style='margin:40px 0 14px;color:#F2F0EB'>WEEK 3 <span class='mu' style='float:right'>12 REPS</span></div><div class='track'><div class='grow' data-w='100' data-l='5' data-dl='2.5' style='background:#C8F04A'></div></div></div>"
+  },
+  {
+   "l": 6,
+   "cap": false,
+   "html": "<div class='e mono' style='left:540px;top:330px' data-l='6'>STUDY \u00b7 PEERJ \u00b7 2022</div><div class='e' style='left:540px;top:800px' data-l='6' data-fx='none'><svg width=\"640\" height=\"640\" viewBox=\"0 0 640 640\" style=\"overflow:visible\"><circle class=\"draw\" data-l=\"6\" data-dl=\".05\" data-d=\".8\" cx=\"320\" cy=\"320\" r=\"300\" fill=\"none\" stroke=\"#2A2A2D\" stroke-width=\"4\" /><circle class=\"draw\" data-l=\"6\" data-dl=\"0.25\" data-d=\"1.0\" cx=\"320\" cy=\"320\" r=\"300\" fill=\"none\" stroke=\"#C8F04A\" stroke-width=\"10\" stroke-linecap=\"round\" transform=\"rotate(-90 320 320)\" /></svg></div><div class='e an' style='left:540px;top:790px;font-size:260px' data-l='6' data-dl='0.25' data-fx='pop'><span class='count ac' data-to='38'>0</span></div><div class='e mono' style='left:540px;top:960px;font-size:40px;color:#F2F0EB' data-l='6' data-dl='0.5' data-fx='fade'>TRAINED LIFTERS</div><div class='e an' style='left:540px;top:1230px;font-size:130px' data-l='6' data-dl='1.9' data-fx='pop'><span class='ac'>8</span> WEEKS</div>"
+  },
+  {
+   "l": 7,
+   "html": "<div class='e mono' style='left:540px;top:330px' data-l='7'>LEG MUSCLE GROWTH \u00b7 8 WEEKS</div><div class='e an' style='left:540px;top:480px;font-size:130px' data-l='7' data-fx='words'>WEIGHT <span class='mu'>VS</span> REPS</div><div class='e' style='left:540px;top:820px;width:880px;text-align:left' data-l='7' data-dl='.2' data-fx='fade'><div class='mono' style='margin:0px 0 14px;color:#F2F0EB'>ADDED WEIGHT <span class='mu' style='float:right'></span></div><div class='track' style='height:90px'><div class='grow' data-w='96' data-l='7' data-dl='0.35' style='background:#F2F0EB'></div></div><div class='mono' style='margin:40px 0 14px;color:#F2F0EB'>ADDED REPS <span class='mu' style='float:right'></span></div><div class='track' style='height:90px'><div class='grow' data-w='97' data-l='8' data-dl='0.3' style='background:#C8F04A'></div></div></div><div class='e an' style='left:540px;top:1150px;font-size:190px' data-l='9' data-dl='.5' data-fx='slam'>= <span class='ac'>SAME</span></div>"
+  },
+  {
+   "l": 10,
+   "cap": false,
+   "html": "<div class='e mono' style='left:540px;top:380px' data-l='10'>DO THIS INSTEAD</div><div class='e an' style='left:540px;top:620px;font-size:128px' data-l='10' data-fx='words' data-dim='11'>TRACK <span class='ac'>EVERY SET.</span></div><div class='e an' style='left:540px;top:840px;font-size:128px' data-l='11' data-fx='words' data-dim='12'>BEAT <span class='ac'>LAST WEEK.</span></div><div class='e an' style='left:540px;top:1060px;font-size:128px' data-l='12' data-fx='words'>WEIGHT <span class='mu'>OR</span> <span class='ac'>REPS.</span></div>"
+  },
+  {
+   "l": 13,
+   "cap": false,
+   "html": "<div class='e' style='left:540px;top:470px' data-l='13' data-fx='none'><svg width=\"150\" height=\"190\" viewBox=\"0 0 150 190\" style=\"overflow:visible\"><path class=\"draw\" data-l=\"13\" data-d=\".6\" d=\"M10 10 L140 10 L140 180 L75 130 L10 180 Z\" fill=\"none\" stroke=\"#C8F04A\" stroke-width=\"10\" stroke-linejoin=\"round\" /></svg></div><div class='e an ac' style='left:540px;top:760px;font-size:250px' data-l='13' data-fx='chars'>SAVE THIS</div><div class='e an' style='left:540px;top:950px;font-size:96px' data-l='13' data-dl='.35' data-fx='words'>FOR YOUR NEXT GYM DAY</div><div class='e mono' style='left:540px;top:1240px;font-size:30px;color:#F2F0EB;border:2px solid #3A3A3E;padding:20px 34px;border-radius:999px' data-l='13' data-dl='.8' data-fx='fade'>FORGE \u2014 YOUR AI GYM COACH \u00b7 LINK IN BIO</div>"
+  }
+ ],
+ "hits": [
+  [
+   0,
+   1.55
+  ],
+  [
+   1,
+   0
+  ],
+  [
+   4,
+   0.25
+  ],
+  [
+   9,
+   0.5
+  ],
+  [
+   10,
+   0
+  ],
+  [
+   11,
+   0
+  ],
+  [
+   12,
+   0
+  ]
+ ],
+ "ticks": [
+  [
+   5,
+   0.95
+  ],
+  [
+   5,
+   1.9
+  ],
+  [
+   5,
+   2.5
+  ]
+ ],
+ "dings": [
+  6
+ ]
+}

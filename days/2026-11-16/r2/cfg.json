@@ -1,0 +1,104 @@
+{
+ "lines": [
+  "Most lifters don't need 200 grams of protein.",
+  "Here's why.",
+  "Protein builds muscle... up to a point.",
+  "Forty-nine trials tested where that point is.",
+  "About one point six grams per kilo of bodyweight.",
+  "Above that, gains flattened out.",
+  "For a seventy-five kilo lifter... that's about one hundred twenty grams.",
+  "Want a safety margin? Go up to two point two.",
+  "Hit your number.",
+  "Every day.",
+  "Lift hard.",
+  "Save this for your next grocery run."
+ ],
+ "tempo": 1.06,
+ "tail": 1.4,
+ "scenes": [
+  {
+   "l": 0,
+   "cap": false,
+   "html": "<div class='e mono' style='left:540px;top:300px' data-l='0' data-fx='none'>THE TRUTH ABOUT PROTEIN</div><div class='e an' style='left:540px;top:500px;font-size:140px' data-l='0' data-fx='none'>MOST LIFTERS</div><div class='e an' style='left:540px;top:660px;font-size:140px' data-l='0' data-fx='none'>DON'T NEED</div><div class='e an rd' style='left:540px;top:930px;font-size:320px' data-l='0' data-fx='none'>200 G</div><div class='e' style='left:540px;top:930px' data-l='0' data-dl='1.55' data-fx='none'><svg width=\"760\" height=\"20\" viewBox=\"0 0 760 20\" style=\"overflow:visible\"><path class=\"draw\" data-l=\"0\" data-dl=\"1.55\" data-d=\".3\" d=\"M0 10 L760 10\" stroke=\"#F2F0EB\" stroke-width=\"18\" stroke-linecap=\"round\" /></svg></div><div class='e an' style='left:540px;top:1180px;font-size:120px' data-l='0' data-fx='none'>OF PROTEIN</div>"
+  },
+  {
+   "l": 1,
+   "cap": false,
+   "html": "<div class='e panel' data-l='1' data-dl='-.12'></div><div class='e an' style='left:540px;top:800px;font-size:250px;color:#0B0B0C' data-l='1' data-dl='0' data-fx='chars'>HERE'S<br>WHY</div>"
+  },
+  {
+   "l": 2,
+   "html": "<div class='e mono' style='left:540px;top:330px' data-l='2'>PROTEIN \u2192 MUSCLE</div><div class='e an' style='left:540px;top:490px;font-size:150px' data-l='2' data-fx='words'>MORE <span class='ac'>PROTEIN</span></div><div class='e' style='left:540px;top:900px' data-l='2' data-fx='none'><svg width=\"860\" height=\"520\" viewBox=\"0 0 860 520\" style=\"overflow:visible\"><path class=\"draw\" data-l=\"2\" data-dl=\".15\" data-d=\".5\" d=\"M10 10 L10 510 L850 510\" fill=\"none\" stroke=\"#3A3A3E\" stroke-width=\"4\" /><path class=\"draw\" data-l=\"2\" data-dl=\"0.4\" data-d=\"1.0\" d=\"M10 480 C 150 330, 300 160, 430 130\" fill=\"none\" stroke=\"#C8F04A\" stroke-width=\"12\" stroke-linecap=\"round\" /><path class=\"draw\" data-l=\"2\" data-dl=\"1.45\" data-d=\".6\" d=\"M430 130 L840 130\" fill=\"none\" stroke=\"#6A6A70\" stroke-width=\"12\" stroke-linecap=\"round\" /></svg></div><div class='e an ac' style='left:540px;top:1240px;font-size:110px' data-l='2' data-dl='1.5' data-fx='pop'>UP TO A POINT</div>"
+  },
+  {
+   "l": 3,
+   "cap": false,
+   "html": "<div class='e mono' style='left:540px;top:330px' data-l='3'>META-ANALYSIS \u00b7 2018 \u00b7 1,863 PEOPLE</div><div class='e' style='left:540px;top:800px' data-l='3' data-fx='none'><svg width=\"640\" height=\"640\" viewBox=\"0 0 640 640\" style=\"overflow:visible\"><circle class=\"draw\" data-l=\"3\" data-dl=\".05\" data-d=\".8\" cx=\"320\" cy=\"320\" r=\"300\" fill=\"none\" stroke=\"#2A2A2D\" stroke-width=\"4\" /><circle class=\"draw\" data-l=\"3\" data-dl=\"0.2\" data-d=\"1.0\" cx=\"320\" cy=\"320\" r=\"300\" fill=\"none\" stroke=\"#C8F04A\" stroke-width=\"10\" stroke-linecap=\"round\" transform=\"rotate(-90 320 320)\" /></svg></div><div class='e an' style='left:540px;top:790px;font-size:260px' data-l='3' data-dl='0.2' data-fx='pop'><span class='count ac' data-to='49'>0</span></div><div class='e mono' style='left:540px;top:960px;font-size:40px;color:#F2F0EB' data-l='3' data-dl='0.45' data-fx='fade'>TRIALS</div>"
+  },
+  {
+   "l": 4,
+   "html": "<div class='e mono' style='left:540px;top:330px' data-l='4'>THE POINT</div><div class='e an ac' style='left:540px;top:660px;font-size:320px' data-l='4' data-dl='.35' data-fx='slam'>1.6 G</div><div class='e an' style='left:540px;top:900px;font-size:130px' data-l='4' data-dl='1.3' data-fx='words'>PER KILO</div><div class='e mono' style='left:540px;top:1060px;color:#F2F0EB' data-l='4' data-dl='1.9' data-fx='fade'>OF BODYWEIGHT \u00b7 PER DAY</div>"
+  },
+  {
+   "l": 5,
+   "html": "<div class='e an' style='left:540px;top:480px;font-size:150px' data-l='5' data-fx='words'>ABOVE <span class='ac'>1.6</span></div><div class='e' style='left:540px;top:900px' data-l='5' data-fx='none'><svg width=\"860\" height=\"520\" viewBox=\"0 0 860 520\" style=\"overflow:visible\"><path class=\"draw\" data-l=\"5\" data-dl=\".15\" data-d=\".5\" d=\"M10 10 L10 510 L850 510\" fill=\"none\" stroke=\"#3A3A3E\" stroke-width=\"4\" /><path class=\"draw\" data-l=\"5\" data-dl=\"0.05\" data-d=\"1.0\" d=\"M10 480 C 150 330, 300 160, 430 130\" fill=\"none\" stroke=\"#C8F04A\" stroke-width=\"12\" stroke-linecap=\"round\" /><path class=\"draw\" data-l=\"5\" data-dl=\".6\" data-d=\".6\" d=\"M430 130 L840 130\" fill=\"none\" stroke=\"#6A6A70\" stroke-width=\"12\" stroke-linecap=\"round\" stroke-dasharray=\"2 0\" /><circle cx=\"430\" cy=\"130\" r=\"16\" fill=\"#C8F04A\" /></svg></div><div class='e an mu' style='left:680px;top:670px;font-size:110px' data-l='5' data-dl='.9' data-fx='slam'>FLAT</div><div class='e mono' style='left:540px;top:1240px;color:#F2F0EB' data-l='5' data-dl='.9' data-fx='fade'>NO EXTRA MUSCLE GAIN</div>"
+  },
+  {
+   "l": 6,
+   "html": "<div class='e mono' style='left:540px;top:330px' data-l='6'>75 KG LIFTER \u00d7 1.6</div><div class='e an' style='left:540px;top:640px;font-size:300px' data-l='6' data-dl='1.9' data-fx='pop'><span class='count ac' data-to='120'>0</span> G</div><div class='e' style='left:540px;top:1030px;width:880px;text-align:left' data-l='6' data-dl='.2' data-fx='fade'><div class='mono' style='margin:0px 0 14px;color:#F2F0EB'>ENOUGH <span class='mu' style='float:right'>\u2248120 G</span></div><div class='track'><div class='grow' data-w='60' data-l='6' data-dl='2.0' style='background:#C8F04A'></div></div><div class='mono' style='margin:36px 0 14px;color:#F2F0EB'>THE HYPE <span class='mu' style='float:right'>200 G</span></div><div class='track'><div class='grow' data-w='100' data-l='6' data-dl='0.4' style='background:#4A4A4F'></div></div></div>"
+  },
+  {
+   "l": 7,
+   "html": "<div class='e mono' style='left:540px;top:330px' data-l='7'>WANT A SAFETY MARGIN?</div><div class='e an' style='left:540px;top:560px;font-size:150px' data-l='7' data-dl='.9' data-fx='words'>UP TO</div><div class='e an ac' style='left:540px;top:800px;font-size:300px' data-l='7' data-dl='1.25' data-fx='slam'>2.2 G</div><div class='e mono' style='left:540px;top:1030px;color:#F2F0EB' data-l='7' data-dl='1.6' data-fx='fade'>PER KG \u00b7 \u2248165 G AT 75 KG</div>"
+  },
+  {
+   "l": 8,
+   "cap": false,
+   "html": "<div class='e mono' style='left:540px;top:380px' data-l='8'>DO THIS INSTEAD</div><div class='e an' style='left:540px;top:620px;font-size:122px' data-l='8' data-fx='words' data-dim='9'>HIT YOUR <span class='ac'>NUMBER.</span></div><div class='e an' style='left:540px;top:840px;font-size:122px' data-l='9' data-fx='words' data-dim='10'>EVERY <span class='ac'>DAY.</span></div><div class='e an' style='left:540px;top:1060px;font-size:122px' data-l='10' data-fx='words'>LIFT <span class='ac'>HARD.</span></div>"
+  },
+  {
+   "l": 11,
+   "cap": false,
+   "html": "<div class='e' style='left:540px;top:470px' data-l='11' data-fx='none'><svg width=\"150\" height=\"190\" viewBox=\"0 0 150 190\" style=\"overflow:visible\"><path class=\"draw\" data-l=\"11\" data-d=\".6\" d=\"M10 10 L140 10 L140 180 L75 130 L10 180 Z\" fill=\"none\" stroke=\"#C8F04A\" stroke-width=\"10\" stroke-linejoin=\"round\" /></svg></div><div class='e an ac' style='left:540px;top:760px;font-size:250px' data-l='11' data-fx='chars'>SAVE THIS</div><div class='e an' style='left:540px;top:950px;font-size:86px' data-l='11' data-dl='.35' data-fx='words'>FOR YOUR NEXT GROCERY RUN</div><div class='e mono' style='left:540px;top:1240px;font-size:30px;color:#F2F0EB;border:2px solid #3A3A3E;padding:20px 34px;border-radius:999px' data-l='11' data-dl='.8' data-fx='fade'>FORGE \u2014 YOUR AI GYM COACH \u00b7 LINK IN BIO</div>"
+  }
+ ],
+ "hits": [
+  [
+   0,
+   1.55
+  ],
+  [
+   1,
+   0
+  ],
+  [
+   4,
+   0.35
+  ],
+  [
+   5,
+   0.9
+  ],
+  [
+   7,
+   1.25
+  ],
+  [
+   8,
+   0
+  ],
+  [
+   9,
+   0
+  ],
+  [
+   10,
+   0
+  ]
+ ],
+ "ticks": [],
+ "dings": [
+  3,
+  6
+ ]
+}
