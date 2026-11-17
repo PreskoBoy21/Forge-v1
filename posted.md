@@ -44,3 +44,6 @@
 - 2026-11-16 | 11:00 IG story | overload-reps-story | Do you have to add weight to the bar to grow? (YES / NO) | teases reel 1 | 429691447
 - 2026-11-16 | 12:00 | reps-vs-weight-explainer | Adding reps builds muscle like adding weight. | motion v3: progressive overload, rep vs load progression similar growth, 38 trained lifters 8 wk (Plotkin 2022, PeerJ) | 429691505
 - 2026-11-16 | 17:00 | protein-ceiling-explainer | Most lifters don't need 200 grams of protein. | motion v3: ~1.6 g/kg/day breakpoint, upper CI 2.2 (Morton 2018, 49 RCTs, 1,863 people) | 429691551
+- 2026-11-17 | 11:00 IG story | sets-volume-story | How many sets a week does a muscle need to grow? (UNDER 5 / 10+) | teases reel 1 | 431090068
+- 2026-11-17 | 12:00 | weekly-sets-volume-explainer | 10 weekly sets grow almost 2x the muscle. | motion v3: <5 / 5–9 / 10+ sets per muscle per week = 5.4 / 6.6 / 9.8% growth (Schoenfeld 2017, 15 studies) | 431090098
+- 2026-11-17 | 17:00 | t-boosters-explainer | Most T-boosters have no proof they work. | motion v3: 50 products, 90% claim more T, ~1 in 4 ingredients with data showing a rise, 1 in 10 a drop, >60% no data, 13 over upper limits (Clemesha 2020, WJMH) — myth-busting, no medical advice | 431090127
