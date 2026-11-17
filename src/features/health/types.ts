@@ -9,9 +9,12 @@ export type DayPoint = {
   restingHr?: number;
   hrvMs?: number;
   activeKcal?: number;
+  /** Web check-in: 1 tired · 2 ok · 3 fresh. */
+  feel?: number;
 };
 
-export type HealthProviderId = 'apple_health' | 'health_connect' | 'demo';
+export type HealthProviderId =
+  'apple_health' | 'health_connect' | 'manual' | 'demo';
 
 export type HealthSnapshot = {
   provider: HealthProviderId;

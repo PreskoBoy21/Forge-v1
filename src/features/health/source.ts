@@ -1,20 +1,26 @@
 /**
- * Default (web) health source: no device health store, so the app runs on
- * sample data. iOS and Android use source.ios.ts / source.android.ts.
+ * Default (web) health source: browsers can't read Apple Health / Health
+ * Connect, so the web app runs on the user's own daily check-in
+ * (sleep, feel, weight). iOS and Android use source.ios.ts / source.android.ts.
  */
-import { demoSnapshot } from './demo';
+import { manualDays, useManualLog } from './manual';
 import type { HealthPermissionResult, HealthSnapshot } from './types';
 
-export const providerLabel = 'Sample data';
+export const providerLabel: string = 'Daily check-in';
 
 export async function isAvailable(): Promise<boolean> {
-  return false;
+  return true;
 }
 
 export async function requestPermissions(): Promise<HealthPermissionResult> {
-  return 'unavailable';
+  return 'granted';
 }
 
 export async function fetchSnapshot(days = 42): Promise<HealthSnapshot> {
-  return demoSnapshot(days);
+  return {
+    provider: 'manual',
+    days: manualDays(useManualLog.getState().entries, days),
+    sources: ['Daily check-in'],
+    fetchedAt: new Date().toISOString(),
+  };
 }

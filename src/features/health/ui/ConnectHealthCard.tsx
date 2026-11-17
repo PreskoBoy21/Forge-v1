@@ -6,12 +6,19 @@ import { HeartPulse } from '@/components/icons';
 import { IconBadge } from '@/components/ui';
 import { useColors } from '@/theme/theme';
 
-import { healthProviderLabel, healthSupported, useHealth } from '../store';
+import {
+  healthProviderLabel,
+  healthSupported,
+  manualHealth,
+  useHealth,
+} from '../store';
+import { MorningCheckin } from './MorningCheckin';
 
 /** Shown wherever health data is missing. */
 export function ConnectHealthCard({ compact = false }: { compact?: boolean }) {
   const c = useColors();
   const { connected, loading, connect, permission } = useHealth();
+  if (manualHealth) return <MorningCheckin />;
   const label = healthSupported
     ? healthProviderLabel
     : 'Apple Health / Health Connect';

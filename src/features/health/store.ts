@@ -22,11 +22,18 @@ type HealthState = {
 };
 
 export const healthProviderLabel = source.providerLabel;
-/** Apple Health / Health Connect exists on this device build. */
+/** A health source exists on this build (Apple Health, Health Connect or the web check-in). */
 export const healthSupported = source.providerLabel !== 'Sample data';
+/** Web: data comes from the user's daily check-in, not a health store. */
+export const manualHealth = source.providerLabel === 'Daily check-in';
 
 const empty = (): HealthSnapshot => ({
-  provider: Platform.OS === 'ios' ? 'apple_health' : 'health_connect',
+  provider:
+    Platform.OS === 'ios'
+      ? 'apple_health'
+      : Platform.OS === 'android'
+        ? 'health_connect'
+        : 'manual',
   days: [],
   sources: [],
   fetchedAt: new Date().toISOString(),

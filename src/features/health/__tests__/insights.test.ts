@@ -87,3 +87,12 @@ test('no data → empty analysis, no crash', () => {
   const a = analyze([], 'recomp');
   assert.deepEqual(a.insights, []);
 });
+
+test('web check-in: sleep + feel alone give a readiness call', () => {
+  const day = (sleepHours: number, feel: number) => [
+    { date: '2026-11-17', sleepHours, feel },
+  ];
+  assert.equal(readiness(day(8, 3))?.training, 'push');
+  assert.equal(readiness(day(5, 1))?.training, 'easy');
+  assert.equal(readiness([{ date: '2026-11-17' }]), undefined);
+});
