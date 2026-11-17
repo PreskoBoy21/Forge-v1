@@ -48,6 +48,7 @@ export {
   Utensils,
   Watch,
   X,
+  Download,
   Zap,
   type LucideIcon,
 } from 'lucide-react-native';

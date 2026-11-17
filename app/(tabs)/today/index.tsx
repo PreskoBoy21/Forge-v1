@@ -12,10 +12,15 @@ import {
   Sparkles,
   Utensils,
 } from '@/components/icons';
+import { InstallHint } from '@/components/InstallHint';
 import { Screen } from '@/components/Screen';
 import { Eyebrow, IconBadge } from '@/components/ui';
 import { useToday } from '@/features/food/store';
 import { ConnectHealthCard } from '@/features/health/ui/ConnectHealthCard';
+import {
+  MorningCheckin,
+  useNeedsCheckin,
+} from '@/features/health/ui/MorningCheckin';
 import { ReadinessRing } from '@/features/health/ui/ReadinessRing';
 import { useAnalysis } from '@/features/health/ui/useAnalysis';
 import { useCoachRead } from '@/features/health/ui/useCoachRead';
@@ -47,6 +52,7 @@ export default function TodayScreen() {
   const c = useColors();
   const { analysis, goal } = useAnalysis();
   const ready = analysis.readiness;
+  const needsCheckin = useNeedsCheckin();
   const { data: coach, isFetching } = useCoachRead(analysis, goal);
   const food = useToday();
   const easy = ready?.training === 'easy';
@@ -80,6 +86,7 @@ export default function TodayScreen() {
 
   return (
     <Screen scroll>
+      <InstallHint />
       <Eyebrow>
         {new Date().toLocaleDateString('en-GB', {
           weekday: 'long',
@@ -91,8 +98,12 @@ export default function TodayScreen() {
         {greeting}
       </Text>
 
-      {/* 1 — how ready you are */}
-      {ready ? (
+      {/* 1 — how ready you are (web: morning check-in first) */}
+      {needsCheckin ? (
+        <View className="mt-6">
+          <MorningCheckin />
+        </View>
+      ) : ready ? (
         <Pressable onPress={() => go('/(tabs)/body')} className="mt-6">
           <Card>
             <View className="flex-row items-center">

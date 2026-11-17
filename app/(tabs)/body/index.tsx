@@ -15,6 +15,7 @@ import {
   healthProviderLabel,
   healthSupported,
   useHealth,
+  manualHealth,
 } from '@/features/health/store';
 import { ConnectHealthCard } from '@/features/health/ui/ConnectHealthCard';
 import { useAnalysis } from '@/features/health/ui/useAnalysis';
@@ -241,11 +242,15 @@ export default function BodyScreen() {
                     label="Readiness"
                     value={readiness ? String(readiness.score) : '—'}
                   />
-                  <Small
-                    label="Resting HR"
-                    value={fmt(r14('restingHr'), ' bpm', 0)}
-                  />
-                  <Small label="HRV" value={fmt(r14('hrvMs'), ' ms', 0)} />
+                  {manualHealth ? null : (
+                    <>
+                      <Small
+                        label="Resting HR"
+                        value={fmt(r14('restingHr'), ' bpm', 0)}
+                      />
+                      <Small label="HRV" value={fmt(r14('hrvMs'), ' ms', 0)} />
+                    </>
+                  )}
                 </View>
                 <Explain
                   Icon={Brain}

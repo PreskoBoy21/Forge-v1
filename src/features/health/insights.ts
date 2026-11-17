@@ -129,6 +129,13 @@ export function readiness(days: DayPoint[]): Readiness | undefined {
   if (today.sleepHours !== undefined) {
     parts.push({ w: 0.4, v: Math.min(1, today.sleepHours / 8) });
   }
+  if (today.feel !== undefined) {
+    // web check-in: tired / ok / fresh
+    parts.push({
+      w: 0.35,
+      v: today.feel <= 1 ? 0.2 : today.feel >= 3 ? 1 : 0.7,
+    });
+  }
   const hrvBase = mean(vals(base, 'hrvMs'));
   let hrvPct: number | undefined;
   if (today.hrvMs !== undefined && hrvBase) {

@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native';
+import { Platform, Text, View } from 'react-native';
 
 import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
@@ -22,7 +22,10 @@ const FEATURES: {
   {
     Icon: HeartPulse,
     title: 'Reads your body',
-    sub: 'Sleep, heart rate, steps and weight from Apple Health',
+    sub:
+      Platform.OS === 'web'
+        ? 'Sleep, energy and weight from a 3-second daily check-in'
+        : 'Sleep, heart rate, steps and weight from Apple Health',
     tone: 'bad',
   },
   {

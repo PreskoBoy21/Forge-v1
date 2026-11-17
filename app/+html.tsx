@@ -4,6 +4,8 @@ import {
 } from 'expo-router/html';
 import type { ReactNode } from 'react';
 
+const BASE = process.env.EXPO_PUBLIC_BASE_URL ?? '';
+
 // Web-only HTML shell. Since Expo SDK 58 the root must render the injected
 // head/body nodes (JS bundles, CSS, fonts) or the page never loads its scripts.
 export default function Root({ children }: { children: ReactNode }) {
@@ -18,6 +20,18 @@ export default function Root({ children }: { children: ReactNode }) {
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
+        {/* Installable web app: Add to Home Screen opens full-screen. */}
+        <meta name="theme-color" content="#0A0C10" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="apple-mobile-web-app-title" content="Forge" />
+        <meta
+          name="description"
+          content="Forge, your AI gym coach: today's workout, the exact weights and how much protein is left."
+        />
+        <link rel="manifest" href={`${BASE}/manifest.json`} />
+        <link rel="apple-touch-icon" href={`${BASE}/icons/icon-180.png`} />
         <ScrollViewStyleReset />
         <style dangerouslySetInnerHTML={{ __html: responsiveBackground }} />
         {headNodes}

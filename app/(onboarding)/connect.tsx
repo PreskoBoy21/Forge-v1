@@ -7,7 +7,11 @@ import { IconBadge } from '@/components/ui';
 import { useColors } from '@/theme/theme';
 import { PreviewBanner } from '@/components/PreviewBanner';
 import { Screen } from '@/components/Screen';
-import { healthProviderLabel, useHealth } from '@/features/health/store';
+import {
+  healthProviderLabel,
+  manualHealth,
+  useHealth,
+} from '@/features/health/store';
 import { go } from '@/lib/nav';
 
 const READS = [
@@ -21,10 +25,16 @@ const READS = [
   [Footprints, 'info', 'Steps and active calories', 'from your phone'],
 ] as const;
 
+const CHECKIN = [
+  [Moon, 'violet', 'Hours slept', 'one tap'],
+  [Footprints, 'info', 'How you feel today', 'tired, OK or fresh'],
+  [Scale, 'accent', 'Your weight', 'optional, whenever you weigh in'],
+] as const;
+
 export default function ConnectScreen() {
   const c = useColors();
   const { connect, loading, permission } = useHealth();
-  const native = healthProviderLabel !== 'Sample data';
+  const native = healthProviderLabel !== 'Sample data' && !manualHealth;
   const label = native ? healthProviderLabel : 'Apple Health / Health Connect';
 
   const onConnect = async () => {
@@ -36,15 +46,16 @@ export default function ConnectScreen() {
     <Screen scroll>
       <PreviewBanner />
       <Text className="font-display text-[34px] uppercase tracking-wide text-bone">
-        Connect your data
+        {manualHealth ? 'Your daily check-in' : 'Connect your data'}
       </Text>
       <Text className="mt-2 font-ui text-[17px] leading-[24px] text-steel">
-        Your coach plans each day around what your body actually did: how you
-        slept, how recovered you are and where your weight is really going.
+        {manualHealth
+          ? 'Each morning you tell Forge how you slept and how you feel. It takes 3 seconds, and your coach plans the day around it.'
+          : 'Your coach plans each day around what your body actually did: how you slept, how recovered you are and where your weight is really going.'}
       </Text>
 
       <View className="mt-8 gap-3">
-        {READS.map(([Icon, tone, title, sub]) => (
+        {(manualHealth ? CHECKIN : READS).map(([Icon, tone, title, sub]) => (
           <Card key={title}>
             <View className="flex-row items-center">
               <IconBadge Icon={Icon} color={c[tone]} size={40} />
@@ -59,11 +70,18 @@ export default function ConnectScreen() {
         ))}
       </View>
 
-      <Text className="mt-6 font-ui text-[13px] leading-[19px] text-steel">
-        Works with Withings, RENPHO, Eufy, Wyze, Etekcity and any scale or watch
-        that syncs to {label}. Forge only reads. It never writes to your health
-        data or sells it.
-      </Text>
+      {manualHealth ? (
+        <Text className="mt-6 font-ui text-[13px] leading-[19px] text-steel">
+          Using an iPhone? The Forge app reads this from Apple Health
+          automatically.
+        </Text>
+      ) : (
+        <Text className="mt-6 font-ui text-[13px] leading-[19px] text-steel">
+          Works with Withings, RENPHO, Eufy, Wyze, Etekcity and any scale or
+          watch that syncs to {label}. Forge only reads. It never writes to your
+          health data or sells it.
+        </Text>
+      )}
       {permission === 'unavailable' ? (
         <Text className="mt-3 font-ui text-[13px] text-gold">
           Health data isn’t available here, so you’ll see sample data for now.
@@ -75,18 +93,22 @@ export default function ConnectScreen() {
           label={
             loading
               ? 'Connecting…'
-              : native
-                ? `Connect ${label}`
-                : 'Connect health data'
+              : manualHealth
+                ? 'Sounds good'
+                : native
+                  ? `Connect ${label}`
+                  : 'Connect health data'
           }
           disabled={loading}
           onPress={() => void onConnect()}
         />
-        <Button
-          label="Skip for now"
-          variant="ghost"
-          onPress={() => go('/(onboarding)/ai')}
-        />
+        {manualHealth ? null : (
+          <Button
+            label="Skip for now"
+            variant="ghost"
+            onPress={() => go('/(onboarding)/ai')}
+          />
+        )}
       </View>
     </Screen>
   );
