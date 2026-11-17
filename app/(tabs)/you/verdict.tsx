@@ -6,6 +6,8 @@ import { Card } from '@/components/Card';
 import { Screen } from '@/components/Screen';
 import { Eyebrow } from '@/components/ui';
 import { useWeekly } from '@/features/progress/useWeekly';
+import { Paywall } from '@/features/paywall/Paywall';
+import { useProLocked } from '@/features/paywall/purchases';
 import { goBack } from '@/lib/nav';
 import { track } from '@/lib/telemetry';
 import { useColors } from '@/theme/theme';
@@ -16,6 +18,7 @@ const DAY = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 export default function VerdictScreen() {
   const c = useColors();
   const { verdict, week, stats } = useWeekly();
+  const locked = useProLocked();
   useEffect(() => track('verdict_viewed', { key: verdict.key }), [verdict.key]);
   const tone =
     verdict.tone === 'good'
@@ -23,6 +26,22 @@ export default function VerdictScreen() {
       : verdict.tone === 'warn'
         ? c.warn
         : c.info;
+
+  if (locked) {
+    return (
+      <Screen scroll>
+        <Eyebrow>Weekly verdict · Forge Pro</Eyebrow>
+        <Text className="mt-3 font-display text-[34px] uppercase leading-[38px] tracking-wide text-bone">
+          Your call for next week is ready
+        </Text>
+        <Text className="mt-3 font-ui text-[16px] leading-6 text-steel">
+          Every week Forge looks at your training, sleep, food and weight and
+          gives you one clear change, with the reason.
+        </Text>
+        <Paywall onDone={goBack} />
+      </Screen>
+    );
+  }
 
   return (
     <Screen scroll>

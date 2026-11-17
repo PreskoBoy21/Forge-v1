@@ -19,7 +19,9 @@ import {
 } from '@/features/health/store';
 import { ConnectHealthCard } from '@/features/health/ui/ConnectHealthCard';
 import { useAnalysis } from '@/features/health/ui/useAnalysis';
+import { go } from '@/lib/nav';
 import { useCoachRead } from '@/features/health/ui/useCoachRead';
+import { useProLocked } from '@/features/paywall/purchases';
 import { lastDays, shortDate } from '@/features/health/vitals';
 import { useColors } from '@/theme/theme';
 
@@ -92,6 +94,7 @@ export default function BodyScreen() {
   const isDemo = snapshot.provider === 'demo';
   const hasData = hasHealthData(snapshot);
   const { data: coach, isFetching } = useCoachRead(analysis, goal);
+  const proLocked = useProLocked();
   const ex = coach?.explain ?? {};
   // Without AI, the top card already shows insights[0]; don't repeat it below.
   const headlineId = coach ? null : insights[0]?.id;
@@ -197,6 +200,16 @@ export default function BodyScreen() {
                 : (insights[0]?.body ??
                   'The more days of data, the sharper the analysis.'))}
           </Text>
+          {proLocked ? (
+            <Pressable
+              accessibilityRole="button"
+              onPress={() => go('/(tabs)/you/paywall')}
+            >
+              <Text className="mt-3 font-uiSemi text-[14px] text-molten">
+                Get your AI coach’s full read with Pro →
+              </Text>
+            </Pressable>
+          ) : null}
         </Card>
       ) : null}
 

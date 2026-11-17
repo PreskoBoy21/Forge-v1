@@ -1,6 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
-import { Image, Pressable, Text, TextInput, View } from 'react-native';
+import {
+  Image,
+  Pressable,
+  Text,
+  TextInput,
+  View,
+  Platform,
+} from 'react-native';
 
 import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
@@ -45,7 +52,9 @@ const SCAN_ERROR: Record<Exclude<ScanOutcome, { ok: true }>['reason'], string> =
     signed_out: 'Log in to use photo scan. You can still add foods below.',
     not_food: 'That doesn’t look like food. Try again or add foods below.',
     limit_reached:
-      'You’ve used today’s 10 photo scans. More tomorrow. Add foods below for now.',
+      Platform.OS === 'web'
+        ? 'You’ve used this week’s 3 free photo scans. Go Pro for unlimited, or add foods below.'
+        : 'You’ve used today’s 10 photo scans. More tomorrow. Add foods below for now.',
     needs_consent:
       'Photo scan uses AI coaching. Turn it on in You → AI coaching, or add foods below.',
     ai_off:
@@ -121,7 +130,7 @@ export default function SnapScreen() {
         setSource('scan');
         setMessage(
           r.scansLeft !== null
-            ? `Estimate · check the grams · ${r.scansLeft} scans left today`
+            ? `Estimate · check the grams · ${r.scansLeft} free scans left ${Platform.OS === 'web' ? 'this week' : 'today'}`
             : 'Estimate · check the grams',
         );
       } else {
@@ -259,7 +268,20 @@ export default function SnapScreen() {
         </View>
       ) : null}
 
-      {message === SCAN_ERROR.needs_consent ? (
+      {message === SCAN_ERROR.limit_reached && Platform.OS === 'web' ? (
+        <Pressable
+          onPress={() => go('/(tabs)/you/paywall')}
+          accessibilityRole="button"
+          className="mt-3 rounded-card border border-molten/40 bg-graphite-900 p-4"
+        >
+          <Text className="font-ui text-[14px] leading-[20px] text-steel">
+            You’ve used this week’s 3 free photo scans.
+          </Text>
+          <Text className="mt-1 font-uiSemi text-[15px] text-molten">
+            Go Pro for unlimited scans →
+          </Text>
+        </Pressable>
+      ) : message === SCAN_ERROR.needs_consent ? (
         <Pressable
           onPress={() => go('/(tabs)/you/ai')}
           accessibilityRole="button"

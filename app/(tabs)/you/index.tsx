@@ -216,9 +216,13 @@ export default function YouScreen() {
           onPress={() => go('/(tabs)/you/paywall')}
           className="mt-3 rounded-card border border-molten/40 bg-graphite-900 p-4"
         >
-          <Text className="font-uiSemi text-[15px] text-molten">Forge Pro</Text>
+          <Text className="font-uiSemi text-[15px] text-molten">
+            {isPro ? 'Forge Pro · active' : 'Upgrade to Forge Pro'}
+          </Text>
           <Text className="mt-1 font-ui text-[13px] text-steel">
-            Unlimited meal scans · AI coach read every day
+            {isPro
+              ? 'Manage your subscription'
+              : 'Unlimited AI scans · daily AI coach · Weekly Verdict'}
           </Text>
         </Pressable>
       ) : null}

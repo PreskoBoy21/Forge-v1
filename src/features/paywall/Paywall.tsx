@@ -1,12 +1,13 @@
 import * as WebBrowser from 'expo-web-browser';
 import { useState } from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { Platform, Pressable, Text, View } from 'react-native';
 import type { PurchasesPackage } from './purchases';
 
 import { Button } from '@/components/Button';
 import { LINKS } from '@/lib/links';
 
 import { buy, restore, usePro } from './purchases';
+import { WebPaywall } from './WebPaywall';
 
 const PERKS = [
   'Unlimited meal photo scans',
@@ -16,6 +17,11 @@ const PERKS = [
 
 /** Shared paywall body (onboarding + You tab). `onDone` = continue/close. */
 export function Paywall({ onDone }: { onDone: () => void }) {
+  if (Platform.OS === 'web') return <WebPaywall onDone={onDone} />;
+  return <NativePaywall onDone={onDone} />;
+}
+
+function NativePaywall({ onDone }: { onDone: () => void }) {
   const { offering, available, isPro } = usePro();
   const pkgs = offering?.availablePackages ?? [];
   const annual = pkgs.find((p) => p.packageType === 'ANNUAL');
