@@ -20,7 +20,7 @@ import '../global.css';
 
 import { useSession, useSessionListener } from '@/features/auth/session';
 import { useHealth } from '@/features/health/store';
-import { initPurchases } from '@/features/paywall/purchases';
+import { initPurchases, refreshPro } from '@/features/paywall/purchases';
 import { syncPendingWorkouts } from '@/features/train/store';
 import { setScreen, startTelemetry } from '@/lib/telemetry';
 import { PALETTE, THEME_VARS, useScheme } from '@/theme/theme';
@@ -42,7 +42,10 @@ export default function RootLayout() {
   const scheme = useScheme();
   // Re-read Apple Health / Health Connect on launch and when the app returns.
   useEffect(() => {
-    const refresh = () => void useHealth.getState().refresh();
+    const refresh = () => {
+      void useHealth.getState().refresh();
+      void refreshPro();
+    };
     if (useHealth.persist.hasHydrated()) refresh();
     const unsub = useHealth.persist.onFinishHydration(refresh);
     let last = Date.now();

@@ -1,4 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
+import { Platform } from 'react-native';
+
+import { useProLocked } from '@/features/paywall/purchases';
+import { platformHeader } from '@/lib/billing';
 import { useMemo } from 'react';
 
 import { useFood, useTargets } from '@/features/food/store';
@@ -55,9 +59,11 @@ export function useCoachRead(analysis: Analysis, goal: Goal) {
     payload.nutrition,
   );
 
+  // Web free plan: the AI coach is Pro, so don't call it at all.
+  const proLocked = useProLocked();
   const query = useQuery({
     queryKey: ['coach-read', payload, coachStyle],
-    enabled: Boolean(supabase) && signedIn && aiOn && hasAnything,
+    enabled: Boolean(supabase) && signedIn && aiOn && hasAnything && !proLocked,
     staleTime: 1000 * 60 * 60 * 6,
     gcTime: 1000 * 60 * 60 * 24,
     retry: false,
@@ -65,7 +71,7 @@ export function useCoachRead(analysis: Analysis, goal: Goal) {
       if (!supabase) return null;
       const { data, error } = await supabase.functions.invoke<CoachRead>(
         'analyze-health',
-        { body: { payload, coachStyle } },
+        { body: { payload, coachStyle }, headers: platformHeader(Platform.OS) },
       );
       if (error || !data || !('headline' in data)) return null;
       return data;

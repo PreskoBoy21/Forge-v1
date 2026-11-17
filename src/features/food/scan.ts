@@ -1,7 +1,9 @@
+import { Platform } from 'react-native';
 import { manipulateAsync, SaveFormat } from 'expo-image-manipulator';
 import * as ImagePicker from 'expo-image-picker';
 
 import { aiAllowed } from '@/features/consent/store';
+import { platformHeader } from '@/lib/billing';
 import { supabase } from '@/lib/supabase';
 
 import type { MealItem } from './nutrition';
@@ -60,6 +62,7 @@ export async function scanMeal(
 
   const { data, error } = await supabase.functions.invoke('scan-meal', {
     body: { imageBase64: small.base64, note },
+    headers: platformHeader(Platform.OS),
   });
   if (error) {
     const status = (error as { context?: { status?: number } }).context?.status;

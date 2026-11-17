@@ -1,16 +1,19 @@
+import { Platform } from 'react-native';
 import { create } from 'zustand';
 
+import { billingReady } from '@/lib/billing';
+import { supabase } from '@/lib/supabase';
+
 /**
- * Subscriptions are OFF for v1 (see src/lib/flags.ts), so the RevenueCat SDK
- * (react-native-purchases) is not installed: its iOS pod (PurchasesHybridCommon
- * 20.1.0) could not be resolved on EAS. The full RevenueCat version of this
- * file is in git history at 5c5a2de:src/features/paywall/purchases.ts.
- * To bring Pro back: install a react-native-purchases version whose iOS pod
- * resolves, restore that file, and set FLAGS.SUBSCRIPTIONS = true.
+ * Forge Pro status.
+ * - Web: Stripe (Payment Links + stripe-webhook) sets profiles.is_pro; the app
+ *   just reads it.
+ * - iOS/Android: in-app purchases aren't set up yet (RevenueCat version is in
+ *   git history at 5c5a2de), so native builds stay on the free launch rules.
  */
 export const ENTITLEMENT = 'pro';
 
-/** Minimal shape the paywall UI needs (matches RevenueCat's package). */
+/** Minimal shape the native paywall UI needs (matches RevenueCat's package). */
 export type PurchasesPackage = {
   identifier: string;
   packageType: string;
@@ -35,13 +38,47 @@ type ProState = {
 
 export const usePro = create<ProState>(() => ({
   ready: true,
-  available: false,
+  available: Platform.OS === 'web' && billingReady(),
   isPro: false,
   offering: null,
 }));
 
-export async function initPurchases(_userId: string | null) {
-  usePro.setState({ ready: true, available: false });
+let currentUser: string | null = null;
+
+/** Re-read is_pro from the user's profile (web subscriptions). */
+export async function refreshPro(): Promise<boolean> {
+  if (!supabase || !currentUser) {
+    usePro.setState({ isPro: false });
+    return false;
+  }
+  const { data } = await supabase
+    .from('profiles')
+    .select('is_pro')
+    .eq('id', currentUser)
+    .maybeSingle();
+  const isPro = Boolean(data?.is_pro);
+  usePro.setState({ isPro });
+  return isPro;
+}
+
+export async function initPurchases(userId: string | null) {
+  currentUser = userId;
+  usePro.setState({
+    ready: true,
+    available: Platform.OS === 'web' && billingReady(),
+  });
+  const isPro = await refreshPro();
+  // Just back from Stripe (…/you?pro=1): the webhook may take a few seconds.
+  if (
+    !isPro &&
+    userId &&
+    Platform.OS === 'web' &&
+    typeof window !== 'undefined' &&
+    new URLSearchParams(window.location.search).get('pro') === '1'
+  ) {
+    for (let i = 0; i < 10 && !(await refreshPro()); i++)
+      await new Promise((r) => setTimeout(r, 2000));
+  }
 }
 
 export async function buy(
@@ -51,5 +88,11 @@ export async function buy(
 }
 
 export async function restore(): Promise<boolean> {
-  return false;
+  return refreshPro();
 }
+
+/** Web free plan: the AI coach and Weekly Verdict are Pro. */
+export const useProLocked = () => {
+  const isPro = usePro((s) => s.isPro);
+  return Platform.OS === 'web' && !isPro;
+};

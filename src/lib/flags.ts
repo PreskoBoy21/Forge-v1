@@ -1,8 +1,10 @@
+import { Platform } from 'react-native';
+
 /**
  * Launch switches.
- * v1 ships free: no subscription, no paywall. Flip SUBSCRIPTIONS to true
- * once RevenueCat + store products are set up.
+ * SUBSCRIPTIONS: Forge Pro is sold on the web (Stripe). Native builds stay
+ * free until Apple/Google in-app purchases are set up.
  */
 export const FLAGS = {
-  SUBSCRIPTIONS: false,
+  SUBSCRIPTIONS: Platform.OS === 'web',
 } as const;
