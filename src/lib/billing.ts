@@ -5,8 +5,8 @@
  * Payment Links must redirect to `<web app>/you?pro=1` after payment.
  */
 export const BILLING = {
-  monthly: '', // https://buy.stripe.com/...  (€4.99 / month)
-  yearly: '', // https://buy.stripe.com/...  (€29.99 / year)
+  monthly: 'https://buy.stripe.com/28E14n37J6f78BH6TAfAc00', // €4.99 / month
+  yearly: 'https://buy.stripe.com/7sYcN55fReLD19fcdUfAc01', // €29.99 / year
   portal: '', // https://billing.stripe.com/p/login/...  (manage / cancel)
   prices: { monthly: '€4.99', yearly: '€29.99', yearlyPerMonth: '€2.50' },
 };
