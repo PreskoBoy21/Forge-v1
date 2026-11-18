@@ -7,6 +7,7 @@
 - Presko's rules: TikTok `isAigc: false`, IG `isAiGenerated: false`; captions have EXACTLY 3 hashtags, one always #gym.
 
 ## What works (data, newest first)
+- 2026-11-18 IG drop day 4, worst yet: 11-17 sets volume 152 IG (68% skip) + T-boosters 123 (70% skip) at ~20 h, vs quiz reels 26–40% skip. Protein climbed to 639, sleep & T stays best motion reel (1.38k). TikTok unchanged (695 / 680). Presko's own manual Notion-tracker TikTok (11-17 14:31, not ours) hit 12.2k / 788 likes. Flagged Presko again. Today: result-first frame 0 (the payoff number −24% huge on screen) + personal-stakes topics (alcohol, body fat & T).
 - 2026-11-17 IG drop day 3: 11-16 motion reels 303 (reps vs weight, 59% skip) + 428 (protein, 53%) at ~20 h, even with a training topic at 12:00 and the hook fully static at frame 0. BUT sleep & T (11-15) climbed late to 1,377 IG / 45% skip — personal-stakes (testosterone/body) topics can work in motion style. TikTok unchanged (694 / 729). Flagged Presko (debate hook or one quiz-style reel back?). Today: debate-style claim + stat hook (sets volume) and a T topic (T-boosters) → measure.
 - 2026-11-17 Unknown IG reel at 13:07 on 11-16 ('#gym #gymtok #creatine', 127 views, 80% skip) is not in posted.md — likely posted manually; ignore in baselines.
 - 2026-11-16 ALERT — first motion v3 day on IG collapsed: creatine 178 views (56.8% skip, 6.2 s avg watch), sleep & T 395 (52.5% skip, 7.1 s) vs quiz/worth reels 1.5–2.1k (26–40% skip, 10–14 s). TikTok unchanged (724 / 755). → It's the first 3 s on IG, not the slot. Test today: whole claim readable at frame 0 (no words animating in), training topic at 12:00 (progressive overload), one huge number/symbol at frame 0. If IG stays < 500 again tomorrow, flag Presko: consider a debate/'is it…?' hook or mixing one quiz-style reel back in.
@@ -22,10 +23,7 @@
 - 2026-11-10 Mistake format holds up: 2 bench mistakes = 2.0k IG / 729 TT in ~19 h (on par with myth quizzes). Keep it in rotation.
 - 2026-11-10 TikTok sits at 700–800 for every format; only versus reels with a named muscle + study broke 1k (incline 1.3k, press vs raise 1.2k). Shipped first ab myth quiz + calves versus today — measure tomorrow.
 - 2026-11-09 Versus with a named muscle + a real study is our best non-myth format on BOTH apps (incline vs flat 2.8k IG / 1.3k TT, most comments). Keep 1 versus reel in rotation; myth quizzes hold IG at 2.0–2.3k but generic '2 gym myths' TikToks stall at 300–800.
-- 2026-11-09 Low-tension openers ('Back under the bar after 60 seconds?', 'Answer in one word') are bottom-2 on both apps. Open on a felt problem/body part. First mistake + versus pair shipped today (bench mistakes, hip thrust vs squat) — measure tomorrow.
 - 2026-11-08 Named body part in a quiz hook wins again: "2 arm myths that keep your arms small" = 2.0k IG / 660 TT (2 comments) in ~11 h, best of the day. Prefer "2 [body-part] myths" over generic "2 gym myths".
-- 2026-11-08 Captions that give away both answers + study details ("used as an excuse" quiz) did weakest today: 1.2k IG / 373 TT. Keep captions answer-free, tease only.
-- 2026-11-08 TikTok back carousel (JPEG) climbed late to 1,080 views (2nd best TT in 14 d); IG carousels still weak → carousels are a TikTok play, Reels remain the IG play.
 - 2026-11 IG is the stronger channel (quizzes 2.6k–3.7k views, 99% non-followers). TikTok 250–1,700.
 - Best format on both: "2 gym myths: true or false?" — 2 myths, 3-2-1 guess gap, FALSE stamp, one-line why, CTA "which one did you believe? comment 1 or 2".
 - Personal hooks win: "myths you probably did today", "your gym bro still swears by", "that keep your arms small". Say "2 gym myths" (or "2 arm myths") in the first second; never give the answer in the hook.
@@ -58,8 +56,6 @@ Squat: cutting depth on heavy days; knees caving — Rows: using the lower back 
 - "You need to bench to build a big chest" (dips/press variations work) — "Abs are made in the kitchen only" (both matter) — "High reps for definition, low reps for size" (both build muscle when hard; Schoenfeld 2017) — "You can't train the same muscle 2 days in a row" — "Bigger forearms need forearm-only training" — "Warm-up sets are a waste" — "Calves are pure genetics" (they grow with hard, full-range training) — "Wide grip = wider back" (CHECKED 2026-11-10: EMG evidence mixed, wide grip slightly higher lat activity in Andersen 2014 → do NOT use as a myth) — "You must lift fast to build power for size" — "Training to failure every set is required" (used) — "Leg day once a week is enough for big legs" (2x/week usually better).
 
 ## TREND LOG (keep ~20, newest last)
-- 2026-11-05: "Take-first" hot-take hooks: state a debatable claim at frame 0.
-- 2026-11-05: Withheld reveal: show both options first, crown the winner after sec 3.
 - 2026-11-06: Mistake-correction lists are the most consistent fitness hook — rotate, they fade when overused.
 - 2026-11-06: IG "did today" quiz reached 3.7k / 15.3 s avg watch / 69% 3-s rate — personal myth hooks keep winning on IG.
 - 2026-11-09: 'Act out the bad rep, then fix it' is this week's top fitness format (~20x median); 'popular belief called wrong in line 1' ~15x; muscle-diagram overlays ~6x.
@@ -75,6 +71,7 @@ Squat: cutting depth on heavy days; knees caving — Rows: using the lower back 
 
 - 2026-11-16: tryvolume: bad-rep-then-fix 21x, before/after flash 17x, age-vs-goal 17x, muscle diagram 7x (still our gap). Pains used: 'stuck on the same weight for weeks', 'how much protein do I really need?'.
 - 2026-11-17: tryvolume fitness page leads with before/after flash (17x, 19 accounts). Own data: testosterone topic is our only motion reel to break 1k on IG. Pains used: 'how many sets should I do?', 'do T-boosters work?'.
+- 2026-11-18: tryvolume: 'show the finished result in second 1' is the top pattern across all niches (8–20x); health 'one-image chart viewers zoom in and save' 17x; wellness 'Ranking ways to…' 1306x outlier. Pains used: 'does drinking kill my gains?', 'does body fat lower testosterone?'.
 
 ## STYLE v3 — MOTION EXPLAINER (current, approved by Presko 2026-11-14)
 - Presko: "Now this is something, this is actually good." Old quiz/mascot style looked AI-made; real stock footage (Descript) was rejected ("slideshow of bad footage").
@@ -96,13 +93,15 @@ Squat: cutting depth on heavy days; knees caving — Rows: using the lower back 
 - Sleep is your best pre-workout (recovery numbers)
 - Plateau? The 3 reasons you stopped growing
 - How muscle actually grows (tension, volume, recovery)
-- Alcohol and gains: what one night does
-- Body fat and testosterone: what losing fat does (no sleep angle — sleep used 2026-11-15)
 - Protein timing vs daily total (total matters most)
 - Rest between sets: 2–3 min beats 1 min for growth (Schoenfeld 2016) — check vs used 'shorter rest' myth first
 - Caffeine as pre-workout: what the evidence says (~3–6 mg/kg used in studies; no dosing advice)
+- Ranking explainer: 'Ranking supplements by evidence' (creatine/caffeine/protein top; BCAAs, T-boosters, fat burners bottom) — tryvolume 'Ranking ways to…' trend
+- Soreness: does DOMS mean growth? (soreness ≠ growth signal; check study)
+- Cardio and gains: interference effect is small for most lifters (Wilson 2012 meta — check)
+- Training frequency: 2x per muscle vs 1x when volume is equal (Schoenfeld 2019 — check)
 
-Used motion topics: calorie deficit / crash dieting (example, 2026-11-14); creatine water myth + 3 g/day saturation + ~1 kg extra lean mass (Hultman 1996, Delpino 2022) (2026-11-15); sleep & testosterone, 1 week of 5 h = −10–15% (Leproult 2011) (2026-11-15); progressive overload — adding reps ≈ adding weight, 38 trained lifters 8 wk (Plotkin 2022, PeerJ) (2026-11-16); protein ceiling ≈1.6 g/kg/day, upper 2.2 (Morton 2018, 49 RCTs) (2026-11-16); weekly training volume, <5 vs 5–9 vs 10+ sets/muscle/week = 5.4 / 6.6 / 9.8% growth (Schoenfeld 2017, 15 studies) (2026-11-17); T-boosters, 50 products, 90% claim, ~1 in 4 ingredients with data showing a rise, >60% no data, 13 over upper limits (Clemesha 2020, WJMH) (2026-11-17)
+Used motion topics: calorie deficit / crash dieting (example, 2026-11-14); creatine water myth + 3 g/day saturation + ~1 kg extra lean mass (Hultman 1996, Delpino 2022) (2026-11-15); sleep & testosterone, 1 week of 5 h = −10–15% (Leproult 2011) (2026-11-15); progressive overload — adding reps ≈ adding weight, 38 trained lifters 8 wk (Plotkin 2022, PeerJ) (2026-11-16); protein ceiling ≈1.6 g/kg/day, upper 2.2 (Morton 2018, 49 RCTs) (2026-11-16); weekly training volume, <5 vs 5–9 vs 10+ sets/muscle/week = 5.4 / 6.6 / 9.8% growth (Schoenfeld 2017, 15 studies) (2026-11-17); T-boosters, 50 products, 90% claim, ~1 in 4 ingredients with data showing a rise, >60% no data, 13 over upper limits (Clemesha 2020, WJMH) (2026-11-17); alcohol after training, ~12 drinks after lifting+cardio = −24% muscle protein synthesis even with 25 g whey, −37% without protein, 8 active men (Parr 2014, PLoS One) (2026-11-18); body fat & testosterone, aromatase converts T→estrogen, 24-study review of men with obesity: diet weight loss raised total T, more weight lost = bigger rise (Corona 2013, Eur J Endocrinol) (2026-11-18)
 
 ## STYLE (old cloud quiz engine — RETIRED 2026-11-14, kept for reference)
 - engine/skel.html = quiz template in brand look: ink #0A0C10, volt #C6F24E, aqua #47D7E8, red #FF4D5E; mascot in volt tank; word-pop captions; FALSE stamp; countdown ring; 2-bar chart or verdict chip per myth.

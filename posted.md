@@ -47,3 +47,6 @@
 - 2026-11-17 | 11:00 IG story | sets-volume-story | How many sets a week does a muscle need to grow? (UNDER 5 / 10+) | teases reel 1 | 431090068
 - 2026-11-17 | 12:00 | weekly-sets-volume-explainer | 10 weekly sets grow almost 2x the muscle. | motion v3: <5 / 5–9 / 10+ sets per muscle per week = 5.4 / 6.6 / 9.8% growth (Schoenfeld 2017, 15 studies) | 431090098
 - 2026-11-17 | 17:00 | t-boosters-explainer | Most T-boosters have no proof they work. | motion v3: 50 products, 90% claim more T, ~1 in 4 ingredients with data showing a rise, 1 in 10 a drop, >60% no data, 13 over upper limits (Clemesha 2020, WJMH) — myth-busting, no medical advice | 431090127
+- 2026-11-18 | 11:00 IG story | alcohol-gains-story | Do drinks after the gym really cut your gains? (YES / NO) | teases reel 1 | 432474799
+- 2026-11-18 | 12:00 | alcohol-after-training-explainer | Post-gym drinking cut muscle building by 24%. | motion v3: ~12 drinks after training = −24% muscle protein synthesis even with 25 g whey, −37% without protein, 8 active men (Parr 2014, PLoS One) — result-first frame 0 | 432474845
+- 2026-11-18 | 17:00 | bodyfat-testosterone-explainer | Body fat turns testosterone into estrogen. | motion v3: aromatase in fat tissue; 24-study review, weight loss in men with obesity raised total T, more lost = bigger rise (Corona 2013, Eur J Endocrinol) — no medical advice | 432474871
