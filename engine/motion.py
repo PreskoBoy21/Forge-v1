@@ -128,6 +128,7 @@ function render(t){
 window.render=render;render(0);
 </script></body></html>'''
 hits = [st[h[0]] + h[1] if isinstance(h, list) else st[h] for h in CF.get('hits', [])]
+html = html.replace('</style></head>', CF.get('css','')+'</style></head>',1)
 html = html.replace('@@FONTS@@', fonts).replace('@@BODY@@', body).replace('@@DUR@@', json.dumps(DUR)).replace('@@SEG@@', json.dumps(S)) \
     .replace('@@HITS@@', json.dumps(hits)).replace('@@KW@@', json.dumps(CF.get('keywords', [])))
 open('index.html', 'w').write(html)

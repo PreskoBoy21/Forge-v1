@@ -23,6 +23,7 @@ Log each step as an activity line `{t: ISO time, agent, text}` and set the worki
 - Metricool `getAnalyticsDataByMetrics` for the last 14 days: TikTok videos, IG reels (views, reach, likes, comments, shares, saves, avg watch time if available).
 - Find top 2 / bottom 2 per platform and say WHY (hook, topic, length, slot).
 - Write 1–3 lessons into PLAYBOOK "What works" (replace stale ones; keep the section short).
+- **Web-app traffic (the real goal):** if the Supabase tool is available, run read-only SQL on project `dxirfwtrrbjuflyiobjq`: `select props->>'ref' ref, count(distinct install_id) visitors, count(*) opens from app_events where name='app_open' and platform='web' and created_at > now()-interval '24 hours' group by 1` plus new sign-ups (`select count(*) from auth.users where created_at > now()-interval '24 hours'`) and Pro users (`select count(*) from profiles where is_pro`). Read-only, never write. Put the numbers in What works and the wrap-up message ("TikTok sent 4 visitors, IG 2, 1 sign-up"). Judge reels by visitors, not just views.
 - Dashboard `board/stats`: `{posts7d, views7d, avgViews7d, best:{title,views}, lessons:[…], postsThisWeek, nextRun:"08:20"}`.
 
 ## 2. Trend Scout [trends] + Intel [intel]
@@ -31,10 +32,14 @@ Log each step as an activity line `{t: ISO time, agent, text}` and set the worki
 - Append 1–2 lines to PLAYBOOK TREND LOG (keep ~20, drop the oldest). Dashboard `board/today.trends`.
 
 ## 3. Content Strategist [strategist]
-**Since 2026-11-14 every reel is a MOTION EXPLAINER (style v3, approved by Presko).** The old quiz formats (myth/mistake/versus/swap/worth, engine/build.py + skel.html) are retired — do not use them.
-Forge is a gym brand. Topics = the famous, searched gym topics people argue about, one topic per reel, explained with real numbers:
+**Since 2026-11-19 EVERY post sells the Forge WEB APP** (Presko: "make them all about the web app so it can actually bring traffic there"). Web app = `https://preskoboy21.github.io/Forge-v1/app` — free in the browser, no download, Pro €4.99/mo. Bio links carry `?ref=tiktok` / `?ref=ig`.
+Look stays MOTION v3 (approved 2026-11-14). The two daily reels:
+- **12:00 "Problem → Forge"**: a famous gym topic (list below) explained with 1–2 real numbers in the first ~60%, then a turn ("Forge does this for you") into 1–2 phone scenes showing the matching app screen, then the CTA. The topic earns the view, the app is the answer.
+- **17:00 "App demo"**: POV / feature demo built mostly from real app screens in phone mockups (check-in → readiness, exact weights, snap a meal → protein left, weekly verdict, body trends). Rotate the angle daily: "POV: day 1 with an AI coach", "I let an AI plan my cut", "what my coach told me after 4 h sleep", "AI vs my gym bro", "the free app that replaced my notes app", one feature deep-dive. Reference build: `days/2026-11-19/app-demo/cfg.json`.
+App screens (real, light theme, 1179 px wide): `engine/assets/app/` — `welcome, checkin, today_ready (readiness 93 / Upper A / 144 g protein to go), train, snap, body, paywall`. Never invent app features, numbers that the app doesn't show, or fake user results/testimonials. Weekly-verdict numbers must be labelled EXAMPLE.
+Topics for the 12:00 reel = the famous, searched gym topics people argue about, one per reel, explained with real numbers:
 fat loss & calorie deficit, carbs, protein, bulking vs cutting vs recomp, natural testosterone (sleep, body fat, training), creatine, supplements that don't work, sleep & recovery, steroids/peptides (RISKS ONLY), muscle growth science, progressive overload, training frequency/volume, soreness, cardio & gains, skinny fat, beginner gains, plateaus.
-- Pick 2 topics from PLAYBOOK "Topic bank" (not in "Used topics"; different areas on the same day).
+- 12:00: pick 1 topic from PLAYBOOK "Topic bank" (not in "Used topics") that maps to an app feature (protein → Snap; sleep/recovery → check-in & readiness; progressive overload → exact weights; fat loss/plateau → weekly verdict & body trend). 17:00: pick a demo angle not in PLAYBOOK "Used demo angles".
 - **Steroids / TRT / peptides / SARMs:** only as risk/myth-busting education. NEVER doses, brands, cycles, sources or "how to". Max 1 per week.
 - Facts must be checkable (real studies or consensus, web-search each number). No medical advice, no claims that a supplement treats anything.
 - Dashboard: two campaigns `{title, format:"Reel · motion", slot:"12:00"/"17:00", stage:"strategist", step:1, status:"in_progress"}`.
@@ -45,15 +50,17 @@ fat loss & calorie deficit, carbs, protein, bulking vs cutting vs recomp, natura
 2. Line 2: a 2-word turn ("Here's why.").
 3. 3–6 lines of mechanism, each carrying ONE number or one concrete image.
 4. 1–2 lines of proof (a named study/population, what happened).
-5. 2–3 punchy rule lines, 2–3 words each ("Small deficit." "High protein." "Lift heavy.").
-6. CTA line: "Save this for your next …" / "Save this before your next …" (saves > comments for reach).
+5. Turn to the app (2–3 lines): "Forge does this for you." + what the screen shows ("It tells you how much protein you have left." / "It lowers your weights after a bad night.").
+6. CTA line, always: "It's called Forge. Try it free... link in bio."
+Demo reel (17:00): same length; line 1 = POV/claim hook ≤ 8 words, then one line per screen, last 2 lines = name + CTA (see the reference cfg). No hype words ("game-changer", "revolutionary"), no fake results.
 Use "..." inside a line only for a deliberate beat. Write 3 hooks, pick the strongest by PLAYBOOK hook rules.
 
 ## 5. Creative Director QA [director-qa] — script gate
-Facts true and conservative; every number sourced; topic not reused; hook ≤ 8 words with a claim; total 60–75 words; CTA line last. Sensitive topics: risks-only rule respected. Fix once if needed, otherwise pick another topic.
+Facts true and conservative; every number sourced; topic not reused; hook ≤ 8 words with a claim; total 60–75 words; Forge CTA line last; every app claim matches a real screen. Sensitive topics: risks-only rule respected. Fix once if needed, otherwise pick another topic.
 
 ## 6. Video Editor [editor] — for each reel r1, r2 (motion engine)
-Reference build: `days/2026-11-14/example/cfg.json` (calorie deficit — the approved look). Copy its patterns, never its text.
+Reference builds: `days/2026-11-14/example/cfg.json` (explainer scenes) + `days/2026-11-19/app-demo/cfg.json` (phone scenes, `css` key with `.phone/.chip/.card`, CTA end card). Copy patterns, never text.
+Phone scenes: `cp engine/assets/app/*.jpg WORK/r1/` and use `<div class='phone'><img src='checkin.jpg' style='margin-top:-Npx'></div>` (560×938 frame; shift the screenshot up with a negative margin-top so the important part is in view); copy the `css` key from the reference cfg.
 1. ElevenLabs `creative_generate_speech`: voice `RwGCfIzuc2tIJySQj0fD`, model `eleven_v4`, `generations_count: 1`, prompt = the lines joined with a space. **Once** per reel. Poll `creative_get_flow_run_status` → `curl -sL -o WORK/r1/raw0.mp3 "<url>"`.
 2. `WORK/r1/cfg.json` = `{"lines":[…], "tempo":1.06, "tail":1.4, "scenes":[{"l":0,"html":""}…]}` (scene `l` values first, html later), then `python3 engine/explainer_prep.py WORK/r1`. It prints each line's duration. If any line is clearly wrong (a short line > 2 s, a long line < 1 s), run `ffmpeg -i WORK/r1/fast.mp3 -af silencedetect=noise=-35dB:d=0.05 -f null -`, set `"segs"` (start/end per line in fast.mp3 time) by hand and rerun. Then read `seg.json` for the final line times.
 3. Write the scenes (one scene per idea, 7–10 scenes, a new scene every 2–4 s). Building blocks (see the example for exact markup):
@@ -65,7 +72,8 @@ Reference build: `days/2026-11-14/example/cfg.json` (calorie deficit — the app
    - **Bad thing** (`tint:'red'`): meter shrinking (`data-from='100' data-w='38'`) + red Anton `slam`.
    - **Study chart**: axes + lines that `draw` (good = lime, other = grey) + labels that `pop` at the line ends; mono source label on top.
    - **Rules** (`cap:false`): 2–3 Anton lines with `words`, earlier lines `data-dim`.
-   - **CTA** (`cap:false`): bookmark `draw` + "SAVE THIS" `chars` + mono pill "FORGE — YOUR AI GYM COACH · LINK IN BIO".
+   - **App screen**: Anton headline on top (`words`, one lime word) + phone `pop` with slight `data-rot`; optional lime `.chip` that `slam`s the key number from the screen.
+   - **CTA** (`cap:false`): mono "YOUR AI GYM COACH" + lime Anton "FORGE" (`chars`) + "TRY IT FREE" + mono "NO DOWNLOAD · LINK IN BIO" + down arrow `draw` (exact markup in the app-demo cfg).
    Rules: Anton headline lines ≤ 12 characters at 180+ px (no edge touching); one lime accent word per headline, red only for "bad"; no emojis, no mascot, no glow; every SVG attribute quoted or ending in ` />`.
    cfg extras: `hits` [[line, delay]…] = camera punch + bass hit on slams/big beats (5–8 per reel), `ticks` for box fills, `dings` [line] for a counter.
 4. `python3 engine/explainer_prep.py WORK/r1` (again, for events) → `python3 engine/motion.py WORK/r1`.
@@ -74,13 +82,13 @@ Reference build: `days/2026-11-14/example/cfg.json` (calorie deficit — the app
 7. Render: `python3 ../../../engine/render.py index.html final.mp3 out.mp4` → `ffprobe` duration 22–32 s.
 
 ## 7. Story Designer [designer]
-`WORK/story.json` = `{"kicker":"<GYM TRUTH OF THE DAY | DO YOU KNOW WHY?>","claim":"<Reel 1 hook claim, short>","time":"12:00","sub":"Answer in today's reel 👀","size":96}` → `python3 engine/story.py WORK/story.json WORK/story.png`. Look at it; shrink `size` if the claim wraps to > 4 lines.
+`WORK/story.json` = `{"kicker":"YOUR AI GYM COACH","claim":"<short app promise tied to Reel 1, e.g. KNOW YOUR PROTEIN LEFT IN 1 PHOTO>","time":"12:00","sub":"Try Forge free — link in bio","size":96}` → `python3 engine/story.py WORK/story.json WORK/story.png`. Look at it; shrink `size` if the claim wraps to > 4 lines.
 
 ## 8. Creative Director QA — visual gate
 Every still + story PNG checked. Nothing half-broken ships. If a reel can't be fixed, ship only what passed and mark that campaign `failed` + tell Presko.
 
 ## 9. Copywriter [copy]
-Caption per reel: the hook claim + one line that teases the payoff (no full answer) + "Save this for your next cut/gym day 📌" + **EXACTLY 3 hashtags, one is #gym** (e.g. `#gym #fatloss #gymtips`). TikTok title = first ~80 chars of the caption without hashtags.
+Caption per reel: the hook claim + one line on what Forge does (true, matches a screen) + "Try Forge free 👉 link in bio (no download)" + **EXACTLY 3 hashtags, one is #gym** (e.g. `#gym #gymtips #aicoach`). TikTok title = first ~80 chars of the caption without hashtags.
 
 ## 10. Publisher [publisher]
 1. Copy files into `media/` as `DATE-r1.mp4`, `DATE-r2.mp4`, `DATE-story.png`; delete media files older than 3 days; `git add -A && git commit -m "media DATE" && git push`.
@@ -88,16 +96,16 @@ Caption per reel: the hook claim + one line that teases the payoff (no full answ
 3. Metricool `createScheduledPost` (blogId `7513231`, timezone Europe/Berlin, autoPublish true). If a slot time has already passed, use the next free full hour.
    - Story 11:00: providers `[{network:"instagram"}]`, `text:""`, media `[story png url]`, `instagramData:{type:"STORY", isAiGenerated:false}`.
    - Reels 12:00 / 17:00: providers tiktok + instagram, text = caption, media `[mp4 url]`,
-     `tiktokData:{title, isAigc:false, privacyOption:"PUBLIC_TO_EVERYONE", autoAddMusic:false}`,
+     `tiktokData:{title, isAigc:false, privacyOption:"PUBLIC_TO_EVERYONE", autoAddMusic:false, commercialContentOwnBrand:true}` (it promotes our own app),
      `instagramData:{type:"REEL", showReelOnFeed:true, isAiGenerated:false}`.
 4. Only count a post as scheduled if Metricool returned an id.
-5. Append to posted.md (`- DATE | slot | slug | hook | myths | id`); add both topics to PLAYBOOK "Used topics" and remove them from the Topic bank; top up the Topic bank to ≥ 15 topics.
+5. Append to posted.md (`- DATE | slot | slug | hook | myths | id`); add the 12:00 topic to "Used motion topics" (remove it from the Topic bank, top up to ≥ 15) and the 17:00 angle to "Used demo angles".
 6. Save cfgs into `days/DATE/`, commit + push the `agency` branch (no mp3/mp4/png in this branch).
 
 ## 11. Director wrap-up [director]
 - Dashboard: campaigns `status:"scheduled", step:6, slot, hook`; `board/week.posts` (next 7 days from getScheduledPosts: `{date,time,title,status}`); all agents `done`.
 - PushNotification (one line): e.g. "Forge Agency: 3/3 scheduled — Story 11:00, Reels 12:00 & 17:00".
-- SendUserMessage to Presko: the two hooks, times, and anything that failed or needs him. Short, friendly, no jargon.
+- SendUserMessage to Presko: yesterday's web-app visitors/sign-ups by source, the two hooks, times, and anything that failed or needs him. Short, friendly, no jargon.
 
 ## If something breaks
 - Never post a broken or half-made video. Mark the agent `blocked` on the dashboard with the reason.

@@ -6,6 +6,17 @@
 - Media hosting: public branch `content-media` of github.com/PreskoBoy21/Forge-v1 → `https://raw.githubusercontent.com/PreskoBoy21/Forge-v1/content-media/<file>` (Metricool copies the file at scheduling time; delete files older than 3 days).
 - Presko's rules: TikTok `isAigc: false`, IG `isAiGenerated: false`; captions have EXACTLY 3 hashtags, one always #gym.
 
+## GOAL since 2026-11-19: traffic to the WEB APP
+- Presko: "make them all about the web app so it can actually bring traffic there… i want to see if people will use it."
+- Web app `https://preskoboy21.github.io/Forge-v1/app` (free in browser, no download; Pro €4.99/mo or €29.99/yr via Stripe). Bio links: TikTok `…/app/?ref=tiktok`, IG `…/app/?ref=ig`.
+- Success = web visitors by ref + sign-ups (Supabase `app_events` name='app_open', platform='web', props.ref), not just views.
+- 12:00 = "Problem → Forge" (gym topic + real numbers → app screen that solves it). 17:00 = "App demo" (POV/feature demo in phone mockups). Story 11:00 = app promise + "Try Forge free — link in bio".
+- Every caption ends "Try Forge free 👉 link in bio (no download)" + 3 hashtags incl. #gym. TikTok `commercialContentOwnBrand:true`.
+- App screens: `engine/assets/app/*.jpg` (welcome, checkin, today_ready, train, snap, body, paywall). Reference build: `days/2026-11-19/app-demo/cfg.json` (Presko's first app demo, 25 s).
+- Never fake results, testimonials or features; example numbers labelled EXAMPLE.
+
+Used demo angles: POV: I let an AI coach plan my gym day (check-in → readiness 93 → exact weights → snap protein → weekly verdict) (2026-11-19 reference)
+
 ## What works (data, newest first)
 - 2026-11-19 IG motion day 5: alcohol 209 (61.7% skip) + body fat & T 158 (57%) at ~20 h — result-first frame 0 didn't lift IG. 9 motion reels avg ~380 IG vs quiz 1.1–2.1k; only sleep & T (1.38k) and protein (647) broke 500 (everyday, personal stakes). TikTok flat ~700 (body fat & T 712 / 12 likes best). Today: highest-stakes topic (steroids & heart, risk-only, 71% number at frame 0) at 12:00 + famous debate claim (carbs) at 17:00. Flagged Presko again: motion costs ~75% of IG reach vs quiz — his call.
 - 2026-11-18 IG drop day 4, worst yet: 11-17 sets volume 152 IG (68% skip) + T-boosters 123 (70% skip) at ~20 h, vs quiz reels 26–40% skip. Protein climbed to 639, sleep & T stays best motion reel (1.38k). TikTok unchanged (695 / 680). Presko's own manual Notion-tracker TikTok (11-17 14:31, not ours) hit 12.2k / 788 likes. Flagged Presko again. Today: result-first frame 0 (the payoff number −24% huge on screen) + personal-stakes topics (alcohol, body fat & T).
