@@ -7,6 +7,7 @@
 - Presko's rules: TikTok `isAigc: false`, IG `isAiGenerated: false`; captions have EXACTLY 3 hashtags, one always #gym.
 
 ## What works (data, newest first)
+- 2026-11-19 IG motion day 5: alcohol 209 (61.7% skip) + body fat & T 158 (57%) at ~20 h — result-first frame 0 didn't lift IG. 9 motion reels avg ~380 IG vs quiz 1.1–2.1k; only sleep & T (1.38k) and protein (647) broke 500 (everyday, personal stakes). TikTok flat ~700 (body fat & T 712 / 12 likes best). Today: highest-stakes topic (steroids & heart, risk-only, 71% number at frame 0) at 12:00 + famous debate claim (carbs) at 17:00. Flagged Presko again: motion costs ~75% of IG reach vs quiz — his call.
 - 2026-11-18 IG drop day 4, worst yet: 11-17 sets volume 152 IG (68% skip) + T-boosters 123 (70% skip) at ~20 h, vs quiz reels 26–40% skip. Protein climbed to 639, sleep & T stays best motion reel (1.38k). TikTok unchanged (695 / 680). Presko's own manual Notion-tracker TikTok (11-17 14:31, not ours) hit 12.2k / 788 likes. Flagged Presko again. Today: result-first frame 0 (the payoff number −24% huge on screen) + personal-stakes topics (alcohol, body fat & T).
 - 2026-11-17 IG drop day 3: 11-16 motion reels 303 (reps vs weight, 59% skip) + 428 (protein, 53%) at ~20 h, even with a training topic at 12:00 and the hook fully static at frame 0. BUT sleep & T (11-15) climbed late to 1,377 IG / 45% skip — personal-stakes (testosterone/body) topics can work in motion style. TikTok unchanged (694 / 729). Flagged Presko (debate hook or one quiz-style reel back?). Today: debate-style claim + stat hook (sets volume) and a T topic (T-boosters) → measure.
 - 2026-11-17 Unknown IG reel at 13:07 on 11-16 ('#gym #gymtok #creatine', 127 views, 80% skip) is not in posted.md — likely posted manually; ignore in baselines.
@@ -20,10 +21,8 @@
 - 2026-11-12 Upper body back on track on IG: chest myths + pulldown mistakes both ~1.7k in ~20 h (calves versus stuck at 915) → keep IG on chest/back/arms/shoulders. TikTok reels flat at 660–730 for 8 in a row regardless of format; only the 2 TT carousels (1.1k) and incline versus (1.3k) broke 1k → TikTok needs a different first frame or more carousels, not a new reel format.
 - 2026-11-11 Legs are bottom on IG for the 3rd time (calves versus 422 views, 50% skip rate) → no leg reels on IG until a strong upper-body streak; if legs, TikTok-only test.
 - 2026-11-11 TikTok is flat at ~710–730 for 6 posts in a row (myth, mistake, versus all the same) → the first frame, not the format, is the limit; test bolder frame-0 claims. Ab myths dropped to 1.2k IG (myth quizzes were 2.0k+) → chest/back/arms myths only.
-- 2026-11-10 Mistake format holds up: 2 bench mistakes = 2.0k IG / 729 TT in ~19 h (on par with myth quizzes). Keep it in rotation.
 - 2026-11-10 TikTok sits at 700–800 for every format; only versus reels with a named muscle + study broke 1k (incline 1.3k, press vs raise 1.2k). Shipped first ab myth quiz + calves versus today — measure tomorrow.
 - 2026-11-09 Versus with a named muscle + a real study is our best non-myth format on BOTH apps (incline vs flat 2.8k IG / 1.3k TT, most comments). Keep 1 versus reel in rotation; myth quizzes hold IG at 2.0–2.3k but generic '2 gym myths' TikToks stall at 300–800.
-- 2026-11-08 Named body part in a quiz hook wins again: "2 arm myths that keep your arms small" = 2.0k IG / 660 TT (2 comments) in ~11 h, best of the day. Prefer "2 [body-part] myths" over generic "2 gym myths".
 - 2026-11 IG is the stronger channel (quizzes 2.6k–3.7k views, 99% non-followers). TikTok 250–1,700.
 - Best format on both: "2 gym myths: true or false?" — 2 myths, 3-2-1 guess gap, FALSE stamp, one-line why, CTA "which one did you believe? comment 1 or 2".
 - Personal hooks win: "myths you probably did today", "your gym bro still swears by", "that keep your arms small". Say "2 gym myths" (or "2 arm myths") in the first second; never give the answer in the hook.
@@ -56,7 +55,6 @@ Squat: cutting depth on heavy days; knees caving — Rows: using the lower back 
 - "You need to bench to build a big chest" (dips/press variations work) — "Abs are made in the kitchen only" (both matter) — "High reps for definition, low reps for size" (both build muscle when hard; Schoenfeld 2017) — "You can't train the same muscle 2 days in a row" — "Bigger forearms need forearm-only training" — "Warm-up sets are a waste" — "Calves are pure genetics" (they grow with hard, full-range training) — "Wide grip = wider back" (CHECKED 2026-11-10: EMG evidence mixed, wide grip slightly higher lat activity in Andersen 2014 → do NOT use as a myth) — "You must lift fast to build power for size" — "Training to failure every set is required" (used) — "Leg day once a week is enough for big legs" (2x/week usually better).
 
 ## TREND LOG (keep ~20, newest last)
-- 2026-11-06: Mistake-correction lists are the most consistent fitness hook — rotate, they fade when overused.
 - 2026-11-06: IG "did today" quiz reached 3.7k / 15.3 s avg watch / 69% 3-s rate — personal myth hooks keep winning on IG.
 - 2026-11-09: 'Act out the bad rep, then fix it' is this week's top fitness format (~20x median); 'popular belief called wrong in line 1' ~15x; muscle-diagram overlays ~6x.
 - 2026-11-09: Warm-up hooks ('This is not a good warm up') spiking → warm-up mistakes reel candidate.
@@ -72,6 +70,7 @@ Squat: cutting depth on heavy days; knees caving — Rows: using the lower back 
 - 2026-11-16: tryvolume: bad-rep-then-fix 21x, before/after flash 17x, age-vs-goal 17x, muscle diagram 7x (still our gap). Pains used: 'stuck on the same weight for weeks', 'how much protein do I really need?'.
 - 2026-11-17: tryvolume fitness page leads with before/after flash (17x, 19 accounts). Own data: testosterone topic is our only motion reel to break 1k on IG. Pains used: 'how many sets should I do?', 'do T-boosters work?'.
 - 2026-11-18: tryvolume: 'show the finished result in second 1' is the top pattern across all niches (8–20x); health 'one-image chart viewers zoom in and save' 17x; wellness 'Ranking ways to…' 1306x outlier. Pains used: 'does drinking kill my gains?', 'does body fat lower testosterone?'.
+- 2026-11-19: tryvolume: fitness before/after flash 17x (18 accounts), health 'one-image chart viewers zoom in and save' 17x. 'Natty or not' steroid debate + low-carb vs low-fat are evergreen arguments. Pains used: 'are steroids really that bad?', 'why did I drop 2 kg in week one of keto?'.
 
 ## STYLE v3 — MOTION EXPLAINER (current, approved by Presko 2026-11-14)
 - Presko: "Now this is something, this is actually good." Old quiz/mascot style looked AI-made; real stock footage (Descript) was rejected ("slideshow of bad footage").
@@ -81,9 +80,8 @@ Squat: cutting depth on heavy days; knees caving — Rows: using the lower back 
 - Engine: engine/explainer_prep.py → engine/motion.py → sfx.py → music.py → render.py. Example: days/2026-11-14/example/cfg.json.
 
 ## Topic bank (motion explainers — famous gym topics; check facts before use)
-- Why cutting carbs isn't why you lose fat (low-carb week 1 = water/glycogen)
+- Steroids & fertility (risk only; NOT before 2026-11-23 — max 1 steroid/TRT/peptide reel per week)
 - Peptides hype vs evidence (BPC-157: mostly animal data, unapproved) — RISKS ONLY
-- What steroids actually do to your heart/fertility — RISKS ONLY
 - Bulking vs cutting vs recomp: which one fits you
 - Skinny fat: why it happens and the fix
 - Deload weeks: do you need them? (check evidence first)

@@ -50,3 +50,6 @@
 - 2026-11-18 | 11:00 IG story | alcohol-gains-story | Do drinks after the gym really cut your gains? (YES / NO) | teases reel 1 | 432474799
 - 2026-11-18 | 12:00 | alcohol-after-training-explainer | Post-gym drinking cut muscle building by 24%. | motion v3: ~12 drinks after training = −24% muscle protein synthesis even with 25 g whey, −37% without protein, 8 active men (Parr 2014, PLoS One) — result-first frame 0 | 432474845
 - 2026-11-18 | 17:00 | bodyfat-testosterone-explainer | Body fat turns testosterone into estrogen. | motion v3: aromatase in fat tissue; 24-study review, weight loss in men with obesity raised total T, more lost = bigger rise (Corona 2013, Eur J Endocrinol) — no medical advice | 432474871
+- 2026-11-19 | 11:00 IG story | steroids-heart-story | Do steroids really weaken your heart? (YES / NO) | teases reel 1 | 433856707
+- 2026-11-19 | 12:00 | steroids-heart-explainer | 71% of lifters on steroids had weak hearts. | motion v3 RISK ONLY: 140 male lifters, 71% of current AAS users LVEF <52% vs 2 of 54 non-users, longer use = more plaque (Baggish 2017, Circulation) — no doses/brands/how-to | 433856758
+- 2026-11-19 | 17:00 | carbs-fatloss-explainer | Cutting carbs doesn't burn more fat. | motion v3: ~3 g water per g glycogen; DIETFITS 609 adults 12 mo, low-carb −6.0 vs low-fat −5.3 kg, no sig. difference (Gardner 2018, JAMA) | 433856819
