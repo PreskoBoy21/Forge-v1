@@ -172,10 +172,49 @@ export function setScreen(path: string) {
   track('screen', { path });
 }
 
+const REF_KEY = 'forge-first-ref';
+
+/**
+ * Web: where this visitor came from. `?ref=tiktok` / `?ref=ig` on the bio
+ * links (or utm_source), else the referring site. The first value is kept,
+ * so later visits still show the original source. Never personal data.
+ */
+function visitSource(): Props {
+  if (Platform.OS !== 'web' || typeof window === 'undefined') return {};
+  try {
+    const q = new URLSearchParams(window.location.search);
+    const fromUrl = (q.get('ref') || q.get('utm_source') || '').slice(0, 40);
+    let referrer = '';
+    try {
+      referrer = document.referrer ? new URL(document.referrer).hostname : '';
+    } catch {
+      referrer = '';
+    }
+    if (referrer === window.location.hostname) referrer = '';
+    let first = localStorage.getItem(REF_KEY);
+    if (!first) {
+      first = fromUrl || referrer || 'direct';
+      localStorage.setItem(REF_KEY, first);
+    }
+    return {
+      ref: fromUrl || null,
+      first_ref: first,
+      referrer: referrer || null,
+      device: /iphone|ipad|android|mobile/i.test(navigator.userAgent)
+        ? 'phone'
+        : 'desktop',
+      standalone:
+        window.matchMedia?.('(display-mode: standalone)').matches ?? false,
+    };
+  } catch {
+    return {};
+  }
+}
+
 /** Call once at app start: send leftovers, periodic flush, error hooks. */
 export function startTelemetry() {
   if (isServer || timer) return;
-  track('app_open');
+  track('app_open', visitSource());
   void loadPending().then(() => flush());
   timer = setInterval(() => void flush(), FLUSH_EVERY_MS);
   AppState.addEventListener('change', (s) => {
