@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   Image,
   Pressable,
@@ -11,7 +11,7 @@ import {
 
 import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
-import { Progress, Ring } from '@/components/charts';
+import { LineChart, Progress } from '@/components/charts';
 import {
   Camera,
   Coffee,
@@ -39,7 +39,11 @@ import {
   type MealItem,
 } from '@/features/food/nutrition';
 import { scanMeal, type ScanOutcome } from '@/features/food/scan';
+import { CheckinCard } from '@/features/food/CheckinCard';
 import { useFood, useToday } from '@/features/food/store';
+import { weightTrend } from '@/features/health/insights';
+import { useAnalysis } from '@/features/health/ui/useAnalysis';
+import { lastDays, shortDate } from '@/features/health/vitals';
 import { go } from '@/lib/nav';
 import { track } from '@/lib/telemetry';
 import { useColors } from '@/theme/theme';
@@ -115,8 +119,20 @@ export default function SnapScreen() {
   });
 
   const draft = sumMacros(items);
-  const proteinLeft = Math.max(0, targets.proteinG - eaten.protein);
-  const kcalLeft = targets.kcal - eaten.kcal;
+  const { snapshot, analysis, goal } = useAnalysis();
+  const weight = analysis.weight;
+  const d42 = useMemo(() => lastDays(snapshot.days, 42), [snapshot]);
+  const trend = useMemo(() => {
+    const byDate = new Map(
+      weightTrend(snapshot.days).map((t) => [t.date, t.trend]),
+    );
+    return d42.map((d) => byDate.get(d.date));
+  }, [snapshot, d42]);
+  const goodWeight =
+    weight &&
+    (goal === 'build_muscle'
+      ? weight.weeklyChangeKg >= 0
+      : weight.weeklyChangeKg <= 0);
 
   const scan = async (from: 'camera' | 'library') => {
     setBusy(true);
@@ -174,65 +190,52 @@ export default function SnapScreen() {
         Food
       </Text>
 
-      {/* today at a glance */}
-      <Card className="mt-4">
-        <View className="flex-row items-center">
-          <Ring
-            value={(eaten.protein / Math.max(1, targets.proteinG)) * 100}
-            size={104}
-            stroke={10}
-            color={c.accent}
-          >
-            <Text className="font-display text-[22px] text-bone">
-              {proteinLeft}
-            </Text>
-            <Text className="font-uiMedium text-[11px] text-steel">
-              g protein left
-            </Text>
-          </Ring>
-          <View className="ml-4 flex-1 gap-3">
-            <View>
-              <View className="mb-1 flex-row justify-between">
-                <Text className="font-uiMedium text-[13px] text-steel">
-                  {kcalLeft >= 0 ? 'Calories left' : 'Over by'}
+      {/* today: the 4 numbers that matter */}
+      <View className="mt-4 flex-row flex-wrap" style={{ gap: 8 }}>
+        {(
+          [
+            ['Calories', eaten.kcal, targets.kcal, 'kcal', true],
+            ['Protein', eaten.protein, targets.proteinG, 'g', false],
+            ['Carbs', eaten.carbs, targets.carbsG, 'g', false],
+            ['Fat', eaten.fat, targets.fatG, 'g', false],
+          ] as const
+        ).map(([label, have, goal, unit, main]) => {
+          const left = goal - have;
+          return (
+            <View
+              key={label}
+              style={{ width: '48.5%' }}
+              className={`rounded-card border p-4 ${main ? 'border-molten/50 bg-graphite-900' : 'border-graphite-700/60 bg-graphite-900'}`}
+            >
+              <Text className="font-uiMedium text-[12px] uppercase tracking-widest text-steel">
+                {label}
+              </Text>
+              <Text
+                className={`mt-1 font-display text-[28px] ${main ? 'text-molten' : 'text-bone'}`}
+                style={{ fontVariant: ['tabular-nums'] }}
+              >
+                {have}
+                <Text className="font-ui text-[14px] text-steel">
+                  {' '}
+                  / {goal} {unit}
                 </Text>
-                <Text
-                  className={`font-uiSemi text-[13px] ${kcalLeft >= 0 ? 'text-bone' : 'text-gold'}`}
-                >
-                  {Math.abs(kcalLeft)} kcal
-                </Text>
+              </Text>
+              <View className="mt-2">
+                <Progress
+                  value={have}
+                  max={Math.max(1, goal)}
+                  color={left < 0 && main ? c.warn : main ? c.accent : c.text}
+                />
               </View>
-              <Progress value={eaten.kcal} max={targets.kcal} color={c.aqua} />
+              <Text
+                className={`mt-1.5 font-ui text-[12px] ${left < 0 ? 'text-gold' : 'text-steel'}`}
+              >
+                {left >= 0 ? `${left} ${unit} left` : `${-left} ${unit} over`}
+              </Text>
             </View>
-            <View>
-              <View className="mb-1 flex-row justify-between">
-                <Text className="font-uiMedium text-[13px] text-steel">
-                  Carbs
-                </Text>
-                <Text className="font-uiSemi text-[13px] text-bone">
-                  {eaten.carbs} / {targets.carbsG} g
-                </Text>
-              </View>
-              <Progress
-                value={eaten.carbs}
-                max={targets.carbsG}
-                color={c.info}
-              />
-            </View>
-            <View>
-              <View className="mb-1 flex-row justify-between">
-                <Text className="font-uiMedium text-[13px] text-steel">
-                  Fat
-                </Text>
-                <Text className="font-uiSemi text-[13px] text-bone">
-                  {eaten.fat} / {targets.fatG} g
-                </Text>
-              </View>
-              <Progress value={eaten.fat} max={targets.fatG} color={c.warn} />
-            </View>
-          </View>
-        </View>
-      </Card>
+          );
+        })}
+      </View>
 
       {/* capture */}
       {items.length === 0 ? (
@@ -484,12 +487,12 @@ export default function SnapScreen() {
               );
             })}
           </Card>
-          <Text className="mb-6 mt-2 font-ui text-[12px] text-steel">
+          <Text className="mt-2 font-ui text-[12px] text-steel">
             Hold a meal to delete it.
           </Text>
         </>
       ) : (
-        <Card className="mb-6 mt-6">
+        <Card className="mt-6">
           <View className="flex-row items-center">
             <IconBadge Icon={Utensils} color={c.warn} />
             <Text className="ml-3 flex-1 font-ui text-[14px] leading-[20px] text-steel">
@@ -499,6 +502,50 @@ export default function SnapScreen() {
           </View>
         </Card>
       )}
+      {/* weight: the result of what you eat */}
+      {weight ? (
+        <>
+          <SectionHeader title="Weight" />
+          <Card className="mb-3">
+            <Text
+              className="font-display text-[32px] text-bone"
+              style={{ fontVariant: ['tabular-nums'] }}
+            >
+              {weight.currentTrendKg.toFixed(1)} kg
+            </Text>
+            <Text className="font-ui text-[13px] text-steel">
+              Trend weight{'  '}
+              <Text className={goodWeight ? 'text-mint' : 'text-gold'}>
+                {weight.weeklyChangeKg > 0 ? '+' : ''}
+                {weight.weeklyChangeKg.toFixed(2)} kg / week
+              </Text>
+            </Text>
+            <View className="mt-4">
+              <LineChart
+                series={[
+                  {
+                    values: d42.map((d) => d.weightKg),
+                    color: c.muted,
+                    dots: true,
+                  },
+                  { values: trend, color: c.accent, area: true },
+                ]}
+                labels={
+                  d42.length
+                    ? [shortDate(d42[0]!.date), shortDate(d42.at(-1)!.date)]
+                    : undefined
+                }
+                unit=" kg"
+              />
+            </View>
+          </Card>
+        </>
+      ) : null}
+      {snapshot.provider !== 'demo' ? (
+        <View className="mb-6">
+          <CheckinCard days={snapshot.days} />
+        </View>
+      ) : null}
     </Screen>
   );
 }
