@@ -2,12 +2,11 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { BodyMap } from '@/components/BodyMap';
 import { Card } from '@/components/Card';
+import { ExerciseDemo } from '@/components/ExerciseDemo';
 import { X } from '@/components/icons';
 import { Eyebrow } from '@/components/ui';
 import { howTo } from '@/features/train/howto';
-import { musclesFor } from '@/features/train/muscles';
 import { useColors } from '@/theme/theme';
 
 /** Form guide for one exercise: what it works, 3 cues, 1 mistake to avoid. */
@@ -15,7 +14,6 @@ export default function HowToScreen() {
   const c = useColors();
   const { name } = useLocalSearchParams<{ name: string }>();
   const h = name ? howTo(name) : undefined;
-  const m = name ? musclesFor(name) : undefined;
 
   return (
     <SafeAreaView className="flex-1 bg-graphite-950" edges={['top', 'bottom']}>
@@ -36,22 +34,12 @@ export default function HowToScreen() {
         </Text>
         {h ? (
           <>
-            {m ? (
-              <Card className="mt-4">
-                <Text className="mb-2 font-uiSemi text-[12px] uppercase tracking-widest text-steel">
-                  Muscles worked
-                </Text>
-                <BodyMap
-                  primary={m.primary}
-                  secondary={m.secondary}
-                  scale={0.72}
-                />
-              </Card>
-            ) : (
-              <Text className="mt-2 font-uiMedium text-[15px] text-molten">
-                Works: {h.works}
-              </Text>
-            )}
+            <Text className="mt-2 font-uiMedium text-[15px] text-molten">
+              Works: {h.works}
+            </Text>
+            <View className="mt-4">
+              <ExerciseDemo name={name!} />
+            </View>
             <Card className="mt-3 gap-4">
               {h.steps.map((s, i) => (
                 <View key={i} className="flex-row">

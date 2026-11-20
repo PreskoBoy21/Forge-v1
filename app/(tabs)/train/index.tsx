@@ -3,6 +3,7 @@ import { Pressable, ScrollView, Text, View } from 'react-native';
 
 import { BodyMap } from '@/components/BodyMap';
 import { Button } from '@/components/Button';
+import { ExerciseDemo } from '@/components/ExerciseDemo';
 import { Card } from '@/components/Card';
 import { BarChart, LineChart } from '@/components/charts';
 import { ChevronRight, History, Trophy } from '@/components/icons';
@@ -14,7 +15,6 @@ import { useOnboardingDraft } from '@/features/onboarding/draft-store';
 import {
   MAIN_GROUPS,
   MUSCLE_LABEL,
-  musclesFor,
   musclesForMany,
   weeklyMuscleSets,
 } from '@/features/train/muscles';
@@ -131,17 +131,13 @@ export default function TrainScreen() {
               }
               className="flex-row items-center py-2"
             >
-              <View className="flex-1">
+              <ExerciseDemo name={mv.name} size="thumb" />
+              <View className="ml-3 flex-1">
                 <Text className="font-ui text-[15px] text-bone">{mv.name}</Text>
                 <Text className="font-ui text-[12px] text-steel">
-                  {(musclesFor(mv.name)?.primary ?? [])
-                    .map((m) => MUSCLE_LABEL[m])
-                    .join(' · ')}
+                  {mv.sets} sets × {mv.repMin}–{mv.repMax} reps
                 </Text>
               </View>
-              <Text className="mr-3 font-ui text-[13px] text-steel">
-                {mv.sets}×{mv.repMin}–{mv.repMax}
-              </Text>
               <Text
                 className={`min-w-[72px] text-right font-uiSemi text-[15px] ${mv.reason === 'increase' ? 'text-mint' : mv.reason === 'deload' ? 'text-gold' : 'text-bone'}`}
               >
@@ -162,7 +158,7 @@ export default function TrainScreen() {
           />
         </View>
         <Text className="mt-3 text-center font-ui text-[12px] text-steel">
-          Tap an exercise to see how to do it
+          Tap an exercise for the full how-to
         </Text>
       </Card>
 

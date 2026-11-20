@@ -3,6 +3,7 @@ import { Animated, Easing, Pressable, Text, View } from 'react-native';
 
 import { BodyMap } from '@/components/BodyMap';
 import { Card } from '@/components/Card';
+import { ExerciseDemo } from '@/components/ExerciseDemo';
 import { BarChart, LineChart, Progress } from '@/components/charts';
 import { InstallHint } from '@/components/InstallHint';
 import { Screen } from '@/components/Screen';
@@ -24,11 +25,7 @@ import { useOnboardingDraft } from '@/features/onboarding/draft-store';
 import { CoachSheet, SheetText } from '@/features/progress/CoachSheet';
 import { clock, dayPlan, type PlanMeal } from '@/features/progress/dayPlan';
 import { useWeekly } from '@/features/progress/useWeekly';
-import {
-  MUSCLE_LABEL,
-  musclesFor,
-  musclesForMany,
-} from '@/features/train/muscles';
+import { MUSCLE_LABEL, musclesForMany } from '@/features/train/muscles';
 import { kgLabel } from '@/features/train/program';
 import { planToday, useTrain } from '@/features/train/store';
 import { useColors } from '@/theme/theme';
@@ -680,13 +677,9 @@ export default function CoachScreen() {
         <View className="mt-3 gap-1">
           {plan.moves.map((m) => (
             <View key={m.name} className="flex-row items-center py-1.5">
-              <Text className="flex-1 font-ui text-[14px] text-bone">
+              <ExerciseDemo name={m.name} size="thumb" />
+              <Text className="ml-3 flex-1 font-ui text-[14px] text-bone">
                 {m.name}
-              </Text>
-              <Text className="mr-3 font-ui text-[12px] text-steel">
-                {(musclesFor(m.name)?.primary ?? [])
-                  .map((x) => MUSCLE_LABEL[x])
-                  .join(' · ')}
               </Text>
               <Text
                 className={`font-uiSemi text-[14px] ${m.reason === 'increase' ? 'text-mint' : 'text-bone'}`}
