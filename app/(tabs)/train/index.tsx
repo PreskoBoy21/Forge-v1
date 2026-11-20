@@ -29,6 +29,8 @@ import {
 } from '@/features/train/stats';
 import { planToday, useTrain } from '@/features/train/store';
 import { go } from '@/lib/nav';
+import { ProLock } from '@/features/paywall/ProLock';
+import { useProLocked } from '@/features/paywall/purchases';
 import { useColors } from '@/theme/theme';
 
 /**
@@ -78,6 +80,7 @@ export default function TrainScreen() {
       ? Math.round((progress.at(-1)!.e1rm - progress[0]!.e1rm) * 10) / 10
       : 0;
   const s = stats.summary;
+  const locked = useProLocked();
   const todayMuscles = useMemo(
     () => musclesForMany(plan.moves.map((mv) => mv.name)),
     [plan],
@@ -166,22 +169,36 @@ export default function TrainScreen() {
       <Text className="mb-3 mt-8 font-display text-[19px] uppercase tracking-wide text-bone">
         This week
       </Text>
-      <Card>
-        <BodyMap sets={week} scale={0.55} />
-        <Text className="mt-3 font-ui text-[14px] leading-[20px] text-steel">
-          {skipped.length === MAIN_GROUPS.length
-            ? 'Every muscle you train this week lights up here. The more sets, the brighter.'
-            : skipped.length
-              ? `Not trained yet: ${skipped.map((g) => MUSCLE_LABEL[g]).join(', ')}.`
-              : 'Every main muscle trained this week.'}
-        </Text>
-      </Card>
+      {locked ? (
+        <ProLock
+          where="week_map"
+          title="Your weekly muscle map"
+          body="See which muscles you trained this week, and which ones you’re skipping."
+        />
+      ) : (
+        <Card>
+          <BodyMap sets={week} scale={0.55} />
+          <Text className="mt-3 font-ui text-[14px] leading-[20px] text-steel">
+            {skipped.length === MAIN_GROUPS.length
+              ? 'Every muscle you train this week lights up here. The more sets, the brighter.'
+              : skipped.length
+                ? `Not trained yet: ${skipped.map((g) => MUSCLE_LABEL[g]).join(', ')}.`
+                : 'Every main muscle trained this week.'}
+          </Text>
+        </Card>
+      )}
 
       {/* progress: one graph at a time */}
       <Text className="mb-3 mt-8 font-display text-[19px] uppercase tracking-wide text-bone">
         Progress
       </Text>
-      {history.length === 0 ? (
+      {locked ? (
+        <ProLock
+          where="progress"
+          title="Strength, volume and calendar graphs"
+          body="Your estimated max per lift, weekly volume and every workout on a calendar."
+        />
+      ) : history.length === 0 ? (
         <Card>
           <Text className="font-ui text-[15px] leading-[21px] text-steel">
             Finish your first workout and your progress graphs show up here.

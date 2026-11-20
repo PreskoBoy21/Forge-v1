@@ -6,5 +6,8 @@ import { Platform } from 'react-native';
  * free until Apple/Google in-app purchases are set up.
  */
 export const FLAGS = {
-  SUBSCRIPTIONS: Platform.OS === 'web',
+  // EXPO_PUBLIC_STORE_SHOTS=1: web build that looks like the iPhone app
+  // (no paywall), only used to make App Store screenshots.
+  SUBSCRIPTIONS:
+    Platform.OS === 'web' && process.env.EXPO_PUBLIC_STORE_SHOTS !== '1',
 } as const;

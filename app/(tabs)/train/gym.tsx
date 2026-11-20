@@ -121,7 +121,7 @@ export default function GymModeScreen() {
           return (
             <View
               key={index}
-              className={`flex-1 items-center rounded-btn py-3 ${isDone ? 'bg-mint' : 'bg-graphite-800'}`}
+              className={`flex-1 items-center rounded-btn py-3 ${isDone ? 'bg-molten' : 'bg-graphite-800'}`}
             >
               <Text
                 className={`font-uiSemi text-[12px] ${isDone ? 'text-graphite-950' : 'text-steel'}`}
@@ -164,7 +164,7 @@ export default function GymModeScreen() {
             useTrain.getState().logSet(weight, reps);
             setRest(move.restSec);
           }}
-          className={`mt-8 h-16 items-center justify-center rounded-btn ${moveComplete ? 'bg-graphite-800' : 'bg-mint'}`}
+          className={`mt-8 h-16 items-center justify-center rounded-btn ${moveComplete ? 'bg-graphite-800' : 'bg-molten'}`}
         >
           <Text className="font-display text-[20px] uppercase text-graphite-950">
             ✓ Set done

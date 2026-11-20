@@ -4,6 +4,7 @@ import { Text } from 'react-native';
 import { Screen } from '@/components/Screen';
 import { FLAGS } from '@/lib/flags';
 import { Paywall } from '@/features/paywall/Paywall';
+import { usePlanPrompt } from '@/features/paywall/planPrompt';
 import { replaceTo } from '@/lib/nav';
 
 export default function OnboardingPaywallScreen() {
@@ -11,12 +12,17 @@ export default function OnboardingPaywallScreen() {
   return (
     <Screen scroll>
       <Text className="font-display text-[34px] uppercase tracking-wide text-bone">
-        Forge Pro
+        Choose your plan
       </Text>
-      <Text className="mt-2 font-ui text-[17px] text-steel">
-        Your plan is ready and free. Pro adds the parts that need AI.
+      <Text className="mt-2 font-ui text-[16px] text-steel">
+        Your training plan is ready. Pick how much coaching you want.
       </Text>
-      <Paywall onDone={() => replaceTo('/(tabs)/today')} />
+      <Paywall
+        onDone={() => {
+          usePlanPrompt.getState().markSeen();
+          replaceTo('/(tabs)/today');
+        }}
+      />
     </Screen>
   );
 }
