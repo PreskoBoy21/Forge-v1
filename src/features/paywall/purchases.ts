@@ -2,6 +2,7 @@ import { Platform } from 'react-native';
 import { create } from 'zustand';
 
 import { billingReady } from '@/lib/billing';
+import { FLAGS } from '@/lib/flags';
 import { supabase } from '@/lib/supabase';
 
 /**
@@ -94,5 +95,5 @@ export async function restore(): Promise<boolean> {
 /** Web free plan: the AI coach and Weekly Verdict are Pro. */
 export const useProLocked = () => {
   const isPro = usePro((s) => s.isPro);
-  return Platform.OS === 'web' && !isPro;
+  return FLAGS.SUBSCRIPTIONS && !isPro;
 };
