@@ -25,6 +25,7 @@ export {
   Pencil,
   ArrowLeftRight,
   Minus,
+  Lock,
   LogOut,
   Mail,
   MessageCircle,

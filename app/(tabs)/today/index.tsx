@@ -25,6 +25,10 @@ import { useOnboardingDraft } from '@/features/onboarding/draft-store';
 import { CoachSheet, SheetText } from '@/features/progress/CoachSheet';
 import { clock, dayPlan, type PlanMeal } from '@/features/progress/dayPlan';
 import { useWeekly } from '@/features/progress/useWeekly';
+import { ProLock, ProTag } from '@/features/paywall/ProLock';
+import { usePlanPrompt } from '@/features/paywall/planPrompt';
+import { useProLocked } from '@/features/paywall/purchases';
+import { go } from '@/lib/nav';
 import { MUSCLE_LABEL, musclesForMany } from '@/features/train/muscles';
 import { kgLabel } from '@/features/train/program';
 import { planToday, useTrain } from '@/features/train/store';
@@ -133,7 +137,21 @@ export default function CoachScreen() {
   const overrides = useTrain((st) => st.overrides);
   const trainingDays = useOnboardingDraft((st) => st.trainingDays);
   const { verdict, stats } = useWeekly();
-  const [sheet, setSheet] = useState<Sheet | null>(null);
+  const [sheet, openSheet] = useState<Sheet | null>(null);
+  const locked = useProLocked();
+  // Free web plan: the "why" sheets are Pro.
+  const setSheet = (s: Sheet | null) =>
+    s && locked ? go('/(tabs)/you/paywall') : openSheet(s);
+  const promptSeen = usePlanPrompt((st) => st.seen);
+  useEffect(() => {
+    // Free web users who never saw the plan choice get it once.
+    if (!locked || promptSeen) return;
+    const id = setTimeout(() => {
+      usePlanPrompt.getState().markSeen();
+      go('/(tabs)/you/paywall');
+    }, 1500);
+    return () => clearTimeout(id);
+  }, [locked, promptSeen]);
   const [now] = useState(() => new Date());
   const today = now.toISOString().slice(0, 10);
   const nowMinute = now.getHours() * 60 + now.getMinutes();
@@ -333,7 +351,9 @@ export default function CoachScreen() {
               </Text>
             </View>
             <Text className="mt-3 font-uiSemi text-[12px] text-molten">
-              Why? Tap to see the data
+              {locked
+                ? 'Why? See the data with Pro'
+                : 'Why? Tap to see the data'}
             </Text>
           </Card>
         </Pressable>
@@ -436,11 +456,14 @@ export default function CoachScreen() {
       ) : null}
 
       {/* 3 — your day, planned */}
-      <Text className="mb-2 mt-7 font-display text-[22px] text-bone">
-        Your day, <Text className="text-molten">planned</Text>
-      </Text>
+      <View className="mb-2 mt-7 flex-row items-center">
+        <Text className="font-display text-[22px] text-bone">
+          Your day, <Text className="text-molten">planned</Text>
+        </Text>
+        {locked ? <ProTag /> : null}
+      </View>
       <Card className="py-2">
-        {items.map((it, i) => {
+        {(locked ? items.slice(0, 2) : items).map((it, i, arr) => {
           const isNext = it.state === 'next';
           const faded = it.state === 'done' || it.state === 'missed';
           return (
@@ -465,7 +488,7 @@ export default function CoachScreen() {
                       : undefined
                   }
                 />
-                {i < items.length - 1 ? (
+                {i < arr.length - 1 ? (
                   <View className="mt-1 w-0.5 flex-1 bg-graphite-700" />
                 ) : null}
               </View>
@@ -501,9 +524,19 @@ export default function CoachScreen() {
           );
         })}
       </Card>
-      <Text className="mt-2 font-ui text-[12px] text-steel">
-        Times follow your usual meals. Suggestions only.
-      </Text>
+      {locked ? (
+        <View className="mt-3">
+          <ProLock
+            where="day_plan"
+            title={`${Math.max(0, items.length - 2)} more today: training, meals, bedtime`}
+            body="Your full day: when to eat what, when to train and when to sleep."
+          />
+        </View>
+      ) : (
+        <Text className="mt-2 font-ui text-[12px] text-steel">
+          Times follow your usual meals. Suggestions only.
+        </Text>
+      )}
 
       {/* 4 — one thing to improve */}
       <Pressable

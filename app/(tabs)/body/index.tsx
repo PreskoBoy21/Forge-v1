@@ -22,6 +22,9 @@ import {
 import { useAnalysis } from '@/features/health/ui/useAnalysis';
 import { useCoachRead } from '@/features/health/ui/useCoachRead';
 import { lastDays, shortDate } from '@/features/health/vitals';
+import { ProLock } from '@/features/paywall/ProLock';
+import { useProLocked } from '@/features/paywall/purchases';
+import { go } from '@/lib/nav';
 import { useColors } from '@/theme/theme';
 
 /**
@@ -69,6 +72,7 @@ export default function SleepScreen() {
     [all, range],
   );
   const ready = analysis.readiness;
+  const locked = useProLocked();
   const rhr = shown.map((d) => d.restingHr).filter((v): v is number => !!v);
   const hrv = shown.map((d) => d.hrvMs).filter((v): v is number => !!v);
   const avg = (xs: number[]) =>
@@ -153,10 +157,12 @@ export default function SleepScreen() {
           <View className="mt-5">
             <Segmented
               value={range}
-              onChange={setRange}
+              onChange={(v) =>
+                v === '30' && locked ? go('/(tabs)/you/paywall') : setRange(v)
+              }
               options={[
                 { value: '7', label: '7 days' },
-                { value: '30', label: '30 days' },
+                { value: '30', label: locked ? '30 days · PRO' : '30 days' },
               ]}
             />
           </View>
@@ -184,7 +190,17 @@ export default function SleepScreen() {
       ) : null}
 
       {/* recommendation */}
-      {s.status !== 'none' ? (
+      {s.status !== 'none' && locked ? (
+        <View className="mt-3">
+          <ProLock
+            where="sleep_tip"
+            title={`Coach’s tip: ${s.tip.title}`}
+            body="What to change tonight, based on your sleep this week."
+          />
+        </View>
+      ) : null}
+      {/* recommendation */}
+      {s.status !== 'none' && !locked ? (
         <Card className="mt-3">
           <View className="flex-row items-center">
             <Sparkles size={15} color={c.accent} />
