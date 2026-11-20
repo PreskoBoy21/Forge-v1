@@ -14,16 +14,17 @@ import { deviceStorage } from '@/lib/storage';
 export type ThemeMode = 'light' | 'dark' | 'system';
 export type Scheme = 'light' | 'dark';
 
+/** Black & Orange (chosen by Presko 2026-11-20). */
 const DARK = {
-  bg: '#0A0C10',
-  card: '#12151B',
-  raised: '#1B1F27',
-  line: '#282D38',
-  text: '#EEF1F5',
-  muted: '#8C95A6',
-  accent: '#C6F24E',
-  aqua: '#47D7E8',
-  violet: '#9B8CFF',
+  bg: '#000000',
+  card: '#111111',
+  raised: '#1C1C1C',
+  line: '#262626',
+  text: '#FFFFFF',
+  muted: '#8E8E8E',
+  accent: '#FF6A1A',
+  aqua: '#FFFFFF',
+  violet: '#B8B8B8',
   good: '#4ADE9A',
   warn: '#FFC542',
   bad: '#FF5D6C',
@@ -31,15 +32,15 @@ const DARK = {
 };
 
 const LIGHT: typeof DARK = {
-  bg: '#F3F5F8',
+  bg: '#F4F4F4',
   card: '#FFFFFF',
-  raised: '#E9EDF2',
-  line: '#DCE2EA',
-  text: '#11141A',
-  muted: '#5F6B7C',
-  accent: '#4C8A0C',
-  aqua: '#0B8EA0',
-  violet: '#6B58DD',
+  raised: '#EAEAEA',
+  line: '#DEDEDE',
+  text: '#0A0A0A',
+  muted: '#6B6B6B',
+  accent: '#E8580C',
+  aqua: '#0A0A0A',
+  violet: '#5C5C5C',
   good: '#0F9A62',
   warn: '#B7791F',
   bad: '#D63445',
@@ -79,8 +80,8 @@ export const THEME_VARS = { light: toVars(LIGHT), dark: toVars(DARK) };
 type ThemeState = { mode: ThemeMode; setMode: (m: ThemeMode) => void };
 
 export const useTheme = create<ThemeState>()(
-  persist((set) => ({ mode: 'light', setMode: (mode) => set({ mode }) }), {
-    name: 'forge-theme',
+  persist((set) => ({ mode: 'dark', setMode: (mode) => set({ mode }) }), {
+    name: 'forge-theme-v2',
     storage: deviceStorage,
   }),
 );
