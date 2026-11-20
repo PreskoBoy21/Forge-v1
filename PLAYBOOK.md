@@ -6,7 +6,23 @@
 - Media hosting: public branch `content-media` of github.com/PreskoBoy21/Forge-v1 → `https://raw.githubusercontent.com/PreskoBoy21/Forge-v1/content-media/<file>` (Metricool copies the file at scheduling time; delete files older than 3 days).
 - Presko's rules: TikTok `isAigc: false`, IG `isAiGenerated: false`; captions have EXACTLY 3 hashtags, one always #gym.
 
-## BRAND (since 2026-11-20, Presko): ONE look everywhere — app, icon, website, videos, stories
+## BRAND IDENTITY (approved by Presko 2026-11-20 — every post follows this)
+- **Who we are:** Forge — the AI gym coach that adapts to your real life: your sleep, your food, your schedule.
+- **One line:** *Know what to do today.*
+- **Mission:** give every regular gym-goer the guidance of a personal trainer — without paying €100+/month for one.
+- **Audience:** 18–30, trains 3–5×/week, past beginner, wants muscle or fat loss, tracks in a notes app or not at all, can't afford a PT. Mainly guys (EU + US), women second.
+- **Enemy:** guessing — notes apps, copy-paste programs, gym-bro myths.
+- **Why Forge:** reads your sleep and changes today's workout, exact weight for every set, food from a photo, and tells you *why*.
+- **Personality:** a straight-talking coach friend — direct, science-backed, a bit funny. Never aggressive "no excuses", never wellness-fluffy, never medical claims.
+- **Voice:** short sentences, real numbers, "you", no hype words (game-changer, revolutionary, insane), honest.
+- **Face:** Presko, ICT student in the Netherlands who built the coach he wanted (founder clips when he sends them).
+- **Price story:** a year of Pro costs less than one PT session. Plans: Free, or Pro €4.99/mo · €29.99/yr. **No free trial** (Presko's choice) — never promise one.
+- **Pillars (weekly mix):** (1) **Gym truths** ~50% — science-backed hooks/debates ("true or false?", "comment 1 or 2") → reach. (2) **Coach calls** ~35% — a real situation → what the app decides (real app screens) → clicks. (3) **Building Forge** ~15% — behind the scenes, founder, later real user wins (never invented) → trust.
+- **Funnel targets (to 100 paying):** ~2,500 sign-ups ≈ 12–15k app visitors. Weekly targets live in WEEK.md.
+- **CTA:** "link in bio" (TikTok `?ref=tiktok`, IG `?ref=ig`, FB `?ref=fb`). When PLAYBOOK says `DM_KEYWORD: COACH` is live, switch captions to "Comment COACH and I'll send you the link".
+- DM_KEYWORD: off
+
+## BRAND LOOK (since 2026-11-20, Presko): ONE look everywhere — app, icon, website, videos, stories
 - Black #000000 + orange #FF6A1A + white text, grey #8E8E8E for details. NO lime, NO aqua/blue, NO other accent (red only for "bad").
 - Anton headlines, Inter Tight text, JetBrains Mono small labels.
 - Only 2 video formats, same look: (1) short voiced reels (story/POV/debate hook, real app footage, captions synced to the voice, soft end card "FORGE · link in bio"), (2) app demo / problem→Forge explainer in motion v3. No other styles.
@@ -130,3 +146,5 @@ Used motion topics: calorie deficit / crash dieting (example, 2026-11-14); creat
   - 2026-11-10: items button labels > ~9 chars (e.g. BOTTOM HALF) overflow the right edge → keep a/b labels short (FULL / STRETCH). Hook 92 px with a long 2nd line touches the edges → 84 px.
   - 2026-11-13: end card 'COMMENT 1 OR 2' text sits over the mascot's head (all formats) → engine fix candidate (move comment line above the mascot or mascot lower).
   - 2026-11-14: FIXED — build.py end-card comment line moved from top 740 → 535 (between the question and the buttons); clear of the mascot. Item card text ~28+ chars wraps one word onto line 2 ("ARE LIFTING STRAPS WORTH / IT?") → keep `myths` short for worth reels ("Lifting straps").
+
+## Weekly reviews (Sunday, newest first — what worked, what flopped, 1 content change + 1 product idea)

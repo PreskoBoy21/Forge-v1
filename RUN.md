@@ -1,9 +1,12 @@
 # RUN.md — the daily run (follow exactly, top to bottom)
 
 Output every day (Europe/Berlin):
-- **11:00 Instagram Story** — a question teasing Reel 1 (TikTok Stories can't be scheduled via Metricool).
-- **12:00 Reel 1** — TikTok + Instagram.
-- **17:00 Reel 2** — TikTok + Instagram.
+- **11:00 Story** — Instagram (+ Facebook story if Facebook is connected). TikTok Stories can't be scheduled via Metricool.
+- **12:00 Reel 1** — TikTok + Instagram (+ Facebook Reel if connected). Pillar 1 or 2 (see BRAND IDENTITY).
+- **17:00 Reel 2** — TikTok + Instagram (+ Facebook Reel if connected). Pillar 2 or 3.
+Facebook is connected when Metricool `getBrandSettings` shows a `facebookData` entry for blog 7513231. No YouTube.
+**Monday:** before step 1 the Chief writes `WEEK.md` (last week's numbers, this week's targets: visitors / sign-ups / Pro, the ONE test of the week, pillar mix) and follows it all week.
+**Sunday:** after the wrap-up the Chief writes a "Weekly reviews" entry in PLAYBOOK (what worked/flopped by sign-ups, 1 content change, 1 product idea for Presko).
 
 DATE = today's date (YYYY-MM-DD, Europe/Berlin). WORK = `days/DATE` (all commands run from the `agency-engine` folder unless they `cd`).
 Dashboard = `https://claude.ai/artifact/13XiYSSutM5qUqbgkNqPN8` (write with ArtifactData). Agent keys are in AGENCY.md.
@@ -14,7 +17,7 @@ git clone -b agency https://github.com/PreskoBoy21/Forge-v1 agency-engine
 git clone -b content-media --depth 1 https://github.com/PreskoBoy21/Forge-v1 media
 pip install --break-system-packages numpy >/dev/null 2>&1 || true
 ```
-Read AGENCY.md, PLAYBOOK.md, posted.md.
+Read AGENCY.md, PLAYBOOK.md (BRAND IDENTITY first), WEEK.md, posted.md.
 Check Metricool `getScheduledPosts` (blogId 7513231, today+tomorrow). **If a slot already has a post, skip that slot.** If all 3 are filled, just do the Analyst step + wrap-up.
 Dashboard: `board/today` set `{date, campaigns:[], activity:[], trends:[]}`; set each `agents/<key>` to `{status:"idle"}` (ads + community `{status:"off"}`).
 Log each step as an activity line `{t: ISO time, agent, text}` and set the working agent `{status:"working", task:"…"}` → `{status:"done"}` when finished. Keep it short; one batch write per step is fine.
@@ -24,6 +27,7 @@ Log each step as an activity line `{t: ISO time, agent, text}` and set the worki
 - Find top 2 / bottom 2 per platform and say WHY (hook, topic, length, slot).
 - Write 1–3 lessons into PLAYBOOK "What works" (replace stale ones; keep the section short).
 - **Web-app traffic (the real goal):** if the Supabase tool is available, run read-only SQL on project `dxirfwtrrbjuflyiobjq`: `select props->>'ref' ref, count(distinct install_id) visitors, count(*) opens from app_events where name='app_open' and platform='web' and created_at > now()-interval '24 hours' group by 1` plus new sign-ups (`select count(*) from auth.users where created_at > now()-interval '24 hours'`) and Pro users (`select count(*) from profiles where is_pro`). Read-only, never write. Put the numbers in What works and the wrap-up message ("TikTok sent 4 visitors, IG 2, 1 sign-up"). Judge reels by visitors, not just views.
+- **Funnel (read-only SQL, last 24 h and last 7 days):** app visitors by ref (above) → sign-ups → plan screen views and checkout clicks (`select props->>'path' p, count(*) from app_events where name='screen' and (props->>'path' like 'checkout_%' or props->>'path' like 'upsell_%' or props->>'path' like '%paywall%') and created_at > now()-interval '7 days' group by 1`) → Pro users. Write the biggest drop-off as today's #1 weakness.
 - Dashboard `board/stats`: `{posts7d, views7d, avgViews7d, best:{title,views}, lessons:[…], postsThisWeek, nextRun:"08:20"}`.
 
 ## 2. Trend Scout [trends] + Intel [intel]
@@ -32,6 +36,8 @@ Log each step as an activity line `{t: ISO time, agent, text}` and set the worki
 - Append 1–2 lines to PLAYBOOK TREND LOG (keep ~20, drop the oldest). Dashboard `board/today.trends`.
 
 ## 3. Content Strategist [strategist]
+**Pillars:** pick each brief's pillar from BRAND IDENTITY + WEEK.md mix. 12:00 = Gym truth or Coach call; 17:00 = Coach call / app demo or Building Forge (only with real material — never invent a founder story or user result).
+**Gym truth / Coach call reels can be SHORT (15–20 s, 40–55 words)** with a debate ending ("Comment 1 or 2") — on Instagram this format beat explainers ~4× in Nov 2026. Hook ≤ 8 words, the app on screen within the first 2 s where possible.
 **Since 2026-11-19 EVERY post sells the Forge WEB APP** (Presko: "make them all about the web app so it can actually bring traffic there"). Web app = `https://preskoboy21.github.io/Forge-v1/app` — free in the browser, no download, Pro €4.99/mo. Bio links carry `?ref=tiktok` / `?ref=ig`.
 Look stays MOTION v3 (approved 2026-11-14). The two daily reels:
 - **12:00 "Problem → Forge"**: a famous gym topic (list below) explained with 1–2 real numbers in the first ~60%, then a turn ("Forge does this for you") into 1–2 phone scenes showing the matching app screen, then the CTA. The topic earns the view, the app is the answer.
@@ -88,7 +94,7 @@ Phone scenes: `cp engine/assets/app/*.jpg WORK/r1/` and use `<div class='phone'>
 Every still + story PNG checked. Nothing half-broken ships. If a reel can't be fixed, ship only what passed and mark that campaign `failed` + tell Presko.
 
 ## 9. Copywriter [copy]
-Caption per reel: the hook claim + one line on what Forge does (true, matches a screen) + "Try Forge free 👉 link in bio (no download)" + **EXACTLY 3 hashtags, one is #gym** (e.g. `#gym #gymtips #aicoach`). TikTok title = first ~80 chars of the caption without hashtags.
+Caption per reel: the hook claim + one line on what Forge does (true, matches a screen) + the CTA from BRAND IDENTITY ("link in bio 👇" now; the COACH keyword only when `DM_KEYWORD` is live) + **EXACTLY 3 hashtags, one is #gym** (e.g. `#gym #gymtips #aicoach`). Debate reels add "Comment 1 or 2 👇". Never mention a free trial. TikTok title = first ~80 chars of the caption without hashtags.
 
 ## 10. Publisher [publisher]
 1. Copy files into `media/` as `DATE-r1.mp4`, `DATE-r2.mp4`, `DATE-story.png`; delete media files older than 3 days; `git add -A && git commit -m "media DATE" && git push`.
@@ -98,6 +104,7 @@ Caption per reel: the hook claim + one line on what Forge does (true, matches a 
    - Reels 12:00 / 17:00: providers tiktok + instagram, text = caption, media `[mp4 url]`,
      `tiktokData:{title, isAigc:false, privacyOption:"PUBLIC_TO_EVERYONE", autoAddMusic:false, commercialContentOwnBrand:true}` (it promotes our own app),
      `instagramData:{type:"REEL", showReelOnFeed:true, isAiGenerated:false}`.
+   - Facebook (only if connected): add provider `{network:"facebook"}` with `facebookData:{type:"REEL"}` to each reel post, and a separate Story post `{network:"facebook"}` + `facebookData:{type:"STORY"}` at 11:00. Caption link `?ref=fb`.
 4. Only count a post as scheduled if Metricool returned an id.
 5. Append to posted.md (`- DATE | slot | slug | hook | myths | id`); add the 12:00 topic to "Used motion topics" (remove it from the Topic bank, top up to ≥ 15) and the 17:00 angle to "Used demo angles".
 6. Save cfgs into `days/DATE/`, commit + push the `agency` branch (no mp3/mp4/png in this branch).

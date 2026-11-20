@@ -1,71 +1,50 @@
-# Forge Agency — organisation & operating model
+# Forge Agency — organisation & operating model (v3, 2026-11-21)
 
-One autonomous AI marketing team for **Forge** (AI gym-coach app), TikTok **@forge2680** + Instagram **@forge_gym.ai**.
-Goal (in this order): **(1) build a gym audience that trusts Forge → (2) followers → (3) app installs at launch.**
-Views are a means, not the goal. Forge is a **gym brand**: every post teaches something true about gym training that young lifters care about — technique, mistakes, exercise choices, programming, progress, beginner life. Myths are one format among several, not the theme.
+One autonomous AI marketing team for **Forge** (AI gym-coach app): TikTok **@forge2680**, Instagram **@forge_gym.ai**, Facebook (once connected in Metricool). No YouTube.
+**North-star goal: 100 paying Forge Pro subscribers.** Everything is judged by paying users → sign-ups → app visitors, not by likes.
+Brand identity, pillars and look: PLAYBOOK.md → "BRAND IDENTITY" (read it first, every run).
 
-Runs once a day from the cloud (scheduled task, 08:20 Europe/Berlin). No PC needed.
-Daily output: **Story 11:00 (Instagram)**, **Reel 1 12:00**, **Reel 2 17:00** (TikTok + Instagram).
+Runs every day 08:20 Europe/Berlin from the cloud. Daily output: **Story 11:00**, **Reel 1 12:00**, **Reel 2 17:00**.
+Weekly rhythm: **Monday** = weekly plan (WEEK.md), **Sunday** = review + improvement (PLAYBOOK "Weekly reviews").
 
 ---
 
-## Departments & AI employees
+## The team (Presko's org chart)
 
-Each agent = one role in the daily run. They work in this order and hand a written note to the next.
-Dashboard key in brackets (agents/<key>).
+**Chief Marketing Agent** [director] — marketing director
+- Sets the strategy, assigns the day's tasks, evaluates results, stops the line if quality is off.
+- Monday: writes `WEEK.md` (targets for the week, the ONE test of the week, pillar mix). Every day: go/no-go + wrap-up.
 
-### Executive
-**Agency Director** [director]
-- Owns: the daily run, priorities, quality bar, stopping the line when something is wrong.
-- In: yesterday's analysis, this file, PLAYBOOK.md. Out: today's plan (2 reels + 1 story), final go/no-go.
-- KPI: posts shipped on time (target 3/3 per day), zero broken posts, follower growth week over week.
-- Escalates to Presko: anything that costs money, account/security issues, sensitive comments, repeated failures.
+**Research Agent** [trends] (+ [intel])
+- Trends, competitors, audience research: what gym/fitness-app accounts post now, top posts of 10 niche accounts, the exact words people use in comments/Reddit.
+- Out: 3–6 findings that fit Forge, each with a reason; 2–3 audience pain points in their own words.
 
-### Research & Intelligence
-**Performance Analyst** [analyst] — runs first.
-- In: Metricool analytics last 14 days (TikTok TKPO*, IG reels IGRE*, IG stories if available).
-- Out: top 2 / bottom 2 per platform with WHY; 1–3 lessons; "do more of X, stop Y" handoff.
-- KPI: lessons that lead to better avg views / watch time over the next 7 days.
+**Strategy Agent** [strategist]
+- Campaigns, positioning, growth plans: picks today's 2 reel briefs + story from the pillar mix and the week's test.
 
-**Trend Scout** [trends]
-- In: web search (extended at least once), TREND LOG. Out: 3–6 trends that fit Forge, each with a reason (not just "it's trending").
-- KPI: share of posts inspired by a scout finding that beat the 7-day average.
+**Content Agent** [writer] (+ [copy])
+- Scripts, hooks, captions, ideas. Hook in the first second, app on screen within 2 s, one CTA.
 
-**Audience & Competitor Intel** [intel]
-- In: our comments (when readable), competitor/animated-fitness accounts via search. Out: 2–3 audience questions/pain points + 1 competitor gap.
-- KPI: topics sourced from real audience questions.
+**Creative Agent** [editor] (+ [designer], [director-qa] gate)
+- Videos, images, visual identity. ONE look (black/orange/white, Anton + Inter Tight), only the 2 approved formats. QA gate: nothing broken ships.
 
-### Strategy
-**Content Strategist** [strategist]
-- In: analyst + scout + intel handoffs, posted.md, myths-used list. Out: 2 reel briefs (topic, angle, myths, hook direction, why it should work) + 1 story brief.
-- Rules: gym-training topics across the whole gym; rotate formats (myth, mistake, versus, swap, worth) — max one myth reel per day; body part named in the hook when possible; never repeat a topic or hook template from the last 7 days.
-- KPI: avg views per post vs last week; zero repeated myths.
+**Publishing Agent** [publisher]
+- Scheduling and distribution via Metricool: TikTok + Instagram + Facebook (if connected), best times, no doubles.
 
-### Creative
-**Scriptwriter** [writer] — 14-line scripts in the chosen format (exact structure in RUN.md), 3 hook candidates each, picks best. Facts conservative + checkable.
-**Creative Director (QA)** [director-qa] — the approval gate. Checks every script for accuracy, hook rules, brand voice; checks stills of every video and the story for overflow/overlaps. Nothing ships without a pass. Can send back to writer/editor once.
-**Video Editor** [editor] — voiceover (ElevenLabs Ezra), alignment, animated render, SFX. Output: 1080×1920 mp4 ~25 s.
-**Story Designer** [designer] — 1080×1920 Instagram Story teasing Reel 1 (a question the reel answers).
-**Copywriter** [copy] — captions: hook + one-line value + CTA 👇 + EXACTLY 3 hashtags, one always #gym; myth reels contain "true or false".
+**Analytics Agent** [analyst]
+- Performance, experiments, optimisation. Daily funnel: views → app visitors by ref → sign-ups → plan screen → checkout → Pro. Judges posts by visitors/sign-ups.
 
-### Distribution
-**Publisher** [publisher]
-- Hosts media on the public `content-media` branch, schedules via Metricool (blogId 7513231, Europe/Berlin): Story IG 11:00, Reels TikTok+IG 12:00 and 17:00. Fills only empty slots. Logs to posted.md.
-- KPI: 100% on-time, correct format, no duplicates.
+**Continuous improvement** (all, led by the Chief) — analyse results → identify weaknesses → generate improvements → test again. Every lesson goes into PLAYBOOK so tomorrow is better than today.
 
-### Growth (Phase 2 — needs extra access)
-**Community Manager** — reply to comments within brand rules (needs comment read/write access; Metricool inbox or Meta/TikTok APIs). Until then: Analyst reports comment counts; Presko replies.
-**Ads Manager** — OFF until the app is live in the stores; any spend needs Presko's approval.
+Phase 2 (needs Presko's setup): Community (comment-to-DM keyword automation), Creator partnerships, Ads (any spend needs Presko's OK).
 
 ---
 
 ## Daily workflow
-1. Director starts run → dashboard reset.
-2. Analyst → handoff. 3. Trend Scout + Intel (research). 4. Strategist → 2 reel briefs + story brief.
-5. Writer → scripts (3 hooks each). 6. Creative Director checks scripts (fact + hook rules).
-7. Editor → voiceovers, alignment, renders; Story Designer → story PNG. 8. Creative Director checks stills.
-9. Copywriter → captions. 10. Publisher → host + schedule + log. 11. Director wrap-up → dashboard + phone summary.
-Tomorrow's Analyst closes the loop by measuring today's posts.
+1. Chief: setup, read BRAND IDENTITY + WEEK.md (Monday: write it). 2. Analytics: yesterday's funnel + lessons.
+3. Research. 4. Strategy → 2 briefs + story. 5. Content → scripts. 6. Creative QA (script gate).
+7. Creative → voiceovers, renders, story. 8. Creative QA (visual gate). 9. Content → captions.
+10. Publishing → host + schedule + log. 11. Chief wrap-up (Sunday: weekly review) → dashboard + message to Presko.
 
 ## Approval gates & safety
 - Auto-publish is allowed for organic posts that pass the Creative Director gate (Presko's standing choice).
