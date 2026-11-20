@@ -1,6 +1,6 @@
 # usage: python3 motion.py <dir>   -> index.html  (needs cfg.json, seg.json, dur.json from explainer_prep.py)
 # "Motion" style v3: After-Effects-like motion design. Off-black + film grain, Anton headlines, Inter Tight body,
-# JetBrains Mono data labels, ONE accent (lime) + red only for "bad". Mask reveals, char/word staggers with
+# JetBrains Mono data labels, ONE accent (orange #FF6A1A) + red only for "bad". Mask reveals, char/word staggers with
 # expo/spring easing, shape-panel wipes, self-drawing lines/charts, counters, camera punch only on hits.
 #
 # Scene HTML (cfg.scenes[].html) uses .e elements with:
@@ -25,7 +25,7 @@ starts = [0.0 if i == 0 else st[s['l']] - .04 for i, s in enumerate(sc)]
 ends = starts[1:] + [999]
 body = ''.join(f"<div class='scene' data-a='{starts[i]}' data-b='{ends[i]}' data-tint='{s.get('tint','')}' data-cap='{1 if s.get('cap',True) else 0}'>{s['html'].replace('/>',' />')}</div>\n" for i, s in enumerate(sc))
 html = r'''<!doctype html><html><head><meta charset="utf-8"><style>@@FONTS@@
-:root{--bg:#0B0B0C;--fg:#F2F0EB;--mu:#7D7A75;--ac:#C8F04A;--rd:#FF4B4B;--ln:#2A2A2D}
+:root{--bg:#000000;--fg:#F2F0EB;--mu:#7D7A75;--ac:#FF6A1A;--rd:#FF4B4B;--ln:#2A2A2D}
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);color:var(--fg);font-family:'Inter Tight',sans-serif}
 #tint{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 38%,rgba(255,75,75,.22),rgba(255,75,75,0) 70%);opacity:0}

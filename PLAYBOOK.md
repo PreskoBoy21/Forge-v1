@@ -6,6 +6,11 @@
 - Media hosting: public branch `content-media` of github.com/PreskoBoy21/Forge-v1 → `https://raw.githubusercontent.com/PreskoBoy21/Forge-v1/content-media/<file>` (Metricool copies the file at scheduling time; delete files older than 3 days).
 - Presko's rules: TikTok `isAigc: false`, IG `isAiGenerated: false`; captions have EXACTLY 3 hashtags, one always #gym.
 
+## BRAND (since 2026-11-20, Presko): ONE look everywhere — app, icon, website, videos, stories
+- Black #000000 + orange #FF6A1A + white text, grey #8E8E8E for details. NO lime, NO aqua/blue, NO other accent (red only for "bad").
+- Anton headlines, Inter Tight text, JetBrains Mono small labels.
+- Only 2 video formats, same look: (1) short voiced reels (story/POV/debate hook, real app footage, captions synced to the voice, soft end card "FORGE · link in bio"), (2) app demo / problem→Forge explainer in motion v3. No other styles.
+
 ## GOAL since 2026-11-19: traffic to the WEB APP
 - Presko: "make them all about the web app so it can actually bring traffic there… i want to see if people will use it."
 - Web app `https://preskoboy21.github.io/Forge-v1/app` (free in browser, no download; Pro €4.99/mo or €29.99/yr via Stripe). Bio links: TikTok `…/app/?ref=tiktok`, IG `…/app/?ref=ig`.
@@ -87,8 +92,8 @@ Squat: cutting depth on heavy days; knees caving — Rows: using the lower back 
 
 ## STYLE v3 — MOTION EXPLAINER (current, approved by Presko 2026-11-14)
 - Presko: "Now this is something, this is actually good." Old quiz/mascot style looked AI-made; real stock footage (Descript) was rejected ("slideshow of bad footage").
-- Look: off-black #0B0B0C + film grain, Anton headlines, Inter Tight captions, JetBrains Mono labels, ONE accent lime #C8F04A, red #FF4B4B only for "bad". No mascot, emojis, glow, grid.
-- Motion: mask/word/char reveals with expo easing, lime panel wipe, self-drawing lines/charts/rings, counters, camera punch only on hits, chapter counter "01 / 09".
+- Look: black #000000 + film grain, Anton headlines, Inter Tight captions, JetBrains Mono labels, ONE accent orange #FF6A1A, red #FF4B4B only for "bad". No mascot, emojis, glow, grid.
+- Motion: mask/word/char reveals with expo easing, orange panel wipe, self-drawing lines/charts/rings, counters, camera punch only on hits, chapter counter "01 / 09".
 - Retention: claim on screen at frame 0, payoff slams on its word, a new scene every 2–4 s, 24–28 s total, CTA "Save this…".
 - Engine: engine/explainer_prep.py → engine/motion.py → sfx.py → music.py → render.py. Example: days/2026-11-14/example/cfg.json.
 

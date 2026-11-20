@@ -65,16 +65,16 @@ Phone scenes: `cp engine/assets/app/*.jpg WORK/r1/` and use `<div class='phone'>
 2. `WORK/r1/cfg.json` = `{"lines":[…], "tempo":1.06, "tail":1.4, "scenes":[{"l":0,"html":""}…]}` (scene `l` values first, html later), then `python3 engine/explainer_prep.py WORK/r1`. It prints each line's duration. If any line is clearly wrong (a short line > 2 s, a long line < 1 s), run `ffmpeg -i WORK/r1/fast.mp3 -af silencedetect=noise=-35dB:d=0.05 -f null -`, set `"segs"` (start/end per line in fast.mp3 time) by hand and rerun. Then read `seg.json` for the final line times.
 3. Write the scenes (one scene per idea, 7–10 scenes, a new scene every 2–4 s). Building blocks (see the example for exact markup):
    - **Hook scene** (`cap:false`): mono kicker + the claim in Anton 230–260 px with `data-fx='none'` so it is on screen at frame 0; the payoff word slams in (`slam`) on its spoken word (`data-dl`), red underline `draw`.
-   - **Turn**: lime `panel` wipe + black Anton `chars` text (0.5–1 s).
-   - **Bars**: `.track` + `.grow[data-w]` (energy in/out, comparisons) with mono labels + numbers; a lime `draw` bracket for the gap.
+   - **Turn**: orange `panel` wipe + black Anton `chars` text (0.5–1 s).
+   - **Bars**: `.track` + `.grow[data-w]` (energy in/out, comparisons) with mono labels + numbers; a orange `draw` bracket for the gap.
    - **Counter**: big Anton `.count[data-to]` inside a `draw` ring.
    - **Days/units**: row of `.box .fill` that fill in sequence, then the result `slam`.
    - **Bad thing** (`tint:'red'`): meter shrinking (`data-from='100' data-w='38'`) + red Anton `slam`.
-   - **Study chart**: axes + lines that `draw` (good = lime, other = grey) + labels that `pop` at the line ends; mono source label on top.
+   - **Study chart**: axes + lines that `draw` (good = orange, other = grey) + labels that `pop` at the line ends; mono source label on top.
    - **Rules** (`cap:false`): 2–3 Anton lines with `words`, earlier lines `data-dim`.
-   - **App screen**: Anton headline on top (`words`, one lime word) + phone `pop` with slight `data-rot`; optional lime `.chip` that `slam`s the key number from the screen.
-   - **CTA** (`cap:false`): mono "YOUR AI GYM COACH" + lime Anton "FORGE" (`chars`) + "TRY IT FREE" + mono "NO DOWNLOAD · LINK IN BIO" + down arrow `draw` (exact markup in the app-demo cfg).
-   Rules: Anton headline lines ≤ 12 characters at 180+ px (no edge touching); one lime accent word per headline, red only for "bad"; no emojis, no mascot, no glow; every SVG attribute quoted or ending in ` />`.
+   - **App screen**: Anton headline on top (`words`, one orange word) + phone `pop` with slight `data-rot`; optional orange `.chip` that `slam`s the key number from the screen.
+   - **CTA** (`cap:false`): mono "YOUR AI GYM COACH" + orange Anton "FORGE" (`chars`) + "TRY IT FREE" + mono "NO DOWNLOAD · LINK IN BIO" + down arrow `draw` (exact markup in the app-demo cfg).
+   Rules: Anton headline lines ≤ 12 characters at 180+ px (no edge touching); one orange accent word per headline, red only for "bad"; no emojis, no mascot, no glow; every SVG attribute quoted or ending in ` />`.
    cfg extras: `hits` [[line, delay]…] = camera punch + bass hit on slams/big beats (5–8 per reel), `ticks` for box fills, `dings` [line] for a counter.
 4. `python3 engine/explainer_prep.py WORK/r1` (again, for events) → `python3 engine/motion.py WORK/r1`.
 5. Stills: `cd WORK/r1 && python3 ../../../engine/render.py index.html test <one time per scene, ~70% into each scene + 0>` → look at EVERY still: frame 0 shows the hook claim, nothing touches the edges, no overlaps, charts visible.
