@@ -95,4 +95,88 @@ export const EXERCISE_ANIM: Record<string, { full: number; thumb: number }> = {
     full: require('../../../assets/exercise-anim/bulgarian-split-squat.webp'),
     thumb: require('../../../assets/exercise-anim/bulgarian-split-squat-thumb.webp'),
   },
+  'Dumbbell bench press': {
+    full: require('../../../assets/exercise-anim/dumbbell-bench-press.webp'),
+    thumb: require('../../../assets/exercise-anim/dumbbell-bench-press-thumb.webp'),
+  },
+  'Chest press machine': {
+    full: require('../../../assets/exercise-anim/chest-press-machine.webp'),
+    thumb: require('../../../assets/exercise-anim/chest-press-machine-thumb.webp'),
+  },
+  'Push-up': {
+    full: require('../../../assets/exercise-anim/push-up.webp'),
+    thumb: require('../../../assets/exercise-anim/push-up-thumb.webp'),
+  },
+  'Incline chest press machine': {
+    full: require('../../../assets/exercise-anim/incline-chest-press-machine.webp'),
+    thumb: require('../../../assets/exercise-anim/incline-chest-press-machine-thumb.webp'),
+  },
+  'Cable fly': {
+    full: require('../../../assets/exercise-anim/cable-fly.webp'),
+    thumb: require('../../../assets/exercise-anim/cable-fly-thumb.webp'),
+  },
+  'Pec deck': {
+    full: require('../../../assets/exercise-anim/pec-deck.webp'),
+    thumb: require('../../../assets/exercise-anim/pec-deck-thumb.webp'),
+  },
+  'Shoulder press machine': {
+    full: require('../../../assets/exercise-anim/shoulder-press-machine.webp'),
+    thumb: require('../../../assets/exercise-anim/shoulder-press-machine-thumb.webp'),
+  },
+  'Cable lateral raise': {
+    full: require('../../../assets/exercise-anim/cable-lateral-raise.webp'),
+    thumb: require('../../../assets/exercise-anim/cable-lateral-raise-thumb.webp'),
+  },
+  'Assisted pull-up machine': {
+    full: require('../../../assets/exercise-anim/assisted-pull-up-machine.webp'),
+    thumb: require('../../../assets/exercise-anim/assisted-pull-up-machine-thumb.webp'),
+  },
+  'Chest-supported row machine': {
+    full: require('../../../assets/exercise-anim/chest-supported-row-machine.webp'),
+    thumb: require('../../../assets/exercise-anim/chest-supported-row-machine-thumb.webp'),
+  },
+  'One-arm dumbbell row': {
+    full: require('../../../assets/exercise-anim/one-arm-dumbbell-row.webp'),
+    thumb: require('../../../assets/exercise-anim/one-arm-dumbbell-row-thumb.webp'),
+  },
+  'Hack squat machine': {
+    full: require('../../../assets/exercise-anim/hack-squat-machine.webp'),
+    thumb: require('../../../assets/exercise-anim/hack-squat-machine-thumb.webp'),
+  },
+  'Goblet squat': {
+    full: require('../../../assets/exercise-anim/goblet-squat.webp'),
+    thumb: require('../../../assets/exercise-anim/goblet-squat-thumb.webp'),
+  },
+  'Dumbbell Romanian deadlift': {
+    full: require('../../../assets/exercise-anim/dumbbell-romanian-deadlift.webp'),
+    thumb: require('../../../assets/exercise-anim/dumbbell-romanian-deadlift-thumb.webp'),
+  },
+  'Hip thrust machine': {
+    full: require('../../../assets/exercise-anim/hip-thrust-machine.webp'),
+    thumb: require('../../../assets/exercise-anim/hip-thrust-machine-thumb.webp'),
+  },
+  'Walking lunge': {
+    full: require('../../../assets/exercise-anim/walking-lunge.webp'),
+    thumb: require('../../../assets/exercise-anim/walking-lunge-thumb.webp'),
+  },
+  'Cable curl': {
+    full: require('../../../assets/exercise-anim/cable-curl.webp'),
+    thumb: require('../../../assets/exercise-anim/cable-curl-thumb.webp'),
+  },
+  'Preacher curl machine': {
+    full: require('../../../assets/exercise-anim/preacher-curl-machine.webp'),
+    thumb: require('../../../assets/exercise-anim/preacher-curl-machine-thumb.webp'),
+  },
+  'Overhead cable extension': {
+    full: require('../../../assets/exercise-anim/overhead-cable-extension.webp'),
+    thumb: require('../../../assets/exercise-anim/overhead-cable-extension-thumb.webp'),
+  },
+  Dips: {
+    full: require('../../../assets/exercise-anim/dips.webp'),
+    thumb: require('../../../assets/exercise-anim/dips-thumb.webp'),
+  },
+  Plank: {
+    full: require('../../../assets/exercise-anim/plank.webp'),
+    thumb: require('../../../assets/exercise-anim/plank-thumb.webp'),
+  },
 };
