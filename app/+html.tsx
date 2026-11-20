@@ -21,7 +21,7 @@ export default function Root({ children }: { children: ReactNode }) {
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
         {/* Installable web app: Add to Home Screen opens full-screen. */}
-        <meta name="theme-color" content="#0A0C10" />
+        <meta name="theme-color" content="#000000" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
@@ -50,6 +50,6 @@ body {
 }
 @media (prefers-color-scheme: dark) {
   body {
-    background-color: #0A0C10;
+    background-color: #000000;
   }
 }`;
