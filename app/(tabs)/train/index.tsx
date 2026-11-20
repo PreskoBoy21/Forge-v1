@@ -1,7 +1,9 @@
 import { useMemo, useState } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 
+import { BodyMap } from '@/components/BodyMap';
 import { Button } from '@/components/Button';
+import { ExerciseDemo } from '@/components/ExerciseDemo';
 import { Card } from '@/components/Card';
 import { BarChart, LineChart } from '@/components/charts';
 import { ChevronRight, History, Trophy } from '@/components/icons';
@@ -10,6 +12,12 @@ import { Eyebrow, IconBadge, Pill, Segmented } from '@/components/ui';
 import { useAnalysis } from '@/features/health/ui/useAnalysis';
 import { shortDate } from '@/features/health/vitals';
 import { useOnboardingDraft } from '@/features/onboarding/draft-store';
+import {
+  MAIN_GROUPS,
+  MUSCLE_LABEL,
+  musclesForMany,
+  weeklyMuscleSets,
+} from '@/features/train/muscles';
 import { kgLabel } from '@/features/train/program';
 import {
   consistency,
@@ -23,7 +31,10 @@ import { planToday, useTrain } from '@/features/train/store';
 import { go } from '@/lib/nav';
 import { useColors } from '@/theme/theme';
 
-/** Train = today's plan first; progress is one card with one graph at a time. */
+/**
+ * Gym = today's plan with the muscles it hits, this week's muscle map,
+ * then progress (one graph at a time). Tap an exercise for its guide.
+ */
 const ARROW = { increase: ' ↑', deload: ' ↓', keep: '', first: '' } as const;
 const kg = (n: number) =>
   n >= 10_000 ? `${(n / 1000).toFixed(1)} t` : `${Math.round(n)} kg`;
@@ -67,6 +78,15 @@ export default function TrainScreen() {
       ? Math.round((progress.at(-1)!.e1rm - progress[0]!.e1rm) * 10) / 10
       : 0;
   const s = stats.summary;
+  const todayMuscles = useMemo(
+    () => musclesForMany(plan.moves.map((mv) => mv.name)),
+    [plan],
+  );
+  const week = useMemo(
+    () => weeklyMuscleSets(history, today),
+    [history, today],
+  );
+  const skipped = MAIN_GROUPS.filter((g) => !week[g]);
   const trained28 = stats.days.filter((d) => d.trained).length;
 
   return (
@@ -75,7 +95,7 @@ export default function TrainScreen() {
         {s.workouts7d} of {trainingDays} workouts this week
       </Eyebrow>
       <Text className="mt-1 font-display text-[28px] uppercase tracking-wide text-bone">
-        Train
+        Gym
       </Text>
 
       {/* today's plan */}
@@ -93,7 +113,16 @@ export default function TrainScreen() {
         <Text className="mt-1 font-display text-[26px] uppercase text-bone">
           {active ? active.dayName : plan.name}
         </Text>
-        <View className="mt-2">
+        {todayMuscles.primary.length ? (
+          <View className="mt-3">
+            <BodyMap
+              primary={todayMuscles.primary}
+              secondary={todayMuscles.secondary}
+              scale={0.55}
+            />
+          </View>
+        ) : null}
+        <View className="mt-3">
           {plan.moves.map((mv) => (
             <Pressable
               key={mv.name}
@@ -102,12 +131,13 @@ export default function TrainScreen() {
               }
               className="flex-row items-center py-2"
             >
-              <Text className="flex-1 font-ui text-[15px] text-bone">
-                {mv.name}
-              </Text>
-              <Text className="mr-3 font-ui text-[13px] text-steel">
-                {mv.sets}×{mv.repMin}–{mv.repMax}
-              </Text>
+              <ExerciseDemo name={mv.name} size="thumb" />
+              <View className="ml-3 flex-1">
+                <Text className="font-ui text-[15px] text-bone">{mv.name}</Text>
+                <Text className="font-ui text-[12px] text-steel">
+                  {mv.sets} sets × {mv.repMin}–{mv.repMax} reps
+                </Text>
+              </View>
               <Text
                 className={`min-w-[72px] text-right font-uiSemi text-[15px] ${mv.reason === 'increase' ? 'text-mint' : mv.reason === 'deload' ? 'text-gold' : 'text-bone'}`}
               >
@@ -128,7 +158,22 @@ export default function TrainScreen() {
           />
         </View>
         <Text className="mt-3 text-center font-ui text-[12px] text-steel">
-          Tap an exercise to see how to do it
+          Tap an exercise for the full how-to
+        </Text>
+      </Card>
+
+      {/* this week's muscles */}
+      <Text className="mb-3 mt-8 font-display text-[19px] uppercase tracking-wide text-bone">
+        This week
+      </Text>
+      <Card>
+        <BodyMap sets={week} scale={0.55} />
+        <Text className="mt-3 font-ui text-[14px] leading-[20px] text-steel">
+          {skipped.length === MAIN_GROUPS.length
+            ? 'Every muscle you train this week lights up here. The more sets, the brighter.'
+            : skipped.length
+              ? `Not trained yet: ${skipped.map((g) => MUSCLE_LABEL[g]).join(', ')}.`
+              : 'Every main muscle trained this week.'}
         </Text>
       </Card>
 

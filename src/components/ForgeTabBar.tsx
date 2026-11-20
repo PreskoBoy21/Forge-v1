@@ -2,10 +2,10 @@ import { Pressable, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import {
-  Activity,
   Camera,
   Dumbbell,
-  House,
+  Moon,
+  Sparkles,
   User,
   type LucideIcon,
 } from '@/components/icons';
@@ -20,10 +20,10 @@ type ForgeTabBarProps = {
 };
 
 const TABS: { name: string; label: string; Icon: LucideIcon }[] = [
-  { name: 'today', label: 'Today', Icon: House },
-  { name: 'train', label: 'Train', Icon: Dumbbell },
+  { name: 'today', label: 'Coach', Icon: Sparkles },
+  { name: 'body', label: 'Sleep', Icon: Moon },
   { name: 'snap', label: 'Food', Icon: Camera },
-  { name: 'body', label: 'Body', Icon: Activity },
+  { name: 'train', label: 'Gym', Icon: Dumbbell },
   { name: 'you', label: 'You', Icon: User },
 ];
 
@@ -89,7 +89,7 @@ export function ForgeTabBar({ state, navigateToTab }: ForgeTabBarProps) {
                   elevation: 6,
                 }}
               >
-                <Icon size={26} color={c.bg} strokeWidth={2.2} />
+                <Icon size={26} color="#000000" strokeWidth={2.2} />
               </View>
             ) : (
               <Icon

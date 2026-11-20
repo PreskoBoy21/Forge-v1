@@ -1,5 +1,5 @@
 /**
- * Palette v2 — "Volt on Ink".
+ * Palette v3 — "Black & Orange" (2026-11-20). Names below are legacy.
  * Ink surfaces (deep blue-black), Volt for action and progress,
  * Aqua for body/health data, Violet for sleep & recovery.
  * Legacy token names (molten, ember, graphite, bone, steel) are kept so every
@@ -7,12 +7,12 @@
  * prefer the semantic names in `palette`.
  */
 export const palette = {
-  ink: { 950: '#0A0C10', 900: '#12151B', 800: '#1B1F27', 700: '#282D38' },
-  volt: '#C6F24E',
-  aqua: '#47D7E8',
-  violet: '#9B8CFF',
-  text: '#EEF1F5',
-  muted: '#8C95A6',
+  ink: { 950: '#000000', 900: '#111111', 800: '#1C1C1C', 700: '#262626' },
+  volt: '#FF6A1A',
+  aqua: '#FFFFFF',
+  violet: '#B8B8B8',
+  text: '#FFFFFF',
+  muted: '#8E8E8E',
   good: '#4ADE9A',
   warn: '#FFC542',
   bad: '#FF5D6C',

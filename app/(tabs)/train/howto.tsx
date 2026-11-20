@@ -3,6 +3,7 @@ import { Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Card } from '@/components/Card';
+import { ExerciseDemo } from '@/components/ExerciseDemo';
 import { X } from '@/components/icons';
 import { Eyebrow } from '@/components/ui';
 import { howTo } from '@/features/train/howto';
@@ -36,7 +37,10 @@ export default function HowToScreen() {
             <Text className="mt-2 font-uiMedium text-[15px] text-molten">
               Works: {h.works}
             </Text>
-            <Card className="mt-5 gap-4">
+            <View className="mt-4">
+              <ExerciseDemo name={name!} />
+            </View>
+            <Card className="mt-3 gap-4">
               {h.steps.map((s, i) => (
                 <View key={i} className="flex-row">
                   <View className="h-7 w-7 items-center justify-center rounded-full bg-molten">
