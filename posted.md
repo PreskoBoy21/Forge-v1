@@ -53,3 +53,6 @@
 - 2026-11-19 | 11:00 IG story | steroids-heart-story | Do steroids really weaken your heart? (YES / NO) | teases reel 1 | 433856707
 - 2026-11-19 | 12:00 | steroids-heart-explainer | 71% of lifters on steroids had weak hearts. | motion v3 RISK ONLY: 140 male lifters, 71% of current AAS users LVEF <52% vs 2 of 54 non-users, longer use = more plaque (Baggish 2017, Circulation) — no doses/brands/how-to | 433856758
 - 2026-11-19 | 17:00 | carbs-fatloss-explainer | Cutting carbs doesn't burn more fat. | motion v3: ~3 g water per g glycogen; DIETFITS 609 adults 12 mo, low-carb −6.0 vs low-fat −5.3 kg, no sig. difference (Gardner 2018, JAMA) | 433856819
+- 2026-11-20 | 11:00 IG story | sleep-weights-story | Slept badly? Forge adjusts your weights to your recovery | app promise, teases reel 1 | 435210145
+- 2026-11-20 | 12:00 | sleep-loss-performance-app | Bad sleep steals almost 8% of your workout. | problem→Forge: sleep loss −7.56% performance, 69 publications (Craven 2022, Sports Med) → check-in + readiness screens | 435210187
+- 2026-11-20 | 17:00 | notes-app-vs-forge-demo | Stop logging your sets in your notes app. | app demo: train (exact weights, tap-to-learn) → body (14-day sleep) → snap (photo/barcode) | 435210295
