@@ -17,6 +17,7 @@ import {
   Moon,
   Pencil,
   RotateCcw,
+  BookOpen,
   Shield,
   Sparkles,
   Sun,
@@ -286,6 +287,11 @@ export default function YouScreen() {
 
       <SectionHeader title="Account" />
       <Card className="py-1">
+        <ListRow
+          Icon={BookOpen}
+          label="Sources & how we calculate"
+          onPress={() => go('/sources')}
+        />
         <ListRow
           Icon={Shield}
           label="Privacy policy"

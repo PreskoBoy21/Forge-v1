@@ -46,6 +46,7 @@ import { useAnalysis } from '@/features/health/ui/useAnalysis';
 import { lastDays, shortDate } from '@/features/health/vitals';
 import { go } from '@/lib/nav';
 import { track } from '@/lib/telemetry';
+import { SourcesLink } from '@/features/sources/SourcesLink';
 import { useColors } from '@/theme/theme';
 
 const SCAN_ERROR: Record<Exclude<ScanOutcome, { ok: true }>['reason'], string> =
@@ -236,6 +237,8 @@ export default function SnapScreen() {
           );
         })}
       </View>
+
+      <SourcesLink topic="macros" className="mt-2" />
 
       {/* capture */}
       {items.length === 0 ? (

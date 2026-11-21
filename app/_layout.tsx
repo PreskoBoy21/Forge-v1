@@ -98,6 +98,7 @@ export default function RootLayout() {
           <Stack.Screen name="(onboarding)" />
           <Stack.Screen name="(tabs)" />
           <Stack.Screen name="preview" />
+          <Stack.Screen name="sources" options={{ presentation: 'modal' }} />
         </Stack>
       </View>
     </QueryClientProvider>
