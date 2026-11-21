@@ -56,3 +56,6 @@
 - 2026-11-20 | 11:00 IG story | sleep-weights-story | Slept badly? Forge adjusts your weights to your recovery | app promise, teases reel 1 | 435210145
 - 2026-11-20 | 12:00 | sleep-loss-performance-app | Bad sleep steals almost 8% of your workout. | problem→Forge: sleep loss −7.56% performance, 69 publications (Craven 2022, Sports Med) → check-in + readiness screens | 435210187
 - 2026-11-20 | 17:00 | notes-app-vs-forge-demo | Stop logging your sets in your notes app. | app demo: train (exact weights, tap-to-learn) → body (14-day sleep) → snap (photo/barcode) | 435210295
+- 2026-11-21 | 11:00 IG+FB story | skinny-fat-protein-story | Skinny fat? See your protein left in 1 photo | app promise, teases reel 1 | IG 436452484 · FB 436452500
+- 2026-11-21 | 12:00 | skinny-fat-cut-or-bulk-debate | Skinny fat? Don't cut. Don't bulk either. | short debate (21.5 s): recomp for new lifters (Barakat 2020) → Snap protein left, comment 1 or 2 | TT+IG 436452529 · FB 436452570
+- 2026-11-21 | 17:00 | add-weight-coach-call | My coach decides when I add weight. | coach call (20.2 s): 3 checks → readiness 100 → add weight → leg press 145 kg EXAMPLE, feel or plan? | TT+IG 436452650 · FB 436452699
