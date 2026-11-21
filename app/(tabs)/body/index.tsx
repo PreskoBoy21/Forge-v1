@@ -25,6 +25,7 @@ import { lastDays, shortDate } from '@/features/health/vitals';
 import { ProLock } from '@/features/paywall/ProLock';
 import { useProLocked } from '@/features/paywall/purchases';
 import { go } from '@/lib/nav';
+import { SourcesLink } from '@/features/sources/SourcesLink';
 import { useColors } from '@/theme/theme';
 
 /**
@@ -186,6 +187,7 @@ export default function SleepScreen() {
           <Text className="mt-2 font-ui text-[12px] text-steel">
             Dashed line = 7 hours, the minimum for good recovery.
           </Text>
+          <SourcesLink topic="sleep" className="mt-1" />
         </Card>
       ) : null}
 

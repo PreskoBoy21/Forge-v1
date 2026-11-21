@@ -14,6 +14,7 @@ import {
   type PlanGoal,
 } from '@/features/plan/engine';
 import { go } from '@/lib/nav';
+import { SourcesLink } from '@/features/sources/SourcesLink';
 
 const SPLIT_LABEL = {
   full_body: 'Full body',
@@ -71,6 +72,7 @@ export default function PlanScreen() {
             Protein {targets.proteinG}g · Carbs {targets.carbsG}g · Fat{' '}
             {targets.fatG}g
           </Text>
+          <SourcesLink topic="calories" className="mt-3" />
         </Card>
         <Card>
           <Text className="font-display text-[24px] uppercase text-bone">

@@ -32,6 +32,7 @@ import { go } from '@/lib/nav';
 import { MUSCLE_LABEL, musclesForMany } from '@/features/train/muscles';
 import { kgLabel } from '@/features/train/program';
 import { planToday, useTrain } from '@/features/train/store';
+import { SourcesLink } from '@/features/sources/SourcesLink';
 import { useColors } from '@/theme/theme';
 
 /**
@@ -582,9 +583,10 @@ export default function CoachScreen() {
         </Card>
       ) : null}
 
-      <Text className="mb-6 mt-5 font-ui text-[12px] leading-[18px] text-steel">
+      <Text className="mt-5 font-ui text-[12px] leading-[18px] text-steel">
         Recommendations only, not medical advice.
       </Text>
+      <SourcesLink className="mb-6 mt-1" />
 
       {/* why-sheets */}
       <CoachSheet
