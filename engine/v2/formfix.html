@@ -1,0 +1,80 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:A;src:url(anton-latin-400-normal.woff2)}@font-face{font-family:I;src:url(inter-tight-latin-800-normal.woff2);font-weight:800}@font-face{font-family:I;src:url(inter-tight-latin-600-normal.woff2);font-weight:600}
+*{margin:0;padding:0;box-sizing:border-box}body{width:1080px;height:1920px;background:#000;overflow:hidden;font-family:I;color:#fff}
+#hook{position:absolute;left:70px;right:70px;top:190px;font-family:A;font-size:104px;line-height:1.02;text-transform:uppercase;letter-spacing:.5px}
+#hook .o{color:#FF6A1A}
+#tag{position:absolute;left:70px;top:120px;font-weight:800;font-size:30px;letter-spacing:.25em;color:#8E8E8E}
+#panel{position:absolute;left:70px;right:70px;top:1440px}#badge{display:flex;align-items:center;gap:22px;font-family:A;font-size:68px;line-height:1.02;text-transform:uppercase}
+#badge .ic{flex:none;width:88px;height:88px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:I;font-weight:800;font-size:60px;color:#000}
+.lines{margin-top:26px;font-weight:600;font-size:44px;line-height:1.3;color:#d9d9d9}
+.lines b{color:#fff;font-weight:800}
+#cta{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:#000;opacity:0}
+#cta .big{font-family:A;font-size:120px;line-height:1.02;text-transform:uppercase}
+#cta .big .o{color:#FF6A1A}#cta .sm{margin-top:40px;font-weight:600;font-size:44px;color:#bdbdbd}
+#wm{position:absolute;right:70px;top:120px;font-family:A;font-size:40px;letter-spacing:.06em;color:#fff;opacity:.9}#wm span{color:#FF6A1A}
+.call{position:absolute;font-weight:800;font-size:34px;padding:10px 20px;border-radius:999px;white-space:nowrap;opacity:0}
+#prog{position:absolute;left:0;top:0;height:8px;background:#FF6A1A}
+</style></head><body>
+<svg id="s" width="1080" height="1920" viewBox="0 0 1080 1920" style="position:absolute;inset:0">
+<defs>
+ <radialGradient id="bg" cx="50%" cy="62%" r="70%"><stop offset="0" stop-color="#22140b"/><stop offset=".5" stop-color="#0b0b0b"/><stop offset="1" stop-color="#050505"/></radialGradient>
+ <linearGradient id="skin" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FAFAFA"/><stop offset=".6" stop-color="#D9D9D9"/><stop offset="1" stop-color="#B0B0B0"/></linearGradient>
+ <linearGradient id="skinFar" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6c6c6c"/><stop offset="1" stop-color="#3e3e3e"/></linearGradient>
+ <linearGradient id="shorts" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b2b2b"/><stop offset="1" stop-color="#151515"/></linearGradient>
+ <linearGradient id="musc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFB27A"/><stop offset=".5" stop-color="#FF6A1A"/><stop offset="1" stop-color="#B8420A"/></linearGradient>
+ <filter id="mglow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ <radialGradient id="plate"><stop offset=".18" stop-color="#a8a8a8"/><stop offset=".22" stop-color="#2c2c2c"/><stop offset=".84" stop-color="#1b1b1b"/><stop offset=".88" stop-color="#FF6A1A"/><stop offset="1" stop-color="#B8420A"/></radialGradient>
+</defs>
+<rect width="1080" height="1920" fill="url(#bg)"/>
+<g id="stage"></g>
+</svg>
+<div id="prog"></div><div id="tag">FORM FIX</div><div id="wm">FORGE<span>.</span></div>
+<div id="hook"></div>
+<div id="panel"><div id="badge"><div class="ic"></div><div class="bt"></div></div>
+<div class="lines" id="lines"></div></div>
+<div id="c1" class="call"></div><div id="c2" class="call"></div>
+<div id="cta"><div class="big"></div><div class="sm"></div></div>
+<script src="rig2.js"></script>
+<script src="ex2.js"></script>
+<script>
+const CFG=window.CFG||{
+ hook:'Your squat is hitting your <span class="o">knees</span>, not your legs',
+ bad:{title:'Heels up, knees forward',lines:['Weight shifts to your toes.','The bar drifts past mid-foot.'],calls:[['knee','KNEES PAST TOES'],['heel','HEELS LIFT']]},
+ good:{title:'Sit back, heels down',lines:['Hips back, chest up.','Bar stays over <b>mid-foot</b>.'],calls:[['hip','GLUTES'],['knee','QUADS']]},
+ cta:'Save this for <span class="o">leg day</span>',ctaSub:'Follow for a form fix every day',
+ T:{bad:[3.39,9.72],good:[9.72,18.07],end:20.3},lineT:{bad:[4.69,7.46],good:[10.89,13.84]}
+};
+const $=id=>document.getElementById(id), stg=$('stage');
+const cl=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const phase=t=>{const c=t%3.2;return c<1.3?ease(c/1.3):c<1.6?1:c<2.6?1-ease((c-1.6)/1):0};
+$('hook').innerHTML=CFG.hook;
+function place(el,p,show,col){const X=p[0],Y=p[1];el.style.opacity=show;el.style.left=X+'px';el.style.top=Y+'px';el.style.background=col;el.style.color=col==='#FF6A1A'||col==='#2BD46B'?'#000':'#fff';}
+window.render=function(t){
+  const {bad,good,end}=CFG.T;
+  const isBad=t<good[0], seg=isBad?bad:good, mode=isBad?'bad':'good';
+  const local=Math.max(0,t-(isBad?bad[0]:good[0]));
+  stg.innerHTML='';const s=2.45, ox=540-292*s, oy=1380-528*s;
+  stg.setAttribute('transform',`translate(${ox},${oy}) scale(${s})`);
+  const F=new Fig(stg);F.el('ellipse',{cx:300,cy:528,rx:230,ry:12,fill:'#FF6A1A',opacity:.12});F.el('rect',{x:60,y:526,width:480,height:2.5,fill:'#FF6A1A',opacity:.4});
+  const k=t<bad[0]?0:phase(local);
+  const r=squat(F,k,mode==='bad');
+  F.el('line',{x1:r.mid,y1:225,x2:r.mid,y2:526,stroke:mode==='bad'?'#FF3B3B':'#2BD46B','stroke-dasharray':'6 8','stroke-width':2,opacity:.6});
+  F.el('text',{x:r.mid+8,y:240,fill:mode==='bad'?'#FF3B3B':'#2BD46B','font-family':'I','font-weight':800,'font-size':13,'letter-spacing':'2'}).textContent='MID-FOOT';
+  // badge + lines
+  const inSeg=t>=seg[0], fade=cl((t-seg[0])/.35);
+  $('badge').style.opacity=inSeg?fade:0;
+  $('badge').querySelector('.ic').style.background=isBad?'#FF3B3B':'#2BD46B';$('badge').querySelector('.ic').textContent=isBad?'✕':'✓';
+  $('badge').querySelector('.bt').textContent=(isBad?'Wrong: ':'Fix: ')+(isBad?bad_t():good_t());
+  function bad_t(){return CFG.bad.title} function good_t(){return CFG.good.title}
+  $('badge').querySelector('.bt').style.color=isBad?'#FF5A5A':'#2BD46B';
+  const L=(isBad?CFG.bad:CFG.good).lines;
+  const LT=CFG.lineT[isBad?'bad':'good'];$('lines').innerHTML=L.map((x,i)=>`<div style="opacity:${cl((t-LT[i])/.3)}">${x}</div>`).join('');
+  // callouts follow the body, visible when the rep is near the bottom
+  const calls=(isBad?CFG.bad:CFG.good).calls, deep=cl((k-.55)/.3)*(inSeg?1:0);
+  calls.forEach((c,i)=>{const p=r[c[0]],X=ox+p[0]*s,Y=oy+p[1]*s;const el=$('c'+(i+1));el.textContent=c[1];
+    place(el,[X+(c[0]==='hip'||c[0]==='heel'?-(el.offsetWidth+40):40),Y-28],deep,isBad?'#FF3B3B':'#FF6A1A');});
+  $('hook').style.opacity=1;
+  $('prog').style.width=(cl(t/end)*1080)+'px';
+  const ct=cl((t-good[1])/.4);$('cta').style.opacity=ct;$('cta').querySelector('.big').innerHTML=CFG.cta;$('cta').querySelector('.sm').textContent=CFG.ctaSub;
+};
+</script></body></html>

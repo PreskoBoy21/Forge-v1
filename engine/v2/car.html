@@ -1,0 +1,36 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:A;src:url(anton-latin-400-normal.woff2)}@font-face{font-family:I;src:url(inter-tight-latin-800-normal.woff2);font-weight:800}@font-face{font-family:I;src:url(inter-tight-latin-600-normal.woff2);font-weight:600}
+*{margin:0;padding:0;box-sizing:border-box}body{width:1080px;height:1350px;overflow:hidden;font-family:I;color:#fff;background:radial-gradient(90% 70% at 50% 100%,#24150b,#0a0a0a 60%,#060606);position:relative}
+.top{position:absolute;left:80px;right:80px;top:80px;display:flex;justify-content:space-between;font-weight:800;font-size:30px;letter-spacing:.22em;color:#8E8E8E}
+.wm{font-family:A;letter-spacing:.06em;color:#fff;font-size:40px}.wm span{color:#FF6A1A}
+.h{position:absolute;left:80px;right:80px;font-family:A;text-transform:uppercase;line-height:1}.o{color:#FF6A1A}
+.num{position:absolute;left:80px;top:220px;font-family:A;font-size:300px;line-height:.8;color:#FF6A1A;opacity:.95}
+.card{position:absolute;left:80px;right:80px;bottom:110px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.st{background:#151515;border:2px solid #262626;border-radius:24px;padding:26px 30px}.st .k{font-weight:800;font-size:26px;letter-spacing:.18em;color:#8E8E8E}.st .v{font-family:A;font-size:64px;margin-top:6px}
+.cue{grid-column:1/3;background:#1b0f07;border:2px solid #FF6A1A;border-radius:24px;padding:26px 30px;font-weight:600;font-size:38px;line-height:1.3}.cue b{color:#FF6A1A;font-weight:800}
+.sw{position:absolute;right:80px;bottom:90px;font-weight:800;font-size:34px;color:#FF6A1A;letter-spacing:.1em}
+.dots{position:absolute;left:80px;bottom:60px;display:flex;gap:10px}.dots i{width:14px;height:14px;border-radius:50%;background:#333}.dots i.on{background:#FF6A1A}
+.lst{position:absolute;left:80px;right:80px;top:560px;font-weight:600;font-size:42px;line-height:1.9;color:#d8d8d8}.lst b{color:#fff;font-weight:800}
+</style></head><body><div id="root"></div>
+<script>
+const S=(window.CFG&&window.CFG.slides)||[
+ {t:'hook'},
+ {n:1,name:'Incline dumbbell press',sets:'3 × 6–10',rest:'2–3 min',cue:'Bench at <b>30°</b>, not 45°. Lower until you feel a <b>deep stretch</b>.'},
+ {n:2,name:'Barbell bench press',sets:'3 × 5–8',rest:'2–3 min',cue:'Shoulder blades <b>pinched</b>, feet planted, touch your <b>lower chest</b>.'},
+ {n:3,name:'Weighted dips',sets:'3 × 8–12',rest:'2 min',cue:'<b>Lean forward</b> to load the chest. Go down until your shoulders are just below your elbows.'},
+ {n:4,name:'Cable fly',sets:'2 × 12–15',rest:'90 s',cue:'Slight bend in the elbows. <b>Stretch wide</b>, squeeze together.'},
+ {t:'end'},
+];
+const N=S.length;
+function slide(i){
+ const s=S[i],dots=`<div class="dots">${S.map((_,j)=>`<i class="${j===i?'on':''}"></i>`).join('')}</div>`;
+ const top=`<div class="top"><div>${((window.CFG&&window.CFG.label)||'CHEST DAY')} · ${i+1}/${N}</div><div class="wm">FORGE<span>.</span></div></div>`;
+ if(s.t==='hook')return top+`<div class="h" style="top:300px;font-size:200px">${s.title||'Steal my<br><span class="o">chest day</span>'}</div>
+  <div class="lst" style="top:820px">${s.sub||''}</div><div class="sw">SWIPE →</div>`+dots;
+ if(s.t==='end')return top+`<div class="h" style="top:300px;font-size:150px">${s.title||'Save this'} 📌</div>
+  <div class="lst" style="top:900px">${s.sub||''}</div>`+dots;
+ return top+`<div class="num">${String(s.n).padStart(2,'0')}</div><div class="h" style="top:500px;font-size:120px">${s.name}</div>
+ <div class="card"><div class="st"><div class="k">SETS × REPS</div><div class="v">${s.sets}</div></div><div class="st"><div class="k">REST</div><div class="v">${s.rest}</div></div><div class="cue">${s.cue}</div></div>`+dots;
+}
+window.show=i=>{document.getElementById('root').innerHTML=slide(i)};window.N=N;
+</script></body></html>

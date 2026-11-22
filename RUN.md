@@ -1,9 +1,9 @@
 # RUN.md — the daily run (follow exactly, top to bottom)
 
-Output every day (Europe/Berlin):
-- **11:00 Story** — Instagram (+ Facebook story if Facebook is connected). TikTok Stories can't be scheduled via Metricool.
-- **12:00 Reel 1** — TikTok + Instagram (+ Facebook Reel if connected). Quiz reel (format table in step 3).
-- **17:00 Reel 2** — TikTok + Instagram (+ Facebook Reel if connected). Quiz reel, a different format than 12:00.
+Output every day (Europe/Berlin) — times from Metricool best-time data (IG + TikTok peak at 10:00 and 18:00 every day):
+- **10:00 Reel** — Instagram Reel + TikTok + Facebook Reel. Either a **Tier list** or a **Form fix** (rules in step 3).
+- **18:00 Carousel** — Instagram carousel post + TikTok photo carousel + Facebook post. A **save-worthy plan/list** (6 slides).
+(No stories for now.)
 Facebook is connected when Metricool `getBrandSettings` shows a `facebookData` entry for blog 7513231. No YouTube.
 **Monday:** before step 1 the Chief writes `WEEK.md` (last week's numbers, this week's targets: visitors / sign-ups / Pro, the ONE test of the week, pillar mix) and follows it all week.
 **Sunday:** after the wrap-up the Chief writes a "Weekly reviews" entry in PLAYBOOK (what worked/flopped by sign-ups, 1 content change, 1 product idea for Presko).
@@ -36,84 +36,58 @@ Log each step as an activity line `{t: ISO time, agent, text}` and set the worki
 - Append 1–2 lines to PLAYBOOK TREND LOG (keep ~20, drop the oldest). Dashboard `board/today.trends`.
 
 ## 3. Content Strategist [strategist]
-**AUDIENCE MODE (since 2026-11-22, Presko): build an audience first — NO promotion.** The app isn't published yet and the web app isn't ready to push. So: no app screens, no "Try Forge", no link-in-bio CTA, no prices, no Pro. Forge is just the account name / small watermark. Goal = views, follows, comments, saves. Data: quiz reels averaged ~1.9k IG views (65% past 3 s); motion explainers ~330; app-promo reels ~130. Motion explainers (engine/motion.py) and app demos are PAUSED until Presko says otherwise.
-Forge is a **gym brand, not a myth channel**. Content covers all of gym training: technique, mistakes, exercise choices, programming, progress, beginner life, recovery basics, gym motivation/culture.
-- Pick a **format** for each reel from the engine's formats (all are 2-item, ~25 s, animated):
-  | format | what it is | example hook | line 3 / 8 | line 5 / 10 (verdict) |
-  |---|---|---|---|---|
-  | `myth` | 2 gym myths, true or false | "2 arm myths that keep your arms small" | "Myth one..." | "False." |
-  | `mistake` | 2 technique/training mistakes + the fix | "2 bench mistakes stealing your chest gains" | "Mistake one..." | "Big mistake." |
-  | `versus` | 2 rounds of A vs B, which builds more | "Incline or flat... which builds more chest?" | "Round one..." | "<winner> wins." (or "It's a tie.") |
-  | `swap` | 2 habits to swap for a better one | "2 swaps that grow your back faster" | "Swap one..." | "Swap it." |
-  | `worth` | 2 "is it worth it?" gym questions | "2 things lifters waste time on... or do they?" | "Question one..." | "Worth it." / "Waste." |
-- **What worked (own data, Nov 3–14):** personal hooks ("keep your arms small", "your gym bro still swears by"), upper-body topics (chest, back, arms, shoulders) and debate questions ("is it cheating?", "incline or flat?") → 1.5–3.9k IG. Abs/calves/generic beginner stalled lower.
-- **Mix rule:** max ONE `myth` reel per day; the other reel uses a different format. Never the same format 3 days running for the same slot. Rotate body parts and topics (chest, back, arms, shoulders, legs, glutes, abs, beginner, programming, technique).
-- Facts must be checkable (web search, real studies or consensus). No medical claims, no diet-only topics.
-- Never repeat a topic/myth from PLAYBOOK "Used topics", nor a hook opening used in the last 7 days.
-- Dashboard: two campaigns `{title, format:"Reel · <format>", slot:"12:00"/"17:00", stage:"strategist", step:1, status:"in_progress"}`.
+**AUDIENCE MODE (Presko, 2026-11-22): build an audience — NO promotion.** No app screens, no "Try Forge", no links, prices, Pro or trials. Forge = account name + small "FORGE." watermark only.
+**FORMATS v2 (approved by Presko 2026-11-22 — quiz reels, motion explainers and app demos are retired):**
+| slot | format | template (`engine/v2/`) | reference cfg | what it is |
+|---|---|---|---|---|
+| 10:00 | **Tier list** | `tier.html` | `ref/tier.json` | "Ranking every <muscle/topic> exercise" S→D, 6 items (≈ 25 s), each drops in with a one-line reason; ends "Agree? Comment what you'd move 👇" |
+| 10:00 | **Form fix** | `formfix.html` | `ref/formfix.json` | bad rep (red ✕ + body callouts) → fix (green ✓ + working muscles in orange), ≈ 20 s, "Save this for ___ day" |
+| 18:00 | **Carousel** | `car.html` | `ref/carousel.json` | 6 slides 1080×1350: hook slide, 4 item slides (sets × reps, rest, one cue), save slide |
+- **10:00 rotation:** Tier list Mon/Wed/Fri/Sun, Form fix Tue/Thu/Sat — BUT a Form fix is only possible for an exercise that exists in the figure library (`engine/v2/ex2.js`; today only `squat`, and its sample was already posted 2026-11-23). If no new library exercise exists, make a Tier list instead. Never invent poses.
+- **Tier list topics** (one per day, never repeat; log in PLAYBOOK "Used v2 topics"): back, shoulder, biceps, triceps, leg, glute, ab, calf exercises; also "gym supplements", "beginner mistakes", "cardio types for fat loss", "home workout exercises", "gym machines". Rankings must be defensible by evidence/consensus (stretch, loadability, stability, range of motion) — no medical claims. Exactly 6 items, use all 5 tiers S A B C D at least once across the list where honest.
+- **Carousel topics** (never repeat): "Steal my <back/leg/shoulder/arm/push/pull> day", "<N> exercises for wider shoulders / bigger arms…", "Beginner week 1 plan", "Warm-up before heavy lifts", "Full-body in 45 min". Sets/reps/rest must be sensible hypertrophy defaults (6–15 reps, 2–4 sets, 1.5–3 min for compounds).
+- Dashboard: two campaigns `{title, format:"Tier list"|"Form fix"|"Carousel", slot:"10:00"/"18:00", stage:"strategist", step:1, status:"in_progress"}`.
 
 ## 4. Scriptwriter [writer]
-Each reel = **exactly 14 lines** (the engine depends on it):
-1. Hook sentence (personal, specific, promise — never the answer)
-2. Hook follow-up (tension / tease)
-3. format label line 1 (table above, e.g. "Mistake one...")
-4. item 1 (lower-case statement, e.g. "bouncing the bar off your chest.")
-5. verdict 1 (short, table above)
-6. why / fix, part 1 (short, concrete, a number if true)
-7. why / fix, part 2
-8. format label line 2 (e.g. "Mistake two...")
-9. item 2
-10. verdict 2
-11. why / fix, part 1
-12. why / fix, part 2
-13. CTA part 1 — "Be honest..."
-14. CTA part 2 — matching the format: myth "which one did you believe?", mistake "which one do you do?", versus "which one do you train?", swap "which one will you swap?", worth "did that surprise you?"
-Write 3 hook candidates, pick the best by the Hook rules. Total spoken ≈ 22–26 s (≈ 55–70 words).
+- **Tier list voice script** (one ElevenLabs call): `Ranking every <topic>. ... <Item 1>. <X> tier. <reason, ≤ 9 words>. ... <Item 2>. … ... Agree? Comment what you'd move.` (6 items → ≈ 25 s after tightening).
+- **Form fix voice script** (9 short lines separated by " ... "): hook · "Watch the bad rep." · fault 1 · fault 2 · "Here's the fix." · fix 1 · fix 2 · what the right muscles do · "Save this for ___ day."
+- Carousel: no voice. Write slide text: hook title (≤ 4 words + orange word), sub line, 4 items (name, sets, rest, cue ≤ 20 words with 1–2 `<b>` words), save slide.
+- Hook rules from PLAYBOOK still apply (specific, personal, never the full answer).
 
 ## 5. Creative Director QA [director-qa] — script gate
-Check: facts true and conservative; topic not reused; hook rules; no answer in the hook; lines 3,5,8,10,13,14 follow the format table; the day has max one myth reel. Fix once if needed, otherwise drop that myth and pick another from the bank.
+Facts true and conservative; topic not used before; exactly 6 tier items; carousel numbers sensible; no promotion anywhere.
 
-## 6. Video Editor [editor] — for each reel r1, r2
-Write `WORK/r1/cfg.json` (copy the shape from `days/2026-11-14/r1/cfg.json (look: black & orange since 2026-11-22)`, without `segs`):
-- `format` (myth | mistake | versus | swap | worth), `lines` (14), `hook` (on-screen, ≤ 2 short lines, `<span class="o">` for the orange word, `<br>` between lines), `hookSize` 96–110, `chipTop` 560, `hookChip` (short tease, caps),
-- `myths` [2] = the two on-screen items (Title-case; for versus write "Incline vs flat bench for upper chest"),
-- optional `items` [2] to override button/stamp text per item: `{"a":"FLAT","b":"INCLINE","stamp":"INCLINE WINS"}` — the right button (b) is the one that lights up, so put the correct answer/winner there (required for versus and worth),, `h2` [4] (on-screen captions for lines 6,7,11,12, caps, one `<span class="o">` each),
-- `charts` [2]: either `{labels:[A,B], values:[a,b], unit, verdict}` (only for a real comparison) or `{verdict}` alone.
+## 6. Video Editor [editor]
+Voice: ElevenLabs `creative_generate_speech` voice_id `RwGCfIzuc2tIJySQj0fD`, model `eleven_v4`, `generations_count: 1`, ONE call per reel (never retry). Poll `creative_get_flow_run_status`, `curl -sL -o WORK/vo_raw.mp3 "<url>"`.
+**Tier list:**
+1. Tighten: `ffmpeg -y -i WORK/vo_raw.mp3 -af "silenceremove=stop_periods=-1:stop_duration=0.32:stop_threshold=-38dB:stop_silence=0.3,atempo=1.12" WORK/vo.mp3`
+2. List pauses: `ffmpeg -i WORK/vo.mp3 -af silencedetect=noise=-35dB:d=0.12 -f null - 2>&1 | grep silence_` → item starts = the end of the pause before each exercise name (pattern per item: name · pause · "X tier" · pause · reason). Write `at` (6 start times), `ctaAt` (start of "Agree?") and `end` (= audio length + 0.6) into `WORK/tier.json` (copy shape from `engine/v2/ref/tier.json`).
+3. Stills: `cd WORK && python3 ../../engine/v2/render.py ../../engine/v2/tier.html tier.json test 1,<at[2]+1>,<ctaAt+1>` → look at them.
+4. Frames: `python3 ../../engine/v2/render.py ../../engine/v2/tier.html tier.json video <end>`; mix: `python3 ../../engine/music.py vo.mp3 mix.mp3 116`; encode: `ffmpeg -y -framerate 30 -i frames/%04d.jpg -i mix.mp3 -c:v libx264 -pix_fmt yuv420p -crf 19 -c:a aac -b:a 160k -af "apad,loudnorm=I=-14" -t <end> r1.mp4`.
+**Form fix:** same voice steps (no tightening), `python3 ../../engine/v2/segs.py vo.mp3 9` → 9 segments; set `T.bad=[seg2.start, seg5.start]`, `T.good=[seg5.start, seg9.start]`, `T.end`=audio+0.8, `lineT.bad=[seg3.start, seg4.start]`, `lineT.good=[seg6.start, seg7.start]` in `WORK/formfix.json`; render + mix + encode as above with `formfix.html`.
+**Carousel:** `cd WORK && python3 ../../engine/v2/render.py ../../engine/v2/car.html car.json slides` → slide-1.png … slide-6.png. Look at every slide.
 
-Voiceover:
-1. ElevenLabs `creative_generate_speech`: voice_id `RwGCfIzuc2tIJySQj0fD`, model `eleven_v4`, `generations_count: 1`, prompt = the 14 lines joined with a space. Call it **once** per reel (never retry — it charges again).
-2. Poll `creative_get_flow_run_status` (flow_id + session_ids) until complete; take the audio URL; `curl -sL -o WORK/r1/raw0.mp3 "<url>"`.
-3. `python3 engine/prep.py WORK/r1` → prints the 14 segment durations. Short fixed lines ("Myth one...", "False.", "Be honest...") should be 0.4–0.9 s. If any line is clearly wrong (0 s, > 2× expected), add `"segs"` manually to cfg.json from the printed chunk list and rerun.
-4. `python3 engine/build.py WORK/r1` → `index.html`.
-5. `python3 engine/sfx.py WORK/r1/raw.mp3 WORK/r1/events.json WORK/r1/vo.mp3`
-6. Stills: `cd WORK/r1 && python3 ../../engine/render.py index.html test 0.3,3,6.5,9.5,12.5,16,19,21.5,25` → look at every PNG (Read tool). Hook must not overflow at 0.3 s; no overlaps; chart labels readable.
-7. Render: `python3 ../../engine/render.py index.html vo.mp3 out.mp4` (≈ 25 s, 1080×1920). `ffprobe` duration must be 20–30 s.
-
-## 7. Story Designer [designer]
-`WORK/story.json` = `{"kicker":"<MYTH OF THE DAY | GYM MISTAKE OF THE DAY | WHICH BUILDS MORE? | GYM QUESTION OF THE DAY>","claim":"<Reel 1 item 1>","time":"12:00","sub":"Answer in today's reel 👀","size":96}` → `python3 engine/story.py WORK/story.json WORK/story.png`. Look at it; shrink `size` if the claim wraps to > 4 lines.
+## 7. (no stories for now)
 
 ## 8. Creative Director QA — visual gate
-Every still + story PNG checked. Nothing half-broken ships. If a reel can't be fixed, ship only what passed and mark that campaign `failed` + tell Presko.
+Every still/slide checked: text inside the frame, nothing overlapping, tier chips readable, form-fix callouts on the right body part. Nothing half-broken ships.
 
 ## 9. Copywriter [copy]
-Caption per reel: hook sentence + one-line tease (myth reels add "true or false? 🤔") + the CTA from line 14 + "Comment 1 or 2 👇" + **EXACTLY 3 hashtags, one is #gym** (e.g. `#gym #gymmyths #armday`). TikTok title = first ~80 chars of the caption without hashtags.
+Caption: hook + one line of value + a comment question ("Agree? Comment what you'd move 👇" / "Do you do this? Comment 1 for yes, 2 for no 👇" / "What would you add? 👇") + "Save this 📌" where it fits + **EXACTLY 3 hashtags, one is #gym**. No links, no app. TikTok title = first ~80 chars without hashtags.
 
 ## 10. Publisher [publisher]
-1. Copy files into `media/` as `DATE-r1.mp4`, `DATE-r2.mp4`, `DATE-story.png`; delete media files older than 3 days; `git add -A && git commit -m "media DATE" && git push`.
-2. Verify each `https://raw.githubusercontent.com/PreskoBoy21/Forge-v1/content-media/<file>` returns HTTP 200 (`curl -sI`). Wait/retry up to 2 min.
-3. Metricool `createScheduledPost` (blogId `7513231`, timezone Europe/Berlin, autoPublish true). If a slot time has already passed, use the next free full hour.
-   - Story 11:00: providers `[{network:"instagram"}]`, `text:""`, media `[story png url]`, `instagramData:{type:"STORY", isAiGenerated:false}`.
-   - Reels 12:00 / 17:00: providers tiktok + instagram, text = caption, media `[mp4 url]`,
-     `tiktokData:{title, isAigc:false, privacyOption:"PUBLIC_TO_EVERYONE", autoAddMusic:false, commercialContentOwnBrand:false}` (AUDIENCE MODE: no promotion),
-     `instagramData:{type:"REEL", showReelOnFeed:true, isAiGenerated:false}`.
-   - Facebook (only if connected): add provider `{network:"facebook"}` with `facebookData:{type:"REEL"}` to each reel post, and a separate Story post `{network:"facebook"}` + `facebookData:{type:"STORY"}` at 11:00.
+1. Copy files into `media/DATE/` (`r1.mp4`, `car-1.png` … `car-6.png`); `git add -A && git commit -m "media DATE" && git push` (content-media branch).
+2. Verify each `https://raw.githubusercontent.com/PreskoBoy21/Forge-v1/content-media/DATE/<file>` returns HTTP 200 (`curl -s -o /dev/null -w "%{http_code}"`). Retry up to 2 min.
+3. Metricool `createScheduledPost` (blogId `7513231`, timezone Europe/Berlin, autoPublish true). If a slot has passed, use the next free full hour.
+   - **10:00 reel:** providers instagram + tiktok + facebook, media `[mp4 url]`, `instagramData:{type:"REEL", showReelOnFeed:true, isAiGenerated:false}`, `tiktokData:{title, privacyOption:"PUBLIC_TO_EVERYONE", isAigc:false, commercialContentOwnBrand:false, autoAddMusic:false}`, `facebookData:{type:"REEL"}`.
+   - **18:00 carousel:** providers instagram + tiktok + facebook, media = the 6 slide urls in order, `instagramData:{type:"POST", isAiGenerated:false}`, `tiktokData:{title, privacyOption:"PUBLIC_TO_EVERYONE", isAigc:false, commercialContentOwnBrand:false, autoAddMusic:true, photoCoverIndex:0}`, `facebookData:{type:"POST"}`. If TikTok rejects the photo post, schedule IG + FB only and say so.
 4. Only count a post as scheduled if Metricool returned an id.
-5. Append to posted.md (`- DATE | slot | slug | hook | myths | id`); add the 12:00 topic to "Used motion topics" (remove it from the Topic bank, top up to ≥ 15) and the 17:00 angle to "Used demo angles".
+5. Append to posted.md (`- DATE | slot | format | topic | hook | id`); add the topic to PLAYBOOK "Used v2 topics".
 6. Save cfgs into `days/DATE/`, commit + push the `agency` branch (no mp3/mp4/png in this branch).
 
 ## 11. Director wrap-up [director]
 - Dashboard: campaigns `status:"scheduled", step:6, slot, hook`; `board/week.posts` (next 7 days from getScheduledPosts: `{date,time,title,status}`); all agents `done`.
-- PushNotification (one line): e.g. "Forge Agency: 3/3 scheduled — Story 11:00, Reels 12:00 & 17:00".
+- PushNotification (one line): e.g. "Forge Agency: 2/2 scheduled — Reel 10:00 & Carousel 18:00".
 - SendUserMessage to Presko: yesterday's views + new followers per platform, the two hooks, times, and anything that failed or needs him. Short, friendly, no jargon.
 
 ## If something breaks

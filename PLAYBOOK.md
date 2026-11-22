@@ -6,11 +6,17 @@
 - Media hosting: public branch `content-media` of github.com/PreskoBoy21/Forge-v1 → `https://raw.githubusercontent.com/PreskoBoy21/Forge-v1/content-media/<file>` (Metricool copies the file at scheduling time; delete files older than 3 days).
 - Presko's rules: TikTok `isAigc: false`, IG `isAiGenerated: false`; captions have EXACTLY 3 hashtags, one always #gym.
 
-## ⚠️ AUDIENCE MODE (Presko, 2026-11-22) — overrides everything below about promoting the app
-- Build an audience first. NO promotional videos: no app screens, no "Try Forge", no link-in-bio CTA, no prices/Pro/trial. The app isn't published and the web app isn't ready to push.
-- Content = the proven animated quiz reels (myth · mistake · versus · swap · worth), black & orange (engine/build.py + skel.html, recoloured 2026-11-22). Motion explainers + app demos are paused.
-- Why: IG avg views — quiz reels ~1.9k (Nov 3–14), motion explainers ~330 (Nov 15–19), app promo ~130 (Nov 20–21). TikTok flat ~700 for all reels; Presko's own "I built this tracker" Notion video hit 12.2k.
-- Captions end with a comment question ("Comment 1 or 2 👇") + exactly 3 hashtags incl. #gym. No links.
+## ⚠️ AUDIENCE MODE + FORMATS v2 (Presko, 2026-11-22) — overrides everything below
+- Build an audience first. NO promotion: no app screens, no "Try Forge", no links, prices, Pro or trials.
+- Formats (approved 2026-11-22): **Tier list** + **Form fix** reels (10:00, voiced) and **Carousels** (18:00). Templates in `engine/v2/`. Quiz reels, motion explainers and app demos are retired.
+- Times: 10:00 and 18:00 every day (Metricool best-time peaks for IG and TikTok).
+- Figure v2 (detailed anatomical figure, `engine/v2/rig2.js` + `ex2.js`) is the only figure style. Library today: squat (good + bad). New exercises are added by Claude with Presko, not by the daily run.
+- Why: IG avg views — quiz ~1.9k (Nov 3–14), motion explainers ~330, app promo ~130; TikTok carousels ~1.1k beat every TikTok video (~700).
+
+## Used v2 topics (never repeat)
+- 2026-11-22 18:00 tier list: chest exercises
+- 2026-11-23 10:00 form fix: squat (heels up / knees forward)
+- 2026-11-23 18:00 carousel: steal my chest day
 
 ## BRAND IDENTITY (approved by Presko 2026-11-20 — every post follows this)
 - **Who we are:** Forge — the AI gym coach that adapts to your real life: your sleep, your food, your schedule.

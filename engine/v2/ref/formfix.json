@@ -1,0 +1,5 @@
+{"exercise":"squat","hook":"Your squat is hitting your <span class=\"o\">knees</span>, not your legs",
+ "bad":{"title":"Heels up, knees forward","lines":["Weight shifts to your toes.","The bar drifts past mid-foot."],"calls":[["knee","KNEES PAST TOES"],["heel","HEELS LIFT"]]},
+ "good":{"title":"Sit back, heels down","lines":["Hips back, chest up.","Bar stays over <b>mid-foot</b>."],"calls":[["hip","GLUTES"],["knee","QUADS"]]},
+ "cta":"Save this for <span class=\"o\">leg day</span>","ctaSub":"Follow for a form fix every day",
+ "T":{"bad":[3.39,9.72],"good":[9.72,18.07],"end":20.3},"lineT":{"bad":[4.69,7.46],"good":[10.89,13.84]}}
