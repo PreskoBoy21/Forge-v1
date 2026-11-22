@@ -53,7 +53,7 @@ const WH=[{M1['m']},{M2['m']},{C}];
  <div class="a" style="left:540px;top:450px" data-in="${{M.cs-.15}}" data-out="${{M.e-.1}}" data-fx="pop"><div class="claim"><span class="q">${{LB.q}}</span>${{M.txt.toUpperCase()}}<div class="x" id="x${{i}}" style="${{LB.strike?'':'display:none'}}"></div></div></div>
  <div class="a" style="left:220px;top:680px" data-in="${{M.g-.25}}" data-out="${{M.f+.9}}" data-fx="pop"><div class="btn" id="bt${{i}}">${{M.a}}</div></div>
  <div class="a" style="left:860px;top:680px" data-in="${{M.g-.15}}" data-out="${{M.f+.9}}" data-fx="pop"><div class="btn" id="bf${{i}}">${{M.b}}</div></div>
- <div class="a" style="left:540px;top:690px" data-in="${{M.g-.05}}" data-out="${{M.f}}" data-fx="pop"><div class="ring"><svg viewBox="0 0 150 150"><circle cx="75" cy="75" r="64" fill="#12161D" stroke="#2C3442" stroke-width="10"/><circle id="rg${{i}}" cx="75" cy="75" r="64" fill="none" stroke="#C6F24E" stroke-width="10" stroke-linecap="round" stroke-dasharray="402" transform="rotate(-90 75 75)"/></svg><b id="rn${{i}}">3</b></div></div>
+ <div class="a" style="left:540px;top:690px" data-in="${{M.g-.05}}" data-out="${{M.f}}" data-fx="pop"><div class="ring"><svg viewBox="0 0 150 150"><circle cx="75" cy="75" r="64" fill="#12161D" stroke="#2C3442" stroke-width="10"/><circle id="rg${{i}}" cx="75" cy="75" r="64" fill="none" stroke="#FF6A1A" stroke-width="10" stroke-linecap="round" stroke-dasharray="402" transform="rotate(-90 75 75)"/></svg><b id="rn${{i}}">3</b></div></div>
  <div class="a" style="left:540px;top:930px" data-in="${{M.f}}" data-out="${{M.f+.9}}" data-fx="slam" data-rot="-8"><div class="stamp" style="white-space:nowrap;font-size:${{Math.min(200,Math.floor(1250/Math.max(1,M.st.length)))}}px">${{M.st}}</div></div>`}});
  $('myths').innerHTML=h}})();
 const SEG={json.dumps(S)};
@@ -76,7 +76,7 @@ def pd(i,M,c):
     if 'values' not in c: return ''
     mx=max(c['values'])
     return ''.join(f"  {{const p=eo(clamp((t-{M['e']+.25+k*.3})/.5));const h={int(300*v/mx)}*p;$('cb{i}{k}').style.height=h+'px';$('cl{i}{k}').style.bottom=(h+12)+'px';$('cl{i}{k}').style.opacity=p}}\n" for k,v in enumerate(c['values']))
-propdata=pd(1,M1,CF['charts'][0])+pd(2,M2,CF['charts'][1])+f'''  ['c1','c2'].forEach((c,i)=>{{const on=Math.floor((t-{st[13]})*1.6)%2===i&&t>{st[13]+.6};const e=$(c);e.style.background=on?'#C6F24E':'';e.style.color=on?'#0A0C10':'';e.style.borderColor=on?'#C6F24E':''}});
+propdata=pd(1,M1,CF['charts'][0])+pd(2,M2,CF['charts'][1])+f'''  ['c1','c2'].forEach((c,i)=>{{const on=Math.floor((t-{st[13]})*1.6)%2===i&&t>{st[13]+.6};const e=$(c);e.style.background=on?'#FF6A1A':'';e.style.color=on?'#0A0C10':'';e.style.borderColor=on?'#FF6A1A':''}});
 '''
 anim=f'''  let liftL=0,liftR=0,bob=0,rot=0;
   const press=win(t,[[0,{M1['m']-.1}],[{M1['e']+.15},{M1['end']-.1}]],.2);

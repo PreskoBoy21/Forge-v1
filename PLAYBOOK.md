@@ -6,6 +6,12 @@
 - Media hosting: public branch `content-media` of github.com/PreskoBoy21/Forge-v1 → `https://raw.githubusercontent.com/PreskoBoy21/Forge-v1/content-media/<file>` (Metricool copies the file at scheduling time; delete files older than 3 days).
 - Presko's rules: TikTok `isAigc: false`, IG `isAiGenerated: false`; captions have EXACTLY 3 hashtags, one always #gym.
 
+## ⚠️ AUDIENCE MODE (Presko, 2026-11-22) — overrides everything below about promoting the app
+- Build an audience first. NO promotional videos: no app screens, no "Try Forge", no link-in-bio CTA, no prices/Pro/trial. The app isn't published and the web app isn't ready to push.
+- Content = the proven animated quiz reels (myth · mistake · versus · swap · worth), black & orange (engine/build.py + skel.html, recoloured 2026-11-22). Motion explainers + app demos are paused.
+- Why: IG avg views — quiz reels ~1.9k (Nov 3–14), motion explainers ~330 (Nov 15–19), app promo ~130 (Nov 20–21). TikTok flat ~700 for all reels; Presko's own "I built this tracker" Notion video hit 12.2k.
+- Captions end with a comment question ("Comment 1 or 2 👇") + exactly 3 hashtags incl. #gym. No links.
+
 ## BRAND IDENTITY (approved by Presko 2026-11-20 — every post follows this)
 - **Who we are:** Forge — the AI gym coach that adapts to your real life: your sleep, your food, your schedule.
 - **One line:** *Know what to do today.*
