@@ -59,3 +59,6 @@
 - 2026-11-21 | 11:00 IG+FB story | skinny-fat-protein-story | Skinny fat? See your protein left in 1 photo | app promise, teases reel 1 | IG 436452484 · FB 436452500
 - 2026-11-21 | 12:00 | skinny-fat-cut-or-bulk-debate | Skinny fat? Don't cut. Don't bulk either. | short debate (21.5 s): recomp for new lifters (Barakat 2020) → Snap protein left, comment 1 or 2 | TT+IG 436452529 · FB 436452570
 - 2026-11-21 | 17:00 | add-weight-coach-call | My coach decides when I add weight. | coach call (20.2 s): 3 checks → readiness 100 → add weight → leg press 145 kg EXAMPLE, feel or plan? | TT+IG 436452650 · FB 436452699
+- 2026-11-22 | 11:00 IG+FB story | sleep-check-story | Slept badly? Forge checks before you lift | app promise, teases reel 1 | IG 437338162 · FB 437338169
+- 2026-11-22 | 12:00 | preworkout-sleep-debate | Your late pre-workout is stealing your sleep. | short debate (19.5 s): 400 mg caffeine 6 h before bed = >1 h less sleep, unnoticed (Drake 2013) → check-in + readiness, 'after 5 pm: yes or no?' | TT+IG 437338187 · FB 437338203
+- 2026-11-22 | 17:00 | pt-vs-app-price-call | This costs less than one PT session. | coach call/app demo (22.3 s): PT €60–90/h (Trustlocal 2026) vs Pro €29.99/yr → today, exact weights, protein left, paywall, 'trainer or app?' | TT+IG 437338241 · FB 437338257
