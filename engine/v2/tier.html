@@ -3,7 +3,7 @@
 *{margin:0;padding:0;box-sizing:border-box}body{width:1080px;height:1920px;background:radial-gradient(90% 60% at 50% 55%,#1c120b,#080808 60%,#050505);overflow:hidden;font-family:I;color:#fff;position:relative}
 #tag{position:absolute;left:70px;top:120px;font-weight:800;font-size:30px;letter-spacing:.25em;color:#8E8E8E}
 #wm{position:absolute;right:70px;top:120px;font-family:A;font-size:40px;letter-spacing:.06em}#wm span{color:#FF6A1A}
-#title{position:absolute;left:70px;right:70px;top:180px;font-family:A;font-size:110px;line-height:1;text-transform:uppercase}#title .o{color:#FF6A1A}
+#title{position:absolute;left:70px;right:70px;top:200px;font-family:A;font-size:110px;line-height:1;text-transform:uppercase}#title .o{color:#FF6A1A}
 #board{position:absolute;left:50px;right:50px;top:440px}
 .row{display:flex;align-items:stretch;height:168px;margin-bottom:14px;border-radius:22px;overflow:hidden;background:#141414;border:2px solid #222}
 .lab{width:150px;flex:none;display:flex;align-items:center;justify-content:center;font-family:A;font-size:96px;color:#000}
@@ -14,11 +14,13 @@
 #reason .n{font-family:A;font-size:76px;text-transform:uppercase;line-height:1.05}
 #reason .why{margin-top:14px;font-weight:600;font-size:44px;line-height:1.3;color:#d0d0d0}
 #cta{position:absolute;left:70px;right:70px;top:1420px;font-family:A;font-size:92px;line-height:1.04;text-transform:uppercase;opacity:0}#cta .o{color:#FF6A1A}
+#hookbig{position:absolute;left:0;right:0;top:420px;bottom:0;display:flex;align-items:flex-start;justify-content:center;padding:180px 70px 0;background:linear-gradient(#000000ee,#000000f5 40%,#000000ee);font-family:A;font-size:128px;line-height:1.02;text-transform:uppercase;text-align:center;z-index:5}
+#hookbig .o{color:#FF6A1A}
 #prog{position:absolute;left:0;top:0;height:8px;background:#FF6A1A}
 </style></head><body>
 <div id="prog"></div><div id="tag">TIER LIST</div><div id="wm">FORGE<span>.</span></div>
 <div id="title"></div><div id="board"></div><div id="reason"><div class="n"></div><div class="why"></div></div>
-<div id="cta"></div>
+<div id="cta"></div><div id="hookbig"></div>
 <script>
 const CFG=window.CFG||{
  title:'Ranking every <span class="o">chest</span> exercise',
@@ -55,6 +57,7 @@ window.render=function(t){
   else R.style.opacity=0;
   $('cta').innerHTML=CFG.cta;$('cta').style.opacity=inCta?cl((t-CFG.ctaAt)/.4):0;
   const CAM=Math.floor(t/2.5)%2, cu=cl((t%2.5)/.35), z=CAM?1+.025*cu:1.025-.025*cu;$('board').style.transform=`scale(${z.toFixed(4)})`;$('board').style.transformOrigin='50% 40%';
-  $('prog').style.width=(cl(t/END)*1080)+'px';
+  const hb=$('hookbig');if(CFG.hook){hb.innerHTML=`<div>${CFG.hook}</div>`;const ho=t<CFG.at[0]-.25?1:cl(1-(t-(CFG.at[0]-.25))/.25);hb.style.opacity=ho;hb.style.transform=`scale(${1+.04*cl(t/.25)*(t<CFG.at[0]?1:0)})`;}else hb.style.display='none';
+  $('prog').style.width=(cl(t/END)*1080)+'px';if(window.BRAND&&CFG.endAt)BRAND.end(t,CFG.endAt);
 };
-</script></body></html>
+</script><script src="brand.js"></script></body></html>

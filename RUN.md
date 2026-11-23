@@ -95,3 +95,6 @@ Caption: hook + one line of value + a comment question ("Agree? Comment what you
 - Never post a broken or half-made video. Mark the agent `blocked` on the dashboard with the reason.
 - ElevenLabs out of credits / Metricool error / git push denied → stop that part, tell Presko exactly what failed in one message.
 - If this is a **DRY RUN** (the run message says so): make NO voiceovers, renders or posts. Only test access: (a) Metricool getScheduledPosts, (b) one dashboard activity line "Dry run OK", (c) `git commit --allow-empty -m "dry run DATE" && git push` on the `agency` branch, (d) check `python3 -c "import playwright, numpy"` and `ffmpeg -version`. Report each as OK / FAILED with SendUserMessage.
+
+## Weekly research (Mondays, before step 1)
+Open RESEARCH.md. Re-check the 20 accounts' profile grids (views are visible without login), add any new video with ≥10k views to the top list, and note new patterns. Pick this week's topics from formats that beat 10k there. Every video uses engine/v2/brand.js (series chip + episode number, F wordmark, end card + logo_sfx.py at endAt). Series: FORGE RANKS (tier.html), KNOW THE DIFFERENCE (diff.html), FORM FIX (formfix.html).
