@@ -57,3 +57,17 @@ Method: 20 gym/fitness accounts, last ~32–35 videos each from the profile grid
 ## What Forge does with it
 - Formats: **FORGE RANKS** (tier lists), **KNOW THE DIFFERENCE** (side-by-side wrong vs right), **FORM FIX**, next: **5 BEST FOR…** listicles once the exercise library exists.
 - Brand kit v1 (engine/v2/brand.js): series chip with episode number, orange F tile + FORGE wordmark on every frame, the same orange-muscle figure as mascot, a 2-second branded end card with a sonic logo (engine/v2/logo_sfx.py). No app promotion in audience mode — only the name.
+
+
+## Round 2 (2026-11-23) — 12 more accounts, focus on comparison/form content
+Total now: 32 accounts, ~1,050 videos checked, 635 above 10k.
+| Account | Followers | ≥10k / seen | Median | Best |
+|---|---|---|---|---|
+| jeremyethier | 737k | 33/33 | 568k | "How to bench in 5 steps" 24.7M, "deadlift in 5 steps" 23.3M, "tested 17 chest exercises" 7.3M, "the perfect lat pulldown" 6.6M |
+| muscleandmotion | 913k | 12/35 | 7k | 3D anatomy: triceps 7.5M, "Kipping vs butterfly pull-up" 7.2M, "Hip thrust: scoop vs hinge" 59k |
+| weshape (app) | 943k | 8/35 | 3k | "This muscle protects your knees" 11.2M; ads flop |
+| thefitnesschef_ | 833k | 35/35 | 89k | Calorie myth-busting infographics ("no fat-burning foods" 7.4M) |
+| bioforceman.training | 59k | 19/34 | 12k | "The muscle that makes a chest look designed" 1.9M — small account, huge hit |
+| art_trener | 845k | 31/32 | 86k | Russian myth-busting talking head |
+| optimalik / brolygymlevrai / bethcarlino / milanmanfredi / byayamshala | — | — | — | Lifestyle/personality — not our lane |
+Key: the biggest form videos are **one exercise, done right, step by step**, plus **X vs Y**. Small faceless accounts can still hit 1M+ with a strong "nobody knows this muscle" hook.

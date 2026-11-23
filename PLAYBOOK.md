@@ -6,6 +6,11 @@
 - Media hosting: public branch `content-media` of github.com/PreskoBoy21/Forge-v1 → `https://raw.githubusercontent.com/PreskoBoy21/Forge-v1/content-media/<file>` (Metricool copies the file at scheduling time; delete files older than 3 days).
 - Presko's rules: TikTok `isAigc: false`, IG `isAiGenerated: false`; captions have EXACTLY 3 hashtags, one always #gym.
 
+## ⚠️ PRESKO 2026-11-23: KNOW THE DIFFERENCE = lead format. Tier lists paused.
+- He loved the side-by-side wrong vs right video (engine/v2/diff.html). Tier lists ("FORGE RANKS") underperform his taste → do NOT make them. Queued tier lists moved to days/queue/paused/.
+- 10:00 reel = KNOW THE DIFFERENCE, only with exercises the v2 figure can draw (today: squat). If no new drawable exercise is available, skip the reel and post only the 18:00 carousel. Never repeat a topic.
+- Research (RESEARCH.md): top proven angles = "how to X in 5 steps", "the perfect X", "X vs Y — which is better", "I tested N exercises".
+
 ## ⚠️ AUDIENCE MODE + FORMATS v2 (Presko, 2026-11-22) — overrides everything below
 - Build an audience first. NO promotion: no app screens, no "Try Forge", no links, prices, Pro or trials.
 - Formats (approved 2026-11-22): **Tier list** + **Form fix** reels (10:00, voiced) and **Carousels** (18:00). Templates in `engine/v2/`. Quiz reels, motion explainers and app demos are retired.
