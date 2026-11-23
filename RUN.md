@@ -67,7 +67,7 @@ Voice: ElevenLabs `creative_generate_speech` voice_id `RwGCfIzuc2tIJySQj0fD`, mo
 3. Stills: `cd WORK && python3 ../../engine/v2/render.py ../../engine/v2/tier.html tier.json test 1,<at[2]+1>,<ctaAt+1>` → look at them.
 4. Frames: `python3 ../../engine/v2/render.py ../../engine/v2/tier.html tier.json video <end>`; mix: `python3 ../../engine/music.py vo.mp3 mix.mp3 116`; encode: `ffmpeg -y -framerate 30 -i frames/%04d.jpg -i mix.mp3 -c:v libx264 -pix_fmt yuv420p -crf 19 -c:a aac -b:a 160k -af "apad,loudnorm=I=-14" -t <end> r1.mp4`.
 **Form fix:** same voice steps (no tightening), `python3 ../../engine/v2/segs.py vo.mp3 9` → 9 segments; set `T.bad=[seg2.start, seg5.start]`, `T.good=[seg5.start, seg9.start]`, `T.end`=audio+0.8, `lineT.bad=[seg3.start, seg4.start]`, `lineT.good=[seg6.start, seg7.start]` in `WORK/formfix.json`; render + mix + encode as above with `formfix.html`.
-**Carousel:** `cd WORK && python3 ../../engine/v2/render.py ../../engine/v2/car.html car.json slides` → slide-1.png … slide-6.png. Look at every slide.
+**Carousel:** `cd WORK && python3 ../../engine/v2/render.py ../../engine/v2/car.html car.json slides` → slide-1.png … slide-6.png. Look at every slide. Then convert each to JPEG (TikTok photo posts REJECT png): `python3 -c "from PIL import Image;[Image.open(f'slide-{i}.png').convert('RGB').save(f'slide-{i}.jpg',quality=92) for i in range(1,7)]"`.
 
 ## 7. (no stories for now)
 
@@ -78,7 +78,7 @@ Every still/slide checked: text inside the frame, nothing overlapping, tier chip
 Caption: hook + one line of value + a comment question ("Agree? Comment what you'd move 👇" / "Do you do this? Comment 1 for yes, 2 for no 👇" / "What would you add? 👇") + "Save this 📌" where it fits + **5–7 hashtags (broad + niche), one is always #gym** (SCRIPT_FRAMEWORK, 2026-11-23). No links, no app. TikTok title = first ~80 chars without hashtags.
 
 ## 10. Publisher [publisher]
-1. Copy files into `media/DATE/` (`r1.mp4`, `car-1.png` … `car-6.png`); `git add -A && git commit -m "media DATE" && git push` (content-media branch).
+1. Copy files into `media/DATE/` (`r1.mp4`, `car-1.jpg` … `car-6.jpg` — JPEG only, TikTok rejects png); `git add -A && git commit -m "media DATE" && git push` (content-media branch).
 2. Verify each `https://raw.githubusercontent.com/PreskoBoy21/Forge-v1/content-media/DATE/<file>` returns HTTP 200 (`curl -s -o /dev/null -w "%{http_code}"`). Retry up to 2 min.
 3. Metricool `createScheduledPost` (blogId `7513231`, timezone Europe/Berlin, autoPublish true). If a slot has passed, use the next free full hour.
    - **18:00 and 20:30 reels:** providers instagram + tiktok + facebook, media `[mp4 url]`, `instagramData:{type:"REEL", showReelOnFeed:true, isAiGenerated:false}`, `tiktokData:{title, privacyOption:"PUBLIC_TO_EVERYONE", isAigc:false, commercialContentOwnBrand:false, autoAddMusic:false}`, `facebookData:{type:"REEL"}`.
