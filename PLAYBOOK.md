@@ -6,6 +6,32 @@
 - Media hosting: public branch `content-media` of github.com/PreskoBoy21/Forge-v1 → `https://raw.githubusercontent.com/PreskoBoy21/Forge-v1/content-media/<file>` (Metricool copies the file at scheduling time; delete files older than 3 days).
 - Presko's rules: TikTok `isAigc: false`, IG `isAiGenerated: false`; captions have EXACTLY 3 hashtags, one always #gym.
 
+## ⚠️ PRESKO 2026-11-23 (16:46): APPROVED FORMATS + PRIORITY = RELATABLE NUTRITION / FAT LOSS
+Approved (all tested, refs in engine/v2/ref/): KNOW THE DIFFERENCE (diff.html), HOW TO in 5 steps (solo.html, steps.json), BEST LIFTS list (solo.html, list.json), HIDDEN MUSCLE (solo.html + "only", hidden.json), SAME CALORIES food side-by-side (food.html + food.js, food.json). Tier lists = never.
+**Priority:** food/fat-loss topics people recognise themselves in → this is where virality + follows come from. Rotation for the 10:00 reel: Mon/Wed/Fri/Sun = nutrition (SAME CALORIES or another food comparison), Tue/Thu/Sat = training (KNOW THE DIFFERENCE / HOW TO / BEST LIFTS / HIDDEN MUSCLE, only with exercises the figure can draw). 18:00 carousel = nutrition myth or fat-loss explainer most days.
+**Accuracy rule:** every calorie/protein number must be realistic (USDA FoodData Central-level values, portions stated in grams in the caption). No miracle claims, no "this food burns fat". Myths get debunked with the calorie-balance explanation.
+**Topic bank (use in order, mark used in "Used v2 topics"):**
+1. 500 kcal fast food vs 500 kcal cut plate (done as test)
+2. Hidden calories in a "healthy" day: oil, sauces, latte, nuts, snack bites
+3. Cutting carbs: why you lose weight fast (water + calories, not magic)
+4. Same 300 kcal: chocolate bar vs Greek yogurt + berries + popcorn
+5. Your latte is a meal: latte + syrup vs black coffee
+6. Why the scale goes up after a cheat day (water/salt/glycogen, not fat)
+7. Volume swaps for cutting: rice→cauliflower rice, chips→popcorn, soda→zero, candy→watermelon
+8. 150 g protein without powder: eggs, Greek yogurt, chicken, salmon, cottage cheese
+9. Fruit makes you fat? (banana vs donut, calories + fibre)
+10. "Healthy" foods that ruin a cut: avocado toast, granola, nuts, smoothies, olive oil
+11. Late-night eating myth: the clock vs total calories
+12. Lean bulk vs dirty bulk plate
+13. Weekend undoing the week: 5 days -500 vs 2 days +1200
+14. Incline walk vs running for fat loss
+15. Beginner thinks vs reality (supplements vs sleep/protein/progressive overload)
+16. Liquid calories: soda, juice, beer vs water
+17. Why you are always hungry on a cut (protein, fibre, volume)
+18. 1 tbsp oil = 120 kcal: how much you actually pour
+19. Pizza slice vs high-protein pizza wrap
+20. How much fat loss per week is realistic
+
 ## ⚠️ PRESKO 2026-11-23: KNOW THE DIFFERENCE = lead format. Tier lists paused.
 - He loved the side-by-side wrong vs right video (engine/v2/diff.html). Tier lists ("FORGE RANKS") underperform his taste → do NOT make them. Queued tier lists moved to days/queue/paused/.
 - 10:00 reel = KNOW THE DIFFERENCE, only with exercises the v2 figure can draw (today: squat). If no new drawable exercise is available, skip the reel and post only the 18:00 carousel. Never repeat a topic.

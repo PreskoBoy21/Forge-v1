@@ -98,3 +98,6 @@ Caption: hook + one line of value + a comment question ("Agree? Comment what you
 
 ## Weekly research (Mondays, before step 1)
 Open RESEARCH.md. Re-check the 20 accounts' profile grids (views are visible without login), add any new video with ≥10k views to the top list, and note new patterns. Pick this week's topics from formats that beat 10k there. Every video uses engine/v2/brand.js (series chip + episode number, F wordmark, end card + logo_sfx.py at endAt). Series: FORGE RANKS (tier.html), KNOW THE DIFFERENCE (diff.html), FORM FIX (formfix.html).
+
+## Food videos (food.html)
+CFG: L/R {label,col,items:[{t,kind,x,y,s,kcal}]}, lines[{side,at,text}], endAt/end. kinds in engine/v2/food.js: burger fries plate chicken potato leaf tomato berry straw rice egg oats yogurt popcorn watermelon pizza donut latte oil sauce nuts choc banana shake salmon avocado bread soda water. Time items to the voice; kcal values must add up to the stated total. Render like diff.html, end card + logo_sfx at endAt.
