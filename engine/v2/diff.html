@@ -26,23 +26,26 @@
 <g id="gL"></g><g id="gR"></g>
 </svg>
 <div id="prog"></div><div id="hook"></div>
-<div class="lab" id="labL">✕ Wrong</div><div class="lab" id="labR">✓ Right</div><div id="div"></div>
+<div class="lab" id="labL"></div><div class="lab" id="labR"></div><div id="div"></div>
 <div id="cap"></div>
-<div id="cL1" class="call"></div><div id="cL2" class="call"></div><div id="cR1" class="call"></div><div id="cR2" class="call"></div>
+<div id="cL0" class="call"></div><div id="cL1" class="call"></div><div id="cR0" class="call"></div><div id="cR1" class="call"></div>
 <script src="rig2.js"></script>
-<script src="ex2.js"></script>
+<script src="ex2.js"></script><script src="ex3.js"></script>
 <script>
 const CFG=window.CFG||{};
 const $=id=>document.getElementById(id), cl=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
 $('hook').innerHTML=CFG.hook;
-const phase=t=>{const c=t%3.2;return c<1.3?ease(c/1.3):c<1.6?1:c<2.6?1-ease((c-1.6)/1):0};
-function drawSide(g,bad,k,ox,focus,t){
+const PER=CFG.per||3.2;const phase=t=>{const c=t%PER,f=PER/3.2;return c<1.3*f?ease(c/(1.3*f)):c<1.6*f?1:c<2.6*f?1-ease((c-1.6*f)/f):0};const _p=t=>{const c=t%3.2;return c<1.3?ease(c/1.3):c<1.6?1:c<2.6?1-ease((c-1.6)/1):0};
+const SD={L:Object.assign({ex:'squat',arg:true,label:'✕ Wrong',col:'#FF4A4A',calls:[['knee','KNEES',20],['heel','HEELS UP',-1]]},CFG.L||{}),R:Object.assign({ex:'squat',arg:false,label:'✓ Right',col:'#2BD46B',calls:[['hip','GLUTES',-1],['knee','QUADS',20]]},CFG.R||{})};
+$('labL').innerHTML=SD.L.label;$('labL').style.color=SD.L.col;$('labR').innerHTML=SD.R.label;$('labR').style.color=SD.R.col;
+if(CFG.tintL)document.querySelector('#bgL stop').setAttribute('stop-color',CFG.tintL);if(CFG.tintR)document.querySelector('#bgR stop').setAttribute('stop-color',CFG.tintR);
+function drawSide(g,sd,k,ox,focus,t){
   g.innerHTML='';const s=1.62,cx=ox+270,ty=1420;
   const CAM=Math.floor(t/2.5)%2,cu=cl((t%2.5)/.35),z=(CAM?1+.05*cu:1.05-.05*cu)*(1+.04*focus);
-  const es=s*z, ex=cx-292*es, ey=ty-528*es;g.setAttribute('transform',`translate(${ex},${ey}) scale(${es})`);
-  const F=new Fig(g);F.el('ellipse',{cx:300,cy:528,rx:170,ry:10,fill:bad?'#FF3B3B':'#2BD46B',opacity:.14});
-  const r=squat(F,k,bad);
-  F.el('line',{x1:r.mid,y1:200,x2:r.mid,y2:526,stroke:bad?'#FF3B3B':'#2BD46B','stroke-dasharray':'6 8','stroke-width':2.4,opacity:.7});
+  const es=s*z, ex=cx-(CFG.cx||292)*es, ey=ty-528*es;g.setAttribute('transform',`translate(${ex},${ey}) scale(${es})`);
+  const F=new Fig(g);F.el('ellipse',{cx:300,cy:528,rx:170,ry:10,fill:sd.col,opacity:.14});
+  const r=EX[sd.ex](F,k,sd.arg);
+  F.el('line',{x1:r.mid,y1:200,x2:r.mid,y2:526,stroke:sd.col,'stroke-dasharray':'6 8','stroke-width':2.4,opacity:CFG.noMid?0:.7});
   return {r,ex,ey,es};
 }
 window.render=function(t){
@@ -50,7 +53,7 @@ window.render=function(t){
   // which side is being talked about
   const cur=[...CFG.lines].reverse().find(l=>t>=l.at)||{side:'both'};
   const fL=cur.side==='L'?1:0, fR=cur.side==='R'?1:0;
-  const L=drawSide($('gL'),true,k,0,fL,t), R=drawSide($('gR'),false,k,540,fR,t);
+  const L=drawSide($('gL'),SD.L,k,0,fL,t), R=drawSide($('gR'),SD.R,k,540,fR,t);
   $('gL').style.opacity=cur.side==='R'?.35:1;$('gR').style.opacity=cur.side==='L'?.35:1;
   $('labL').style.opacity=cur.side==='R'?.35:1;$('labR').style.opacity=cur.side==='L'?.35:1;
   // hook: big at top, shrinks after first line
@@ -59,11 +62,8 @@ window.render=function(t){
   const cap=$('cap');if(cur.text){const a=cl((t-cur.at)/.2);cap.innerHTML=cur.text;cap.style.opacity=a;cap.style.transform=`translateY(${(1-a)*20}px) scale(${1+.06*(1-a)})`;}else cap.style.opacity=0;
   // callouts (shown when deep in the rep and that side is in focus or both)
   const deep=cl((k-.55)/.3);
-  const put=(id,P,txt,col,side,dx)=>{const el=$(id);el.textContent=txt;const X=P.ex+P.v[0]*P.es,Y=P.ey+P.v[1]*P.es;el.style.left=(X+dx(el))+'px';el.style.top=(Y-22)+'px';el.style.background=col;el.style.color=col==='#2BD46B'?'#000':'#fff';el.style.opacity=deep*(cur.side===side||cur.side==='both'?1:0)*(t>=CFG.calloutsAt?1:0);};
-  put('cL1',{...L,v:L.r.knee},'KNEES',  '#FF3B3B','L',el=>20);
-  put('cL2',{...L,v:L.r.heel},'HEELS UP','#FF3B3B','L',el=>-el.offsetWidth+30);
-  put('cR1',{...R,v:R.r.hip},'GLUTES',  '#2BD46B','R',el=>-el.offsetWidth-10);
-  put('cR2',{...R,v:R.r.knee},'QUADS',  '#2BD46B','R',el=>20);
+  const put=(id,P,txt,col,side,dx)=>{const el=$(id);el.textContent=txt;const X=P.ex+P.v[0]*P.es,Y=P.ey+P.v[1]*P.es;el.style.left=(X+dx(el))+'px';el.style.top=(Y-22+(P.dy||0))+'px';el.style.background=col;el.style.color='#000';el.style.opacity=deep*(cur.side===side||cur.side==='both'?1:0)*(t>=CFG.calloutsAt?1:0);};
+  [['L',L],['R',R]].forEach(([sd,G])=>SD[sd].calls.forEach((c,i)=>put('c'+sd+i,{...G,v:G.r[c[0]],dy:c[3]||0},c[1],SD[sd].col,sd,el=>c[2]<0?-el.offsetWidth-10:c[2])));
   $('prog').style.width=(cl(t/CFG.endAt)*1080)+'px';
   BRAND.end(t,CFG.endAt);
 };
