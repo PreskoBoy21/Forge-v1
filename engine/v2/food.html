@@ -1,0 +1,37 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:A;src:url(anton-latin-400-normal.woff2)}@font-face{font-family:I;src:url(inter-tight-latin-800-normal.woff2);font-weight:800}@font-face{font-family:I;src:url(inter-tight-latin-600-normal.woff2);font-weight:600}
+*{margin:0;padding:0;box-sizing:border-box}body{width:1080px;height:1920px;background:#050505;overflow:hidden;font-family:I;color:#fff;position:relative}
+#hook{position:absolute;left:64px;right:64px;top:210px;font-family:A;font-size:112px;line-height:1.0;text-transform:uppercase;text-align:center}
+.o{color:#FF6A1A}.r{color:#FF4A4A}.g{color:#2BD46B}
+.lab{position:absolute;top:600px;width:540px;text-align:center;font-family:A;font-size:64px;text-transform:uppercase}
+.kc{position:absolute;top:1300px;width:540px;text-align:center;font-family:A;font-size:120px}
+.kc small{display:block;font-family:I;font-weight:800;font-size:28px;letter-spacing:.25em;color:#9a9a9a}
+#labL{left:0}#labR{left:540px}
+#div{position:absolute;left:538px;top:600px;width:4px;height:860px;background:linear-gradient(#FF6A1A00,#FF6A1A,#FF6A1A00)}
+#cap{position:absolute;left:64px;right:64px;top:1560px;text-align:center;font-family:A;font-size:84px;line-height:1.05;text-transform:uppercase}
+#prog{position:absolute;left:0;top:0;height:8px;background:#FF6A1A;z-index:25}
+</style></head><body>
+<svg width="1080" height="1920" viewBox="0 0 1080 1920" style="position:absolute;inset:0">
+<defs><radialGradient id="bgL" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="#2a0c0c"/><stop offset="1" stop-color="#050505"/></radialGradient>
+<radialGradient id="bgR" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="#0b2414"/><stop offset="1" stop-color="#050505"/></radialGradient></defs>
+<rect x="0" y="560" width="540" height="920" fill="url(#bgL)"/><rect x="540" y="560" width="540" height="920" fill="url(#bgR)"/><g id="gL"></g><g id="gR"></g></svg>
+<div id="prog"></div><div id="hook"></div><div class="lab" id="labL"></div><div class="lab" id="labR"></div><div id="div"></div>
+<div class="kc" id="kL" style="left:0"></div><div class="kc" id="kR" style="left:540px"></div><div id="cap"></div>
+<script src="food.js"></script>
+<script>
+const CFG=window.CFG||{};const $=id=>document.getElementById(id), cl=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)), eo=t=>1-Math.pow(1-t,3), ob=t=>{const c=1.70158;return 1+(c+1)*Math.pow(t-1,3)+c*Math.pow(t-1,2)};
+$('hook').innerHTML=CFG.hook;$('labL').innerHTML=CFG.L.label;$('labL').style.color=CFG.L.col;$('labR').innerHTML=CFG.R.label;$('labR').style.color=CFG.R.col;
+function side(id,sd,ox,t,dim){let h='',kc=0;sd.items.forEach(it=>{if(t<it.t)return;const a=cl((t-it.t)/.45),y=(1-ob(a))*-260;kc+=it.kcal||0;
+  h+=`<g transform="translate(${ox+it.x},${it.y+y}) scale(${it.s||1})" opacity="${cl(a*3)}">${FOOD[it.kind]()}</g>`;});
+  const g=$(id);g.innerHTML=h;g.style.opacity=dim?.35:1;return kc;}
+window.render=function(t){
+  const cur=[...CFG.lines].reverse().find(l=>t>=l.at)||{side:'both'};
+  const kL=side('gL',CFG.L,0,t,cur.side==='R'),kR=side('gR',CFG.R,540,t,cur.side==='L');
+  const sk=(el,v,sd)=>{el.innerHTML=`<small>CALORIES</small><span style="color:${sd.col}">${Math.round(v)}</span>`;};
+  sk($('kL'),kL,CFG.L);sk($('kR'),kR,CFG.R);
+  $('labL').style.opacity=cur.side==='R'?.35:1;$('labR').style.opacity=cur.side==='L'?.35:1;
+  $('hook').style.transform=`scale(${1+.05*(1-cl(t/.3))})`;
+  const cap=$('cap');if(cur.text){const a=cl((t-cur.at)/.2);cap.innerHTML=cur.text;cap.style.opacity=a;cap.style.transform=`scale(${1+.06*(1-a)})`;}else cap.style.opacity=0;
+  $('prog').style.width=(cl(t/CFG.endAt)*1080)+'px';BRAND.end(t,CFG.endAt);
+};
+</script><script src="brand.js"></script></body></html>
