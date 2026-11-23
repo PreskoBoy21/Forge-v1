@@ -8,7 +8,7 @@
 
 ## ⚠️ PRESKO 2026-11-23 (16:46): APPROVED FORMATS + PRIORITY = RELATABLE NUTRITION / FAT LOSS
 Approved (all tested, refs in engine/v2/ref/): KNOW THE DIFFERENCE (diff.html), HOW TO in 5 steps (solo.html, steps.json), BEST LIFTS list (solo.html, list.json), HIDDEN MUSCLE (solo.html + "only", hidden.json), SAME CALORIES food side-by-side (food.html + food.js, food.json). Tier lists = never.
-**Priority:** food/fat-loss topics people recognise themselves in → this is where virality + follows come from. Rotation for the 10:00 reel: Mon/Wed/Fri/Sun = nutrition (SAME CALORIES or another food comparison), Tue/Thu/Sat = training (KNOW THE DIFFERENCE / HOW TO / BEST LIFTS / HIDDEN MUSCLE, only with exercises the figure can draw). 18:00 carousel = nutrition myth or fat-loss explainer most days.
+**Priority:** food/fat-loss topics people recognise themselves in → this is where virality + follows come from. **3 posts/day (Presko 2026-11-23):** 10:00 food/fat-loss reel, 12:30 training reel, 18:00 carousel (nutrition myth / fat-loss explainer). See RUN.md.
 **Accuracy rule:** every calorie/protein number must be realistic (USDA FoodData Central-level values, portions stated in grams in the caption). No miracle claims, no "this food burns fat". Myths get debunked with the calorie-balance explanation.
 **Topic bank (use in order, mark used in "Used v2 topics"):**
 1. 500 kcal fast food vs 500 kcal cut plate (done as test)
@@ -40,7 +40,7 @@ Approved (all tested, refs in engine/v2/ref/): KNOW THE DIFFERENCE (diff.html), 
 ## ⚠️ AUDIENCE MODE + FORMATS v2 (Presko, 2026-11-22) — overrides everything below
 - Build an audience first. NO promotion: no app screens, no "Try Forge", no links, prices, Pro or trials.
 - Formats (approved 2026-11-22): **Tier list** + **Form fix** reels (10:00, voiced) and **Carousels** (18:00). Templates in `engine/v2/`. Quiz reels, motion explainers and app demos are retired.
-- Times: 10:00 and 18:00 every day (Metricool best-time peaks for IG and TikTok).
+- Times: 10:00, 12:30 and 18:00 every day (Metricool best-time peaks for IG and TikTok).
 - Figure v2 (detailed anatomical figure, `engine/v2/rig2.js` + `ex2.js`) is the only figure style. Library today: squat (good + bad). New exercises are added by Claude with Presko, not by the daily run.
 - Why: IG avg views — quiz ~1.9k (Nov 3–14), motion explainers ~330, app promo ~130; TikTok carousels ~1.1k beat every TikTok video (~700).
 

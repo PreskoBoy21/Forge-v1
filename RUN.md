@@ -1,8 +1,9 @@
 # RUN.md — the daily run (follow exactly, top to bottom)
 
-Output every day (Europe/Berlin) — times from Metricool best-time data (IG + TikTok peak at 10:00 and 18:00 every day):
-- **10:00 Reel** — Instagram Reel + TikTok + Facebook Reel. Either a **Tier list** or a **Form fix** (rules in step 3).
-- **18:00 Carousel** — Instagram carousel post + TikTok photo carousel + Facebook post. A **save-worthy plan/list** (6 slides).
+Output every day (Europe/Berlin), 3 posts — times from Metricool best-time data for our IG + TikTok (peaks 10h, 12h, 18h every day; decided 2026-11-23):
+- **10:00 Food reel** — IG Reel + TikTok + FB Reel. Nutrition / fat-loss topic from the PLAYBOOK topic bank (food.html, SAME CALORIES style), voiced.
+- **12:30 Training reel** — IG Reel + TikTok + FB Reel. KNOW THE DIFFERENCE (diff.html) / HOW TO in 5 steps / BEST LIFTS / HIDDEN MUSCLE (solo.html), voiced, only with exercises in ex2.js/ex3.js.
+- **18:00 Carousel** — IG carousel + TikTok photo + FB post. Nutrition myth or fat-loss explainer (6 slides, car.html).
 (No stories for now.)
 Facebook is connected when Metricool `getBrandSettings` shows a `facebookData` entry for blog 7513231. No YouTube.
 **Monday:** before step 1 the Chief writes `WEEK.md` (last week's numbers, this week's targets: visitors / sign-ups / Pro, the ONE test of the week, pillar mix) and follows it all week.
@@ -40,13 +41,13 @@ Log each step as an activity line `{t: ISO time, agent, text}` and set the worki
 **FORMATS v2 (approved by Presko 2026-11-22 — quiz reels, motion explainers and app demos are retired):**
 | slot | format | template (`engine/v2/`) | reference cfg | what it is |
 |---|---|---|---|---|
-| 10:00 | **Tier list** | `tier.html` | `ref/tier.json` | "Ranking every <muscle/topic> exercise" S→D, 6 items (≈ 25 s), each drops in with a one-line reason; ends "Agree? Comment what you'd move 👇" |
-| 10:00 | **Form fix** | `formfix.html` | `ref/formfix.json` | bad rep (red ✕ + body callouts) → fix (green ✓ + working muscles in orange), ≈ 20 s, "Save this for ___ day" |
+| 10:00 | **Food comparison** | `food.html` | `ref/food.json` | two plates/foods side by side, items drop in, live kcal counters, ≈ 18 s, ends with a comment question |
+| 12:30 | **Know the difference / How to / Best lifts / Hidden muscle** | `diff.html` / `solo.html` | `ref/diff*.json`, `ref/steps.json`, `ref/list.json`, `ref/hidden.json` | rotate these four; tier lists are NEVER made. Old form fix row kept for reference: `formfix.html` | bad rep (red ✕ + body callouts) → fix (green ✓ + working muscles in orange), ≈ 20 s, "Save this for ___ day" |
 | 18:00 | **Carousel** | `car.html` | `ref/carousel.json` | 6 slides 1080×1350: hook slide, 4 item slides (sets × reps, rest, one cue), save slide |
-- **10:00 rotation:** Tier list Mon/Wed/Fri/Sun, Form fix Tue/Thu/Sat — BUT a Form fix is only possible for an exercise that exists in the figure library (`engine/v2/ex2.js`; today only `squat`, and its sample was already posted 2026-11-23). If no new library exercise exists, make a Tier list instead. Never invent poses.
+- **Rotation:** 10:00 food reel every day; 12:30 training reel rotates Know the difference → How to → Best lifts → Hidden muscle. Never repeat a topic (check PLAYBOOK "Used v2 topics"). If no unused exercise topic exists for the 12:30 slot, use a second food topic. Never invent poses.
 - **Tier list topics** (one per day, never repeat; log in PLAYBOOK "Used v2 topics"): back, shoulder, biceps, triceps, leg, glute, ab, calf exercises; also "gym supplements", "beginner mistakes", "cardio types for fat loss", "home workout exercises", "gym machines". Rankings must be defensible by evidence/consensus (stretch, loadability, stability, range of motion) — no medical claims. Exactly 6 items, use all 5 tiers S A B C D at least once across the list where honest.
 - **Carousel topics** (never repeat): "Steal my <back/leg/shoulder/arm/push/pull> day", "<N> exercises for wider shoulders / bigger arms…", "Beginner week 1 plan", "Warm-up before heavy lifts", "Full-body in 45 min". Sets/reps/rest must be sensible hypertrophy defaults (6–15 reps, 2–4 sets, 1.5–3 min for compounds).
-- Dashboard: two campaigns `{title, format:"Tier list"|"Form fix"|"Carousel", slot:"10:00"/"18:00", stage:"strategist", step:1, status:"in_progress"}`.
+- Dashboard: three campaigns `{title, format:"Tier list"|"Form fix"|"Carousel", slot:"10:00"/"12:30"/"18:00", stage:"strategist", step:1, status:"in_progress"}`.
 
 ## 4. Scriptwriter [writer]
 **Every post follows SCRIPT_FRAMEWORK.md (Presko, 2026-11-23).** First check `days/queue/DATE.md` — if a script is queued for today, use it. Otherwise write the full 5-part script into `WORK/script.md`: PART 1 concept (angle, emotion, duration 15–45 s), PART 2 three hook options (visual curiosity / contrarian / problem) + which one is chosen, PART 3 timestamp table (visual + spoken + on-screen; a visual change every 2–3 s — the templates zoom-punch every 2.5 s, chip drops/callouts add more), PART 4 music/SFX + caption + hashtags, PART 5 hook score /10, shareability, app integration (write "N/A — audience mode" while AUDIENCE MODE is on). Sentences 5–10 words. No greetings. The on-screen title must match the spoken hook from 0.0 s. Last line loops back to the hook or is a micro-CTA (comment / save). For carousels, PART 3 is a slide table instead of timestamps.
@@ -80,7 +81,7 @@ Caption: hook + one line of value + a comment question ("Agree? Comment what you
 1. Copy files into `media/DATE/` (`r1.mp4`, `car-1.png` … `car-6.png`); `git add -A && git commit -m "media DATE" && git push` (content-media branch).
 2. Verify each `https://raw.githubusercontent.com/PreskoBoy21/Forge-v1/content-media/DATE/<file>` returns HTTP 200 (`curl -s -o /dev/null -w "%{http_code}"`). Retry up to 2 min.
 3. Metricool `createScheduledPost` (blogId `7513231`, timezone Europe/Berlin, autoPublish true). If a slot has passed, use the next free full hour.
-   - **10:00 reel:** providers instagram + tiktok + facebook, media `[mp4 url]`, `instagramData:{type:"REEL", showReelOnFeed:true, isAiGenerated:false}`, `tiktokData:{title, privacyOption:"PUBLIC_TO_EVERYONE", isAigc:false, commercialContentOwnBrand:false, autoAddMusic:false}`, `facebookData:{type:"REEL"}`.
+   - **10:00 and 12:30 reels:** providers instagram + tiktok + facebook, media `[mp4 url]`, `instagramData:{type:"REEL", showReelOnFeed:true, isAiGenerated:false}`, `tiktokData:{title, privacyOption:"PUBLIC_TO_EVERYONE", isAigc:false, commercialContentOwnBrand:false, autoAddMusic:false}`, `facebookData:{type:"REEL"}`.
    - **18:00 carousel:** providers instagram + tiktok + facebook, media = the 6 slide urls in order, `instagramData:{type:"POST", isAiGenerated:false}`, `tiktokData:{title, privacyOption:"PUBLIC_TO_EVERYONE", isAigc:false, commercialContentOwnBrand:false, autoAddMusic:true, photoCoverIndex:0}`, `facebookData:{type:"POST"}`. If TikTok rejects the photo post, schedule IG + FB only and say so.
 4. Only count a post as scheduled if Metricool returned an id.
 5. Append to posted.md (`- DATE | slot | format | topic | hook | id`); add the topic to PLAYBOOK "Used v2 topics".
@@ -88,7 +89,7 @@ Caption: hook + one line of value + a comment question ("Agree? Comment what you
 
 ## 11. Director wrap-up [director]
 - Dashboard: campaigns `status:"scheduled", step:6, slot, hook`; `board/week.posts` (next 7 days from getScheduledPosts: `{date,time,title,status}`); all agents `done`.
-- PushNotification (one line): e.g. "Forge Agency: 2/2 scheduled — Reel 10:00 & Carousel 18:00".
+- PushNotification (one line): e.g. "Forge Agency: 3/3 scheduled — Food reel 10:00, Training reel 12:30, Carousel 18:00".
 - SendUserMessage to Presko: yesterday's views + new followers per platform, the two hooks, times, and anything that failed or needs him. Short, friendly, no jargon.
 
 ## If something breaks
