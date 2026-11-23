@@ -54,6 +54,7 @@ window.render=function(t){
     R.querySelector('.n').innerHTML=`<span style="color:${col}">${it[0]} tier</span> · ${it[1]}`;R.querySelector('.why').textContent=it[2];R.style.opacity=a;}
   else R.style.opacity=0;
   $('cta').innerHTML=CFG.cta;$('cta').style.opacity=inCta?cl((t-CFG.ctaAt)/.4):0;
+  const CAM=Math.floor(t/2.5)%2, cu=cl((t%2.5)/.35), z=CAM?1+.025*cu:1.025-.025*cu;$('board').style.transform=`scale(${z.toFixed(4)})`;$('board').style.transformOrigin='50% 40%';
   $('prog').style.width=(cl(t/END)*1080)+'px';
 };
 </script></body></html>

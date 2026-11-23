@@ -49,6 +49,7 @@ Log each step as an activity line `{t: ISO time, agent, text}` and set the worki
 - Dashboard: two campaigns `{title, format:"Tier list"|"Form fix"|"Carousel", slot:"10:00"/"18:00", stage:"strategist", step:1, status:"in_progress"}`.
 
 ## 4. Scriptwriter [writer]
+**Every post follows SCRIPT_FRAMEWORK.md (Presko, 2026-11-23).** First check `days/queue/DATE.md` — if a script is queued for today, use it. Otherwise write the full 5-part script into `WORK/script.md`: PART 1 concept (angle, emotion, duration 15–45 s), PART 2 three hook options (visual curiosity / contrarian / problem) + which one is chosen, PART 3 timestamp table (visual + spoken + on-screen; a visual change every 2–3 s — the templates zoom-punch every 2.5 s, chip drops/callouts add more), PART 4 music/SFX + caption + hashtags, PART 5 hook score /10, shareability, app integration (write "N/A — audience mode" while AUDIENCE MODE is on). Sentences 5–10 words. No greetings. The on-screen title must match the spoken hook from 0.0 s. Last line loops back to the hook or is a micro-CTA (comment / save). For carousels, PART 3 is a slide table instead of timestamps.
 - **Tier list voice script** (one ElevenLabs call): `Ranking every <topic>. ... <Item 1>. <X> tier. <reason, ≤ 9 words>. ... <Item 2>. … ... Agree? Comment what you'd move.` (6 items → ≈ 25 s after tightening).
 - **Form fix voice script** (9 short lines separated by " ... "): hook · "Watch the bad rep." · fault 1 · fault 2 · "Here's the fix." · fix 1 · fix 2 · what the right muscles do · "Save this for ___ day."
 - Carousel: no voice. Write slide text: hook title (≤ 4 words + orange word), sub line, 4 items (name, sets, rest, cue ≤ 20 words with 1–2 `<b>` words), save slide.
@@ -73,7 +74,7 @@ Voice: ElevenLabs `creative_generate_speech` voice_id `RwGCfIzuc2tIJySQj0fD`, mo
 Every still/slide checked: text inside the frame, nothing overlapping, tier chips readable, form-fix callouts on the right body part. Nothing half-broken ships.
 
 ## 9. Copywriter [copy]
-Caption: hook + one line of value + a comment question ("Agree? Comment what you'd move 👇" / "Do you do this? Comment 1 for yes, 2 for no 👇" / "What would you add? 👇") + "Save this 📌" where it fits + **EXACTLY 3 hashtags, one is #gym**. No links, no app. TikTok title = first ~80 chars without hashtags.
+Caption: hook + one line of value + a comment question ("Agree? Comment what you'd move 👇" / "Do you do this? Comment 1 for yes, 2 for no 👇" / "What would you add? 👇") + "Save this 📌" where it fits + **5–7 hashtags (broad + niche), one is always #gym** (SCRIPT_FRAMEWORK, 2026-11-23). No links, no app. TikTok title = first ~80 chars without hashtags.
 
 ## 10. Publisher [publisher]
 1. Copy files into `media/DATE/` (`r1.mp4`, `car-1.png` … `car-6.png`); `git add -A && git commit -m "media DATE" && git push` (content-media branch).

@@ -54,7 +54,7 @@ window.render=function(t){
   const isBad=t<good[0], seg=isBad?bad:good, mode=isBad?'bad':'good';
   const local=Math.max(0,t-(isBad?bad[0]:good[0]));
   stg.innerHTML='';const s=2.45, ox=540-292*s, oy=1380-528*s;
-  stg.setAttribute('transform',`translate(${ox},${oy}) scale(${s})`);
+  const CAM=Math.floor(t/2.5)%2,cu=cl((t%2.5)/.35),zz=CAM?1+.06*cu:1.06-.06*cu;const ex=540-(540-ox)*zz, ey=1000-(1000-oy)*zz, es=s*zz;stg.setAttribute('transform',`translate(${ex},${ey}) scale(${es})`);
   const F=new Fig(stg);F.el('ellipse',{cx:300,cy:528,rx:230,ry:12,fill:'#FF6A1A',opacity:.12});F.el('rect',{x:60,y:526,width:480,height:2.5,fill:'#FF6A1A',opacity:.4});
   const k=t<bad[0]?0:phase(local);
   const r=squat(F,k,mode==='bad');
@@ -71,7 +71,7 @@ window.render=function(t){
   const LT=CFG.lineT[isBad?'bad':'good'];$('lines').innerHTML=L.map((x,i)=>`<div style="opacity:${cl((t-LT[i])/.3)}">${x}</div>`).join('');
   // callouts follow the body, visible when the rep is near the bottom
   const calls=(isBad?CFG.bad:CFG.good).calls, deep=cl((k-.55)/.3)*(inSeg?1:0);
-  calls.forEach((c,i)=>{const p=r[c[0]],X=ox+p[0]*s,Y=oy+p[1]*s;const el=$('c'+(i+1));el.textContent=c[1];
+  calls.forEach((c,i)=>{const p=r[c[0]],X=ex+p[0]*es,Y=ey+p[1]*es;const el=$('c'+(i+1));el.textContent=c[1];
     place(el,[X+(c[0]==='hip'||c[0]==='heel'?-(el.offsetWidth+40):40),Y-28],deep,isBad?'#FF3B3B':'#FF6A1A');});
   $('hook').style.opacity=1;
   $('prog').style.width=(cl(t/end)*1080)+'px';

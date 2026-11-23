@@ -13,10 +13,14 @@
 - Figure v2 (detailed anatomical figure, `engine/v2/rig2.js` + `ex2.js`) is the only figure style. Library today: squat (good + bad). New exercises are added by Claude with Presko, not by the daily run.
 - Why: IG avg views — quiz ~1.9k (Nov 3–14), motion explainers ~330, app promo ~130; TikTok carousels ~1.1k beat every TikTok video (~700).
 
+- **Script framework (Presko, 2026-11-23):** every post is written with SCRIPT_FRAMEWORK.md (3-second hook, 5–10-word sentences, visual change every 2–3 s, loop ending or micro-CTA, 5-part output incl. 3 hook options and a score). Hashtags now 5–7 incl. #gym. App integration stays N/A while AUDIENCE MODE is on.
+- Queued scripts live in `days/queue/DATE.md` and are used first.
+
 ## Used v2 topics (never repeat)
 - 2026-11-22 18:00 tier list: chest exercises
 - 2026-11-23 10:00 form fix: squat (heels up / knees forward)
 - 2026-11-23 18:00 carousel: steal my chest day
+- queued: 2026-11-24 back tier list · 2026-11-25 shoulder tier list · 2026-11-26 supplements tier list
 
 ## BRAND IDENTITY (approved by Presko 2026-11-20 — every post follows this)
 - **Who we are:** Forge — the AI gym coach that adapts to your real life: your sleep, your food, your schedule.
