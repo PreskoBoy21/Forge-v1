@@ -115,3 +115,6 @@ Times are new (12:30 / 18:00 / 20:30). Analytics compares views + new followers 
 
 ## Marketing skills (2026-11-24)
 Read `skills/README.md` and use the skills it maps to each step: `skills/social` + `skills/marketing-psychology` while scripting, a `skills/content-humanizer` pass on every caption, `skills/content-strategy` + `skills/customer-research` for topic choice, `skills/reverse-engineer-marketing` in the Monday research. BRAND_BOOK.md and the hard rules always win.
+
+## Loop-friendly endings (Presko 2026-11-24)
+End card 1.2 s max (`end = endAt + 1.25`), logo sfx trimmed to 1.25 s with fade. Captions stay above y≈1450 and left of x≈940 (platform UI safe zone). New food/fat-loss template: engine/v2/week.html (ref/week.json) + engine/v2/sfx.py for pop/thud/hit/ding/buzz/whoosh on every visual beat.
