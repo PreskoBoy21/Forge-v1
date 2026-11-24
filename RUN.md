@@ -1,9 +1,9 @@
 # RUN.md — the daily run (follow exactly, top to bottom)
 
-Output every day (Europe/Berlin), 3 posts — times from Buffer/Metricool/Sprout 2026 studies + US overlap (English audience): 18:00 Berlin = 12:00 New York, 20:30 = 14:30 (decided with Presko 2026-11-23):
+Output every day (Europe/Berlin), 3 REELS (no carousels — Presko 2026-11-24, they underperform) — times from Buffer/Metricool/Sprout 2026 studies + US overlap (English audience): 18:00 Berlin = 12:00 New York, 20:30 = 14:30 (decided with Presko 2026-11-23):
 - **18:00 Food reel** — IG Reel + TikTok + FB Reel. Nutrition / fat-loss topic from the PLAYBOOK topic bank (food.html, SAME CALORIES style), voiced.
 - **20:30 Training reel** — IG Reel + TikTok + FB Reel. KNOW THE DIFFERENCE (diff.html) / HOW TO in 5 steps / BEST LIFTS / HIDDEN MUSCLE (solo.html), voiced, only with exercises in ex2.js/ex3.js.
-- **12:30 Carousel** — IG carousel + TikTok photo + FB post. Nutrition myth or fat-loss explainer (6 slides, car.html).
+- **12:30 Answer reel** — IG Reel + TikTok + FB Reel. A PROBLEM / question answer (BRAND_BOOK §6, comment loop first), usually food.html; voiced.
 (No stories for now.)
 Facebook is connected when Metricool `getBrandSettings` shows a `facebookData` entry for blog 7513231. No YouTube.
 **Monday:** before step 1 the Chief writes `WEEK.md` (last week's numbers, this week's targets: visitors / sign-ups / Pro, the ONE test of the week, pillar mix) and follows it all week.
@@ -43,7 +43,7 @@ Log each step as an activity line `{t: ISO time, agent, text}` and set the worki
 |---|---|---|---|---|
 | 18:00 | **Food comparison** | `food.html` | `ref/food.json` | two plates/foods side by side, items drop in, live kcal counters, ≈ 18 s, ends with a comment question |
 | 20:30 | **Know the difference / How to / Best lifts / Hidden muscle** | `diff.html` / `solo.html` | `ref/diff*.json`, `ref/steps.json`, `ref/list.json`, `ref/hidden.json` | rotate these four; tier lists are NEVER made. Old form fix row kept for reference: `formfix.html` | bad rep (red ✕ + body callouts) → fix (green ✓ + working muscles in orange), ≈ 20 s, "Save this for ___ day" |
-| 12:30 | **Carousel** | `car.html` | `ref/carousel.json` | 6 slides 1080×1350: hook slide, 4 item slides (sets × reps, rest, one cue), save slide |
+| (retired) | **Carousel** | `car.html` | `ref/carousel.json` | 6 slides 1080×1350: hook slide, 4 item slides (sets × reps, rest, one cue), save slide |
 - **Rotation:** 18:00 food reel every day; 20:30 training reel rotates Know the difference → How to → Best lifts → Hidden muscle. Never repeat a topic (check PLAYBOOK "Used v2 topics"). If no unused exercise topic exists for the 20:30 slot, use a second food topic. Never invent poses.
 - **Tier list topics** (one per day, never repeat; log in PLAYBOOK "Used v2 topics"): back, shoulder, biceps, triceps, leg, glute, ab, calf exercises; also "gym supplements", "beginner mistakes", "cardio types for fat loss", "home workout exercises", "gym machines". Rankings must be defensible by evidence/consensus (stretch, loadability, stability, range of motion) — no medical claims. Exactly 6 items, use all 5 tiers S A B C D at least once across the list where honest.
 - **Carousel topics** (never repeat): "Steal my <back/leg/shoulder/arm/push/pull> day", "<N> exercises for wider shoulders / bigger arms…", "Beginner week 1 plan", "Warm-up before heavy lifts", "Full-body in 45 min". Sets/reps/rest must be sensible hypertrophy defaults (6–15 reps, 2–4 sets, 1.5–3 min for compounds).
@@ -82,14 +82,14 @@ Caption: hook + one line of value + a comment question ("Agree? Comment what you
 2. Verify each `https://raw.githubusercontent.com/PreskoBoy21/Forge-v1/content-media/DATE/<file>` returns HTTP 200 (`curl -s -o /dev/null -w "%{http_code}"`). Retry up to 2 min.
 3. Metricool `createScheduledPost` (blogId `7513231`, timezone Europe/Berlin, autoPublish true). If a slot has passed, use the next free full hour.
    - **18:00 and 20:30 reels:** providers instagram + tiktok + facebook, media `[mp4 url]`, `instagramData:{type:"REEL", showReelOnFeed:true, isAiGenerated:false}`, `tiktokData:{title, privacyOption:"PUBLIC_TO_EVERYONE", isAigc:false, commercialContentOwnBrand:false, autoAddMusic:false}`, `facebookData:{type:"REEL"}`.
-   - **12:30 carousel:** providers instagram + tiktok + facebook, media = the 6 slide urls in order, `instagramData:{type:"POST", isAiGenerated:false}`, `tiktokData:{title, privacyOption:"PUBLIC_TO_EVERYONE", isAigc:false, commercialContentOwnBrand:false, autoAddMusic:true, photoCoverIndex:0}`, `facebookData:{type:"POST"}`. If TikTok rejects the photo post, schedule IG + FB only and say so.
+   - **(retired) carousel:** providers instagram + tiktok + facebook, media = the 6 slide urls in order, `instagramData:{type:"POST", isAiGenerated:false}`, `tiktokData:{title, privacyOption:"PUBLIC_TO_EVERYONE", isAigc:false, commercialContentOwnBrand:false, autoAddMusic:true, photoCoverIndex:0}`, `facebookData:{type:"POST"}`. If TikTok rejects the photo post, schedule IG + FB only and say so.
 4. Only count a post as scheduled if Metricool returned an id.
 5. Append to posted.md (`- DATE | slot | format | topic | hook | id`); add the topic to PLAYBOOK "Used v2 topics".
 6. Save cfgs into `days/DATE/`, commit + push the `agency` branch (no mp3/mp4/png in this branch).
 
 ## 11. Director wrap-up [director]
 - Dashboard: campaigns `status:"scheduled", step:6, slot, hook`; `board/week.posts` (next 7 days from getScheduledPosts: `{date,time,title,status}`); all agents `done`.
-- PushNotification (one line): e.g. "Forge Agency: 3/3 scheduled — Carousel 12:30, Food reel 18:00, Training reel 20:30".
+- PushNotification (one line): e.g. "Forge Agency: 3/3 reels scheduled — Answer 12:30, Food 18:00, Training 20:30".
 - SendUserMessage to Presko: yesterday's views + new followers per platform, the two hooks, times, and anything that failed or needs him. Short, friendly, no jargon.
 
 ## If something breaks
@@ -105,3 +105,10 @@ CFG: L/R {label,col,items:[{t,kind,x,y,s,kcal}]}, lines[{side,at,text}], endAt/e
 
 ## Slot test (2026-11-24 → 2026-12-07)
 Times are new (12:30 / 18:00 / 20:30). Analytics compares views + new followers per slot weekly; report in WEEK.md. Never change slots without Presko.
+
+## Brand book + growth loop (2026-11-24)
+- Read BRAND_BOOK.md before writing anything. Scorecard ≥ 14/20 or rewrite (write the score in script.md).
+- Theme the day with the daily-moment calendar (BRAND_BOOK §7).
+- **Comment loop (Mondays + Thursdays):** read the newest comments on our posts read-only (Metricool analytics if it exposes them, otherwise the public post pages). Pick the best real question → make it the next 12:30 "Answering your question" reel (quote the question on screen WITHOUT username). Never reply, like or DM.
+- **Weekly test (Mondays):** pick ONE test by ICE score, write hypothesis in WEEK.md, run it all week, report keep/kill next Monday. North Star = new followers/week.
+- **Queue first:** if days/queue/DATE-SLOT.md or a ready mp4 in media/queue/ exists for a slot, use it.

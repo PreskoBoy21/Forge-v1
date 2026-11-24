@@ -6,6 +6,9 @@
 - Media hosting: public branch `content-media` of github.com/PreskoBoy21/Forge-v1 → `https://raw.githubusercontent.com/PreskoBoy21/Forge-v1/content-media/<file>` (Metricool copies the file at scheduling time; delete files older than 3 days).
 - Presko's rules: TikTok `isAigc: false`, IG `isAiGenerated: false`; captions have EXACTLY 3 hashtags, one always #gym.
 
+## ⚠️ PRESKO 2026-11-24: 3 REELS A DAY, NO CAROUSELS + BRAND BOOK
+12:30 answer reel (problem/question), 18:00 food comparison reel, 20:30 training reel. Carousels retired (they underperformed). BRAND_BOOK.md rules everything about voice, audience, scoring and growth.
+
 ## ⚠️ PRESKO 2026-11-23 (16:46): APPROVED FORMATS + PRIORITY = RELATABLE NUTRITION / FAT LOSS
 Approved (all tested, refs in engine/v2/ref/): KNOW THE DIFFERENCE (diff.html), HOW TO in 5 steps (solo.html, steps.json), BEST LIFTS list (solo.html, list.json), HIDDEN MUSCLE (solo.html + "only", hidden.json), SAME CALORIES food side-by-side (food.html + food.js, food.json). Tier lists = never.
 **Priority:** food/fat-loss topics people recognise themselves in → this is where virality + follows come from. **3 posts/day (Presko 2026-11-23):** 12:30 carousel (nutrition myth / fat-loss explainer), 18:00 food/fat-loss reel, 20:30 training reel. See RUN.md.
