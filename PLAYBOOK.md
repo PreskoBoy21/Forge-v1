@@ -6,6 +6,17 @@
 - Media hosting: public branch `content-media` of github.com/PreskoBoy21/Forge-v1 → `https://raw.githubusercontent.com/PreskoBoy21/Forge-v1/content-media/<file>` (Metricool copies the file at scheduling time; delete files older than 3 days).
 - Presko's rules: TikTok `isAigc: false`, IG `isAiGenerated: false`; captions have EXACTLY 3 hashtags, one always #gym.
 
+## ⚠️ PRESKO 2026-11-24 (19:17): NEW PLAN — WAITLIST + QUALITY FIRST (overrides older slot/ratio rules)
+- **Frequency:** 2 reels/day until 2026-12-07 (18:00 MAIN + 20:30 SECOND). From 2026-12-08: 1 reel/day at 18:00 (or 2 only if WEEK.md data says the second slot pays off). 12:30 slot retired.
+- **Quality gate:** every reel needs ≥ 14/20 on the BRAND_BOOK scorecard AND a hook that lands in second 0–1. If the SECOND slot can't reach that, SKIP it (report why) — never post filler.
+- **Audience mode is OVER for 1 in 5 posts.** Ratio 4 value : 1 Forge. The Forge post shows the app's "aha" (only real iOS screens from media/app/ — never mock screens, never features not in the build under review) and ends "Early access → link in bio". Until real app recordings exist in media/app/, the 1-in-5 is a value reel whose CTA line is "Want this done for you daily? Early access in bio." Never a link in the caption.
+- **Bio link:** https://preskoboy21.github.io/Forge-v1/early/?src=tt (TikTok) / ?src=ig (Instagram). Waitlist rows have source early-tt / early-ig.
+- **Format verdicts:** judge a format only after ≥ 6 posts AND ≥ 10 days on: 3-s hold, saves+shares per 1k views, profile visits → waitlist sign-ups. Never kill/keep on one post.
+- **Metrics that matter (WEEK.md every Monday):** profile visits, bio link clicks, saves, shares, rewatches/avg watch, waitlist sign-ups per source (SELECT count(*), source from waitlist group by source — counts only, never read emails). First milestone: 100 sign-ups.
+- **Founder offer (launch only, when Apple approves):** first 100 members lock in Pro at €19.99/year (normally €29.99) while subscribed. Only mention it in posts once the Stripe founder price + 100-use code exist (Presko confirms).
+- **Real footage:** Presko is not filming yet. Use app screen recordings when they arrive, otherwise the animated templates (week.html, food.html, diff.html, solo.html). Free stock only as ≤2 s cuts inside a template, never a stock slideshow.
+- Facebook = silent auto-copy, not counted in decisions.
+
 ## ⚠️ PRESKO 2026-11-24: 3 REELS A DAY, NO CAROUSELS + BRAND BOOK
 12:30 answer reel (problem/question), 18:00 food comparison reel, 20:30 training reel. Carousels retired (they underperformed). BRAND_BOOK.md rules everything about voice, audience, scoring and growth.
 
@@ -51,10 +62,11 @@ Approved (all tested, refs in engine/v2/ref/): KNOW THE DIFFERENCE (diff.html), 
 - Queued scripts live in `days/queue/DATE.md` and are used first.
 
 ## Used v2 topics (never repeat)
-- 2026-11-25 12:30 myth: fruit vs donut (3 bananas ≈ 1 donut) — pre-scheduled by Presko session
+- 2026-11-27 18:00 fat loss traps #01: weekend erases the week — pre-scheduled
+- 2026-11-26 18:00 myth: fruit vs donut (3 bananas ≈ 1 donut) — pre-scheduled
 - 2026-11-25 18:00 same calories: 500 kcal fast food vs cut plate — pre-scheduled
 - 2026-11-25 20:30 hidden muscle: glutes / lower back — pre-scheduled
-- 2026-11-26 12:30 same calories: 4 pm snack, chocolate bar vs yogurt+berries+popcorn — pre-scheduled
+- 2026-11-28 18:00 same calories: 4 pm snack, chocolate bar vs yogurt+berries+popcorn — pre-scheduled
 - 2026-11-26 20:30 know the difference: barbell row wrong vs right — pre-scheduled
 - 2026-11-27 20:30 how to squat in 5 steps — pre-scheduled
 - 2026-11-28 20:30 best lifts: 4 barbell lifts — pre-scheduled

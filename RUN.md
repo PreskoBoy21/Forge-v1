@@ -1,6 +1,6 @@
 # RUN.md — the daily run (follow exactly, top to bottom)
 
-Output every day (Europe/Berlin), 3 REELS (no carousels — Presko 2026-11-24, they underperform) — times from Buffer/Metricool/Sprout 2026 studies + US overlap (English audience): 18:00 Berlin = 12:00 New York, 20:30 = 14:30 (decided with Presko 2026-11-23):
+Output every day (Europe/Berlin): **2 REELS until 2026-12-07 (18:00 main + 20:30 second), then 1 REEL at 18:00** — see PLAYBOOK 'NEW PLAN' (2026-11-24 19:17). Older lines below about 3 reels / 12:30 are superseded. Original notes: times from Buffer/Metricool/Sprout 2026 studies + US overlap (English audience): 18:00 Berlin = 12:00 New York, 20:30 = 14:30 (decided with Presko 2026-11-23):
 - **18:00 Food reel** — IG Reel + TikTok + FB Reel. Nutrition / fat-loss topic from the PLAYBOOK topic bank (food.html, SAME CALORIES style), voiced.
 - **20:30 Training reel** — IG Reel + TikTok + FB Reel. KNOW THE DIFFERENCE (diff.html) / HOW TO in 5 steps / BEST LIFTS / HIDDEN MUSCLE (solo.html), voiced, only with exercises in ex2.js/ex3.js.
 - **12:30 Answer reel** — IG Reel + TikTok + FB Reel. A PROBLEM / question answer (BRAND_BOOK §6, comment loop first), usually food.html; voiced.
