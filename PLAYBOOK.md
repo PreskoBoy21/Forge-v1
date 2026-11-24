@@ -157,6 +157,7 @@ Squat: cutting depth on heavy days; knees caving — Rows: using the lower back 
 - 2026-11-20: tryvolume: 'numbers on screen as proof' 20x, 'progress tracker stays on screen' 14x, before/after flash 17x; app outliers (Handler) are screen-recording demos; MyFitnessPal 'let's see how fast I can log my whole day' speed-run opener → future demo angle. Pains used: 'slept 5 h, train heavy?', 'my gym log is a mess in Notes'.
 - 2026-11-21: tryvolume: physique-proof-first 22x, bad-rep-then-fix 21x, age-vs-goal 21x, before/after flash 17x (18 accts); no debate or app-demo format in the fitness top list. Pains used: 'I'm skinny fat — cut or bulk first?', 'when should I add weight?'.
 - 2026-11-22: tryvolume (Nov 21, 714 posts): physique-proof-first 22x, bad-rep-then-fix 21x, age-vs-goal 21x, before/after flash 17x (19 accts), 'Strava numbers on screen as proof' 25x, progress tracker on screen 14x. Pains used: 'is pre-workout at night ruining my sleep?', 'can't afford a PT'.
+- 2026-11-24: tryvolume fitness (23 Nov): bad-rep-then-fix 21x (9 accts), before/after flash 17x (16), vanity problem area in hook 16x (6), muscle diagram overlay 7x (18); Aubrium: 'food label breakdowns' top nutrition idea (76 creators, 35x), weight-loss meals 22x. Pains used: 'always hungry on a cut', 'eating clean but not losing weight'.
 
 ## STYLE v3 — MOTION EXPLAINER (current, approved by Presko 2026-11-14)
 - Presko: "Now this is something, this is actually good." Old quiz/mascot style looked AI-made; real stock footage (Descript) was rejected ("slideshow of bad footage").
@@ -198,7 +199,6 @@ Used motion topics: calorie deficit / crash dieting (example, 2026-11-14); creat
   - 2026-11-13: end card 'COMMENT 1 OR 2' text sits over the mascot's head (all formats) → engine fix candidate (move comment line above the mascot or mascot lower).
   - 2026-11-14: FIXED — build.py end-card comment line moved from top 740 → 535 (between the question and the buttons); clear of the mascot. Item card text ~28+ chars wraps one word onto line 2 ("ARE LIFTING STRAPS WORTH / IT?") → keep `myths` short for worth reels ("Lifting straps").
 
-- 2026-11-24: tryvolume fitness (23 Nov): bad-rep-then-fix 21x (9 accts), before/after flash 17x (16), vanity problem area in hook 16x (6), muscle diagram overlay 7x (18); Aubrium: 'food label breakdowns' top nutrition idea (76 creators, 35x), weight-loss meals 22x. Pains used: 'always hungry on a cut', 'eating clean but not losing weight'.
 
 ## Weekly reviews (Sunday, newest first — what worked, what flopped, 1 content change + 1 product idea)
 ### Week ending 2026-11-22 (Chief Marketing Agent)
