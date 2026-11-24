@@ -112,3 +112,6 @@ Times are new (12:30 / 18:00 / 20:30). Analytics compares views + new followers 
 - **Comment loop (Mondays + Thursdays):** read the newest comments on our posts read-only (Metricool analytics if it exposes them, otherwise the public post pages). Pick the best real question → make it the next 12:30 "Answering your question" reel (quote the question on screen WITHOUT username). Never reply, like or DM.
 - **Weekly test (Mondays):** pick ONE test by ICE score, write hypothesis in WEEK.md, run it all week, report keep/kill next Monday. North Star = new followers/week.
 - **Queue first:** if days/queue/DATE-SLOT.md or a ready mp4 in media/queue/ exists for a slot, use it.
+
+## Marketing skills (2026-11-24)
+Read `skills/README.md` and use the skills it maps to each step: `skills/social` + `skills/marketing-psychology` while scripting, a `skills/content-humanizer` pass on every caption, `skills/content-strategy` + `skills/customer-research` for topic choice, `skills/reverse-engineer-marketing` in the Monday research. BRAND_BOOK.md and the hard rules always win.
