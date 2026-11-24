@@ -1,0 +1,62 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:A;src:url(anton-latin-400-normal.woff2)}@font-face{font-family:I;src:url(inter-tight-latin-800-normal.woff2);font-weight:800}@font-face{font-family:I;src:url(inter-tight-latin-600-normal.woff2);font-weight:600}
+*{margin:0;padding:0;box-sizing:border-box}body{width:1080px;height:1920px;background:radial-gradient(70% 50% at 50% 45%,#1e0f06,#050505 75%);overflow:hidden;font-family:I;color:#fff;position:relative}
+.o{color:#FF6A1A}.r{color:#FF4A4A}.g{color:#2BD46B}
+#hook{position:absolute;left:60px;right:60px;top:200px;font-family:A;font-size:118px;line-height:1;text-transform:uppercase;text-align:center;z-index:6}
+#ctr{position:absolute;left:0;right:0;top:250px;text-align:center;opacity:0}
+#ctr .l{font-weight:800;font-size:30px;letter-spacing:.3em;color:#9a9a9a}
+#ctr .v{font-family:A;font-size:170px;line-height:1.05}
+#ctr .s{font-weight:800;font-size:40px;color:#d0d0d0}
+#cap{position:absolute;left:60px;right:60px;top:1590px;text-align:center;font-family:A;font-size:86px;line-height:1.05;text-transform:uppercase}
+#cap span{display:inline-block;margin:0 10px;transition:none}
+#cap .w{opacity:.35}#cap .on{color:#FF6A1A;opacity:1}#cap .done{opacity:1}
+#fix{position:absolute;left:90px;right:90px;top:560px;opacity:0;display:flex;flex-direction:column;gap:26px;z-index:7}
+#fix div{font-family:A;font-size:76px;text-transform:uppercase;padding:26px 34px;border-radius:28px;display:flex;justify-content:space-between;align-items:center}
+#fix .y{background:#0f2a18;border:4px solid #2BD46B}#fix .n{background:#2a0f0f;border:4px solid #FF4A4A;opacity:.85}
+#prog{position:absolute;left:0;top:0;height:8px;background:#FF6A1A;z-index:25}
+#flash{position:absolute;inset:0;background:#FF3B3B;opacity:0;z-index:4;pointer-events:none}
+</style></head><body>
+<div id="flash"></div>
+<svg width="1080" height="1920" viewBox="0 0 1080 1920" style="position:absolute;inset:0"><g id="chart"></g><g id="food"></g></svg>
+<div id="prog"></div><div id="hook"></div>
+<div id="ctr"><div class="l">THIS WEEK</div><div class="v" id="cv">0</div><div class="s" id="cs"></div></div>
+<div id="fix"><div class="y"><span>1 bigger meal</span><span>✓</span></div><div class="n"><span>2 whole days</span><span>✕</span></div></div>
+<div id="cap"></div>
+<script src="food.js"></script>
+<script>
+const CFG=window.CFG||{};const $=id=>document.getElementById(id),cl=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)),eo=t=>1-Math.pow(1-t,3),ob=t=>{const c=1.70158;return 1+(c+1)*Math.pow(t-1,3)+c*Math.pow(t-1,2)};
+$('hook').innerHTML=CFG.hook;
+const D=CFG.days, X0=150, DX=130, BASE=1180, K=0.30;   // px per kcal
+// caption lines: CFG.words = [[t0,t1,'word',lineIndex]]
+function caption(t){const W=CFG.words;let cur=W.filter(w=>t>=w[0]);if(!cur.length||t>=CFG.endAt){$('cap').innerHTML='';return}
+  const line=cur[cur.length-1][3];const ws=W.filter(w=>w[3]===line);
+  $('cap').innerHTML=ws.map(w=>{const st=t<w[0]?'w':(t<w[1]?'on':'done');const p=st==='on'?cl((t-w[0])/.12):1;return `<span class="${st}" style="transform:scale(${st==='on'?1+.12*(1-p):1})">${w[2]}</span>`}).join('');}
+window.render=function(t){
+  const showChart=t>=CFG.chartAt&&t<CFG.fixAt;
+  // hook: big until chartAt
+  const h=$('hook');h.style.opacity=t<CFG.chartAt?1:0;h.style.transform=`scale(${1+.05*(1-cl(t/.3))})`;
+  let g='',total=0;
+  D.forEach((d,i)=>{const x=X0+i*DX;const a=t<d.at?0:eo(cl((t-d.at)/.4));const v=d.kcal*a;total+=v;
+    const hpx=Math.abs(d.kcal)*K*a, up=d.kcal>0, col=up?'#FF4A4A':'#2BD46B';
+    g+=`<text x="${x}" y="${BASE+262}" text-anchor="middle" font-family="A" font-size="58" fill="${t>=d.at?'#fff':'#555'}">${d.l}</text>`;
+    if(a>0){g+=`<rect x="${x-46}" y="${up?BASE-hpx:BASE}" width="92" height="${hpx}" rx="14" fill="${col}"/>`;
+      g+=`<text x="${x}" y="${up?BASE-hpx-22:BASE+hpx+46}" text-anchor="middle" font-family="I" font-weight="800" font-size="${up?34:30}" fill="${col}" opacity="${a}">${up?'+':'−'}${Math.abs(Math.round(v)).toLocaleString('en')}</text>`}});
+  g=`<line x1="80" x2="1000" y1="${BASE}" y2="${BASE}" stroke="#444" stroke-width="4"/>`+g;
+  $('chart').innerHTML=showChart?g:'';$('chart').style.opacity=showChart?1:0;
+  // food icons above weekend bars
+  let f='';if(showChart)(CFG.food||[]).forEach(it=>{if(t<it.t)return;const a=cl((t-it.t)/.4);f+=`<g transform="translate(${it.x},${it.y+(1-ob(a))*-200}) scale(${it.s})" opacity="${cl(a*3)}">${FOOD[it.kind]()}</g>`});$('food').innerHTML=f;
+  // counter
+  const c=$('ctr');c.style.opacity=showChart?1:0;
+  let shown=total;if(t>=CFG.goneAt)shown=0;
+  const kg=Math.abs(shown)/7700;
+  $('cv').textContent=(shown<-1?'−':shown>1?'+':'')+Math.abs(Math.round(shown)).toLocaleString('en')+' kcal';
+  $('cv').style.color=t>=CFG.goneAt?'#FF4A4A':(shown<0?'#2BD46B':'#fff');
+  $('cs').innerHTML=t>=CFG.goneAt?'≈ <span class="r">0 kg</span> fat lost':(shown<-1?`≈ <span class="g">−${kg.toFixed(1)} kg</span> of fat`:'');
+  const sh=t>=CFG.goneAt&&t<CFG.goneAt+.45?Math.sin((t-CFG.goneAt)*90)*14*(1-(t-CFG.goneAt)/.45):0;c.style.transform=`translateX(${sh}px)`;
+  $('flash').style.opacity=t>=CFG.goneAt&&t<CFG.goneAt+.3?.35*(1-(t-CFG.goneAt)/.3):0;
+  // fix card
+  const fx=$('fix');const fa=cl((t-CFG.fixAt)/.35);fx.style.opacity=t>=CFG.fixAt&&t<CFG.endAt?fa:0;fx.style.transform=`translateY(${(1-eo(fa))*60}px)`;
+  caption(t);
+  $('prog').style.width=(cl(t/CFG.endAt)*1080)+'px';BRAND.end(t,CFG.endAt);
+};
+</script><script src="brand.js"></script></body></html>
