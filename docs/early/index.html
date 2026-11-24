@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Forge – early access</title>
+<meta name="description" content="Forge is an AI gym coach for iPhone. Join early access: the first 100 members lock in Pro at €19.99 a year.">
+<meta property="og:title" content="Forge – early access">
+<meta property="og:description" content="Your AI gym coach for iPhone. First 100 members lock in Pro at €19.99/yr.">
+<meta property="og:image" content="https://preskoboy21.github.io/Forge-v1/img/today.jpg">
+<link rel="icon" href="../img/icon-192.png">
+<meta name="theme-color" content="#000000">
+<style>
+@font-face{font-family:Anton;src:url(../fonts/anton.woff2) format('woff2');font-display:swap}
+:root{color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;min-height:100svh;background:radial-gradient(80% 50% at 50% 30%,#2a1408,#000 70%);color:#fff;font:17px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;display:flex;justify-content:center}
+main{width:100%;max-width:460px;padding:28px 20px 40px;display:flex;flex-direction:column;gap:18px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.08em}
+.logo b{display:inline-grid;place-items:center;width:36px;height:36px;border-radius:10px;background:#FF6A1A;color:#000;font-family:Anton,Impact,sans-serif;font-size:22px;font-weight:400}
+h1{font-family:Anton,Impact,sans-serif;font-weight:400;font-size:52px;line-height:.98;text-transform:uppercase;margin:12px 0 0}
+h1 em{font-style:normal;color:#FF6A1A}
+p{margin:0;color:#bdbdbd}
+ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+li{background:#111;border:1px solid #262626;border-radius:14px;padding:12px 14px;color:#fff}
+li span{color:#FF6A1A;font-weight:800;margin-right:6px}
+.offer{border:2px solid #FF6A1A;border-radius:16px;padding:14px 16px;color:#fff}
+.offer strong{color:#FF6A1A}
+form{display:grid;gap:10px}
+input{min-height:56px;padding:0 16px;border-radius:14px;border:1px solid #333;background:#111;color:#fff;font-size:17px}
+button{min-height:56px;border:0;border-radius:14px;background:#FF6A1A;color:#000;font-weight:900;font-size:16px;letter-spacing:.06em;text-transform:uppercase}
+button:disabled{opacity:.6}
+.note{font-size:14px;min-height:1.4em;color:#8e8e8e}.note.err{color:#ff4a4a;font-weight:700}.note.ok{color:#2BD46B;font-weight:700}
+small{color:#6f6f6f;font-size:12px}small a{color:#8e8e8e}
+</style>
+</head>
+<body>
+<main>
+  <div class="logo"><b>F</b> FORGE</div>
+  <h1>Your AI gym coach. <em>Early access.</em></h1>
+  <p>Forge reads your sleep, food and training and tells you exactly what to do today.</p>
+  <form id="wl" novalidate>
+    <input type="email" name="email" placeholder="you@email.com" autocomplete="email" inputmode="email" required aria-label="Email address">
+    <button type="submit">Get early access</button>
+  </form>
+  <div class="note" id="note">One email when the iPhone app is live. No spam.</div>
+  <div class="offer">Founder price: the <strong>first 100</strong> members lock in Pro at <strong>€19.99/year</strong> (normally €29.99) for as long as they stay subscribed.</div>
+  <ul>
+    <li><span>✓</span>Today's workout with the exact weight for every set</li>
+    <li><span>✓</span>Protein and calories left, from a meal photo or barcode</li>
+    <li><span>✓</span>Plans around how you slept</li>
+  </ul>
+  <small>Not medical advice. <a href="../privacy.html">Privacy</a></small>
+</main>
+<script>
+(function(){
+  var URL='https://dxirfwtrrbjuflyiobjq.supabase.co/rest/v1/waitlist';
+  var KEY='sb_publishable_zu5bhrjh681kKzfBFHizQw_bf0dRljF'; // public publishable key; table is insert-only
+  var q=new URLSearchParams(location.search), src=(q.get('src')||q.get('ref')||'direct').replace(/[^a-z0-9_-]/gi,'').slice(0,40)||'direct';
+  var f=document.getElementById('wl'), n=document.getElementById('note');
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var email=f.email.value.trim().toLowerCase();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){n.className='note err';n.textContent='That email doesn’t look right.';f.email.focus();return;}
+    var b=f.querySelector('button');b.disabled=true;n.className='note';n.textContent='Adding you…';
+    fetch(URL,{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify({email:email,source:'early-'+src})})
+    .then(function(r){if(r.ok||r.status===409){n.className='note ok';n.textContent='You’re in. We’ll email you on launch day.';f.reset();}else{n.className='note err';n.textContent='Couldn’t save that. Try again in a minute.';}})
+    .catch(function(){n.className='note err';n.textContent='No connection. Try again in a minute.';})
+    .finally(function(){b.disabled=false;});
+  });
+})();
+</script>
+</body>
+</html>
