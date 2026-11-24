@@ -51,6 +51,13 @@ Approved (all tested, refs in engine/v2/ref/): KNOW THE DIFFERENCE (diff.html), 
 - Queued scripts live in `days/queue/DATE.md` and are used first.
 
 ## Used v2 topics (never repeat)
+- 2026-11-25 12:30 myth: fruit vs donut (3 bananas ≈ 1 donut) — pre-scheduled by Presko session
+- 2026-11-25 18:00 same calories: 500 kcal fast food vs cut plate — pre-scheduled
+- 2026-11-25 20:30 hidden muscle: glutes / lower back — pre-scheduled
+- 2026-11-26 12:30 same calories: 4 pm snack, chocolate bar vs yogurt+berries+popcorn — pre-scheduled
+- 2026-11-26 20:30 know the difference: barbell row wrong vs right — pre-scheduled
+- 2026-11-27 20:30 how to squat in 5 steps — pre-scheduled
+- 2026-11-28 20:30 best lifts: 4 barbell lifts — pre-scheduled
 - 2026-11-22 18:00 tier list: chest exercises
 - 2026-11-23 10:00 form fix: squat (heels up / knees forward)
 - 2026-11-23 18:00 carousel: steal my chest day
