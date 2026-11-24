@@ -1,0 +1,53 @@
+{
+ "label": "CUT HUNGER",
+ "slides": [
+  {
+   "t": "hook",
+   "title": "Hungry<br>on a <span class=\"o\">cut?</span>",
+   "sub": "Starving by 4 pm, every day?<br>It's usually not willpower.<br><b>It's these 4 things.</b>"
+  },
+  {
+   "n": 1,
+   "name": "Too little protein",
+   "k1": "FULLEST MACRO",
+   "v1": "Protein",
+   "k2": "EASY ADDS",
+   "v2": "Eggs · skyr",
+   "sets": "Protein",
+   "rest": "Eggs · skyr",
+   "cue": "Protein keeps you full longer than carbs or fat. Put <b>a protein source in every meal</b>."
+  },
+  {
+   "n": 2,
+   "name": "Low-volume food",
+   "k1": "300 KCAL GRAPES",
+   "sets": "≈ 430 g",
+   "k2": "300 KCAL RAISINS",
+   "rest": "≈ 100 g",
+   "cue": "Same calories, <b>4× the food</b>. Pick foods with lots of water and fibre: fruit, veg, potatoes, soups."
+  },
+  {
+   "n": 3,
+   "name": "Drinking your calories",
+   "k1": "500 ML COLA",
+   "sets": "≈ 210 kcal",
+   "k2": "500 ML ZERO",
+   "rest": "≈ 0 kcal",
+   "cue": "Drinks <b>don't fill you up</b> like food does. Swap to water, zero drinks or black coffee."
+  },
+  {
+   "n": 4,
+   "name": "Short sleep",
+   "k1": "HUNGER",
+   "sets": "+24%",
+   "k2": "AFTER",
+   "rest": "2 short nights",
+   "cue": "In a sleep-lab study, 2 nights of 4 h sleep raised hunger by about <b>a quarter</b>. Sleep is part of your diet."
+  },
+  {
+   "t": "end",
+   "title": "Save this for<br>your next<br><span class=\"o\">cut</span>",
+   "sub": "Which one is you?<br><b>Comment 1, 2, 3 or 4.</b>"
+  }
+ ]
+}

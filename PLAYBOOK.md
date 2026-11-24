@@ -51,7 +51,10 @@ Approved (all tested, refs in engine/v2/ref/): KNOW THE DIFFERENCE (diff.html), 
 - 2026-11-22 18:00 tier list: chest exercises
 - 2026-11-23 10:00 form fix: squat (heels up / knees forward)
 - 2026-11-23 18:00 carousel: steal my chest day
-- queued: 2026-11-24 back tier list · 2026-11-25 shoulder tier list · 2026-11-26 supplements tier list
+- 2026-11-24 12:30 carousel: always hungry on a cut (bank #17)
+- 2026-11-24 18:00 food reel: hidden calories in a healthy day (bank #2) — HIDDEN CALORIES #01
+- 2026-11-24 20:30 know the difference #02: RDL vs deadlift
+- paused (not used): 2026-11-24 back tier list · 2026-11-25 shoulder tier list · 2026-11-26 supplements tier list
 
 ## BRAND IDENTITY (approved by Presko 2026-11-20 — every post follows this)
 - **Who we are:** Forge — the AI gym coach that adapts to your real life: your sleep, your food, your schedule.
@@ -86,6 +89,7 @@ Approved (all tested, refs in engine/v2/ref/): KNOW THE DIFFERENCE (diff.html), 
 Used demo angles: Price: PT €60–90/h (Trustlocal 2026, DE) vs Forge Pro €29.99/yr → today plan, exact weights, protein left, paywall, 'trainer or app?' (2026-11-22); Coach call: when to add weight — 3 checks (sleep 8h/protein 104%/weight 83.1) → readiness 100 → 'add weight on your first lift' → leg press 145 kg EXAMPLE, debate 'feel or plan?' (2026-11-21); POV: I let an AI coach plan my gym day (check-in → readiness 93 → exact weights → snap protein → weekly verdict) (2026-11-19 reference); Stop logging sets in your notes app (notes card vs train exact weights → tap exercise how-to → body 14-day sleep → snap photo/barcode) (2026-11-20)
 
 ## What works (data, newest first)
+- 2026-11-24 AUDIENCE: followers IG 16 (±0), TikTok 38 (±0), FB 1 (+1) on 11-23. Chest tier list (11-22 17:11) = 1,566 IG / 39.7% skip / 12.9 s watch — best IG reel since the quiz era; TT 672. Squat form fix (11-23) = only 164 IG (54.5% skip, 6.1 s) / 636 TT; chest-day carousel TT 616. → Ranking/list content still travels on IG; the slow wrong-vs-right squat opener didn't. Web (info only): 1 visitor, 0 sign-ups. Today = first food reel + first nutrition carousel → judge by follows + comments tomorrow.
 - 2026-11-22 FUNNEL: web 24 h = 6 visitors (fb 3 — first day of Facebook, all from the clickable ?ref=fb caption link; ig 1; untagged 2) → 2 sign-ups → 1 paywall view → 0 checkout clicks → Pro count now 1 (account created 11-21 12:27 already Pro, no checkout screen logged — ask Presko if it's his test). 7 days: ~50 visitors → 20 reached sign-in → 4 sign-ups → 3 paywall → 0 checkout. #1 weakness = sign-in → sign-up (80% drop). Week test day 1 (short debate + app): IG 127 / 113 (62–66% skip, 4–6 s watch), TT 670 / 600 → the debate ending alone does NOT rescue app reels on IG; the first 3 s are the problem. FB clickable link = best visitors per post so far.
 - 2026-11-21 FUNNEL: web 24 h = 12 visitors (3 tagged ?ref=ig — first tagged traffic, 9 untagged) → 10 reached sign-in → 0 sign-ups → 3 saw the paywall → 0 checkout → 0 Pro (6 users total). #1 weakness = sign-in → sign-up (100% drop). First app reels were our lowest IG ever: sleep→check-in 148 (47% skip), notes-app demo 115 (64% skip, 3.8 s watch); TikTok 656 / 643. Debate 'comment 1 or 2' reels still hold 1.1–2.1k IG → today = week test day 1: two ~20 s debate reels (skinny fat cut-or-bulk; coach call 'add weight by feel or plan') on TT + IG + FB (Facebook now connected; FB posts carry a clickable ?ref=fb link).
 - 2026-11-20 WEB APP day 1: 10 web visitors / 24 opens in 24 h, ALL with ref = null (bio links may not carry ?ref=tiktok/?ref=ig, or ref isn't captured) → asked Presko to check; 0 new sign-ups (6 users, 0 Pro). Last pre-app motion day: steroids & heart 178 IG but best motion retention (46% skip, 11.1 s), carbs 128 (58% skip); TikTok 663 / 650. Shipped first full app day: sleep loss → check-in/readiness (12:00) + notes-app-vs-Forge demo (17:00). Judge by visitors from tomorrow.
@@ -193,6 +197,8 @@ Used motion topics: calorie deficit / crash dieting (example, 2026-11-14); creat
   - 2026-11-10: items button labels > ~9 chars (e.g. BOTTOM HALF) overflow the right edge → keep a/b labels short (FULL / STRETCH). Hook 92 px with a long 2nd line touches the edges → 84 px.
   - 2026-11-13: end card 'COMMENT 1 OR 2' text sits over the mascot's head (all formats) → engine fix candidate (move comment line above the mascot or mascot lower).
   - 2026-11-14: FIXED — build.py end-card comment line moved from top 740 → 535 (between the question and the buttons); clear of the mascot. Item card text ~28+ chars wraps one word onto line 2 ("ARE LIFTING STRAPS WORTH / IT?") → keep `myths` short for worth reels ("Lifting straps").
+
+- 2026-11-24: tryvolume fitness (23 Nov): bad-rep-then-fix 21x (9 accts), before/after flash 17x (16), vanity problem area in hook 16x (6), muscle diagram overlay 7x (18); Aubrium: 'food label breakdowns' top nutrition idea (76 creators, 35x), weight-loss meals 22x. Pains used: 'always hungry on a cut', 'eating clean but not losing weight'.
 
 ## Weekly reviews (Sunday, newest first — what worked, what flopped, 1 content change + 1 product idea)
 ### Week ending 2026-11-22 (Chief Marketing Agent)

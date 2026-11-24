@@ -62,3 +62,8 @@
 - 2026-11-22 | 11:00 IG+FB story | sleep-check-story | Slept badly? Forge checks before you lift | app promise, teases reel 1 | IG 437338162 · FB 437338169
 - 2026-11-22 | 12:00 | preworkout-sleep-debate | Your late pre-workout is stealing your sleep. | short debate (19.5 s): 400 mg caffeine 6 h before bed = >1 h less sleep, unnoticed (Drake 2013) → check-in + readiness, 'after 5 pm: yes or no?' | TT+IG 437338187 · FB 437338203
 - 2026-11-22 | 17:00 | pt-vs-app-price-call | This costs less than one PT session. | coach call/app demo (22.3 s): PT €60–90/h (Trustlocal 2026) vs Pro €29.99/yr → today, exact weights, protein left, paywall, 'trainer or app?' | TT+IG 437338241 · FB 437338257
+- 2026-11-23 | 09:10 | squat-form-fix | Your squat is hitting your knees, not your legs | form fix: heels up / knees forward (logged late) | id not logged
+- 2026-11-23 | 17:10 | chest-day-carousel | Steal my chest day | carousel: 4 exercises, 11 sets (logged late) | id not logged
+- 2026-11-24 | 12:30 | hunger-on-a-cut (CAROUSEL) | Hungry on a cut? | protein, low-volume food (grapes vs raisins), liquid calories (cola), short sleep (+24% hunger, Spiegel 2004) | 439896342
+- 2026-11-24 | 18:00 | hidden-calories-healthy-day (FOOD REEL) | Eating clean. Scale won't move? | meal 470 kcal vs extras 615 (oil, dressing, almonds, latte) | 439896359
+- 2026-11-24 | 20:30 | rdl-vs-deadlift (KNOW THE DIFFERENCE #02) | RDL vs deadlift. Not the same lift | hinge vs floor pull | 439896374

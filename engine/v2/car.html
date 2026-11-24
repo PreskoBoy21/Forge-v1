@@ -30,7 +30,7 @@ function slide(i){
  if(s.t==='end')return top+`<div class="h" style="top:300px;font-size:150px">${s.title||'Save this'} 📌</div>
   <div class="lst" style="top:900px">${s.sub||''}</div>`+dots;
  return top+`<div class="num">${String(s.n).padStart(2,'0')}</div><div class="h" style="top:500px;font-size:120px">${s.name}</div>
- <div class="card"><div class="st"><div class="k">SETS × REPS</div><div class="v">${s.sets}</div></div><div class="st"><div class="k">REST</div><div class="v">${s.rest}</div></div><div class="cue">${s.cue}</div></div>`+dots;
+ <div class="card"><div class="st"><div class="k">${s.k1||'SETS × REPS'}</div><div class="v">${s.sets}</div></div><div class="st"><div class="k">${s.k2||'REST'}</div><div class="v">${s.rest}</div></div><div class="cue">${s.cue}</div></div>`+dots;
 }
 window.show=i=>{document.getElementById('root').innerHTML=slide(i)};window.N=N;
 </script></body></html>
