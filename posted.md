@@ -67,3 +67,11 @@
 - 2026-11-24 | 12:30 | hunger-on-a-cut (CAROUSEL) | Hungry on a cut? | protein, low-volume food (grapes vs raisins), liquid calories (cola), short sleep (+24% hunger, Spiegel 2004) | 439896342
 - 2026-11-24 | 18:00 | hidden-calories-healthy-day (FOOD REEL) | Eating clean. Scale won't move? | meal 470 kcal vs extras 615 (oil, dressing, almonds, latte) | 439896359
 - 2026-11-24 | 20:30 | rdl-vs-deadlift (KNOW THE DIFFERENCE #02) | RDL vs deadlift. Not the same lift | hinge vs floor pull | 439896374
+- 2026-11-25 | 18:00 | same-calories-500kcal (FOOD REEL, pre-scheduled 11-24) | 500 calories. Two very different plates | burger+fries vs chicken/potato/salad/berries | 440612564
+- 2026-11-25 | 20:30 | hidden-muscle-glutes-lowerback (pre-scheduled) | Lower back hurts? You skip this muscle | glutes / hinge | 440612659
+- 2026-11-26 | 18:00 | fruit-vs-donut (pre-scheduled) | Fruit makes you fat? 1 donut vs 3 bananas | ~300 vs ~315 kcal | 440700326
+- 2026-11-26 | 20:30 | barbell-row-diff (pre-scheduled) | Your rows hit your traps, not your lats | know the difference | 440612830
+- 2026-11-27 | 18:00 | fat-loss-traps-01-weekend (pre-scheduled) | Losing fat all week? Then Saturday erases it | week.html | 440700669
+- 2026-11-27 | 20:30 | how-to-squat-5-steps (pre-scheduled) | How to squat in 5 steps | solo.html steps | 440612932
+- 2026-11-28 | 18:00 | 4pm-snack-300kcal (pre-scheduled) | Hungry at 4 pm? Same 300 kcal | choc bar vs yogurt+berries+popcorn | 440700387
+- 2026-11-28 | 20:30 | best-4-barbell-lifts (pre-scheduled) | 4 barbell lifts every lifter needs | solo.html list | 440613031
